@@ -1,6 +1,9 @@
 package org.bandrsoftwares.celestialdiary.employee_authentication_service;
 
 import com.auth0.jwt.JWTVerifier;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
@@ -36,6 +39,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class EmployeeAuthenticationTokenControllerTest {
 
     @Autowired
+    private ObjectMapper mapper;
+
+    @Autowired
     private MockMvc mockMvc;
 
     @Autowired
@@ -47,7 +53,7 @@ class EmployeeAuthenticationTokenControllerTest {
     @MockBean
     private EmployeeRepository employeeRepository;
 
-    private final String correctCompanyId = "ajfhs546qsf46qs46";
+    private final String correctCompanyName = "correctcompany";
 
     private final String correctEmployeeEmail = "correct-employee@hotmail.fr";
     private final String correctEmployeePassword = "correctEmployeePassword";
@@ -55,7 +61,7 @@ class EmployeeAuthenticationTokenControllerTest {
     @BeforeEach
     void setUp() {
         Company correctCompany = buildCorrectCompany();
-        when(companyRepository.findById(correctCompanyId)).thenReturn(Optional.of(correctCompany));
+        when(companyRepository.findByName(correctCompanyName)).thenReturn(Optional.of(correctCompany));
 
         Employee correctEmployee = buildCorrectEmployee(correctCompany);
         when(employeeRepository.findByCompanySummaryCompanyAndEmail(correctCompany, correctEmployeeEmail)).thenReturn(Optional.of(correctEmployee));
@@ -71,7 +77,7 @@ class EmployeeAuthenticationTokenControllerTest {
 
     private Company buildCorrectCompany() {
         return Company.builder()
-                .id(correctCompanyId)
+                .id(correctCompanyName)
                 .email("correct-company@hotmail.fr")
                 .name("CorrectCompany")
                 .build();
@@ -84,9 +90,11 @@ class EmployeeAuthenticationTokenControllerTest {
         @Test
         @DisplayName(V1_EMPLOYEE_TOKEN_URL + " returns 200 and a correct JWT token if basic authorization is correct.")
         void tokenWithCorrectBasicAuthorization() throws Exception {
-            String jwt = mockMvc.perform(post(V1_EMPLOYEE_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctEmployeeAuthorization()))
+            String response = mockMvc.perform(post(V1_EMPLOYEE_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctEmployeeAuthorization()))
                     .andDo(print())
                     .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+            String jwt = extractJwtResponse(response).jwt();
             assertThat(jwt).isNotNull().isNotBlank();
             assertDoesNotThrow(() -> jwtVerifier.verify(jwt));
         }
@@ -142,10 +150,11 @@ class EmployeeAuthenticationTokenControllerTest {
         void tokenRefreshWithValidJwt() throws Exception {
             String jwt = getCorrectEmployeeJwt();
 
-            String refreshedJwt = mockMvc.perform(post(V1_EMPLOYEE_TOKEN_REFRESH_URL).header(HttpHeaders.AUTHORIZATION, bearerAuthorization(jwt)))
+            String response = mockMvc.perform(post(V1_EMPLOYEE_TOKEN_REFRESH_URL).header(HttpHeaders.AUTHORIZATION, bearerAuthorization(jwt)))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andReturn().getResponse().getContentAsString();
+            String refreshedJwt = extractJwtResponse(response).jwt();
             assertThat(refreshedJwt).isNotNull().isNotBlank().isNotEqualTo(jwt);
             assertDoesNotThrow(() -> jwtVerifier.verify(refreshedJwt));
 
@@ -162,29 +171,33 @@ class EmployeeAuthenticationTokenControllerTest {
         }
     }
 
+    private JwtTokenResponse extractJwtResponse(String response) throws JsonProcessingException {
+        return mapper.readValue(response, JwtTokenResponse.class);
+    }
+
     private String getCorrectEmployeeJwt() throws Exception {
-        return mockMvc.perform(post(V1_EMPLOYEE_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctEmployeeAuthorization())).andReturn()
-                .getResponse()
-                .getContentAsString();
+        String resp = mockMvc.perform(post(V1_EMPLOYEE_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctEmployeeAuthorization())).andReturn()
+                .getResponse().getContentAsString();
+        return extractJwtResponse(resp).jwt();
     }
 
     private String malFormattedCredentials() {
-        return basicAuthorization(correctCompanyId + "unknown" + "+" + correctEmployeeEmail, correctEmployeePassword);
+        return basicAuthorization(correctCompanyName + "unknown" + "+" + correctEmployeeEmail, correctEmployeePassword);
     }
 
     private String unknownCompanyAuthorization() {
-        return basicAuthorization(correctCompanyId + "unknown" + "|" + correctEmployeeEmail, correctEmployeePassword);
+        return basicAuthorization(correctCompanyName + "unknown" + "|" + correctEmployeeEmail, correctEmployeePassword);
     }
 
     private String unknownEmployeeAuthorization() {
-        return basicAuthorization(correctCompanyId + "|" + correctEmployeeEmail + "unknown", correctEmployeePassword);
+        return basicAuthorization(correctCompanyName + "|" + correctEmployeeEmail + "unknown", correctEmployeePassword);
     }
 
     private String correctEmployeeAuthorization() {
-        return basicAuthorization(correctCompanyId + "|" + correctEmployeeEmail, correctEmployeePassword);
+        return basicAuthorization(correctCompanyName + "|" + correctEmployeeEmail, correctEmployeePassword);
     }
 
     private String wrongEmployeePasswordAuthorization() {
-        return basicAuthorization(correctCompanyId + "|" + correctEmployeeEmail, correctEmployeePassword + "wrong");
+        return basicAuthorization(correctCompanyName + "|" + correctEmployeeEmail, correctEmployeePassword + "wrong");
     }
 }

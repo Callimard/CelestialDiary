@@ -29,13 +29,13 @@ public class BasicEmployeeAuthenticationProvider implements AuthenticationProvid
         String[] split = authenticationName.split("\\|");
         if (split.length != 2) {
             log.info("BASIC AUTH FAIL -> Mal formatted Credentials / Details: {}", authentication.getDetails());
-            throw new BadCredentialsException("Authentication name not correctly formatted. Format -> companyId|employeeEmail:password");
+            throw new BadCredentialsException("Authentication name not correctly formatted. Format -> companyName|employeeEmail:password");
         }
-        String companyId = split[0];
+        String companyName = split[0].replace(" ", "").toLowerCase();
         String employeeEmail = split[1];
         String password = authentication.getCredentials().toString();
 
-        Optional<Company> opCompany = companyRepository.findById(companyId);
+        Optional<Company> opCompany = companyRepository.findByName(companyName);
         if (opCompany.isPresent()) {
             Company company = opCompany.get();
             Optional<Employee> opEmployee = employeeRepository.findByCompanySummaryCompanyAndEmail(company, employeeEmail);

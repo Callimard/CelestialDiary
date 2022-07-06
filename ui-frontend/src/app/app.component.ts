@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'UIFrontend';
+
+  constructor(private translate: TranslateService) {
+    this.translate.setDefaultLang(environment.langageEn);
+    this.translate.use(environment.langageEn);
+  }
 }

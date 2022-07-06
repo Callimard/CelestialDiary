@@ -38,8 +38,14 @@ public class CompanyAuthenticationConfiguration {
                 .formLogin().disable()
                 .logout().disable()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, ApiCompanyV1.V1_COMPANY + "/**").authenticated()
                 .anyRequest().denyAll();
+
+        http.headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
 
         http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());
 

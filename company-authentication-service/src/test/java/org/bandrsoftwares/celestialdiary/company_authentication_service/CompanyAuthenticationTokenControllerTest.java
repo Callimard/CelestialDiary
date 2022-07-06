@@ -1,6 +1,9 @@
 package org.bandrsoftwares.celestialdiary.company_authentication_service;
 
 import com.auth0.jwt.JWTVerifier;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +22,6 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.V1_COMPANY_TOKEN_REFRESH_URL;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.V1_COMPANY_TOKEN_URL;
-import static org.bandrsoftwares.celestialdiary.api.v1.ApiEmployeeV1.V1_EMPLOYEE_TOKEN_REFRESH_URL;
 import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.basicAuthorization;
 import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.bearerAuthorization;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -33,6 +35,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Nested
 @DisplayName("Company Authentication")
 public class CompanyAuthenticationTokenControllerTest {
+
+    @Autowired
+    private ObjectMapper mapper;
 
     @Autowired
     private MockMvc mockMvc;
@@ -63,9 +68,11 @@ public class CompanyAuthenticationTokenControllerTest {
         @Test
         @DisplayName(V1_COMPANY_TOKEN_URL + " returns 200 and a correct JWT token if basic authorization is correct")
         void tokenWithCorrectBasicAuthorization() throws Exception {
-            String jwt = mockMvc.perform(post(V1_COMPANY_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctCompanyAuthorization()))
+            String response = mockMvc.perform(post(V1_COMPANY_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctCompanyAuthorization()))
                     .andDo(print())
                     .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+            String jwt = extractJwtResponse(response).jwt();
             assertThat(jwt).isNotNull().isNotBlank();
             assertDoesNotThrow(() -> jwtVerifier.verify(jwt));
         }
@@ -106,10 +113,12 @@ public class CompanyAuthenticationTokenControllerTest {
         void tokenRefreshWithValidJwt() throws Exception {
             String jwt = getCorrectCompanyJwt();
 
-            String refreshedJwt = mockMvc.perform(post(V1_COMPANY_TOKEN_REFRESH_URL).header(HttpHeaders.AUTHORIZATION, bearerAuthorization(jwt)))
+            String response = mockMvc.perform(post(V1_COMPANY_TOKEN_REFRESH_URL).header(HttpHeaders.AUTHORIZATION, bearerAuthorization(jwt)))
                     .andDo(print())
                     .andExpect(status().isOk())
                     .andReturn().getResponse().getContentAsString();
+
+            String refreshedJwt = extractJwtResponse(response).jwt();
             assertThat(refreshedJwt).isNotNull().isNotBlank().isNotEqualTo(jwt);
             assertDoesNotThrow(() -> jwtVerifier.verify(refreshedJwt));
 
@@ -127,9 +136,14 @@ public class CompanyAuthenticationTokenControllerTest {
         }
     }
 
+    private JwtTokenResponse extractJwtResponse(String response) throws JsonProcessingException {
+        return mapper.readValue(response, JwtTokenResponse.class);
+    }
+
     private String getCorrectCompanyJwt() throws Exception {
-        return mockMvc.perform(post(V1_COMPANY_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctCompanyAuthorization()))
+        String resp = mockMvc.perform(post(V1_COMPANY_TOKEN_URL).header(HttpHeaders.AUTHORIZATION, correctCompanyAuthorization()))
                 .andReturn().getResponse().getContentAsString();
+        return extractJwtResponse(resp).jwt();
     }
 
     private String unknownCompanyAuthorization() {

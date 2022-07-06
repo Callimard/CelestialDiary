@@ -1,0 +1,182 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.celestial-title {
+  position: absolute;
+
+  font-size: var(--title-logo-size);
+  font-weight: bold;
+  color: white;
+
+  top: 5%;
+  right: 50%;
+}
+
+
+.diary-title {
+  position: absolute;
+
+  font-size: var(--title-logo-size);
+  font-weight: bold;
+  color: var(--primary-light);
+
+  top: 5%;
+  left: 50%;
+}
+
+.login-container {
+  display: grid;
+  height: 100%;
+  width: 100%;
+
+  grid-template: 1fr / repeat(2, 1fr);
+}
+
+.login-img-container, .login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-img-container {
+  background-image: linear-gradient(var(--primary-light), #fff);
+}
+
+.login-img-svg {
+  width: 63%;
+  height: auto;
+}
+
+
+.login-form {
+  padding: 2%;
+
+  width: 57%;
+  height: 60%;
+
+  display: block;
+}
+
+.form-container {
+  display: block;
+  text-align: center;
+}
+
+.login-logo-container {
+  padding: 3%;
+}
+
+.login-logo {
+  width: 24%;
+  height: auto;
+}
+
+.login-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 60px;
+  color: var(--main-text-color);
+  margin-top: 3%;
+}
+
+.authentication-fail {
+  margin: 4% 0;
+
+  border: 2px solid var(--smooth-danger-color);
+  border-radius: 0.3em;
+  padding: 0.6em 0.4em;
+  font-weight: bold;
+  font-size: 1.2rem;
+
+  color: var(--smooth-danger-color);
+  background-color: var(--smooth-danger-bakground);
+}
+
+.login-field {
+  position: relative;
+  margin-top: 3%;
+
+  border-bottom: 2px solid var(--place-holder-text-color);
+}
+
+.login-input {
+  width: 100%;
+  height: 60px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+
+  color: var(--secondary-text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 30px;
+
+  margin: 0;
+  padding-left: 10px;
+}
+
+.login-input::placeholder {
+  color: var(--place-holder-text-color);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 30px;
+  margin: 0;
+}
+
+.login-input:focus {
+  outline: none;
+}
+
+.forgotten-password-container {
+  margin-top: 3%;
+
+  display: flex;
+  justify-content: flex-end;
+  justify-items: center;
+}
+
+.forgotten-password {
+  color: var(--place-holder-text-color);
+  font-weight: bold;
+  font-size: 1.2rem;
+  transition: 0.4s;
+}
+
+.forgotten-password:hover {
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.login-button {
+  margin-top: 6%;
+
+  width: 100%;
+
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 27px;
+
+  padding: 0.5em;
+
+  color: white;
+  outline: none;
+  border: none;
+  border-radius: 17px;
+  cursor: pointer;
+
+  background-image: linear-gradient(to right, var(--primary), var(--primary-light), var(--primary));
+  background-size: 200% auto;
+
+  transition: 0.5s;
+}
+
+.login-button:hover {
+  background-position: right;
+}
+
+.login-button:disabled {
+  background-image: linear-gradient(to right, var(--primary-light-light), var(--primary-light-light));
+}

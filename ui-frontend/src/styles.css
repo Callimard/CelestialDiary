@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --title-logo-size: 115px;
+
+  --primary: #45D5E8;
+  --primary-light: #74E0EE;
+  --primary-light-light: #D1F5F9;
+
+  --smooth-danger-bakground: #ffc4c4;
+  --smooth-danger-color: #ff4d4d;
+
+  --main-text-color: #000000;
+  --secondary-text-color: #000000;
+  --place-holder-text-color: #dad7d7;
+
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+body, html {
+  height: 100vh;
+}
+
+main, .app {
+  display: block;
+  height: 100%;
+}
+
+.app {
+  position: relative;
+}

@@ -6,6 +6,7 @@ import org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1;
 import org.bandrsoftwares.celestialdiary.jwt.JwtAPIWrongAuthenticationPrincipalException;
 import org.bandrsoftwares.celestialdiary.jwt.JwtAccount;
 import org.bandrsoftwares.celestialdiary.jwt.JwtCreatorService;
+import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,20 +22,20 @@ public class CompanyAuthenticationTokenController {
     private final JwtCreatorService jwtCreatorService;
 
     @PostMapping(ApiCompanyV1.TOKEN)
-    public String loginToken(Authentication authentication) {
+    public JwtTokenResponse loginToken(Authentication authentication) {
         if (authentication.getPrincipal() instanceof Company company) {
             log.info("Generate login token for Company {}", company.getEmail());
-            return jwtCreatorService.createJwtFor(company);
+            return new JwtTokenResponse(jwtCreatorService.createJwtFor(company));
         } else {
             throw new JwtAPIWrongAuthenticationPrincipalException("For /company/token, use BASIC authentication");
         }
     }
 
     @PostMapping(ApiCompanyV1.TOKEN_REFRESH)
-    public String refreshToken(Authentication authentication) {
+    public JwtTokenResponse refreshToken(Authentication authentication) {
         if (authentication.getPrincipal() instanceof JwtAccount jwtAccount) {
             log.info("Refresh token for Company {}", jwtAccount.getCompanyEmail());
-            return jwtCreatorService.createJwtFor(jwtAccount);
+            return new JwtTokenResponse(jwtCreatorService.createJwtFor(jwtAccount));
         } else {
             throw new JwtAPIWrongAuthenticationPrincipalException("For /company/token/refresh, use BEARER authentication");
         }

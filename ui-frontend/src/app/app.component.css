@@ -1,0 +1,10 @@
+.langage-selection {
+  position: absolute;
+
+  height: 4%;
+  width: 5%;
+
+  right: 0;
+
+  z-index: 1;
+}
