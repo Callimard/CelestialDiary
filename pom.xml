@@ -4,17 +4,106 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <groupId>org.bandrsoftwares.celestialdiary</groupId>
-    <artifactId>CelestialDiary</artifactId>
+    <artifactId>celestial-diary</artifactId>
     <packaging>pom</packaging>
     <version>dev-SNAPSHOT</version>
-    <modules>
-        <module>UIFrontend</module>
-    </modules>
 
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <spring-boot.version>2.7.1</spring-boot.version>
     </properties>
 
+    <modules>
+        <module>ui-frontend</module>
+        <module>model</module>
+        <module>jwt</module>
+        <module>api</module>
+        <module>configuration-server</module>
+        <module>company-authentication-service</module>
+        <module>employee-authentication-service</module>
+        <module>security</module>
+        <module>utils</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>authentication</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>model</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>jwt</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>api</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>security</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>utils</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>31.1-jre</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>4.0.0</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-codec/commons-codec -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.15</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <type>pom</type>
+                <version>${spring-boot.version}</version>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>

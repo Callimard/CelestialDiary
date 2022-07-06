@@ -1,0 +1,11 @@
+{
+  "login": {
+    "welcome": "Bienvenue",
+    "companyName": "Nom de l'entreprise",
+    "employeeEmail": "Email de l'employée",
+    "password": "Mot de passe",
+    "forgottenPasswordQuestion": "Mot de passe oublié?",
+    "connection": "Connexion",
+    "connectionFailed": "Connexion échouée, vérifier vos identifiants."
+  }
+}

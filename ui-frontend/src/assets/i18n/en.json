@@ -1,0 +1,11 @@
+{
+  "login": {
+    "welcome": "Welcome",
+    "companyName": "Company name",
+    "employeeEmail": "Employee email",
+    "password": "Password",
+    "forgottenPasswordQuestion": "Forgot your password?",
+    "connection": "Connection",
+    "connectionFailed": "Connection failed, please check yours credentials."
+  }
+}
