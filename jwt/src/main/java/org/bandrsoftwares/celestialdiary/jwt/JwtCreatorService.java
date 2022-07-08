@@ -8,7 +8,7 @@ import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyPrivilege;
 import org.springframework.stereotype.Service;
 

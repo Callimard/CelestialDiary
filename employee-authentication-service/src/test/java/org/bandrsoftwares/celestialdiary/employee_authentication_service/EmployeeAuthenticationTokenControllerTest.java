@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EmployeeRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -19,13 +19,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Instant;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiEmployeeV1.V1_EMPLOYEE_TOKEN_REFRESH_URL;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiEmployeeV1.V1_EMPLOYEE_TOKEN_URL;
-import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.basicAuthorization;
-import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.bearerAuthorization;
+import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.basicAuthorization;
+import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.bearerAuthorization;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -35,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Nested
-@DisplayName("Employee Authentication")
+@DisplayName("Employee Authentication tests")
 class EmployeeAuthenticationTokenControllerTest {
 
     @Autowired
@@ -80,6 +81,7 @@ class EmployeeAuthenticationTokenControllerTest {
                 .id(correctCompanyName)
                 .email("correct-company@hotmail.fr")
                 .name("CorrectCompany")
+                .creationDate(Instant.now())
                 .build();
     }
 

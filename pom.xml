@@ -33,6 +33,9 @@
         <module>employee-authentication-service</module>
         <module>security</module>
         <module>utils</module>
+        <module>company-management-service</module>
+        <module>aop</module>
+        <module>validation</module>
     </modules>
 
     <dependencyManagement>
@@ -64,6 +67,16 @@
             </dependency>
             <dependency>
                 <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>aop</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
+                <artifactId>validation</artifactId>
+                <version>dev-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bandrsoftwares.celestialdiary</groupId>
                 <artifactId>utils</artifactId>
                 <version>dev-SNAPSHOT</version>
             </dependency>
@@ -87,6 +100,13 @@
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>1.15</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/commons-validator/commons-validator -->
+            <dependency>
+                <groupId>commons-validator</groupId>
+                <artifactId>commons-validator</artifactId>
+                <version>1.7</version>
             </dependency>
 
             <dependency>
