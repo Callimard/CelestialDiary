@@ -1,0 +1,154 @@
+:host {
+  position: relative;
+  height: 100vh;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  --side-bar-max-width: 18%;
+  --side-bar-min-width: 60px;
+  --side-bar-wrappe-time: 0.7s;
+
+  --side-bar-text-color: #ffffff;
+
+  color: var(--side-bar-text-color);
+}
+
+.application-side-bar {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  width: var(--side-bar-max-width);
+
+  background: var(--primary-dark);
+  box-shadow: 2px 0 5px #f1efef;
+
+  transition: var(--side-bar-wrappe-time);
+
+  overflow: hidden;
+}
+
+.application-side-bar.wrapped {
+  width: var(--side-bar-min-width);
+}
+
+.nav-title-container, .nav-account-content {
+  display: flex;
+  transition: var(--side-bar-wrappe-time);
+}
+
+.nav-title-container {
+  border-bottom: 2px solid var(--side-bar-text-color);
+}
+
+.nav-account-content {
+  align-items: stretch;
+  overflow: hidden;
+  transition: var(--side-bar-wrappe-time);
+}
+
+.nav-account-information {
+  flex: 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  white-space: nowrap;
+  padding: 0 1.3em;
+
+  transition: var(--side-bar-wrappe-time);
+}
+
+.nav-account-photo {
+  padding: 0.4em;
+  flex: 0 1;
+  min-width: var(--side-bar-min-width);
+  height: auto;
+}
+
+.nav-account-default-avatar {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.nav-zone, .nav-item {
+  position: relative;
+  display: block;
+}
+
+.nav-zone {
+  border-top: 1px solid var(--side-bar-text-color);
+}
+
+.application-side-bar.wrapped .nav-account-information {
+  padding: 0;
+  width: 0;
+}
+
+.account-info {
+  transition: var(--side-bar-wrappe-time);
+}
+
+.application-side-bar.wrapped .account-info {
+  opacity: 0;
+}
+
+.nav-item a {
+  display: flex;
+  position: relative;
+  width: 100%;
+  text-decoration: none;
+  background-color: transparent;
+  transition: 0.4s;
+}
+
+.nav-clickable:hover {
+  background-color: var(--primary);
+}
+
+.nav-clickable:active {
+  background-color: var(--primary-light);
+}
+
+.nav-icon {
+  position: relative;
+  display: block;
+  min-width: var(--side-bar-min-width);
+  height: var(--side-bar-min-width);
+  line-height: 60px;
+  text-align: center;
+
+  font-size: 1.3rem;
+}
+
+.nav-title, .nav-text {
+  position: relative;
+  display: block;
+  min-width: var(--side-bar-min-width);
+  height: var(--side-bar-min-width);
+  line-height: var(--side-bar-min-width);
+  text-align: center;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.nav-text {
+  font-size: 0.9rem;
+}
+
+.application-content {
+  position: relative;
+
+  z-index: 1;
+}
+
+.nav-logout {
+  margin-top: auto;
+}

@@ -5,6 +5,7 @@ import {EmployeeBasicCredential} from "./employee-basic-credential";
 import {JwtTokenResponse} from "../../data/authentication/jwt/jwt-token-response";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Router} from "@angular/router";
+import {JwtAccount} from "./jwt-account";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ import {Router} from "@angular/router";
 export class AuthenticationService {
 
   public static readonly JWT_TOKEN_KEY = "jwt_token";
+  public static readonly LAST_COMPANY_NAME_USED = "last_company_name_used";
+  public static readonly LAST_EMPLOYEE_EMAIL_USED = "last_employee_email_used";
 
   private static readonly JWT_HELPER = new JwtHelperService();
 
@@ -39,7 +42,9 @@ export class AuthenticationService {
         headers: {'Authorization': employeeBasicCredential.toBasicCredentials()}
       }).subscribe({
         next: (token) => {
-          AuthenticationService.saveJwtToken(token.jwt);
+          localStorage.setItem(AuthenticationService.LAST_COMPANY_NAME_USED, companyName);
+          localStorage.setItem(AuthenticationService.LAST_EMPLOYEE_EMAIL_USED, employeeEmail);
+          localStorage.setItem(AuthenticationService.JWT_TOKEN_KEY, token.jwt);
           resolve(true);
         },
         error: (err: HttpErrorResponse) => {
@@ -55,12 +60,8 @@ export class AuthenticationService {
     this.redirectToLoginPage();
   }
 
-  private static saveJwtToken(jwt: string) {
-    localStorage.setItem(AuthenticationService.JWT_TOKEN_KEY, jwt);
-  }
-
   public static isAuthenticated(): boolean {
-    const jwtToken: string | null = localStorage.getItem(AuthenticationService.JWT_TOKEN_KEY);
+    const jwtToken: string | null = AuthenticationService.getCurrentJwtToken();
     if (jwtToken == null) {
       return false;
     } else {
@@ -70,5 +71,33 @@ export class AuthenticationService {
         return false;
       }
     }
+  }
+
+  public static getJwtAccount(): any {
+    const jwtToken: string | null = AuthenticationService.getCurrentJwtToken();
+    if (jwtToken == null) {
+      return null;
+    } else {
+      return AuthenticationService.extractJwtTokenAccount(jwtToken);
+    }
+  }
+
+  private static extractJwtTokenAccount(jwt: string): JwtAccount {
+    let decodedJWT = AuthenticationService.JWT_HELPER.decodeToken(jwt);
+    return JSON.parse(decodedJWT.account);
+  }
+
+  public static getCurrentJwtToken(): string | null {
+    return localStorage.getItem(AuthenticationService.JWT_TOKEN_KEY)
+  }
+
+  public static lastCompanyNameUsed(): string {
+    const companyName: string | null = localStorage.getItem(AuthenticationService.LAST_COMPANY_NAME_USED);
+    return companyName != null ? companyName : '';
+  }
+
+  public static lastEmployeeEmailUsed(): string {
+    const employeeEmail: string | null = localStorage.getItem(AuthenticationService.LAST_EMPLOYEE_EMAIL_USED);
+    return employeeEmail != null ? employeeEmail : '';
   }
 }

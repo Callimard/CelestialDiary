@@ -41,7 +41,7 @@
 }
 
 .login-img-container {
-  background-image: linear-gradient(var(--primary-light), #fff);
+  background-image: linear-gradient(var(--primary), #fff);
 }
 
 .login-img-svg {

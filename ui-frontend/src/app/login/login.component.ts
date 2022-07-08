@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 
 @Component({
@@ -14,12 +14,12 @@ export class LoginComponent implements OnInit {
   authenticationFail = false;
 
   loginForm = new FormGroup({
-    company: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    company: new FormControl(AuthenticationService.lastCompanyNameUsed(), Validators.required),
+    email: new FormControl(AuthenticationService.lastEmployeeEmailUsed(), Validators.required),
     password: new FormControl('', Validators.required)
   });
 
-  constructor(private authService: AuthenticationService, private router: Router, private route: ActivatedRoute) {
+  constructor(private authService: AuthenticationService, private router: Router) {
     // Nothing
   }
 
