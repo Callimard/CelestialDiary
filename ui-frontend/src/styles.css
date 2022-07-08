@@ -1,3 +1,4 @@
+
 * {
   padding: 0;
   margin: 0;
@@ -7,9 +8,20 @@
 :root {
   --title-logo-size: 115px;
 
-  --primary: #45D5E8;
-  --primary-light: #74E0EE;
-  --primary-light-light: #D1F5F9;
+  --primary-h: 188;
+  --primary-s: 70%;
+  --primary-l: 61%;
+
+  --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
+
+  --percent-dark: 20%;
+  --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - var(--percent-dark)));
+
+  --percent-light: 15%;
+  --primary-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + var(--percent-light)));
+
+  --percent-light-light: 25%;
+  --primary-light-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + var(--percent-light-light)));
 
   --smooth-danger-bakground: #ffc4c4;
   --smooth-danger-color: #ff4d4d;
@@ -18,7 +30,7 @@
   --secondary-text-color: #000000;
   --place-holder-text-color: #dad7d7;
 
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Sarala', sans-serif;
 }
 
 body, html {

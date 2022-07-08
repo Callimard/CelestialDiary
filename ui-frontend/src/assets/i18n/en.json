@@ -7,5 +7,9 @@
     "forgottenPasswordQuestion": "Forgot your password?",
     "connection": "Connection",
     "connectionFailed": "Connection failed, please check yours credentials."
+  },
+  "side-bar": {
+    "title": "Celestial Diary",
+    "logout": "Logout"
   }
 }
