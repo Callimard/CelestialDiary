@@ -1,0 +1,11 @@
+package org.bandrsoftwares.celestialdiary.aop;
+
+public class AopMethodSignatureException extends RuntimeException {
+    public AopMethodSignatureException(String message) {
+        super(message);
+    }
+
+    public AopMethodSignatureException(Throwable cause) {
+        super(cause);
+    }
+}

@@ -19,8 +19,7 @@ import java.io.IOException;
 @Slf4j
 public class JwtAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/**",
-                                                                                                            "POST");
+    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/**");
 
     private final DefaultBearerTokenResolver bearerTokenResolver = new DefaultBearerTokenResolver();
 

@@ -17,13 +17,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.Instant;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.V1_COMPANY_TOKEN_REFRESH_URL;
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.V1_COMPANY_TOKEN_URL;
-import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.basicAuthorization;
-import static org.bandrsoftwares.celestialdiary.utils.HttpUtils.bearerAuthorization;
+import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.basicAuthorization;
+import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.bearerAuthorization;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,7 +34,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Nested
-@DisplayName("Company Authentication")
+@DisplayName("Company Authentication tests")
 public class CompanyAuthenticationTokenControllerTest {
 
     @Autowired
@@ -56,6 +57,8 @@ public class CompanyAuthenticationTokenControllerTest {
         Company correctCompany = Company.builder()
                 .email(correctCompanyEmail)
                 .password(correctCompanyPassword)
+                .name("Correct company")
+                .creationDate(Instant.now())
                 .build();
 
         when(companyRepository.findByEmail(correctCompanyEmail)).thenReturn(Optional.of(correctCompany));

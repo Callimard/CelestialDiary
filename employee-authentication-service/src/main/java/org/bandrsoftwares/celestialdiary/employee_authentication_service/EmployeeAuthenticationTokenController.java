@@ -7,7 +7,7 @@ import org.bandrsoftwares.celestialdiary.jwt.JwtAPIWrongAuthenticationPrincipalE
 import org.bandrsoftwares.celestialdiary.jwt.JwtAccount;
 import org.bandrsoftwares.celestialdiary.jwt.JwtCreatorService;
 import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
