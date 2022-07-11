@@ -1,6 +1,7 @@
 package org.bandrsoftwares.celestialdiary.security;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 @Configuration
 @AutoConfigurationPackage
 @ComponentScan("org.bandrsoftwares.celestialdiary.security")
