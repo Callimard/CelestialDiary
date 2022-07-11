@@ -29,13 +29,12 @@
         <module>jwt</module>
         <module>api</module>
         <module>configuration-server</module>
-        <module>company-authentication-service</module>
-        <module>employee-authentication-service</module>
         <module>security</module>
         <module>utils</module>
         <module>company-management-service</module>
         <module>aop</module>
         <module>validation</module>
+        <module>authentication-service</module>
     </modules>
 
     <dependencyManagement>

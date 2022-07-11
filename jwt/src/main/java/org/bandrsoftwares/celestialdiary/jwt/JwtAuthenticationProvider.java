@@ -31,15 +31,17 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        BearerTokenAuthenticationToken auth = (BearerTokenAuthenticationToken) authentication;
+        BearerTokenAuthenticationToken bearerAuth = (BearerTokenAuthenticationToken) authentication;
 
         try {
-            DecodedJWT decodedJWT = jwtVerifier.verify(auth.getToken());
+            DecodedJWT decodedJWT = jwtVerifier.verify(bearerAuth.getToken());
             JwtAccount jwtAccount = mapper.readValue(decodedJWT.getClaim(CLAIM_ACCOUNT).asString(), JwtAccount.class);
-            return new UsernamePasswordAuthenticationToken(jwtAccount, decodedJWT.getToken(), extractAuthorities(jwtAccount));
+            UsernamePasswordAuthenticationToken auth =
+                    new UsernamePasswordAuthenticationToken(jwtAccount, decodedJWT.getToken(), extractAuthorities(jwtAccount));
+            auth.setDetails(bearerAuth.getDetails());
+            return auth;
         } catch (JWTVerificationException | JsonProcessingException e) {
-            log.info("JWT AUTH FAIL -> Details: {} / Reason: {}", authentication.getDetails() != null ? authentication.getDetails().toString() :
-                             null,
+            log.info("JWT AUTH FAIL -> Details: {} / Reason: {}", authentication.getDetails() != null ? authentication.getDetails().toString() : null,
                      e.getMessage());
             throw new BadCredentialsException("JWT is not correct", e);
         }
