@@ -9,7 +9,7 @@
         <version>dev-SNAPSHOT</version>
     </parent>
 
-    <artifactId>configuration-server</artifactId>
+    <artifactId>configuration-service</artifactId>
 
     <properties>
         <java.version>18</java.version>
