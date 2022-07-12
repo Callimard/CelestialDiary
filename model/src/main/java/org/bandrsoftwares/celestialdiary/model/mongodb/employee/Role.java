@@ -1,7 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.employee;
 
 import lombok.*;
-import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanySummary;
+import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,9 +25,11 @@ public class Role {
     private String description;
     private List<Privilege> privileges;
 
-    private CompanySummary companySummary;
+    @ToString.Exclude
+    @DocumentReference(collection = "Company")
+    private Company company;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Establishment", lazy = true)
+    @DocumentReference(collection = "Establishment")
     private Establishment establishment;
 }

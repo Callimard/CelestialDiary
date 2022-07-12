@@ -2,9 +2,10 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.company;
 
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.model.general.Address;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeSummary;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.Instant;
 import java.util.List;
@@ -30,17 +31,9 @@ public class Company {
     private Address address;
     private String phone;
 
-    private EmployeeSummary manager;
-    private List<EmployeeSummary> employees;
+    @ToString.Exclude
+    @DocumentReference(collection = "Employee")
+    private List<Employee> employees;
 
     private Instant creationDate;
-
-    public CompanySummary summary() {
-        return CompanySummary.builder()
-                .companyEmail(email)
-                .companyName(name)
-                .companyCreationDate(creationDate)
-                .company(this)
-                .build();
-    }
 }

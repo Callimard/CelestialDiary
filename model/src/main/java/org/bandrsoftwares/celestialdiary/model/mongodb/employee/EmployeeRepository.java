@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
-    List<Employee> findByCompanySummaryCompany(Company company);
+    List<Employee> findByCompany(Company company);
 
-    List<Employee> findByCompanySummaryCompanyAndActivated(Company company, Boolean active);
+    List<Employee> findByCompanyAndActivated(Company company, Boolean active);
 
-    List<Employee> findByCompanySummaryCompanyAndIsTechnician(Company company, Boolean isTechnician);
+    List<Employee> findByCompanyAndIsTechnician(Company company, Boolean isTechnician);
 
-    List<Employee> findByCompanySummaryCompanyAndActivatedAndIsTechnician(Company company, Boolean active, Boolean isTechnician);
+    List<Employee> findByCompanyAndActivatedAndIsTechnician(Company company, Boolean active, Boolean isTechnician);
 
-    Optional<Employee> findByCompanySummaryCompanyAndEmail(Company company, String email);
+    Optional<Employee> findByCompanyAndEmail(Company company, String email);
 }

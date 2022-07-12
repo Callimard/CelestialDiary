@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
-import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanySummary;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentPrivilege;
@@ -60,26 +59,19 @@ public class Employee {
     @DocumentReference(collection = "Establishment")
     private Set<Establishment> assignedEstablishments;
 
-    private CompanySummary companySummary;
+    @ToString.Exclude
+    @DocumentReference(collection = "Company")
+    private Company company;
 
     private Instant creationDate;
 
     // Methods.
 
-    public EmployeeSummary summary() {
-        return EmployeeSummary.builder()
-                .userEmail(email)
-                .userFirstName(firstName)
-                .userLastName(lastName)
-                .employee(this)
-                .build();
-    }
-
     public Set<String> allAuthorities() {
         Set<String> authorities = Sets.newHashSet();
         if (roles != null)
             for (Role role : roles) {
-                Company roleCompany = role.getCompanySummary().getCompany();
+                Company roleCompany = role.getCompany();
                 Establishment roleEstablishment = role.getEstablishment();
                 for (Privilege privilege : role.getPrivileges()) {
                     Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);

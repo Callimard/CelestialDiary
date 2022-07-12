@@ -24,7 +24,6 @@ public class CheckAspect {
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.company.CheckCompanyCoherence)")
     void verifyCompanyCoherence(JoinPoint jp) {
-        log.info("In check company coherence");
         String companyId = AopTool.extractSpecificParameter(jp, CompanyId.class);
 
         Parameter[] parameters = AopTool.extractJoinPointMethodParameter(jp);
@@ -40,7 +39,7 @@ public class CheckAspect {
     private void checkEmployeeCoherence(String companyId) {
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
         if (employee != null) {
-            if (!employee.getCompanySummary().getCompany().getId().equals(companyId)) {
+            if (!employee.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(
                         "The employee with the id " + employee.getId() + " is not in the company with the id " + companyId);
             }

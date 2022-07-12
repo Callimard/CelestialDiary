@@ -39,7 +39,6 @@ public class SearchingAspect {
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.company.SearchCompany)")
     void searchAndShareCompany(JoinPoint jp) {
-        log.info("In search company");
         String companyId = AopTool.extractSpecificParameter(jp, CompanyId.class);
         searchAndShareCompany(companyId);
     }
@@ -55,7 +54,6 @@ public class SearchingAspect {
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.employee.SearchEmployee)")
     void searchAndShareEmployee(JoinPoint jp) {
-        log.info("In search employee");
         String employeeId = AopTool.extractSpecificParameter(jp, EmployeeId.class);
         searchAndShareEmployee(employeeId);
     }
@@ -71,7 +69,6 @@ public class SearchingAspect {
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.establishment.SearchEstablishment)")
     void searchAndShareEstablishment(JoinPoint jp) {
-        log.info("In search establishment");
         String establishmentId = AopTool.extractSpecificParameter(jp, EstablishmentId.class);
         searchAndShareEstablishment(establishmentId);
     }

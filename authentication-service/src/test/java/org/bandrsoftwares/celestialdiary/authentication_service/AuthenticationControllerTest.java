@@ -191,7 +191,7 @@ public class AuthenticationControllerTest {
             when(companyRepository.findByName(correctCompanyName)).thenReturn(Optional.of(correctCompany));
 
             Employee correctEmployee = buildCorrectEmployee(correctCompany);
-            when(employeeRepository.findByCompanySummaryCompanyAndEmail(correctCompany, correctEmployeeEmail)).thenReturn(
+            when(employeeRepository.findByCompanyAndEmail(correctCompany, correctEmployeeEmail)).thenReturn(
                     Optional.of(correctEmployee));
         }
 
@@ -199,7 +199,7 @@ public class AuthenticationControllerTest {
             return Employee.builder()
                     .email(correctEmployeeEmail)
                     .password(correctEmployeePassword)
-                    .companySummary(company.summary())
+                    .company(company)
                     .build();
         }
 

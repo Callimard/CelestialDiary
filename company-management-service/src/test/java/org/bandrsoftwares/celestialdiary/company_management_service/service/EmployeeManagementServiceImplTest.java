@@ -71,13 +71,13 @@ class EmployeeManagementServiceImplTest {
         when(companyRepository.findById(correctCompanyId)).thenReturn(Optional.of(company));
 
         Employee employee = Employee.builder()
-                .companySummary(company.summary())
+                .company(company)
                 .activated(true)
                 .build();
         when(employeeRepository.findById(correctEmployeeId)).thenReturn(Optional.of(employee));
 
         Employee incoherentEmployee = Employee.builder()
-                .companySummary(wrongCompany.summary())
+                .company(wrongCompany)
                 .activated(true)
                 .build();
         when(employeeRepository.findById(incoherentEmployeeId)).thenReturn(Optional.of(incoherentEmployee));
