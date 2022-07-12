@@ -19,18 +19,18 @@ import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Set;
 
-public interface CompanyEmployeeManagementService {
+public interface EmployeeManagementService {
 
     /**
      * @param companyId the company id
      *
      * @return the list of all employees in the company
      */
-    List<Employee> allRegisteredEmployees(String companyId);
+    List<Employee> allRegisteredEmployees(@CompanyId String companyId);
 
-    List<Employee> allRegisteredEmployees(String companyId, boolean active);
+    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active);
 
-    List<Employee> allRegisteredEmployees(String companyId, boolean technician, @Null String useless);
+    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean technician, @Null String useless);
 
     /**
      * @param companyId the company id
@@ -39,7 +39,7 @@ public interface CompanyEmployeeManagementService {
      *
      * @throws CompanyNotFoundException if the company is not found.
      */
-    List<Employee> allRegisteredEmployees(String companyId, boolean active, boolean technician);
+    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active, boolean technician);
 
     /**
      * Create and save the new employee. The specified email must be unique in the company.

@@ -1,7 +1,10 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
-import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanySummary;
+import org.bandrsoftwares.celestialdiary.model.general.Address;
+import org.bandrsoftwares.celestialdiary.model.general.DatedTimeIntervalList;
+import org.bandrsoftwares.celestialdiary.model.general.NonDatedTimeIntervalList;
+import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,18 +28,30 @@ public class Establishment {
     private String name;
     private String description;
 
+    private Address address;
+
+    private NonDatedTimeIntervalList mondayOpening;
+    private NonDatedTimeIntervalList tuesdayOpening;
+    private NonDatedTimeIntervalList wednesdayOpening;
+    private NonDatedTimeIntervalList thursdayOpening;
+    private NonDatedTimeIntervalList fridayOpening;
+    private NonDatedTimeIntervalList saturdayOpening;
+    private NonDatedTimeIntervalList sundayOpening;
+
+    private List<DatedTimeIntervalList> exceptionalOpening;
+    private List<DatedTimeIntervalList> exceptionalClosing;
+
+    private boolean activated;
+
     @ToString.Exclude
-    @DocumentReference(collection = "Employee", lazy = true)
+    @DocumentReference(collection = "Employee")
     private List<Employee> assignedEmployees;
 
-    private CompanySummary companySummary;
+    @ToString.Exclude
+    @DocumentReference(collection = "Company")
+    private Company company;
 
-    public EstablishmentSummary summary() {
-        return EstablishmentSummary.builder()
-                .establishmentName(name)
-                .establishment(this)
-                .build();
-    }
+    // Methods.
 
     public boolean hasAsAssignedEmployee(Employee employee) {
         return getAssignedEmployees().stream().map(Employee::getId).collect(Collectors.toSet()).contains(employee.getId());
