@@ -41,25 +41,25 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     @SearchCompany
     @Override
     public List<Employee> allRegisteredEmployees(@CompanyId String companyId) {
-        return employeeRepository.findByCompanySummaryCompany(SearchingAspect.COMPANY_FOUND.get());
+        return employeeRepository.findByCompany(SearchingAspect.COMPANY_FOUND.get());
     }
 
     @SearchCompany
     @Override
     public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive) {
-        return employeeRepository.findByCompanySummaryCompanyAndActivated(SearchingAspect.COMPANY_FOUND.get(), isActive);
+        return employeeRepository.findByCompanyAndActivated(SearchingAspect.COMPANY_FOUND.get(), isActive);
     }
 
     @SearchCompany
     @Override
     public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean technician, @Null String useless) {
-        return employeeRepository.findByCompanySummaryCompanyAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), technician);
+        return employeeRepository.findByCompanyAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), technician);
     }
 
     @SearchCompany
     @Override
     public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive, boolean technician) {
-        return employeeRepository.findByCompanySummaryCompanyAndActivatedAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), isActive, technician);
+        return employeeRepository.findByCompanyAndActivatedAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), isActive, technician);
     }
 
     @SearchCompany
@@ -83,7 +83,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
                 .activated(true)
                 .tags(Sets.newHashSet(employeeCreationInformation.tags()))
                 .roles(roles)
-                .companySummary(company.summary())
+                .company(company)
                 .creationDate(Instant.now())
                 .build();
     }

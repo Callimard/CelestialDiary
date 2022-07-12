@@ -82,9 +82,9 @@ public class JwtCreatorService {
 
     private JwtAccount buildJwtAccount(Employee employee) {
         return JwtAccount.builder()
-                .companyId(employee.getCompanySummary().getCompany().getId())
-                .companyEmail(employee.getCompanySummary().getCompanyEmail())
-                .companyName(employee.getCompanySummary().getCompanyName())
+                .companyId(employee.getCompany().getId())
+                .companyEmail(employee.getCompany().getEmail())
+                .companyName(employee.getCompany().getName())
                 .employeeEmail(employee.getEmail())
                 .employeeFirstName(employee.getFirstName())
                 .employeeLastName(employee.getLastName())

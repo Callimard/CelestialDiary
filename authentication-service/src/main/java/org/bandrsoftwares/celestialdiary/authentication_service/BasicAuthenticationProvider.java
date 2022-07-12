@@ -76,7 +76,7 @@ public class BasicAuthenticationProvider implements AuthenticationProvider {
         Optional<Company> opCompany = companyRepository.findByName(companyName);
         if (opCompany.isPresent()) {
             Company company = opCompany.get();
-            Optional<Employee> opEmployee = employeeRepository.findByCompanySummaryCompanyAndEmail(company, employeeEmail);
+            Optional<Employee> opEmployee = employeeRepository.findByCompanyAndEmail(company, employeeEmail);
             if (opEmployee.isPresent()) {
                 Employee employee = opEmployee.get();
                 if (employee.getPassword().equals(password)) {
