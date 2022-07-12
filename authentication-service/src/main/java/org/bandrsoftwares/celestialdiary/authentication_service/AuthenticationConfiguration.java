@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.V1_AUTHENTICATION;
+import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.AUTHENTICATION_URL;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -39,7 +39,7 @@ public class AuthenticationConfiguration {
                 .logout().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.POST, V1_AUTHENTICATION + "/**").authenticated()
+                .antMatchers(HttpMethod.POST, AUTHENTICATION_URL + "/**").authenticated()
                 .anyRequest().denyAll();
 
         http.headers()

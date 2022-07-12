@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.V1_COMPANY_MANAGEMENT;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.COMPANIES_URL;
 
 @RequiredArgsConstructor
 @Configuration
@@ -36,8 +36,10 @@ public class CompanyManagementConfiguration {
                 .logout().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers(HttpMethod.GET, V1_COMPANY_MANAGEMENT + "/**").authenticated()
-                .antMatchers(HttpMethod.POST, V1_COMPANY_MANAGEMENT + "/**").authenticated()
+                .antMatchers(HttpMethod.GET, COMPANIES_URL + "/**").authenticated()
+                .antMatchers(HttpMethod.POST, COMPANIES_URL + "/**").authenticated()
+                .antMatchers(HttpMethod.PUT, COMPANIES_URL + "/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, COMPANIES_URL + "/**").authenticated()
                 .anyRequest().denyAll();
 
         http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());

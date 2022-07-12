@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanySummary;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
-import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentSummary;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentPrivilege;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +16,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A User
@@ -46,17 +46,19 @@ public class Employee {
 
     private String phone;
 
-    private Boolean isTechnician = false;
+    private Boolean isTechnician;
 
-    private Boolean active = true;
+    private Boolean activated;
 
     private Set<EmployeeTag> tags;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Role", lazy = true)
+    @DocumentReference(collection = "Role")
     private List<Role> roles;
 
-    private Set<EstablishmentSummary> assignedEstablishments;
+    @ToString.Exclude
+    @DocumentReference(collection = "Establishment")
+    private Set<Establishment> assignedEstablishments;
 
     private CompanySummary companySummary;
 
@@ -80,7 +82,7 @@ public class Employee {
                 Company roleCompany = role.getCompanySummary().getCompany();
                 Establishment roleEstablishment = role.getEstablishment();
                 for (Privilege privilege : role.getPrivileges()) {
-                    Optional<CompanyPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
+                    Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
                     Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
 
                     if (opCompanyPrivilege.isPresent()) {
@@ -95,9 +97,9 @@ public class Employee {
         return authorities;
     }
 
-    private Optional<CompanyPrivilege> extractCompanyPrivilege(Privilege privilege) {
+    private Optional<CompanyManagementPrivilege> extractCompanyPrivilege(Privilege privilege) {
         try {
-            return Optional.of(CompanyPrivilege.valueOf(privilege.getIdentifierName()));
+            return Optional.of(CompanyManagementPrivilege.valueOf(privilege.getIdentifierName()));
         } catch (IllegalArgumentException e) {
             return Optional.empty();
         }
@@ -109,6 +111,10 @@ public class Employee {
         } catch (IllegalArgumentException e) {
             return Optional.empty();
         }
+    }
+
+    public boolean isAssignedTo(Establishment establishment) {
+        return getAssignedEstablishments().stream().map(Establishment::getId).collect(Collectors.toSet()).contains(establishment.getId());
     }
 
     // Enum

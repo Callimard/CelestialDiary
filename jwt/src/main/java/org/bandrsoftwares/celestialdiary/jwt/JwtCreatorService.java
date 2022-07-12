@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -76,7 +76,7 @@ public class JwtCreatorService {
                 .companyId(company.getId())
                 .companyEmail(company.getEmail())
                 .companyName(company.getName())
-                .accountAuthorities(Lists.newArrayList(CompanyPrivilege.COMPANY_ALL.getPrivilege(company.getId())))
+                .accountAuthorities(Lists.newArrayList(CompanyManagementPrivilege.COMPANY_ALL.getPrivilege(company.getId())))
                 .build();
     }
 

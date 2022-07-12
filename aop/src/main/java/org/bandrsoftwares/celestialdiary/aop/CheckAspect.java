@@ -53,7 +53,7 @@ public class CheckAspect {
     private void checkEstablishmentCoherence(String companyId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
         if (establishment != null) {
-            if (!establishment.getCompanySummary().getCompany().getId().equals(companyId)) {
+            if (!establishment.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(
                         "The establishment with the id " + establishment.getId() + " is not in the company with the id " + companyId);
             }

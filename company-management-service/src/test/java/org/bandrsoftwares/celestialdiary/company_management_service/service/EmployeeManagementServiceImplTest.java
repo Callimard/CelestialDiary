@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 @Nested
 @DisplayName("CompanyEmployeeManagementService tests")
 @SpringBootTest
-class CompanyEmployeeManagementServiceImplTest {
+class EmployeeManagementServiceImplTest {
 
     @MockBean
     private CompanyRepository companyRepository;
@@ -42,7 +42,7 @@ class CompanyEmployeeManagementServiceImplTest {
     private EstablishmentRepository establishmentRepository;
 
     @Autowired
-    private CompanyEmployeeManagementServiceImpl companyEmployeeManagementService;
+    private EmployeeManagementServiceImpl companyEmployeeManagementService;
 
     private final String correctCompanyId = "qjhqglkqs65g23qsgq5f6dsg";
 
@@ -72,23 +72,23 @@ class CompanyEmployeeManagementServiceImplTest {
 
         Employee employee = Employee.builder()
                 .companySummary(company.summary())
-                .active(true)
+                .activated(true)
                 .build();
         when(employeeRepository.findById(correctEmployeeId)).thenReturn(Optional.of(employee));
 
         Employee incoherentEmployee = Employee.builder()
                 .companySummary(wrongCompany.summary())
-                .active(true)
+                .activated(true)
                 .build();
         when(employeeRepository.findById(incoherentEmployeeId)).thenReturn(Optional.of(incoherentEmployee));
 
         Establishment establishment = Establishment.builder()
-                .companySummary(company.summary())
+                .company(company)
                 .build();
         when(establishmentRepository.findById(correctEstablishmentId)).thenReturn(Optional.of(establishment));
 
         Establishment incoherentEstablishment = Establishment.builder()
-                .companySummary(wrongCompany.summary())
+                .company(wrongCompany)
                 .build();
         when(establishmentRepository.findById(incoherentEstablishmentId)).thenReturn(Optional.of(incoherentEstablishment));
     }
@@ -132,15 +132,15 @@ class CompanyEmployeeManagementServiceImplTest {
         @Test
         @DisplayName("createEmployee() throws CompanyNotFoundException with unknown company id")
         void withUnknownCompanyId() {
-            CompanyEmployeeManagementService.EmployeeCreationInformation info = buildCorrectEmployeeInfo();
+            EmployeeManagementService.EmployeeCreationInformation info = buildCorrectEmployeeInfo();
             assertThrows(CompanyNotFoundException.class,
                          () -> companyEmployeeManagementService.createEmployee(correctCompanyId + "wrong", info));
         }
 
-        private CompanyEmployeeManagementService.EmployeeCreationInformation buildCorrectEmployeeInfo() {
-            return new CompanyEmployeeManagementService.EmployeeCreationInformation("guil.rako@hotmail.fr", "Callimard94500$", "Guillaume",
-                                                                                    "Rakotomalala", null, null, "+33 6 52 44 77 78", true,
-                                                                                    Sets.newHashSet(), Lists.newArrayList());
+        private EmployeeManagementService.EmployeeCreationInformation buildCorrectEmployeeInfo() {
+            return new EmployeeManagementService.EmployeeCreationInformation("guil.rako@hotmail.fr", "Callimard94500$", "Guillaume",
+                                                                             "Rakotomalala", null, null, "+33 6 52 44 77 78", true,
+                                                                             Sets.newHashSet(), Lists.newArrayList());
         }
     }
 
@@ -151,7 +151,7 @@ class CompanyEmployeeManagementServiceImplTest {
         @Test
         @DisplayName("updateEmployeeInformation() throws EmployeeNotFoundException with unknown employee id")
         void withUnknownEmployeeId() {
-            CompanyEmployeeManagementService.EmployeeUpdatedInformation info = buildCorrectEmployeeUpdatedInfo();
+            EmployeeManagementService.EmployeeUpdatedInformation info = buildCorrectEmployeeUpdatedInfo();
             assertThrows(EmployeeNotFoundException.class,
                          () -> companyEmployeeManagementService.updateEmployeeInformation(correctCompanyId, correctEmployeeId + "wrong", info));
         }
@@ -159,16 +159,16 @@ class CompanyEmployeeManagementServiceImplTest {
         @Test
         @DisplayName("updateEmployeeInformation() throws CompanyCoherenceException with unknown employee not in the company")
         void withIncoherentEmployee() {
-            CompanyEmployeeManagementService.EmployeeUpdatedInformation info = buildCorrectEmployeeUpdatedInfo();
+            EmployeeManagementService.EmployeeUpdatedInformation info = buildCorrectEmployeeUpdatedInfo();
             assertThrows(CompanyCoherenceException.class,
                          () -> companyEmployeeManagementService.updateEmployeeInformation(correctCompanyId, incoherentEmployeeId, info));
         }
 
-        private CompanyEmployeeManagementService.EmployeeUpdatedInformation buildCorrectEmployeeUpdatedInfo() {
-            return new CompanyEmployeeManagementService.EmployeeUpdatedInformation("newSuperPassword945$", "FirstName", "LastName", "Salut salut",
-                                                                                   PersonGender.FEMALE,
-                                                                                   "+33 6 95 55 88 77",
-                                                                                   true, Sets.newHashSet());
+        private EmployeeManagementService.EmployeeUpdatedInformation buildCorrectEmployeeUpdatedInfo() {
+            return new EmployeeManagementService.EmployeeUpdatedInformation("newSuperPassword945$", "FirstName", "LastName", "Salut salut",
+                                                                            PersonGender.FEMALE,
+                                                                            "+33 6 95 55 88 77",
+                                                                            true, Sets.newHashSet());
         }
     }
 
@@ -179,7 +179,7 @@ class CompanyEmployeeManagementServiceImplTest {
         @Test
         @DisplayName("updateEmployeeRoles() throws EmployeeNotFoundException with unknown employee id")
         void withUnknownEmployeeId() {
-            CompanyEmployeeManagementService.EmployeeUpdatedRoles info = buildCorrectEmployeeUpdateRoleInfo();
+            EmployeeManagementService.EmployeeUpdatedRoles info = buildCorrectEmployeeUpdateRoleInfo();
             assertThrows(EmployeeNotFoundException.class,
                          () -> companyEmployeeManagementService.updateEmployeeRoles(correctCompanyId, correctEmployeeId + "wrong", info));
         }
@@ -187,13 +187,13 @@ class CompanyEmployeeManagementServiceImplTest {
         @Test
         @DisplayName("updateEmployeeRoles() throws CompanyCoherenceException with unknown employee not in the company")
         void withIncoherentEmployee() {
-            CompanyEmployeeManagementService.EmployeeUpdatedRoles info = buildCorrectEmployeeUpdateRoleInfo();
+            EmployeeManagementService.EmployeeUpdatedRoles info = buildCorrectEmployeeUpdateRoleInfo();
             assertThrows(CompanyCoherenceException.class,
                          () -> companyEmployeeManagementService.updateEmployeeRoles(correctCompanyId, incoherentEmployeeId, info));
         }
 
-        private CompanyEmployeeManagementService.EmployeeUpdatedRoles buildCorrectEmployeeUpdateRoleInfo() {
-            return new CompanyEmployeeManagementService.EmployeeUpdatedRoles(Lists.newArrayList(), Lists.newArrayList());
+        private EmployeeManagementService.EmployeeUpdatedRoles buildCorrectEmployeeUpdateRoleInfo() {
+            return new EmployeeManagementService.EmployeeUpdatedRoles(Lists.newArrayList(), Lists.newArrayList());
         }
     }
 

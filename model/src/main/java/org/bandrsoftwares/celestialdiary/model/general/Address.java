@@ -1,4 +1,4 @@
-package org.bandrsoftwares.celestialdiary.model.mongodb.general;
+package org.bandrsoftwares.celestialdiary.model.general;
 
 import lombok.*;
 

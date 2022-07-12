@@ -15,7 +15,6 @@ import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentSummary;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -29,7 +28,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Validated
 @Service
-public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeManagementService {
+public class EmployeeManagementServiceImpl implements EmployeeManagementService {
 
     // Variables.
 
@@ -47,8 +46,8 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
 
     @SearchCompany
     @Override
-    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active) {
-        return employeeRepository.findByCompanySummaryCompanyAndActive(SearchingAspect.COMPANY_FOUND.get(), active);
+    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive) {
+        return employeeRepository.findByCompanySummaryCompanyAndActivated(SearchingAspect.COMPANY_FOUND.get(), isActive);
     }
 
     @SearchCompany
@@ -59,8 +58,8 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
 
     @SearchCompany
     @Override
-    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active, boolean technician) {
-        return employeeRepository.findByCompanySummaryCompanyAndActiveAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), active, technician);
+    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive, boolean technician) {
+        return employeeRepository.findByCompanySummaryCompanyAndActivatedAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), isActive, technician);
     }
 
     @SearchCompany
@@ -81,7 +80,7 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
                 .gender(employeeCreationInformation.gender() != null ? employeeCreationInformation.gender() : PersonGender.NO_GENDER)
                 .phone(employeeCreationInformation.phone())
                 .isTechnician(employeeCreationInformation.isTechnician())
-                .active(true)
+                .activated(true)
                 .tags(Sets.newHashSet(employeeCreationInformation.tags()))
                 .roles(roles)
                 .companySummary(company.summary())
@@ -124,11 +123,7 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
         }
 
         if (update.tags() != null) {
-            if (employee.getTags() == null) {
-                employee.setTags(Sets.newHashSet(update.tags()));
-            } else {
-                employee.getTags().addAll(update.tags());
-            }
+            employee.setTags(update.tags());
         }
 
         return employeeRepository.save(employee);
@@ -163,17 +158,18 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
 
         if (!establishment.hasAsAssignedEmployee(employee)) {
             establishment.getAssignedEmployees().add(employee);
-            employee.getAssignedEstablishments().add(establishment.summary());
-
-            employeeRepository.save(employee);
             establishmentRepository.save(establishment);
+
+            if (!employee.isAssignedTo(establishment)) {
+                employee.getAssignedEstablishments().add(establishment);
+                employeeRepository.save(employee);
+            }
 
             return true;
         } else {
             // Just in case employee is not up-to-date
-            EstablishmentSummary establishmentSummary = establishment.summary();
-            boolean added = employee.getAssignedEstablishments().add(establishmentSummary);
-            if (added) {
+            if (!employee.isAssignedTo(establishment)) {
+                employee.getAssignedEstablishments().add(establishment);
                 employeeRepository.save(employee);
                 return true;
             }
@@ -192,16 +188,15 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
 
         if (establishment.hasAsAssignedEmployee(employee)) {
             establishment.getAssignedEmployees().removeIf(emp -> emp.getId().equals(employeeId));
-            employee.getAssignedEstablishments().remove(establishment.summary());
+            employee.getAssignedEstablishments().removeIf(est -> est.getId().equals(establishment.getId()));
 
             employeeRepository.save(employee);
             establishmentRepository.save(establishment);
             return true;
         } else {
             // Just in case employee is not up-to-date
-            EstablishmentSummary establishmentSummary = establishment.summary();
-            boolean removed = employee.getAssignedEstablishments().remove(establishmentSummary);
-            if (removed) {
+            if (employee.isAssignedTo(establishment)) {
+                employee.getAssignedEstablishments().removeIf(est -> est.getId().equals(establishment.getId()));
                 employeeRepository.save(employee);
                 return true;
             }
@@ -214,9 +209,9 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
     @Override
     public boolean activateEmployee(@CompanyId String companyId, @EmployeeId String employeeId) {
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
-        boolean activated = employee.getActive();
+        boolean activated = employee.getActivated();
         if (!activated) {
-            employee.setActive(true);
+            employee.setActivated(true);
             employeeRepository.save(employee);
             return true;
         }
@@ -228,9 +223,9 @@ public class CompanyEmployeeManagementServiceImpl implements CompanyEmployeeMana
     @Override
     public boolean deactivateEmployee(@CompanyId String companyId, @EmployeeId String employeeId) {
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
-        boolean activated = employee.getActive();
+        boolean activated = employee.getActivated();
         if (activated) {
-            employee.setActive(false);
+            employee.setActivated(false);
             employeeRepository.save(employee);
             return true;
         }

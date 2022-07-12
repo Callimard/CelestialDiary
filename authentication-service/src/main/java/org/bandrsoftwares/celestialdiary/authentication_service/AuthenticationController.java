@@ -16,7 +16,7 @@ import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(V1_AUTHENTICATION)
+@RequestMapping(AUTHENTICATION_URL)
 public class AuthenticationController {
 
     private final JwtCreatorService jwtCreatorService;
@@ -29,7 +29,9 @@ public class AuthenticationController {
             log.info("Generate login token for Company {} / Details {}", companyAuth.getPrincipal().getEmail(), authentication.getDetails());
             return new JwtTokenResponse(jwtCreatorService.createJwtFor(companyAuth.getPrincipal()));
         } else {
-            throw new JwtAPIWrongAuthenticationPrincipalException("For " + V1_AUTHENTICATION + COMPANY_AUTHENTICATION + ", use BASIC authentication");
+            log.error("COMPANY AUTH FAIL -> wrong authentication type on {}, must be BASIC authentication / Details {}", COMPANY_AUTHENTICATION_URL
+                    , authentication.getDetails());
+            throw new JwtAPIWrongAuthenticationPrincipalException("For " + COMPANY_AUTHENTICATION_URL + ", use BASIC authentication");
         }
     }
 
@@ -39,7 +41,9 @@ public class AuthenticationController {
             log.info("Refresh token for Company {} / Details {}", jwtAccount.getCompanyEmail(), authentication.getDetails());
             return new JwtTokenResponse(jwtCreatorService.createJwtFor(jwtAccount));
         } else {
-            throw new JwtAPIWrongAuthenticationPrincipalException("For " + V1_AUTHENTICATION + COMPANY_TOKEN_REFRESH + ", use BEARER authentication");
+            log.error("COMPANY AUTH FAIL -> wrong authentication type on {}, must be BEARER authentication / Details {}", COMPANY_TOKEN_REFRESH_URL
+                    , authentication.getDetails());
+            throw new JwtAPIWrongAuthenticationPrincipalException("For " + COMPANY_TOKEN_REFRESH_URL + ", use BEARER authentication");
         }
     }
 
@@ -49,8 +53,10 @@ public class AuthenticationController {
             log.info("Generate login token for Employee {} / Details {}", employeeAuth.getPrincipal().getEmail(), authentication.getDetails());
             return new JwtTokenResponse(jwtCreatorService.createJwtFor(employeeAuth.getPrincipal()));
         } else {
+            log.error("EMPLOYEE AUTH FAIL -> wrong authentication type on {}, must be BASIC authentication / Details {}", EMPLOYEE_AUTHENTICATION_URL
+                    , authentication.getDetails());
             throw new JwtAPIWrongAuthenticationPrincipalException(
-                    "For " + V1_AUTHENTICATION + EMPLOYEE_AUTHENTICATION + ", use BASIC authentication");
+                    "For " + EMPLOYEE_AUTHENTICATION_URL + ", use BASIC authentication");
         }
     }
 
@@ -60,8 +66,10 @@ public class AuthenticationController {
             log.info("Refresh token for Employee {}  / Details {}", jwtAccount.getEmployeeEmail(), authentication.getDetails());
             return new JwtTokenResponse(jwtCreatorService.createJwtFor(jwtAccount));
         } else {
+            log.error("EMPLOYEE AUTH FAIL -> wrong authentication type on {}, must be BEARER authentication / Details {}", EMPLOYEE_TOKEN_REFRESH_URL
+                    , authentication.getDetails());
             throw new JwtAPIWrongAuthenticationPrincipalException(
-                    "For " + V1_AUTHENTICATION + EMPLOYEE_TOKEN_REFRESH + ", use BEARER authentication");
+                    "For " + EMPLOYEE_TOKEN_REFRESH_URL + ", use BEARER authentication");
         }
     }
 }
