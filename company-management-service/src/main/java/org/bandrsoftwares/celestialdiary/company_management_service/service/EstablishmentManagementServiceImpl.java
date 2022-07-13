@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.time.Instant;
 import java.util.List;
 
 @Slf4j
@@ -56,6 +57,7 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
                 .sundayOpening(info.sundayOpening())
                 .activated(true)
                 .company(company)
+                .creationDate(Instant.now())
                 .build();
     }
 
@@ -68,7 +70,7 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
                                              @Valid EstablishmentUpdatedInformation update) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
 
-        if (update.name() != null) {
+        if (update.name() != null && !update.name().isBlank()) {
             establishment.setName(update.name());
         }
 
@@ -118,7 +120,7 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
     public boolean activateEstablishment(@CompanyId String companyId, @EstablishmentId String establishmentId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
 
-        if (!establishment.isActivated()) {
+        if (Boolean.FALSE.equals(establishment.getActivated())) {
             establishment.setActivated(true);
             establishmentRepository.save(establishment);
             return true;
@@ -133,7 +135,7 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
     public boolean deactivateEstablishment(@CompanyId String companyId, @EstablishmentId String establishmentId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
 
-        if (establishment.isActivated()) {
+        if (Boolean.TRUE.equals(establishment.getActivated())) {
             establishment.setActivated(false);
             establishmentRepository.save(establishment);
             return true;

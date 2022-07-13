@@ -65,8 +65,10 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     @SearchCompany
     @Override
     public Employee createEmployee(@CompanyId String companyId, @Valid EmployeeCreationInformation employeeCreationInformation) {
-        List<Role> roles = roleRepository.findByIdIn(employeeCreationInformation.roles());
-        Employee employee = createEmployeeFrom(SearchingAspect.COMPANY_FOUND.get(), employeeCreationInformation, roles);
+        Company company = SearchingAspect.COMPANY_FOUND.get();
+
+        List<Role> roles = roleRepository.findByCompanyAndIdIn(company, employeeCreationInformation.roles());
+        Employee employee = createEmployeeFrom(company, employeeCreationInformation, roles);
         return employeeRepository.insert(employee);
     }
 
@@ -94,7 +96,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     public Employee updateEmployeeInformation(@CompanyId String companyId, @EmployeeId String employeeId, @Valid EmployeeUpdatedInformation update) {
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
 
-        if (update.password() != null) {
+        if (update.password() != null && !update.password().isBlank()) {
             employee.setPassword(update.password());
         }
 
@@ -129,11 +131,13 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
         return employeeRepository.save(employee);
     }
 
+    @SearchCompany
     @SearchEmployee
     @CheckCompanyCoherence
     @Override
     public Employee updateEmployeeRoles(@CompanyId String companyId, @EmployeeId String employeeId,
                                         @Valid EmployeeUpdatedRoles employeeUpdatedRoles) {
+        Company company = SearchingAspect.COMPANY_FOUND.get();
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
 
         Set<String> rolesToRemove = Sets.newHashSet(employeeUpdatedRoles.rolesToRemove());
@@ -141,7 +145,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
 
         employee.getRoles().removeIf(r -> rolesToRemove.contains(r.getId()));
 
-        List<Role> newRoles = roleRepository.findByIdIn(rolesToAdd);
+        List<Role> newRoles = roleRepository.findByCompanyAndIdIn(company, rolesToAdd);
         employee.getRoles().addAll(newRoles);
 
         return employeeRepository.save(employee);

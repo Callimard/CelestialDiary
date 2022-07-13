@@ -8,6 +8,7 @@ import org.bandrsoftwares.celestialdiary.model.general.NonDatedTimeIntervalList;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -18,11 +19,11 @@ public interface EstablishmentManagementService {
      *
      * @return the list of all establishment of the company.
      */
-    List<Establishment> allRegisteredEstablishment(String companyId);
+    List<Establishment> allRegisteredEstablishment(@CompanyId String companyId);
 
     Establishment createEstablishment(@CompanyId String companyId, @Valid EstablishmentCreationInformation establishmentCreationInformation);
 
-    record EstablishmentCreationInformation(@NotNull String name, String description, Address address,
+    record EstablishmentCreationInformation(@NotNull @NotBlank String name, String description, Address address,
                                             NonDatedTimeIntervalList mondayOpening,
                                             NonDatedTimeIntervalList tuesdayOpening,
                                             NonDatedTimeIntervalList wednesdayOpening,

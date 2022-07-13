@@ -15,6 +15,8 @@ db.Employee.insertOne({
     "personGender": "MALE",
     "phone": "+33 6 07 27 14 40",
     "active": true,
-    "companySummary": {"companyEmail": "super-company@hotmail.fr", "companyName": "supercompany", "company": resComp.insertedId},
+    "company": {
+        "$oid": resComp.insertedId
+    },
     "creationDate": "$$NOW"
 })

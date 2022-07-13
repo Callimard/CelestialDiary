@@ -9,8 +9,14 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceVerificatio
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
+import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.BundleId;
+import org.bandrsoftwares.celestialdiary.aop.saleable.product.ProductId;
+import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +38,12 @@ public class CheckAspect {
                 checkEmployeeCoherence(companyId);
             } else if (parameter.isAnnotationPresent(EstablishmentId.class)) {
                 checkEstablishmentCoherence(companyId);
+            } else if (parameter.isAnnotationPresent(ProductId.class)) {
+                checkProductCoherence(companyId);
+            } else if (parameter.isAnnotationPresent(PrestationId.class)) {
+                checkServiceCoherence(companyId);
+            } else if (parameter.isAnnotationPresent(BundleId.class)) {
+                checkBundleCoherence(companyId);
             }
         }
     }
@@ -55,6 +67,45 @@ public class CheckAspect {
             if (!establishment.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(
                         "The establishment with the id " + establishment.getId() + " is not in the company with the id " + companyId);
+            }
+        } else {
+            throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
+                                                                    "annotations @SearchEmployee and/or @SearchEstablishment");
+        }
+    }
+
+    private void checkProductCoherence(String companyId) {
+        Product product = SearchingAspect.PRODUCT_FOUND.get();
+        if (product != null) {
+            if (!product.getCompany().getId().equals(companyId)) {
+                throw new CompanyCoherenceException(
+                        "The product with the id " + product.getId() + " is not in the company with the id " + companyId);
+            }
+        } else {
+            throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
+                                                                    "annotations @SearchEmployee and/or @SearchEstablishment");
+        }
+    }
+
+    private void checkServiceCoherence(String companyId) {
+        Prestation prestation = SearchingAspect.SERVICE_FOUND.get();
+        if (prestation != null) {
+            if (!prestation.getCompany().getId().equals(companyId)) {
+                throw new CompanyCoherenceException(
+                        "The service with the id " + prestation.getId() + " is not in the company with the id " + companyId);
+            }
+        } else {
+            throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
+                                                                    "annotations @SearchEmployee and/or @SearchEstablishment");
+        }
+    }
+
+    private void checkBundleCoherence(String companyId) {
+        Bundle bundle = SearchingAspect.BUNDLE_FOUND.get();
+        if (bundle != null) {
+            if (!bundle.getCompany().getId().equals(companyId)) {
+                throw new CompanyCoherenceException(
+                        "The bundle with the id " + bundle.getId() + " is not in the company with the id " + companyId);
             }
         } else {
             throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
