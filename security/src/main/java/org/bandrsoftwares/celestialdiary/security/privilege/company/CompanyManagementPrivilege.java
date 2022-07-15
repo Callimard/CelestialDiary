@@ -19,7 +19,15 @@ public enum CompanyManagementPrivilege {
     ESTABLISHMENT_READ("company:%s:establishment:read"),
     ESTABLISHMENT_CREATE("company:%s:establishment:create"),
     ESTABLISHMENT_UPDATE("company:%s:establishment:update"),
-    ESTABLISHMENT_ACTIVATE("company:%s:establishment:activate");
+    ESTABLISHMENT_ACTIVATE("company:%s:establishment:activate"),
+
+    // Saleable Management Privilege
+
+    SALEABLE_ALL("company:%s:saleable:all"),
+    SALEABLE_READ("company:%s:saleable:read"),
+    SALEABLE_CREATE("company:%s:saleable:create"),
+    SALEABLE_UPDATE("company:%s:saleable:update"),
+    SALEABLE_ACTIVATE("company:%s:saleable:activate");
 
     private final String privilege;
 

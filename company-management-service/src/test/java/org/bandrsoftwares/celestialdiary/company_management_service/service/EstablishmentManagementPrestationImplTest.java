@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 @Nested
 @DisplayName("EstablishmentManagementService tests")
 @SpringBootTest
-class EstablishmentManagementServiceImplTest {
+class EstablishmentManagementPrestationImplTest {
 
     @Autowired
     private EstablishmentManagementServiceImpl establishmentManagementService;

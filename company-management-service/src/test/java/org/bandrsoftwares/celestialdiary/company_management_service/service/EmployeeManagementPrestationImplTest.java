@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 @Nested
 @DisplayName("CompanyEmployeeManagementService tests")
 @SpringBootTest
-class EmployeeManagementServiceImplTest {
+class EmployeeManagementPrestationImplTest {
 
     @MockBean
     private CompanyRepository companyRepository;

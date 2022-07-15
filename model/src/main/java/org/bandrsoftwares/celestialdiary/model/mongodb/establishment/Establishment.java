@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,9 @@ public class Establishment {
     private List<DatedTimeIntervalList> exceptionalOpening;
     private List<DatedTimeIntervalList> exceptionalClosing;
 
-    private boolean activated;
+    private List<EstablishmentProduct> proposedProducts;
+    private List<EstablishmentPrestation> proposedServices;
+    private List<EstablishmentBundle> proposedBundles;
 
     @ToString.Exclude
     @DocumentReference(collection = "Employee")
@@ -50,6 +53,10 @@ public class Establishment {
     @ToString.Exclude
     @DocumentReference(collection = "Company")
     private Company company;
+
+    private Boolean activated;
+
+    private Instant creationDate;
 
     // Methods.
 
