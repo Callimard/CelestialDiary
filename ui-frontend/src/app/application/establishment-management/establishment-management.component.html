@@ -1,1 +1,43 @@
-<p>establishment-management works!</p>
+<div class="establishment-management-container">
+  <div class="establishment-management-left-container" [class.horizontal-slider-first]="!isBigScreen()" [class.swiped]="swipeDone">
+    <div app-search-bar class="establishment-search-bar"
+         placeHolder="{{ 'establishment-management.establishment-selection.search-establishment' | translate }}"
+         (inputText)="searchText($event)">
+    </div>
+    <div app-establishment-searching-list [observer]="this" [paddingHeight]="'var(--establishment-search-bar-height)'"
+         [allEstablishments]="allEstablishments"
+         class="establishment-list">
+    </div>
+    <button class="floating-button create-establishment-button" (click)="goCreateEstablishment()">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+  <div class="establishment-management-right-container" [class.horizontal-slider-second]="!isBigScreen()" [class.swiped]="swipeDone">
+    <div class="establishment-information-container" *ngIf="selectedEstablishment != null">
+      <div class="establishment-information-header floating-card">
+        <div class="back-arrow basic-clickable" (click)="backToEstablishmentSelection()">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <div class="establishment-account-title-container">
+          <div class="establishment-title-info">
+            <h4>{{selectedEstablishment?.name}}</h4>
+          </div>
+          <div class="establishment-avatar-container">
+            <img class="establishment-avatar" src="/assets/images/kraken.jpg" alt="establishment avatar">
+          </div>
+        </div>
+      </div>
+      <div app-establishment-information-updater class="floating-card establishment-information-updater"
+           [establishmentId]="selectedEstablishment.id" (updateSuccess)="establishmentUpdateDone($event)"></div>
+    </div>
+    <div class="establishment-creation-container" *ngIf="createEstablishment">
+      <div class="establishment-creation-header floating-card">
+        <div class="back-arrow basic-clickable" (click)="backToEstablishmentSelection()">
+          <i class="fa-solid fa-arrow-left"></i>
+        </div>
+        <h3 class="establishment-creation-title">{{ 'establishment-management.establishment-creation.establishment-creation-title' | translate }}</h3>
+      </div>
+      <div app-establishment-creator class="floating-card establishment-creator" (creationSuccess)="establishmentCreationDone($event)"></div>
+    </div>
+  </div>
+</div>

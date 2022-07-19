@@ -1,4 +1,4 @@
-package org.bandrsoftwares.celestialdiary.model.general;
+package org.bandrsoftwares.celestialdiary.model.general.time;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

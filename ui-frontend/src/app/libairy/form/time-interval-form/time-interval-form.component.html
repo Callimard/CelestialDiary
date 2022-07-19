@@ -1,0 +1,11 @@
+<div class="time-interval-container" [formGroup]="timeIntervalFormGroup">
+  <label class="form-label"
+         for="{{prefix}}-start-{{index}}">{{ 'time.time-interval-form.start' | translate }}</label>
+  <input name="{{prefix}}-start-{{index}}" id="{{prefix}}-start-{{index}}" type="time" formControlName="start">
+  <label class="form-label"
+         for="{{prefix}}-end-{{index}}">{{ 'time.time-interval-form.end' | translate }}</label>
+  <input name="{{prefix}}-end-{{index}}" id="{{prefix}}-end-{{index}}" type="time" formControlName="end">
+  <button class="danger-button remove-button" type="button" (click)="removeTimeIntervalForm()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+</div>

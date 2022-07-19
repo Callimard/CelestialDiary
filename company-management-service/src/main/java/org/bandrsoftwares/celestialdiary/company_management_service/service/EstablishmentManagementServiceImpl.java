@@ -8,6 +8,7 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.SearchEstablishment;
+import org.bandrsoftwares.celestialdiary.model.dto.general.time.DatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
@@ -38,6 +39,20 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
 
     @SearchCompany
     @Override
+    public List<Establishment> searchEstablishment(@CompanyId String companyId, String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return establishmentRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchEstablishment
+    @CheckCompanyCoherence
+    @Override
+    public Establishment getSpecificEstablishment(@CompanyId String companyId, @EstablishmentId String establishmentId) {
+        return SearchingAspect.ESTABLISHMENT_FOUND.get();
+    }
+
+    @SearchCompany
+    @Override
     public Establishment createEstablishment(@CompanyId String companyId, @Valid EstablishmentCreationInformation establishmentCreationInformation) {
         Establishment establishment = createEstablishmentFrom(SearchingAspect.COMPANY_FOUND.get(), establishmentCreationInformation);
         return establishmentRepository.insert(establishment);
@@ -48,13 +63,13 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
                 .name(info.name())
                 .description(info.description())
                 .address(info.address())
-                .mondayOpening(info.mondayOpening())
-                .tuesdayOpening(info.tuesdayOpening())
-                .wednesdayOpening(info.wednesdayOpening())
-                .thursdayOpening(info.thursdayOpening())
-                .fridayOpening(info.fridayOpening())
-                .saturdayOpening(info.saturdayOpening())
-                .sundayOpening(info.sundayOpening())
+                .mondayOpening(info.mondayOpening() != null ? info.mondayOpening().toNonDatedTimeIntervalList() : null)
+                .tuesdayOpening(info.tuesdayOpening() != null ? info.tuesdayOpening().toNonDatedTimeIntervalList() : null)
+                .wednesdayOpening(info.wednesdayOpening() != null ? info.wednesdayOpening().toNonDatedTimeIntervalList() : null)
+                .thursdayOpening(info.thursdayOpening() != null ? info.thursdayOpening().toNonDatedTimeIntervalList() : null)
+                .fridayOpening(info.fridayOpening() != null ? info.fridayOpening().toNonDatedTimeIntervalList() : null)
+                .saturdayOpening(info.saturdayOpening() != null ? info.saturdayOpening().toNonDatedTimeIntervalList() : null)
+                .sundayOpening(info.sundayOpening() != null ? info.sundayOpening().toNonDatedTimeIntervalList() : null)
                 .activated(true)
                 .company(company)
                 .creationDate(Instant.now())
@@ -83,31 +98,53 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
         }
 
         if (update.mondayOpening() != null) {
-            establishment.setMondayOpening(update.mondayOpening());
+            establishment.setMondayOpening(update.mondayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setMondayOpening(null);
         }
 
         if (update.tuesdayOpening() != null) {
-            establishment.setTuesdayOpening(update.tuesdayOpening());
+            establishment.setTuesdayOpening(update.tuesdayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setTuesdayOpening(null);
         }
 
         if (update.wednesdayOpening() != null) {
-            establishment.setWednesdayOpening(update.wednesdayOpening());
+            establishment.setWednesdayOpening(update.wednesdayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setWednesdayOpening(null);
         }
 
         if (update.thursdayOpening() != null) {
-            establishment.setThursdayOpening(update.thursdayOpening());
+            establishment.setThursdayOpening(update.thursdayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setThursdayOpening(null);
         }
 
         if (update.fridayOpening() != null) {
-            establishment.setFridayOpening(update.fridayOpening());
+            establishment.setFridayOpening(update.fridayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setFridayOpening(null);
         }
 
         if (update.saturdayOpening() != null) {
-            establishment.setSaturdayOpening(update.saturdayOpening());
+            establishment.setSaturdayOpening(update.saturdayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setSaturdayOpening(null);
         }
 
         if (update.sundayOpening() != null) {
-            establishment.setSundayOpening(update.sundayOpening());
+            establishment.setSundayOpening(update.sundayOpening().toNonDatedTimeIntervalList());
+        } else {
+            establishment.setSundayOpening(null);
+        }
+
+        if (update.exceptionalOpening() != null) {
+            establishment.setExceptionalOpening(update.exceptionalOpening().stream().map(DatedTimeIntervalListDTO::toDatedTimeIntervalList).toList());
+        }
+
+        if (update.exceptionalClosing() != null) {
+            establishment.setExceptionalClosing(update.exceptionalClosing().stream().map(DatedTimeIntervalListDTO::toDatedTimeIntervalList).toList());
         }
 
         return establishmentRepository.save(establishment);

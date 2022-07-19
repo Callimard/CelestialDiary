@@ -1,0 +1,14 @@
+.add-remove-buttons-container {
+  padding: 0.7em 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.1em;
+}
+
+.establishment-creation-button {
+  margin-top: 6%;
+
+  width: 50%;
+
+  font-size: 27px;
+}

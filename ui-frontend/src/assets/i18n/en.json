@@ -50,5 +50,60 @@
       "employee-information-title": "Employee information",
       "employee-update-fail": "Fail to update employee information"
     }
+  },
+  "establishment-management": {
+    "establishment-selection": {
+      "search-establishment": "Search an establishment"
+    },
+    "establishment-creation": {
+      "establishment-creation-title": "Create an establishment",
+      "create-title": "Create",
+      "name": "Name",
+      "description": "Description",
+      "address": {
+        "title": "Address",
+        "street": "Street",
+        "zipCode": "Zip code",
+        "city": "City",
+        "country": "Country"
+      },
+      "openingHours": {
+        "title": "Opening hours",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "saturday",
+        "sunday": "sunday",
+        "start": "Start",
+        "end": "End",
+        "add": "Add hours",
+        "remove": "Remove hours"
+      }
+    },
+    "establishment-information": {
+      "title": "Establishment information",
+      "update": {
+        "title": "Update",
+        "failed": "Establishment update failed",
+        "exceptional-opening": {
+          "title": "Exceptional opening",
+          "add": "Add exceptional opening",
+          "remove": "Remove exceptional opening"
+        },
+        "exceptional-closing":  {
+          "title": "Exceptional closing",
+          "add": "Add exceptional closing",
+          "remove": "Remove exceptional closing"
+        }
+      }
+    }
+  },
+  "time": {
+    "time-interval-form": {
+      "start": "Start",
+      "end": "End"
+    }
   }
 }

@@ -29,7 +29,7 @@
   overflow: hidden;
   white-space: nowrap;
 
-  background: var(--primary-dark);
+  background: linear-gradient(123deg, var(--primary-dark) 0%, var(--primary) 85%, var(--primary)100%);
   color: var(--application-navigation-bar-text-color);
   border-right: 1px solid var(--place-holder-text-color-light);
 
@@ -150,7 +150,7 @@
   left: 0;
   right: 0;
 
-  background: var(--application-header-background-color);
+  background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 85%, var(--primary)100%);
   box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
 
   transition: var(--application-navigation-bar-close-time);

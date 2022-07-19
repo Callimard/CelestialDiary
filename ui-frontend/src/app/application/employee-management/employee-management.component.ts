@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WrappedEmployeeDTO} from "../../../data/company-management/employee/wrapped-employee-dto";
 import {EmployeeManagementService} from "../../../service/company-management/employee-management.service";
-import {environment} from "../../../environments/environment";
+import {ScreenService} from "../../../service/screen/screen.service";
 
 @Component({
   selector: 'app-employee-management',
@@ -45,7 +45,7 @@ export class EmployeeManagementComponent implements OnInit {
   }
 
   isBigScreen(): boolean {
-    return window.innerWidth > environment.bigScreenWidth;
+    return ScreenService.isBigScreen();
   }
 
   backToEmployeeSelection() {
@@ -53,12 +53,12 @@ export class EmployeeManagementComponent implements OnInit {
     this.employeeCreation = false;
   }
 
-  createEmployee() {
+  goToEmployeeCreation() {
     this.swipeDone = true;
     this.employeeCreation = true;
   }
 
-  creationEmployeeDone(success: boolean) {
+  employeeCreationDone(success: boolean) {
     if (success) {
       this.backToEmployeeSelection();
       this.chargeEmployee()

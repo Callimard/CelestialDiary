@@ -12,11 +12,11 @@
           img="/assets/images/kraken.jpg">
       </li>
     </ul>
-    <button class="add-employee-button floating-button" (click)="createEmployee()">
+    <button class="create-employee-button floating-button" (click)="goToEmployeeCreation()">
       <i class="fa-solid fa-plus"></i>
     </button>
   </div>
-  <div class="employee-left-container" [class.horizontal-slider-second]="!isBigScreen()"
+  <div class="employee-right-container" [class.horizontal-slider-second]="!isBigScreen()"
        [class.swiped]="swipeDone">
     <div class="employee-information-container" *ngIf="!employeeCreation && selectedEmployee != null">
       <div class="employee-information-header floating-card">
@@ -33,16 +33,16 @@
           </div>
         </div>
       </div>
-      <div app-employee-information-updater class="employee-update-information floating-card" [employeeId]="selectedEmployee.id">s</div>
+      <div app-employee-information-updater class="employee-update-information floating-card" [employeeId]="selectedEmployee.id"></div>
     </div>
     <div class="employee-creation-container" *ngIf="employeeCreation">
       <div class="employee-creation-header floating-card">
         <div class="back-arrow basic-clickable" (click)="backToEmployeeSelection()">
           <i class="fa-solid fa-arrow-left"></i>
         </div>
-        <h2 class="employee-creation-title">{{ 'employee-management.employee-creation.employee-creation-title' | translate }}</h2>
+        <h3 class="employee-creation-title">{{ 'employee-management.employee-creation.employee-creation-title' | translate }}</h3>
       </div>
-      <div app-employee-creator class="employee-creation-form-container floating-card" (creationSuccess)="creationEmployeeDone($event)"></div>
+      <div app-employee-creator class="employee-creation-form-container floating-card" (creationSuccess)="employeeCreationDone($event)"></div>
     </div>
   </div>
 </div>

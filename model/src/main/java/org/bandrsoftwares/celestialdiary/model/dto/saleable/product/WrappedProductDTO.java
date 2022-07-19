@@ -7,6 +7,10 @@ public class WrappedProductDTO extends WrappedSaleableDTO {
 
     // Constructors.
 
+    public WrappedProductDTO() {
+        super();
+    }
+
     public WrappedProductDTO(Product product) {
         super(product);
     }

@@ -1,20 +1,26 @@
 package org.bandrsoftwares.celestialdiary.model.dto.saleable.prestation;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.bandrsoftwares.celestialdiary.model.dto.saleable.WrappedSaleableDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 
+@Setter
 @Getter
 public class WrappedPrestationDTO extends WrappedSaleableDTO {
 
     // Variables.
 
-    private final Integer nbNeededTechnician;
-    private final Integer nbClient;
+    private Integer nbNeededTechnician;
+    private Integer nbClient;
 
-    private final Integer suggestedExecutionTime;
+    private Integer suggestedExecutionTime;
 
     // Constructors.
+
+    public WrappedPrestationDTO() {
+        super();
+    }
 
     public WrappedPrestationDTO(Prestation prestation) {
         super(prestation);

@@ -20,6 +20,10 @@ import {HttpAuthenticationInterceptor} from "../service/authentication/http-auth
 import { UnwrapArrowComponent } from './libairy/unwrap-arrow/unwrap-arrow.component';
 import { EmployeeInformationUpdaterComponent } from './application/employee-management/employee-information-updater/employee-information-updater.component';
 import { EmployeeCreatorComponent } from './application/employee-management/employee-creator/employee-creator.component';
+import { EstablishmentSearchingListComponent } from './application/establishment-management/establishment-searching-list/establishment-searching-list.component';
+import { EstablishmentCreatorComponent } from './application/establishment-management/establishment-creator/establishment-creator.component';
+import { EstablishmentInformationUpdaterComponent } from './application/establishment-management/establishment-information-updater/establishment-information-updater.component';
+import { TimeIntervalFormComponent } from './libairy/form/time-interval-form/time-interval-form.component';
 
 const appRoutes: Routes = [
   {path: environment.frontLoginPage, component: LoginComponent},
@@ -43,7 +47,11 @@ const appRoutes: Routes = [
     InformationTicketComponent,
     UnwrapArrowComponent,
     EmployeeInformationUpdaterComponent,
-    EmployeeCreatorComponent
+    EmployeeCreatorComponent,
+    EstablishmentSearchingListComponent,
+    EstablishmentCreatorComponent,
+    EstablishmentInformationUpdaterComponent,
+    TimeIntervalFormComponent
   ],
   imports: [
     BrowserModule,
