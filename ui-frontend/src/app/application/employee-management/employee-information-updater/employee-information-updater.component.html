@@ -1,0 +1,61 @@
+<h3 class="employee-information-title">{{ 'employee-management.employee-information.employee-information-title' | translate}}</h3>
+<div class="update-fail-container form-group-error" *ngIf="updateFail">
+  <p>{{ 'employee-management.employee-information.employee-update-fail' | translate }}</p>
+</div>
+<form class="employee-update-form" [formGroup]="employeeUpdateForm" *ngIf="employeeUpdateForm != null" (ngSubmit)="onUpdate()">
+  <div class="form-group">
+    <label class="form-label" for="update-email">{{ 'employee-management.employee-creation.email' | translate }}</label>
+    <input class="form-input" type="email" id="update-email" name="update-email" formControlName="email"
+           placeholder="{{ 'employee-management.employee-creation.email' | translate }}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-password">{{ 'employee-management.employee-creation.password' | translate }}</label>
+    <input class="form-input" type="password" id="update-password" name="update-password" formControlName="password"
+           placeholder="{{ 'employee-management.employee-creation.password' | translate }}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-first-name">{{ 'employee-management.employee-creation.first-name' | translate }}</label>
+    <input class="form-input" type="text" id="update-first-name" name="update-first-name" formControlName="firstName"
+           placeholder="{{ 'employee-management.employee-creation.first-name' | translate }}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-last-name">{{ 'employee-management.employee-creation.last-name' | translate }}</label>
+    <input class="form-input" type="text" id="update-last-name" name="update-last-name" formControlName="lastName"
+           placeholder="{{ 'employee-management.employee-creation.last-name' | translate }}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-comment">{{ 'employee-management.employee-creation.comment' | translate }}</label>
+    <textarea class="form-input" id="update-comment" name="update-comment" formControlName="comment"
+              placeholder="{{ 'employee-management.employee-creation.comment' | translate }}">
+          </textarea>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-gender">{{ 'employee-management.employee-creation.gender' | translate }}</label>
+    <select class="form-input" id="update-gender" name="update-gender" formControlName="gender">
+      <option value="MALE">{{ 'employee-management.employee-creation.gender-type.male' | translate }}</option>
+      <option value="FEMALE">{{ 'employee-management.employee-creation.gender-type.female' | translate }}</option>
+      <option value="NO_GENDER">{{ 'employee-management.employee-creation.gender-type.no-gender' | translate }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-phone">{{ 'employee-management.employee-creation.phone' | translate }}</label>
+    <input class="form-input" type="tel" id="update-phone" name="update-phone" formControlName="phone"
+           placeholder="{{ 'employee-management.employee-creation.phone' | translate }}"/>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-is-technician">{{ 'employee-management.employee-creation.is-technician' | translate }}</label>
+    <select class="form-input" id="update-is-technician" name="update-is-techinician" formControlName="isTechnician">
+      <option value="true">{{'employee-management.employee-creation.is-technician-value.yes' | translate}}</option>
+      <option value="false">{{'employee-management.employee-creation.is-technician-value.no' | translate}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="update-tags">{{ 'employee-management.employee-creation.tags' | translate }}</label>
+    <input class="form-input" type="text" id="update-tags" name="update-tags" formControlName="tags"
+           placeholder="{{ 'employee-management.employee-creation.tags' | translate }}"/>
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button employee-creation-button" [disabled]="employeeUpdateForm.invalid"
+            type="submit">{{ 'employee-management.employee-information.update' | translate }}</button>
+  </div>
+</form>

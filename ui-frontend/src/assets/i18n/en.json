@@ -10,6 +10,45 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
+    "establishments": "Establishments",
+    "employees": "Employees",
+    "products": "Products",
+    "prestations": "Prestations",
+    "bundles": "Bundles",
     "logout": "Logout"
+  },
+  "employee-management": {
+    "employee-selection": {
+      "search-employee": "Search an employee"
+    },
+    "employee-creation": {
+      "employee-creation-title": "Create an employee",
+      "email": "Email",
+      "password": "Password",
+      "first-name": "First Name",
+      "last-name": "Last Name",
+      "comment": "Comment",
+      "gender": "Gender",
+      "gender-type": {
+        "male": "Male",
+        "female": "Female",
+        "no-gender": "No gender"
+      },
+      "phone": "Phone",
+      "is-technician": "Is technician",
+      "is-technician-value": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "tags": "Tags",
+      "roles": "Roles",
+      "create": "Create",
+      "creation-failed": "Employee creation failed"
+    },
+    "employee-information": {
+      "update": "Update",
+      "employee-information-title": "Employee information",
+      "employee-update-fail": "Fail to update employee information"
+    }
   }
 }

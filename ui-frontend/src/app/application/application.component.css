@@ -1,154 +1,277 @@
-:host {
+.main {
+  --application-navigation-bar-max-width: 100%;
+  --application-navigation-bar-min-width: 60px;
+  --application-navigation-bar-close-time: 0.3s;
+  --application-navigation-bar-text-color: #ffffff;
+  --application-navigation-bar-close-width: 50px;
+
+  --application-header-background-color: var(--primary-dark);
+  --application-header-text-color: white;
+  --application-header-icon-side-size: 60px;
+  --application-header-height: var(--application-header-icon-side-size);
+
+  display: block;
   position: relative;
   height: 100vh;
-
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-
-  --side-bar-max-width: 18%;
-  --side-bar-min-width: 60px;
-  --side-bar-wrappe-time: 0.7s;
-
-  --side-bar-text-color: #ffffff;
-
-  color: var(--side-bar-text-color);
-}
-
-.application-side-bar {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-
-  width: var(--side-bar-max-width);
-
-  background: var(--primary-dark);
-  box-shadow: 2px 0 5px #f1efef;
-
-  transition: var(--side-bar-wrappe-time);
-
-  overflow: hidden;
-}
-
-.application-side-bar.wrapped {
-  width: var(--side-bar-min-width);
-}
-
-.nav-title-container, .nav-account-content {
-  display: flex;
-  transition: var(--side-bar-wrappe-time);
-}
-
-.nav-title-container {
-  border-bottom: 2px solid var(--side-bar-text-color);
-}
-
-.nav-account-content {
-  align-items: stretch;
-  overflow: hidden;
-  transition: var(--side-bar-wrappe-time);
-}
-
-.nav-account-information {
-  flex: 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  white-space: nowrap;
-  padding: 0 1.3em;
-
-  transition: var(--side-bar-wrappe-time);
-}
-
-.nav-account-photo {
-  padding: 0.4em;
-  flex: 0 1;
-  min-width: var(--side-bar-min-width);
-  height: auto;
-}
-
-.nav-account-default-avatar {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.nav-zone, .nav-item {
-  position: relative;
-  display: block;
-}
-
-.nav-zone {
-  border-top: 1px solid var(--side-bar-text-color);
-}
-
-.application-side-bar.wrapped .nav-account-information {
-  padding: 0;
-  width: 0;
-}
-
-.account-info {
-  transition: var(--side-bar-wrappe-time);
-}
-
-.application-side-bar.wrapped .account-info {
-  opacity: 0;
-}
-
-.nav-item a {
-  display: flex;
-  position: relative;
-  width: 100%;
-  text-decoration: none;
-  background-color: transparent;
-  transition: 0.4s;
-}
-
-.nav-clickable:hover {
-  background-color: var(--primary);
-}
-
-.nav-clickable:active {
-  background-color: var(--primary-light);
-}
-
-.nav-icon {
-  position: relative;
-  display: block;
-  min-width: var(--side-bar-min-width);
-  height: var(--side-bar-min-width);
-  line-height: 60px;
-  text-align: center;
-
-  font-size: 1.3rem;
-}
-
-.nav-title, .nav-text {
-  position: relative;
-  display: block;
-  min-width: var(--side-bar-min-width);
-  height: var(--side-bar-min-width);
-  line-height: var(--side-bar-min-width);
-  text-align: center;
-
-  font-weight: bold;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.nav-text {
-  font-size: 0.9rem;
-}
-
-.application-content {
-  position: relative;
 
   z-index: 1;
 }
 
-.nav-logout {
-  margin-top: auto;
+.application-navigation-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+
+  width: 100%;
+
+  overflow: hidden;
+  white-space: nowrap;
+
+  background: var(--primary-dark);
+  color: var(--application-navigation-bar-text-color);
+  border-right: 1px solid var(--place-holder-text-color-light);
+
+  transition: var(--application-navigation-bar-close-time);
+}
+
+.application-navigation-bar.closed {
+  width: 0;
+  border: none;
+}
+
+.application-navigation-bar ul {
+  list-style-type: none;
+}
+
+.nav-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 1.2rem;
+  font-size: 20px;
+  font-weight: bold;
+
+  border-bottom: 1px solid var(--place-holder-text-color-light);
+}
+
+.nav-title {
+  cursor: pointer;
+}
+
+.close-nav-bar {
+  width: var(--application-navigation-bar-close-width);
+  height: var(--application-navigation-bar-close-width);
+
+  text-align: center;
+
+  font-size: 30px;
+}
+
+.close-nav-bar:hover {
+  background: var(--primary-light);
+}
+
+.close-nav-bar:active {
+  background: var(--primary-light-light);
+}
+
+.nav-zone {
+  padding: 1.2rem;
+}
+
+.nav-item {
+  padding: 0.7em 0;
+
+  cursor: pointer;
+}
+
+.nav-item.active {
+  padding-left: 0.5em;
+
+  background-color: var(--primary-light);
+  cursor: pointer;
+
+  border-left: 0.5em solid var(--primary);
+}
+
+.nav-item-text {
+  margin-left: 1em;
+}
+
+.nav-clickable {
+  transition: 0.4s;
+}
+
+.nav-clickable:hover {
+  padding-left: 0.5em;
+
+  background-color: var(--primary-light);
+  cursor: pointer;
+
+  border-left: 0.5em solid var(--primary);
+}
+
+.nav-clickable:active {
+  padding-left: 0.5em;
+
+  background-color: var(--primary-light-light);
+  cursor: pointer;
+
+  border-left: 0.5em solid var(--primary);
+}
+
+.application-container {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+
+  transition: var(--application-navigation-bar-close-time);
+}
+
+.application-container.behindNavigationBar {
+  opacity: 0.6;
+}
+
+.application-header {
+  position: relative;
+
+  height: var(--application-header-height);
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background: var(--application-header-background-color);
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
+
+  transition: var(--application-navigation-bar-close-time);
+
+  z-index: 100;
+}
+
+.open-navigation-bar-icon {
+  float: left;
+
+  opacity: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--application-header-icon-side-size);
+  height: var(--application-header-icon-side-size);
+
+  color: var(--application-header-text-color);
+  font-size: 30px;
+
+  transition: var(--application-navigation-bar-close-time);
+}
+
+.open-navigation-bar-icon:hover {
+  background: var(--primary-light);
+}
+
+.open-navigation-bar-icon:active {
+  background: var(--primary-light-light);
+}
+
+.header-title {
+  float: left;
+
+  padding-left: 0.4em;
+  padding-right: 0.4em;
+
+  margin-top: 10px;
+
+  color: var(--application-header-text-color);
+}
+
+.account-information {
+  float: right;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  width: var(--application-header-height);
+  height: var(--application-header-height);
+
+  color: var(--application-header-text-color);
+}
+
+.account-text-information {
+  display: none;
+}
+
+.account-email {
+  color: var(--place-holder-text-color-light);
+}
+
+.account-avatar {
+  padding: 0.4rem;
+
+  width: var(--application-header-height);
+  height: auto;
+
+  cursor: pointer;
+}
+
+.application-main {
+  position: relative;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: calc(100% - var(--application-header-height));
+}
+
+@media only screen and (min-width: 370px) {
+  .application-navigation-bar {
+    width: 370px;
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+
+  .application-container {
+    left: 370px;
+    width: calc(100% - 370px);
+  }
+
+  .application-container.allScreen {
+    left: 0;
+    width: 100%;
+  }
+
+  .open-navigation-bar-icon.invisible  {
+    width: 0;
+    opacity: 0;
+  }
+
+  .account-information {
+    width: auto;
+  }
+
+  .account-text-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+
+    height: var(--application-header-height);
+
+    padding: 0.6em 0.4em;
+
+    cursor: pointer;
+  }
 }

@@ -1,12 +1,64 @@
-<nav class="application-side-bar" [class.wrapped]="wrapped">
-  <div class="nav-title-container">
-    <span class="nav-icon nav-clickable" (click)="wrapSlidBar()"><i class="fa-solid fa-bars"></i></span>
-    <h3 class="nav-title">{{ 'side-bar.title' | translate }}</h3>
-  </div>
-  <div class="nav-account-content">
-    <div class="nav-account-photo">
-      <a>
-        <svg class="nav-account-default-avatar" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="698" height="698" viewBox="0 0 698 698">
+<div class="main">
+  <nav class="application-navigation-bar" [class.closed]="navigationBarClosed">
+    <div class="nav-title-container">
+      <h3 class="nav-title">{{ 'side-bar.title' | translate }}</h3>
+      <div class="close-nav-bar" (click)="closeNavigationBar()"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <ul class="nav-zone">
+      <li class="nav-item nav-clickable" [routerLink]="['establishments']" routerLinkActive="active" (click)="navClick('side-bar.establishments')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-shop"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.establishments' | translate}}</span>
+        </a>
+      </li>
+      <li class="nav-item nav-clickable" [routerLink]="['employees']" routerLinkActive="active" (click)="navClick('side-bar.employees')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-person"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.employees' | translate}}</span>
+        </a>
+      </li>
+      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.products')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-cubes"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.products' | translate}}</span>
+        </a>
+      </li>
+      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.prestations')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-scissors"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.prestations' | translate}}</span>
+        </a>
+      </li>
+      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.bundles')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-gift"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.bundles' | translate}}</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="nav-zone nav-logout">
+      <li class="nav-item nav-clickable">
+        <a (click)="logoutClick()">
+          <span class="nav-item-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.logout' | translate}}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div class="application-container" [class.behindNavigationBar]="!navigationBarClosed && isLittleScreen()"
+       [class.allScreen]="isBigScreen() && navigationBarClosed">
+    <header class="application-header">
+      <div class="open-navigation-bar-icon" [class.invisible]="isBigScreen() && !navigationBarClosed" (click)="openNavigationBar()">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+      <h2 class="header-title">{{ selectedNavItem | translate}}</h2>
+      <div class="account-information">
+        <div class="account-text-information">
+          <h4 class="account-names">{{jwtAccount.employeeLastName + ' ' + jwtAccount.employeeFirstName}}</h4>
+          <h5 class="account-email">{{jwtAccount.employeeEmail}}</h5>
+        </div>
+        <svg class="account-avatar" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width="698" height="698"
+             viewBox="0 0 698 698">
           <defs>
             <linearGradient id="b247946c-c62f-4d08-994a-4c3d64e1e98f-39" x1="349" y1="698" x2="349" gradientUnits="userSpaceOnUse">
               <stop offset="0" stop-color="gray" stop-opacity="0.25"/>
@@ -38,22 +90,10 @@
           <ellipse cx="194.86" cy="372.3" rx="14.09" ry="26.42" fill="#fdb797"/>
           <ellipse cx="497.8" cy="372.3" rx="14.09" ry="26.42" fill="#fdb797"/>
         </svg>
-      </a>
-    </div>
-    <div class="nav-account-information">
-      <h4 class="account-info">{{ jwtAccount.employeeEmail }}</h4>
-      <p class="account-info">{{ jwtAccount.employeeLastName }} {{ jwtAccount.employeeFirstName }}</p>
+      </div>
+    </header>
+    <div class="application-main">
+      <router-outlet></router-outlet>
     </div>
   </div>
-  <ul class="nav-zone nav-logout">
-    <li class="nav-item nav-clickable">
-      <a (click)="logoutClick()">
-        <span class="nav-icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span>
-        <span class="nav-text">{{ 'side-bar.logout' | translate}}</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div class="application-content">
-  <router-outlet name="application-router"></router-outlet>
 </div>

@@ -1,0 +1,11 @@
+.unwrap-arrow-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+}
+
+.unwrap-arrow-icon {
+  font-size: 30px;
+}

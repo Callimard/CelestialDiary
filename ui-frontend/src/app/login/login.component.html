@@ -157,7 +157,7 @@
         </svg>
       </div>
       <h1 class="form-container login-title">{{ 'login.welcome' | translate }}</h1>
-      <div class="form-container authentication-fail" *ngIf="authenticationFail">
+      <div class="form-container form-group-error authentication-fail" *ngIf="authenticationFail">
         <p>{{ 'login.connectionFailed' | translate }}</p>
       </div>
       <div class="form-container login-field login-company">
@@ -175,7 +175,7 @@
       <div class="form-container forgotten-password-container">
         <a class="forgotten-password">{{ 'login.forgottenPasswordQuestion' | translate }}</a>
       </div>
-      <button class="login-button" type="submit" [disabled]="!loginForm.valid">{{ 'login.connection' | translate }}</button>
+      <button class="super-valid-button login-button" type="submit" [disabled]="!loginForm.valid">{{ 'login.connection' | translate }}</button>
     </form>
   </div>
 </div>
