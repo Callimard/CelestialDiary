@@ -29,16 +29,16 @@ export class AuthenticationService {
   }
 
   private redirectToLoginPage() {
-    this.router.navigate([environment.frontLoginPage], {skipLocationChange: true}).catch((reason => {
+    this.router.navigate([environment.frontLoginPage]).catch((reason => {
       console.error("Fail to redirect to login page", reason);
     }));
   }
 
   public employeeLogin(companyName: string, employeeEmail: string, employeePassword: string): Promise<any> {
-    const employeeBasicCredential = new EmployeeBasicCredential(companyName, employeeEmail, employeePassword);
+    const employeeBasicCredential = new EmployeeBasicCredential(environment.employeeAuthenticationIdentifier + companyName, employeeEmail, employeePassword);
 
     return new Promise<boolean>((resolve, reject) => {
-      this.httpClient.post<JwtTokenResponse>(environment.backend + environment.apiV1 + environment.employeeLoginUrl, null, {
+      this.httpClient.post<JwtTokenResponse>(environment.backendUrl + environment.apiV1Url + environment.employeeLogin, null, {
         headers: {'Authorization': employeeBasicCredential.toBasicCredentials()}
       }).subscribe({
         next: (token) => {

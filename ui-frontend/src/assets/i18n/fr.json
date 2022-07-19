@@ -2,7 +2,7 @@
   "login": {
     "welcome": "Bienvenue",
     "companyName": "Nom de l'entreprise",
-    "employeeEmail": "Email de l'employée",
+    "employeeEmail": "Email de l'employé",
     "password": "Mot de passe",
     "forgottenPasswordQuestion": "Mot de passe oublié?",
     "connection": "Connexion",
@@ -10,6 +10,45 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
+    "establishments": "Établissements",
+    "employees": "Employés",
+    "products": "Produits",
+    "prestations": "Prestations",
+    "bundles": "Paquets",
     "logout": "Déconnexion"
+  },
+  "employee-management": {
+    "employee-selection": {
+      "search-employee": "Rechercher un employé"
+    },
+    "employee-creation": {
+      "employee-creation-title": "Créer un employé",
+      "email": "Email",
+      "password": "Mot de passe",
+      "first-name": "Prénom",
+      "last-name": "Nom",
+      "comment": "Commentaire",
+      "gender": "Genre",
+      "gender-type": {
+        "male": "Homme",
+        "female": "Femme",
+        "no-gender": "Non précisé"
+      },
+      "phone": "Téléphone",
+      "is-technician": "Est un technicien(ne)",
+      "is-technician-value": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "tags": "Tags",
+      "roles": "Roles",
+      "create": "Créer",
+      "creation-failed": "La création de l'employé a échouée"
+    },
+    "employee-information": {
+      "update": "Mettre à jour",
+      "employee-information-title": "Informations de l'employé",
+      "employee-update-fail": "Échec de la mise à jour de l'employée"
+    }
   }
 }

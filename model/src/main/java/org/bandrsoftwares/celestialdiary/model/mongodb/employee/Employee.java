@@ -41,6 +41,8 @@ public class Employee {
 
     private String comment;
 
+    private String photo;
+
     private PersonGender gender;
 
     private String phone;
@@ -49,7 +51,7 @@ public class Employee {
 
     private Boolean activated;
 
-    private Set<EmployeeTag> tags;
+    private List<String> tags;
 
     @ToString.Exclude
     @DocumentReference(collection = "Role")
@@ -107,11 +109,5 @@ public class Employee {
 
     public boolean isAssignedTo(Establishment establishment) {
         return getAssignedEstablishments().stream().map(Establishment::getId).collect(Collectors.toSet()).contains(establishment.getId());
-    }
-
-    // Enum
-
-    public enum EmployeeTag {
-        SECRETARY, TECHNICIAN
     }
 }

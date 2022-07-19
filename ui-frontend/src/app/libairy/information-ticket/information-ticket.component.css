@@ -1,0 +1,37 @@
+.information-ticket-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 1rem;
+}
+
+.ticket-title-container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.ticket-title, .ticket-sub-title {
+  font-weight: bold;
+}
+
+.ticket-sub-title {
+  color: var(--place-holder-text-color);
+}
+
+.ticket-img-container {
+  flex: 0 1 75px;
+  height: 75px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.ticket-img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.5);
+}

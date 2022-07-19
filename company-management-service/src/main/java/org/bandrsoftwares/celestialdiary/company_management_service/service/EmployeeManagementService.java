@@ -5,6 +5,7 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
+import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.PersonGender;
@@ -15,9 +16,7 @@ import org.bandrsoftwares.celestialdiary.validation.ValidPhone;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.util.List;
-import java.util.Set;
 
 public interface EmployeeManagementService {
 
@@ -28,18 +27,24 @@ public interface EmployeeManagementService {
      */
     List<Employee> allRegisteredEmployees(@CompanyId String companyId);
 
-    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active);
-
-    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean technician, @Null String useless);
-
     /**
      * @param companyId the company id
+     * @param filter    the filter (either first name, either last name or either email)
      *
-     * @return the list of all employees in the company in function of the filter
-     *
-     * @throws CompanyNotFoundException if the company is not found.
+     * @return the list of employee corresponding to the filter
      */
-    List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean active, boolean technician);
+    List<Employee> searchEmployee(@CompanyId String companyId, String filter);
+
+    /**
+     * @param companyId  the company id
+     * @param employeeId the employee id
+     *
+     * @return the employee if it has been found and is coherent with the specified company id.
+     *
+     * @throws EmployeeNotFoundException if the employee is not found
+     * @throws CompanyCoherenceException if the company id is not coherent with the employee
+     */
+    Employee getSpecificEmployee(@CompanyId String companyId, @EmployeeId String employeeId);
 
     /**
      * Create and save the new employee. The specified email must be unique in the company.
@@ -56,7 +61,7 @@ public interface EmployeeManagementService {
     record EmployeeCreationInformation(@NotNull @ValidEmail String email, @NotNull @ValidPassword String password,
                                        @NotNull @NotBlank String firstName, @NotNull @NotBlank String lastName, String comment,
                                        PersonGender gender, @ValidPhone String phone, @NonNull Boolean isTechnician,
-                                       @NonNull Set<Employee.EmployeeTag> tags, @NonNull List<String> roles) {
+                                       @NonNull List<String> tags, @NonNull List<String> roles) {
     }
 
     /**
@@ -76,7 +81,7 @@ public interface EmployeeManagementService {
 
     record EmployeeUpdatedInformation(@ValidPassword String password, String firstName, String lastName, String comment,
                                       PersonGender gender, @ValidPhone String phone, Boolean isTechnician,
-                                      Set<Employee.EmployeeTag> tags) {
+                                      List<String> tags) {
 
     }
 

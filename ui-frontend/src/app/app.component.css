@@ -1,10 +1,18 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .langage-selection {
-  position: absolute;
+  position: fixed;
 
   height: 4%;
   width: 5%;
 
+  top: 90%;
+  bottom: 0;
   right: 0;
+  left: 85%;
 
   z-index: 150;
 }

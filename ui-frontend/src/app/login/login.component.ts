@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   private navigateToApplication() {
-    this.router.navigate([environment.frontApplicationPage]).catch((reason => {
+    this.router.navigate([environment.frontApplicationPage, environment.employeeManagement ]).catch((reason => {
       console.error("Fail to navigate to Application page", reason);
     }));
   }

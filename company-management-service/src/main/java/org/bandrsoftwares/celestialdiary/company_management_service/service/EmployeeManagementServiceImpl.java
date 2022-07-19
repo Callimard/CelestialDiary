@@ -1,6 +1,7 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
 import com.google.common.collect.Sets;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.aop.SearchingAspect;
@@ -19,7 +20,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
@@ -46,20 +46,17 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
 
     @SearchCompany
     @Override
-    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive) {
-        return employeeRepository.findByCompanyAndActivated(SearchingAspect.COMPANY_FOUND.get(), isActive);
+    public List<Employee> searchEmployee(@CompanyId String companyId, @NonNull String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return employeeRepository.findByCompanyAndFirstNameRegexOrLastNameRegexOrEmailRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter,
+                                                                                            regexFilter, regexFilter);
     }
 
-    @SearchCompany
+    @SearchEmployee
+    @CheckCompanyCoherence
     @Override
-    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean technician, @Null String useless) {
-        return employeeRepository.findByCompanyAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), technician);
-    }
-
-    @SearchCompany
-    @Override
-    public List<Employee> allRegisteredEmployees(@CompanyId String companyId, boolean isActive, boolean technician) {
-        return employeeRepository.findByCompanyAndActivatedAndIsTechnician(SearchingAspect.COMPANY_FOUND.get(), isActive, technician);
+    public Employee getSpecificEmployee(@CompanyId String companyId, @EmployeeId String employeeId) {
+        return SearchingAspect.EMPLOYEE_FOUND.get();
     }
 
     @SearchCompany
@@ -83,7 +80,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
                 .phone(employeeCreationInformation.phone())
                 .isTechnician(employeeCreationInformation.isTechnician())
                 .activated(true)
-                .tags(Sets.newHashSet(employeeCreationInformation.tags()))
+                .tags(employeeCreationInformation.tags())
                 .roles(roles)
                 .company(company)
                 .creationDate(Instant.now())
