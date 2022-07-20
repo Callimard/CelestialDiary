@@ -11,6 +11,8 @@
   font-weight: bold;
   font-size: 1.1rem;
 
+  color: blue;
+
   padding: 0.5em 0.4em;
   border-radius: 5%;
 
@@ -18,7 +20,7 @@
   border: none;
 
   background-color: white;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;;
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;;
 }
 
 .langage-selection-container:hover {

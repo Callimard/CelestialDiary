@@ -5,9 +5,11 @@
   --employee-create-employee-floating-button-size: 45px;
   --employee-card-margin: 0.8em 0.6em;
   --employee-car-padding: 1.5em;
+}
 
-  position: relative;
-  height: 100%;
+.floating-card {
+  margin: var(--employee-card-margin);
+  padding: var(--employee-car-padding);
 }
 
 /* Employee selection */
@@ -43,10 +45,6 @@
   z-index: 5;
 }
 
-app-search-bar {
-  width: 100%;
-}
-
 .employee-found-container {
   position: absolute;
   top: 0;
@@ -66,7 +64,7 @@ app-search-bar {
   height: var(--employee-search-bar-height);
 }
 
-.add-employee-button {
+.create-employee-button {
   bottom: 1em;
   left: 1em;
 
@@ -77,12 +75,12 @@ app-search-bar {
 
   font-size: 25px;
 
-  z-index: 50;
+  z-index: 75;
 }
 
 /* Employee information */
 
-.employee-left-container {
+.employee-right-container {
   height: 100%;
 
   transition: var(--employee-container-transition);
@@ -92,11 +90,6 @@ app-search-bar {
   height: 100%;
 
   overflow: auto;
-}
-
-.floating-card {
-  margin: var(--employee-card-margin);
-  padding: var(--employee-car-padding);
 }
 
 .employee-information-header, .employee-creation-header {
@@ -176,7 +169,7 @@ app-search-bar {
     width: 400px;
   }
 
-  .employee-left-container {
+  .employee-right-container {
     position: absolute;
     top: 0;
     left: 400px;
@@ -189,9 +182,8 @@ app-search-bar {
   }
 
   .employee-account-title-container {
-    width: 100%;
-
-    justify-content: space-between;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
   }
 
   .employee-creation-form-container {

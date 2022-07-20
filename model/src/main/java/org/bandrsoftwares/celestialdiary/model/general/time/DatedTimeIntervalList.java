@@ -1,4 +1,4 @@
-package org.bandrsoftwares.celestialdiary.model.general;
+package org.bandrsoftwares.celestialdiary.model.general.time;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,8 +20,8 @@ public class DatedTimeIntervalList extends NonDatedTimeIntervalList {
 
     // Constructors.
 
-    public DatedTimeIntervalList(@NonNull LocalDate date, @NonNull Set<TimeInterval> openingTimeIntervals) {
-        super(openingTimeIntervals);
+    public DatedTimeIntervalList(@NonNull LocalDate date, @NonNull Set<TimeInterval> timeIntervals) {
+        super(timeIntervals);
         this.date = date;
     }
 

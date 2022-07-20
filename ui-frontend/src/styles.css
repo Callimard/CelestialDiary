@@ -8,23 +8,24 @@
 :root {
   --title-logo-size: 115px;
 
-  --primary-h: 265;
-  --primary-s: 95%;
-  --primary-l: 35%;
+  --primary-h: 179;
+  --primary-s: 74%;
+  --primary-l: 45%;
 
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
 
-  --percent-dark: 20%;
+  --percent-dark: 15%;
   --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - var(--percent-dark)));
 
-  --percent-light: 15%;
+  --percent-light: 20%;
   --primary-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + var(--percent-light)));
 
-  --percent-light-light: 25%;
+  --percent-light-light: 30%;
   --primary-light-light: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) + var(--percent-light-light)));
 
-  --smooth-danger-bakground: #ffc4c4;
-  --smooth-danger-color: #ff4d4d;
+  --danger-color: hsl(5, var(--primary-s), var(--primary-l));
+  --danger-color-light: hsl(0, var(--primary-s), calc(var(--primary-l) + var(--percent-light)));
+  --danger-color-light-light: hsl(0, var(--primary-s), calc(var(--primary-l) + var(--percent-light-light)));
 
   --main-text-color: #000000;
   --secondary-text-color: #000000;
@@ -35,6 +36,14 @@
   --basic-clickable-hover-color: #fafafa;
   --basic-clickable-active-color: #eaeaea;
 
+  --valid-button-background-color: var(--primary-light);
+  --valid-button-hover-background-color: var(--primary-light-light);
+  --valid-button-active-background-color: var(--primary);
+
+  --danger-button-background-color: var(--danger-color);
+  --danger-button-hover-background-color: var(--primary-light-light);
+  --danger-button-active-background-color: var(--primary);
+
   font-family: 'Sarala', sans-serif;
 }
 
@@ -42,14 +51,11 @@ body, html {
   height: 100vh;
 }
 
-main{
+main {
+  position: fixed;
   display: block;
   height: 100%;
 }
-
-/*.app {
-  position: relative;
-}*/
 
 .basic-clickable {
   background: var(--basic-clickable-color);
@@ -122,6 +128,12 @@ main{
 }
 
 .form-group {
+  margin: 0.5em 0;
+  padding: 0.5em 0;
+  border-top: 1px solid var(--place-holder-text-color-light);
+}
+
+.form-control {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -144,31 +156,39 @@ main{
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-top: 1px solid var(--place-holder-text-color-light);
+  padding: 1em 0;
 }
 
 .form-group-error {
-  border: 2px solid var(--smooth-danger-color);
+  border: 2px solid var(--danger-color);
   border-radius: 0.3em;
   padding: 0.6em 0.4em;
   font-weight: bold;
   font-size: 1.2rem;
 
-  color: var(--smooth-danger-color);
-  background-color: var(--smooth-danger-bakground);
+  color: var(--danger-color);
+  background-color: var(--danger-color-light)
+}
+
+button {
+  outline: none;
+  border: none;
+
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px 0, rgba(0, 0, 0, 0.1) 0 0 2px 0;
 }
 
 .super-valid-button {
-  text-align: center;
   text-transform: uppercase;
-  font-weight: bold;
 
   padding: 0.5em;
 
-  color: white;
-  outline: none;
-  border: none;
   border-radius: 17px;
-  cursor: pointer;
 
   background-image: linear-gradient(to right, var(--primary), var(--primary-light), var(--primary));
   background-size: 200% auto;
@@ -182,4 +202,49 @@ main{
 
 .super-valid-button:disabled {
   opacity: 0.5;
+}
+
+.valid-button, .danger-button {
+  padding: 0.6em 0.4em;
+
+  border-radius: 0.7em;
+
+}
+
+.valid-button {
+  background: var(--valid-button-background-color);
+}
+
+.valid-button:hover {
+  background: var(--valid-button-hover-background-color);
+}
+
+.valid-button:active {
+  background: var(--valid-button-active-background-color);
+}
+
+.danger-button {
+  background: var(--danger-color-light);
+}
+
+.danger-button:hover {
+  background: var(--danger-color-light-light);
+}
+
+.danger-button:active {
+  background: var(--danger-color);
+}
+
+.remove-button {
+  font-size: 17px;
+  padding: 0.8em 0.8em;
+  border-radius: 0;
+}
+
+input[type=time] {
+  text-align: center;
+  border: none;
+  font-size: 15px;
+  padding: 0.7em 0.5em;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px 0, rgba(0, 0, 0, 0.1) 0 0 2px 0;
 }

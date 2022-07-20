@@ -1,0 +1,163 @@
+.establishment-management-container {
+  --establishment-search-bar-height: 60px;
+  --establishment-container-transition: 0.5s;
+  --establishment-information-header-height: 60px;
+  --establishment-card-margin: 0.8em 0.6em;
+  --establishment-car-padding: 1em;
+  --establishment-create-establishment-floating-button-size: 45px;
+}
+
+.floating-card {
+  margin: var(--establishment-card-margin);
+  padding: var(--establishment-car-padding);
+}
+
+/* Left */
+
+.establishment-management-left-container, .establishment-management-right-container {
+  height: 100%;
+
+  border-right: 1px solid var(--place-holder-text-color);
+  transition: var(--establishment-container-transition);
+}
+
+.establishment-search-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  height: var(--establishment-search-bar-height);
+
+  padding: 0.7rem 0.4rem;
+  font-size: 20px;
+
+  background: transparent;
+
+  z-index: 5;
+}
+
+.establishment-list {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  height: 100%;
+
+  z-index: 1;
+}
+
+.create-establishment-button {
+  bottom: 1em;
+  left: 1em;
+
+  width: var(--establishment-create-establishment-floating-button-size);
+  height: var(--establishment-create-establishment-floating-button-size);
+
+  color: white;
+
+  font-size: 25px;
+
+  z-index: 75;
+}
+
+/* Right */
+
+.establishment-information-container {
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.establishment-information-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.back-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--establishment-information-header-height);
+
+  font-size: 20px;
+}
+
+.establishment-account-title-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+
+  white-space: nowrap;
+
+  width: calc(100% - var(--establishment-information-header-height));
+}
+
+.establishment-avatar-container {
+  width: var(--establishment-information-header-height);
+  height: var(--establishment-information-header-height);
+
+  border-radius: 100%;
+
+  overflow: hidden;
+}
+
+.establishment-avatar {
+  width: 100%;
+  height: auto;
+  transform: scale(1.5);
+}
+
+/* Creation */
+
+.establishment-creation-container {
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.establishment-creation-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.establishment-creation-title {
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media only screen and (min-width: 1280px) {
+  .establishment-management-left-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 400px;
+  }
+
+  .establishment-management-right-container {
+    position: absolute;
+    top: 0;
+    left: 400px;
+
+    width: calc(100% - 400px);
+  }
+
+  .back-arrow {
+    display: none;
+  }
+
+  .establishment-account-title-container {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+  }
+}

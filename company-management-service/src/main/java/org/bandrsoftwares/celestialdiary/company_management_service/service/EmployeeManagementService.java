@@ -31,7 +31,7 @@ public interface EmployeeManagementService {
      * @param companyId the company id
      * @param filter    the filter (either first name, either last name or either email)
      *
-     * @return the list of employee corresponding to the filter
+     * @return the list of employees corresponding to the filter
      */
     List<Employee> searchEmployee(@CompanyId String companyId, String filter);
 

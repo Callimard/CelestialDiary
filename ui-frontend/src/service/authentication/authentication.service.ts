@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {backend, environment} from "../../environments/environment";
 import {EmployeeBasicCredential} from "./employee-basic-credential";
 import {JwtTokenResponse} from "../../data/authentication/jwt/jwt-token-response";
 import {JwtHelperService} from "@auth0/angular-jwt";
@@ -35,10 +35,10 @@ export class AuthenticationService {
   }
 
   public employeeLogin(companyName: string, employeeEmail: string, employeePassword: string): Promise<any> {
-    const employeeBasicCredential = new EmployeeBasicCredential(environment.employeeAuthenticationIdentifier + companyName, employeeEmail, employeePassword);
+    const employeeBasicCredential = new EmployeeBasicCredential(backend.employeeAuthenticationIdentifier + companyName, employeeEmail, employeePassword);
 
     return new Promise<boolean>((resolve, reject) => {
-      this.httpClient.post<JwtTokenResponse>(environment.backendUrl + environment.apiV1Url + environment.employeeLogin, null, {
+      this.httpClient.post<JwtTokenResponse>(backend.backendUrl + backend.apiV1Url + backend.employeeLogin, null, {
         headers: {'Authorization': employeeBasicCredential.toBasicCredentials()}
       }).subscribe({
         next: (token) => {

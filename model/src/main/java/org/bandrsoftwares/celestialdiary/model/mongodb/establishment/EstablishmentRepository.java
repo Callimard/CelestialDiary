@@ -8,4 +8,6 @@ import java.util.List;
 public interface EstablishmentRepository extends MongoRepository<Establishment, String> {
 
     List<Establishment> findByCompany(Company company);
+
+    List<Establishment> findByCompanyAndNameRegex(Company company, String name);
 }

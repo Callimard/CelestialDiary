@@ -4,6 +4,7 @@ import org.assertj.core.util.Lists;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentNotFoundException;
+import org.bandrsoftwares.celestialdiary.model.general.Address;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
@@ -44,6 +45,8 @@ class EstablishmentManagementPrestationImplTest {
     private final String correctEstablishmentId = "qgq1g2qs1g4qg54q654zaenxwc24z4";
     private final String incoherentEstablishmentId = "qgq1g2qs1g4qg54q654zaenxwc2qgdsqgqdgq21g4dq654z4";
 
+    private Establishment correctEstablishment;
+
     @Mock
     private Establishment anyEstablishment;
 
@@ -57,7 +60,7 @@ class EstablishmentManagementPrestationImplTest {
                 .build();
         when(companyRepository.findById(correctCompanyId)).thenReturn(Optional.of(company));
 
-        Establishment establishment = Establishment.builder()
+        correctEstablishment = Establishment.builder()
                 .id(correctEstablishmentId)
                 .company(company)
                 .build();
@@ -66,7 +69,7 @@ class EstablishmentManagementPrestationImplTest {
                 .company(incoherentCompany)
                 .build();
 
-        when(establishmentRepository.findById(correctEstablishmentId)).thenReturn(Optional.of(establishment));
+        when(establishmentRepository.findById(correctEstablishmentId)).thenReturn(Optional.of(correctEstablishment));
         when(establishmentRepository.findById(incoherentEstablishmentId)).thenReturn(Optional.of(incoherentEstablishment));
         when(establishmentRepository.findByCompany(company)).thenReturn(Lists.newArrayList(anyEstablishment));
     }
@@ -93,6 +96,9 @@ class EstablishmentManagementPrestationImplTest {
     @DisplayName("createEstablishment() tests")
     class CreateEstablishment {
 
+        @Mock
+        private Address address;
+
         @Test
         @DisplayName("createEstablishment() throws CompanyNotFoundException if the company is unknown")
         void withUnknownCompany() {
@@ -116,11 +122,39 @@ class EstablishmentManagementPrestationImplTest {
         }
 
         private EstablishmentManagementService.EstablishmentCreationInformation correctEstablishmentCreationInfo() {
-            return new EstablishmentManagementService.EstablishmentCreationInformation("Name", null, null, null, null, null, null, null, null, null);
+            return new EstablishmentManagementService.EstablishmentCreationInformation("Name", null, address, null, null, null, null, null, null,
+                                                                                       null);
         }
 
         private EstablishmentManagementService.EstablishmentCreationInformation incorrectEstablishmentCreationInfo() {
             return new EstablishmentManagementService.EstablishmentCreationInformation(null, null, null, null, null, null, null, null, null, null);
+        }
+    }
+
+    @Nested
+    @DisplayName("getSpecificEstablishment() tests")
+    class GetSpecificEmployee {
+
+        @Test
+        @DisplayName("getSpecificEstablishment() throws CompanyCoherenceException if the establishment id is not coherent with the company id")
+        void withIncoherentEmployee() {
+            assertThrows(CompanyCoherenceException.class, () -> establishmentManagementService.getSpecificEstablishment(correctCompanyId,
+                                                                                                                        incoherentEstablishmentId));
+        }
+
+        @Test
+        @DisplayName("getSpecificEstablishment() throws EstablishmentNotFound if the establishment does not exists")
+        void withUnknownEmployee() {
+            assertThrows(EstablishmentNotFoundException.class, () -> establishmentManagementService.getSpecificEstablishment(correctCompanyId,
+                                                                                                                             correctEstablishmentId +
+                                                                                                                                     "wrong"));
+        }
+
+        @Test
+        @DisplayName("getSpecificEstablishment() returns the correct establishment with correct company id and establishment id")
+        void withAllCorrect() {
+            Establishment establishment = establishmentManagementService.getSpecificEstablishment(correctCompanyId, correctEstablishmentId);
+            assertThat(establishment).isNotNull().isSameAs(correctEstablishment);
         }
     }
 

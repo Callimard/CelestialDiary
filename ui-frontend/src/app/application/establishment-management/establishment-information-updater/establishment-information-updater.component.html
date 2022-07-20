@@ -1,0 +1,176 @@
+<form class="establishment-update-form" [formGroup]="establishmentUpdateForm" *ngIf="establishmentUpdateForm != null" (ngSubmit)="onUpdate()">
+  <div class="form-group-error" *ngIf="updateFail">
+    <p>{{ 'establishment-management.establishment-information.update.failed' | translate }}</p>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="name">{{ 'establishment-management.establishment-creation.name' | translate }}</label>
+    <input class="form-input" name="name" id="name" formControlName="name" type="text"
+           placeholder="{{ 'establishment-management.establishment-creation.name' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="description">{{ 'establishment-management.establishment-creation.description' | translate }}</label>
+    <input class="form-input" name="description" id="description" formControlName="description" type="text"
+           placeholder="{{ 'establishment-management.establishment-creation.description' | translate }}"/>
+  </div>
+  <div class="form-group" formGroupName="address">
+    <h3>{{ 'establishment-management.establishment-creation.address.title' | translate }}</h3>
+    <div class="form-control">
+      <label class="form-label" for="street">{{ 'establishment-management.establishment-creation.address.street' | translate }}</label>
+      <input class="form-input" name="street" id="street" formControlName="street" type="text"
+             placeholder="{{ 'establishment-management.establishment-creation.address.street' | translate }}"/>
+    </div>
+    <div class="form-control">
+      <label class="form-label" for="zipCode">{{ 'establishment-management.establishment-creation.address.zipCode' | translate }}</label>
+      <input class="form-input" name="zipCode" id="zipCode" formControlName="zipCode" type="number"
+             placeholder="{{ 'establishment-management.establishment-creation.address.zipCode' | translate }}"/>
+    </div>
+    <div class="form-control">
+      <label class="form-label" for="city">{{ 'establishment-management.establishment-creation.address.city' | translate }}</label>
+      <input class="form-input" name="city" id="city" formControlName="city" type="text"
+             placeholder="{{ 'establishment-management.establishment-creation.address.city' | translate }}"/>
+    </div>
+    <div class="form-control">
+      <label class="form-label" for="country">{{ 'establishment-management.establishment-creation.address.country' | translate }}</label>
+      <input class="form-input" name="country" id="country" formControlName="country" type="text"
+             placeholder="{{ 'establishment-management.establishment-creation.address.country' | translate }}"/>
+    </div>
+  </div>
+  <div class="form-group" formGroupName="openingHours">
+    <h3>{{ 'establishment-management.establishment-creation.openingHours.title' | translate }}</h3>
+    <div class="form-group" formArrayName="mondayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.monday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'monday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeMondayHours(i)"
+           *ngFor="let hours of this.mondayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addMondayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="tuesdayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.tuesday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'tuesday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeTuesdayHours(i)"
+           *ngFor="let hours of this.tuesdayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addTuesdayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="wednesdayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.wednesday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'wednesday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeWednesdayHours(i)"
+           *ngFor="let hours of this.wednesdayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addWednesdayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="thursdayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.thursday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'thursday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeThursdayHours(i)"
+           *ngFor="let hours of this.thursdayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addThursdayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="fridayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.friday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'friday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeFridayHours(i)"
+           *ngFor="let hours of this.fridayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addFridayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="saturdayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.saturday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'saturday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeSaturdayHours(i)"
+           *ngFor="let hours of this.saturdayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addSaturdayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+    <div class="form-group" formArrayName="sundayOpening">
+      <h4>{{ 'establishment-management.establishment-creation.openingHours.sunday' | translate }}</h4>
+      <div app-time-interval-form [prefix]="'sunday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeSundayHours(i)"
+           *ngFor="let hours of this.sundayOpeningsControls; let i = index">
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button" (click)="addSundayHours()">
+          {{ 'establishment-management.establishment-creation.openingHours.add' | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" formArrayName="exceptionalOpening">
+    <h4>{{ 'establishment-management.establishment-information.update.exceptional-opening.title' | translate }}</h4>
+    <div class="form-group" *ngFor="let exceptionalOpening of this.exceptionOpeningsControls; let i = index" [formGroupName]="i">
+      <div class="exceptional-date-container">
+        <label class="form-label" for="exceptional-opening-date-{{i}}">Date</label>
+        <input class="form-input" type="date" name="exceptional-opening-date-{{i}}" id="exceptional-opening-date-{{i}}" formControlName="date">
+        <button class="danger-button remove-button" type="button" (click)="removeExceptionalOpening(i)" *ngIf="this.exceptionalOpenings.length > 0">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="time-intervals-containers" formArrayName="timeIntervals">
+        <div app-time-interval-form [prefix]="'exceptional-opening'" [index]="j" [timeIntervalFormGroup]="timeInterval"
+             (remove)="removeTimeIntervalForm(exceptionalOpening, j)"
+             *ngFor="let timeInterval of this.getTimeIntervalFormControls(exceptionalOpening); let j =index">
+        </div>
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button"
+                (click)="addTimeIntervalFormGroup(exceptionalOpening)">{{'establishment-management.establishment-creation.openingHours.add' | translate }}</button>
+      </div>
+    </div>
+    <div class="add-remove-buttons-container">
+      <button class="valid-button" type="button"
+              (click)="addExceptionalOpening()">{{ 'establishment-management.establishment-information.update.exceptional-opening.add' |translate }}</button>
+    </div>
+  </div>
+
+  <div class="form-group" formArrayName="exceptionalClosing">
+    <h4>{{ 'establishment-management.establishment-information.update.exceptional-closing.title' | translate }}</h4>
+    <div class="form-group" *ngFor="let exceptionalClosing of this.exceptionClosingsControls; let i = index" [formGroupName]="i">
+      <div class="exceptional-date-container">
+        <label class="form-label" for="exceptional-closing-date-{{i}}">Date</label>
+        <input class="form-input" type="date" name="exceptional-closing-date-{{i}}" id="exceptional-closing-date-{{i}}" formControlName="date">
+        <button class="danger-button remove-button" type="button" (click)="removeExceptionalClosing(i)" *ngIf="this.exceptionalClosings.length > 0">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="time-intervals-containers" formArrayName="timeIntervals">
+        <div app-time-interval-form [prefix]="'exceptional-closing'" [index]="j" [timeIntervalFormGroup]="timeInterval"
+             (remove)="removeTimeIntervalForm(exceptionalClosing, j)"
+             *ngFor="let timeInterval of this.getTimeIntervalFormControls(exceptionalClosing); let j =index">
+        </div>
+      </div>
+      <div class="add-remove-buttons-container">
+        <button class="valid-button" type="button"
+                (click)="addTimeIntervalFormGroup(exceptionalClosing)">{{'establishment-management.establishment-creation.openingHours.add' | translate }}</button>
+      </div>
+    </div>
+    <div class="add-remove-buttons-container">
+      <button class="valid-button" type="button"
+              (click)="addExceptionalClosing()">{{ 'establishment-management.establishment-information.update.exceptional-closing.add' |translate }}</button>
+    </div>
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button establishment-update-button" [disabled]="this.establishmentUpdateForm.invalid"
+            type="submit">{{ 'establishment-management.establishment-information.update.title' | translate }}</button>
+  </div>
+</form>
+

@@ -1,10 +1,12 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
+import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
+import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentNotFoundException;
+import org.bandrsoftwares.celestialdiary.model.dto.general.time.DatedTimeIntervalListDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.general.time.NonDatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.general.Address;
-import org.bandrsoftwares.celestialdiary.model.general.DatedTimeIntervalList;
-import org.bandrsoftwares.celestialdiary.model.general.NonDatedTimeIntervalList;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 
 import javax.validation.Valid;
@@ -21,16 +23,36 @@ public interface EstablishmentManagementService {
      */
     List<Establishment> allRegisteredEstablishment(@CompanyId String companyId);
 
+    /**
+     * @param companyId the company id
+     * @param filter    the filter (either first name)
+     *
+     * @return the list of establishments corresponding to the filter
+     */
+    List<Establishment> searchEstablishment(@CompanyId String companyId, String filter);
+
+
+    /**
+     * @param companyId       the company id
+     * @param establishmentId the establishment id
+     *
+     * @return the establishment if it has been found and is coherent with the specified company id.
+     *
+     * @throws EstablishmentNotFoundException if the establishment is not found
+     * @throws CompanyCoherenceException      if the establishment id is not coherent with the employee
+     */
+    Establishment getSpecificEstablishment(@CompanyId String companyId, @EstablishmentId String establishmentId);
+
     Establishment createEstablishment(@CompanyId String companyId, @Valid EstablishmentCreationInformation establishmentCreationInformation);
 
-    record EstablishmentCreationInformation(@NotNull @NotBlank String name, String description, Address address,
-                                            NonDatedTimeIntervalList mondayOpening,
-                                            NonDatedTimeIntervalList tuesdayOpening,
-                                            NonDatedTimeIntervalList wednesdayOpening,
-                                            NonDatedTimeIntervalList thursdayOpening,
-                                            NonDatedTimeIntervalList fridayOpening,
-                                            NonDatedTimeIntervalList saturdayOpening,
-                                            NonDatedTimeIntervalList sundayOpening) {
+    record EstablishmentCreationInformation(@NotNull @NotBlank String name, String description, @NotNull Address address,
+                                            NonDatedTimeIntervalListDTO mondayOpening,
+                                            NonDatedTimeIntervalListDTO tuesdayOpening,
+                                            NonDatedTimeIntervalListDTO wednesdayOpening,
+                                            NonDatedTimeIntervalListDTO thursdayOpening,
+                                            NonDatedTimeIntervalListDTO fridayOpening,
+                                            NonDatedTimeIntervalListDTO saturdayOpening,
+                                            NonDatedTimeIntervalListDTO sundayOpening) {
 
     }
 
@@ -39,15 +61,15 @@ public interface EstablishmentManagementService {
                                       @Valid EstablishmentUpdatedInformation establishmentUpdatedInformation);
 
     record EstablishmentUpdatedInformation(String name, String description, Address address,
-                                           NonDatedTimeIntervalList mondayOpening,
-                                           NonDatedTimeIntervalList tuesdayOpening,
-                                           NonDatedTimeIntervalList wednesdayOpening,
-                                           NonDatedTimeIntervalList thursdayOpening,
-                                           NonDatedTimeIntervalList fridayOpening,
-                                           NonDatedTimeIntervalList saturdayOpening,
-                                           NonDatedTimeIntervalList sundayOpening,
-                                           List<DatedTimeIntervalList> exceptionalOpening,
-                                           List<DatedTimeIntervalList> exceptionalClosing) {
+                                           NonDatedTimeIntervalListDTO mondayOpening,
+                                           NonDatedTimeIntervalListDTO tuesdayOpening,
+                                           NonDatedTimeIntervalListDTO wednesdayOpening,
+                                           NonDatedTimeIntervalListDTO thursdayOpening,
+                                           NonDatedTimeIntervalListDTO fridayOpening,
+                                           NonDatedTimeIntervalListDTO saturdayOpening,
+                                           NonDatedTimeIntervalListDTO sundayOpening,
+                                           List<DatedTimeIntervalListDTO> exceptionalOpening,
+                                           List<DatedTimeIntervalListDTO> exceptionalClosing) {
     }
 
     boolean activateEstablishment(@CompanyId String companyId, @EstablishmentId String establishmentId);

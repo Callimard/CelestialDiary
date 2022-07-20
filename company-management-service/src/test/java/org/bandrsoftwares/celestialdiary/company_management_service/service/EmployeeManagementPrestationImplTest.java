@@ -137,7 +137,7 @@ class EmployeeManagementPrestationImplTest {
         }
 
         @Test
-        @DisplayName("getSpecificEmployee() throws Employee not found if the employee does not exists")
+        @DisplayName("getSpecificEmployee() throws EmployeeNotFound if the employee does not exists")
         void withUnknownEmployee() {
             assertThrows(EmployeeNotFoundException.class, () -> employeeManagementService.getSpecificEmployee(correctCompanyId,
                                                                                                               correctEmployeeId + "wrong"));

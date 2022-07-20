@@ -3,6 +3,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.EstablishmentManagementService;
+import org.bandrsoftwares.celestialdiary.model.dto.establishment.EstablishmentDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.establishment.WrappedEstablishmentDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.ActivateEstablishmentPrivilege;
@@ -29,9 +30,13 @@ public class EstablishmentManagementController {
 
     @ReadEstablishmentPrivilege
     @GetMapping
-    public List<WrappedEstablishmentDTO> getEstablishments(@PathVariable(name = "idCompany") String idCompany) {
-        List<Establishment> establishments = establishmentManagementService.allRegisteredEstablishment(idCompany);
-        return establishments.stream().map(WrappedEstablishmentDTO::new).toList();
+    public List<WrappedEstablishmentDTO> getEstablishments(@PathVariable(name = "idCompany") String idCompany, @RequestParam(name = "filter",
+            required = false) String filter) {
+        if (filter == null) {
+            return establishmentManagementService.allRegisteredEstablishment(idCompany).stream().map(WrappedEstablishmentDTO::new).toList();
+        } else {
+            return establishmentManagementService.searchEstablishment(idCompany, filter).stream().map(WrappedEstablishmentDTO::new).toList();
+        }
     }
 
     @CreateEstablishmentPrivilege
@@ -40,6 +45,13 @@ public class EstablishmentManagementController {
             EstablishmentManagementService.EstablishmentCreationInformation information) {
         Establishment establishment = establishmentManagementService.createEstablishment(idCompany, information);
         return new WrappedEstablishmentDTO(establishment);
+    }
+
+    @ReadEstablishmentPrivilege
+    @GetMapping(SPECIFIC_ESTABLISHMENT)
+    public EstablishmentDTO getSpecificEstablishment(@PathVariable(name = "idCompany") String idCompany,
+                                                     @PathVariable(name = "idEstablishment") String idEstablishment) {
+        return new EstablishmentDTO(establishmentManagementService.getSpecificEstablishment(idCompany, idEstablishment));
     }
 
     @UpdateEstablishmentPrivilege

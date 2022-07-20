@@ -2,8 +2,8 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.model.general.Address;
-import org.bandrsoftwares.celestialdiary.model.general.DatedTimeIntervalList;
-import org.bandrsoftwares.celestialdiary.model.general.NonDatedTimeIntervalList;
+import org.bandrsoftwares.celestialdiary.model.general.time.DatedTimeIntervalList;
+import org.bandrsoftwares.celestialdiary.model.general.time.NonDatedTimeIntervalList;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.springframework.data.annotation.Id;
@@ -43,7 +43,7 @@ public class Establishment {
     private List<DatedTimeIntervalList> exceptionalClosing;
 
     private List<EstablishmentProduct> proposedProducts;
-    private List<EstablishmentPrestation> proposedServices;
+    private List<EstablishmentPrestation> proposedPrestations;
     private List<EstablishmentBundle> proposedBundles;
 
     @ToString.Exclude
