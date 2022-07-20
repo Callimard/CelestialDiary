@@ -1,4 +1,3 @@
-<h3 class="establishment-information-title">{{ 'establishment-management.establishment-information.title' | translate }}</h3>
 <form class="establishment-update-form" [formGroup]="establishmentUpdateForm" *ngIf="establishmentUpdateForm != null" (ngSubmit)="onUpdate()">
   <div class="form-group-error" *ngIf="updateFail">
     <p>{{ 'establishment-management.establishment-information.update.failed' | translate }}</p>

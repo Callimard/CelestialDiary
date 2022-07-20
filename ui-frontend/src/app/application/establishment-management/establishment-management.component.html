@@ -27,8 +27,13 @@
           </div>
         </div>
       </div>
-      <div app-establishment-information-updater class="floating-card establishment-information-updater"
-           [establishmentId]="selectedEstablishment.id" (updateSuccess)="establishmentUpdateDone($event)"></div>
+      <details class="floating-card ">
+        <summary>
+          <h3 class="establishment-information-title">{{ 'establishment-management.establishment-information.title' | translate }}</h3>
+        </summary>
+        <div app-establishment-information-updater class="establishment-information-updater"
+             [establishmentId]="selectedEstablishment.id" (updateSuccess)="establishmentUpdateDone($event)"></div>
+      </details>
     </div>
     <div class="establishment-creation-container" *ngIf="createEstablishment">
       <div class="establishment-creation-header floating-card">

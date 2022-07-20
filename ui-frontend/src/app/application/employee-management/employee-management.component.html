@@ -33,7 +33,12 @@
           </div>
         </div>
       </div>
-      <div app-employee-information-updater class="employee-update-information floating-card" [employeeId]="selectedEmployee.id"></div>
+      <details class="floating-card">
+        <summary>
+          <h3 class="employee-information-title">{{ 'employee-management.employee-information.employee-information-title' | translate}}</h3>
+        </summary>
+        <div app-employee-information-updater class="employee-update-information" [employeeId]="selectedEmployee.id"></div>
+      </details>
     </div>
     <div class="employee-creation-container" *ngIf="employeeCreation">
       <div class="employee-creation-header floating-card">

@@ -1,4 +1,3 @@
-<h3 class="employee-information-title">{{ 'employee-management.employee-information.employee-information-title' | translate}}</h3>
 <form class="employee-update-form" [formGroup]="employeeUpdateForm" *ngIf="employeeUpdateForm != null" (ngSubmit)="onUpdate()">
   <div class="update-fail-container form-group-error" *ngIf="updateFail">
     <p>{{ 'employee-management.employee-information.employee-update-fail' | translate }}</p>
