@@ -45,7 +45,7 @@ public class SearchingAspect {
     public static final ThreadLocal<Employee> EMPLOYEE_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Establishment> ESTABLISHMENT_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Product> PRODUCT_FOUND = new ThreadLocal<>();
-    public static final ThreadLocal<Prestation> SERVICE_FOUND = new ThreadLocal<>();
+    public static final ThreadLocal<Prestation> PRESTATION_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Bundle> BUNDLE_FOUND = new ThreadLocal<>();
 
     private final CompanyRepository companyRepository;
@@ -115,18 +115,18 @@ public class SearchingAspect {
         }
     }
 
-    @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.saleable.service.SearchService)")
-    void searchAndShareService(JoinPoint jp) {
+    @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.saleable.service.SearchPrestation)")
+    void searchAndSharePrestation(JoinPoint jp) {
         String serviceId = AopTool.extractSpecificParameter(jp, PrestationId.class);
-        searchAndShareService(serviceId);
+        searchAndSharePrestation(serviceId);
     }
 
-    private void searchAndShareService(String serviceId) {
+    private void searchAndSharePrestation(String serviceId) {
         Optional<Prestation> opService = prestationRepository.findById(serviceId);
         if (opService.isEmpty()) {
             throw new ServiceNotFoundException(serviceId);
         } else {
-            SERVICE_FOUND.set(opService.get());
+            PRESTATION_FOUND.set(opService.get());
         }
     }
 

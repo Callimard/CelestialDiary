@@ -88,7 +88,7 @@ public class CheckAspect {
     }
 
     private void checkServiceCoherence(String companyId) {
-        Prestation prestation = SearchingAspect.SERVICE_FOUND.get();
+        Prestation prestation = SearchingAspect.PRESTATION_FOUND.get();
         if (prestation != null) {
             if (!prestation.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(

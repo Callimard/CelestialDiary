@@ -10,4 +10,6 @@ public interface PrestationRepository extends MongoRepository<Prestation, String
     List<Prestation> findByCompany(Company company);
 
     List<Prestation> findByCompanyAndIdIn(Company company, Iterable<String> prestationIds);
+
+    List<Prestation> findByCompanyAndNameRegex(Company company, String name);
 }

@@ -4,6 +4,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.PrestationManagementService;
+import org.bandrsoftwares.celestialdiary.model.dto.saleable.prestation.PrestationDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.saleable.prestation.WrappedPrestationDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.saleable.ActivateSaleablePrivilege;
@@ -30,9 +31,13 @@ public class PrestationManagementController {
 
     @ReadSaleablePrivilege
     @GetMapping
-    public List<WrappedPrestationDTO> getPrestations(@PathVariable(name = "idCompany") String idCompany) {
-        List<Prestation> prestations = prestationManagementService.allRegisteredPrestation(idCompany);
-        return prestations.stream().map(WrappedPrestationDTO::new).toList();
+    public List<WrappedPrestationDTO> getPrestations(@PathVariable(name = "idCompany") String idCompany,
+                                                     @RequestParam(name = "filter", required = false) String filter) {
+        if (filter == null) {
+            return prestationManagementService.allRegisteredPrestation(idCompany).stream().map(WrappedPrestationDTO::new).toList();
+        } else {
+            return prestationManagementService.searchPrestation(idCompany, filter).stream().map(WrappedPrestationDTO::new).toList();
+        }
     }
 
     @CreateSaleablePrivilege
@@ -41,6 +46,13 @@ public class PrestationManagementController {
                                                  @RequestBody PrestationManagementService.PrestationCreationInformation information) {
         Prestation prestation = prestationManagementService.createPrestation(idCompany, information);
         return new WrappedPrestationDTO(prestation);
+    }
+
+    @ReadSaleablePrivilege
+    @GetMapping(SPECIFIC_PRESTATION)
+    public PrestationDTO getSpecificPrestation(@PathVariable(name = "idCompany") String idCompany,
+                                               @PathVariable(name = "idPrestation") String idPrestation) {
+        return new PrestationDTO(prestationManagementService.getSpecificPrestation(idCompany, idPrestation));
     }
 
     @UpdateSaleablePrivilege
