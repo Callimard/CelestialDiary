@@ -3,6 +3,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.ProductManagementService;
+import org.bandrsoftwares.celestialdiary.model.dto.saleable.product.ProductDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.saleable.product.WrappedProductDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.saleable.ActivateSaleablePrivilege;
@@ -29,9 +30,13 @@ public class ProductManagementController {
 
     @ReadSaleablePrivilege
     @GetMapping
-    public List<WrappedProductDTO> getProducts(@PathVariable(name = "idCompany") String idCompany) {
-        List<Product> products = productManagementService.allRegisteredProduct(idCompany);
-        return products.stream().map(WrappedProductDTO::new).toList();
+    public List<WrappedProductDTO> getProducts(@PathVariable(name = "idCompany") String idCompany,
+                                               @RequestParam(name = "filter", required = false) String filter) {
+        if (filter == null) {
+            return productManagementService.allRegisteredProduct(idCompany).stream().map(WrappedProductDTO::new).toList();
+        } else {
+            return productManagementService.searchProduct(idCompany, filter).stream().map(WrappedProductDTO::new).toList();
+        }
     }
 
     @CreateSaleablePrivilege
@@ -40,6 +45,13 @@ public class ProductManagementController {
                                            @RequestBody ProductManagementService.ProductCreationInformation information) {
         Product product = productManagementService.createProduct(idCompany, information);
         return new WrappedProductDTO(product);
+    }
+
+    @ReadSaleablePrivilege
+    @GetMapping(SPECIFIC_PRODUCT)
+    public ProductDTO getSpecificProduct(@PathVariable(name = "idCompany") String idCompany,
+                                         @PathVariable(name = "idProduct") String idProduct) {
+        return new ProductDTO(productManagementService.getSpecificProduct(idCompany, idProduct));
     }
 
     @UpdateSaleablePrivilege
