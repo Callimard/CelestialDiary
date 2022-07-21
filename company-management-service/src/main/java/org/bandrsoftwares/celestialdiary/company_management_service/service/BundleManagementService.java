@@ -14,6 +14,10 @@ public interface BundleManagementService {
 
     List<Bundle> allRegisteredBundle(@CompanyId String companyId);
 
+    List<Bundle> searchBundle(@CompanyId String companyId, String filter);
+
+    Bundle getSpecificBundle(@CompanyId String companyId, @BundleId String bundleId);
+
     Bundle createBundle(@CompanyId String companyId, @Valid BundleCreationInformation information);
 
     record BundleCreationInformation(@NotNull @NotBlank String name, String description, @NotNull @DecimalMin("0.01") Double suggestedPrice,
@@ -31,3 +35,4 @@ public interface BundleManagementService {
 
     boolean deactivateBundle(@CompanyId String companyId, @BundleId String bundleId);
 }
+

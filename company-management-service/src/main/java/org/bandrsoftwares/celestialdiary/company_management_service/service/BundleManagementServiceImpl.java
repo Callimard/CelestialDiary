@@ -46,6 +46,20 @@ public class BundleManagementServiceImpl implements BundleManagementService {
 
     @SearchCompany
     @Override
+    public List<Bundle> searchBundle(@CompanyId String companyId, String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return bundleRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchBundle
+    @CheckCompanyCoherence
+    @Override
+    public Bundle getSpecificBundle(@CompanyId String companyId, @BundleId String bundleId) {
+        return SearchingAspect.BUNDLE_FOUND.get();
+    }
+
+    @SearchCompany
+    @Override
     public Bundle createBundle(@CompanyId String companyId, @Valid BundleCreationInformation information) {
         Bundle bundle = createBundleFrom(SearchingAspect.COMPANY_FOUND.get(), information);
         return bundleRepository.insert(bundle);
