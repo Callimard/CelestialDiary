@@ -100,6 +100,11 @@
       }
     }
   },
+  "product-management":{
+    "product-selection": {
+      "search-product": "Rechercher un produit"
+    }
+  },
   "time": {
     "time-interval-form": {
       "start": "Début",

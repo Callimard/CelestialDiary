@@ -1,0 +1,11 @@
+<div app-searching-list class="prestation-selection-container"
+     [allElements]="allPrestations"
+     [listPaddingHeight]="'var(--company-management-search-bar-height)'"
+     [elementTitleField]="'name'"
+     (elementSelected)="navigateToPrestationInformation($event)"
+     (searchFilter)="filterPrestation($event)"
+>
+</div>
+<button class="floating-button create-prestation-button" (click)="navigateToCreatePrestation()">
+  <i class="fa-solid fa-plus"></i>
+</button>

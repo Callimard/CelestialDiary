@@ -65,6 +65,8 @@
 }
 
 .create-employee-button {
+  position: absolute;
+
   bottom: 1em;
   left: 1em;
 
@@ -86,7 +88,7 @@
   transition: var(--employee-container-transition);
 }
 
-.employee-information-container{
+.employee-information-container {
   height: 100%;
 
   overflow: auto;

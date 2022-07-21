@@ -44,6 +44,13 @@
   --danger-button-hover-background-color: var(--primary-light-light);
   --danger-button-active-background-color: var(--primary);
 
+  --company-management-search-bar-height: 60px;
+  --company-management-container-transition: 0.5s;
+  --company-management-information-header-height: 60px;
+  --company-management-card-margin: 0.8em 0.6em;
+  --company-management-car-padding: 1em;
+  --company-management-floating-button-size: 45px;
+
   font-family: 'Sarala', sans-serif;
 }
 
@@ -97,8 +104,6 @@ main {
 }
 
 .floating-button {
-  position: absolute;
-
   border-radius: 100%;
 
   border: none;

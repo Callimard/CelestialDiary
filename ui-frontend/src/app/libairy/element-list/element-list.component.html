@@ -1,0 +1,8 @@
+<ul class="element-list">
+  <li class="product-list-padding" [style.height]="listPaddingHeight"></li>
+  <li app-information-ticket *ngFor="let element of allElements" class="basic-clickable product-ticket-information"
+      [title]="element[elementTitleField]"
+      [subTitle]="elementSubtitleField != null ? element[elementSubtitleField] : null"
+      [img]="elementImageField != null ? element[elementImageField] : '/assets/images/kraken.jpg'" (click)="onTicketClick(element)">
+  </li>
+</ul>

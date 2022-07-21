@@ -5,31 +5,46 @@
       <div class="close-nav-bar" (click)="closeNavigationBar()"><i class="fa-solid fa-xmark"></i></div>
     </div>
     <ul class="nav-zone">
-      <li class="nav-item nav-clickable" [routerLink]="['establishments']" routerLinkActive="active" (click)="navClick('side-bar.establishments')">
+      <li class="nav-item nav-clickable"
+          [routerLink]="['establishments']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.establishments')">
         <a>
           <span class="nav-item-icon"><i class="fa-solid fa-shop"></i></span>
           <span class="nav-item-text">{{ 'side-bar.establishments' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable" [routerLink]="['employees']" routerLinkActive="active" (click)="navClick('side-bar.employees')">
+      <li class="nav-item nav-clickable"
+          [routerLink]="['employees']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.employees')">
         <a>
           <span class="nav-item-icon"><i class="fa-solid fa-person"></i></span>
           <span class="nav-item-text">{{ 'side-bar.employees' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.products')">
+      <li class="nav-item nav-clickable"
+          [routerLink]="['company', 'management', 'products']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.products')">
         <a>
           <span class="nav-item-icon"><i class="fa-solid fa-cubes"></i></span>
           <span class="nav-item-text">{{ 'side-bar.products' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.prestations')">
+      <li class="nav-item nav-clickable"
+          [routerLink]="['company', 'management', 'prestations']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.prestations')">
         <a>
           <span class="nav-item-icon"><i class="fa-solid fa-scissors"></i></span>
           <span class="nav-item-text">{{ 'side-bar.prestations' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable" routerLinkActive="active" (click)="navClick('side-bar.bundles')">
+      <li class="nav-item nav-clickable"
+          [routerLink]="['company', 'management', 'bundles']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.bundles')">
         <a>
           <span class="nav-item-icon"><i class="fa-solid fa-gift"></i></span>
           <span class="nav-item-text">{{ 'side-bar.bundles' | translate}}</span>
