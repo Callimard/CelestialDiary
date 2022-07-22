@@ -1,1 +1,10 @@
-<p>prestation-information works!</p>
+<div class="prestation-information-container" *ngIf="prestation != null">
+  <div app-card-advanced-title
+       [title]="prestation.name"
+       [subtitle]="prestation.suggestedPrice + '€'"
+       [img]="'/assets/images/kraken.jpg'"
+       (goBack)="goBack()"></div>
+  <div app-prestation-form-updater class="floating-card prestation-update-form"
+       [prestation]="prestation">
+  </div>
+</div>

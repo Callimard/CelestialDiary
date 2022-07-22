@@ -13,7 +13,7 @@ export class ProductFormUpdaterComponent implements OnInit {
 
   @Input() product!: ProductDTO
 
-  productUpdateFailed = false;
+  updateFailed = false;
 
   productUpdateForm!: FormGroup;
 
@@ -39,12 +39,12 @@ export class ProductFormUpdaterComponent implements OnInit {
       suggestedPrice: form.suggestedPrice
     }
     this.productManagementService.updateProduct(this.product.id, productUpdates).then((wrappedProduct) => {
-      this.productUpdateFailed = false;
+      this.updateFailed = false;
       this.product.name = wrappedProduct.name;
       this.product.description = wrappedProduct.description;
       this.product.suggestedPrice = wrappedProduct.suggestedPrice;
     }).catch(() => {
-      this.productUpdateFailed = true
+      this.updateFailed = true
     })
   }
 

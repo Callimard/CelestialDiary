@@ -37,5 +37,4 @@ export class ProductInformationComponent implements OnInit {
   goBack() {
     this.location.back()
   }
-
 }

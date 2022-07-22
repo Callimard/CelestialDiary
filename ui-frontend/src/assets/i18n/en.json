@@ -106,18 +106,36 @@
     }
   },
   "product": {
-    "product-name": "Product name",
-    "product-description": "Description",
+    "name": "Product name",
+    "description": "Description",
     "suggested-price": "Suggested price",
     "price": "Price",
     "creation": {
       "product-creation": "Product creation",
-      "create-product": "Create",
-      "product-creation-failed": "Product creation failed"
+      "create": "Create",
+      "creation-failed": "Product creation failed"
     },
     "update": {
-      "update-product": "Update",
-      "product-update-failed": "Product update failed"
+      "update": "Update",
+      "update-failed": "Product update failed"
+    }
+  },
+  "prestation": {
+    "name": "Prestation name",
+    "description": "Description",
+    "suggested-price": "Suggested price",
+    "price": "Price",
+    "nb-technician": "Nb of technician",
+    "nb-client": "Nb of client",
+    "suggested-execution-time": "Execution time",
+    "creation": {
+      "prestation-creation": "Prestation creation",
+      "create": "Create",
+      "creation-failed": "Prestation creation failed"
+    },
+    "update": {
+      "update": "Update",
+      "update-failed": "Prestation update failed"
     }
   },
   "time": {

@@ -1,6 +1,6 @@
 <form class="product-updater-form-container" [formGroup]="productUpdateForm" (ngSubmit)="onProductUpdate()">
-  <div class="form-group-error product-updater-failed-container" *ngIf="productUpdateFailed">
-    <p>{{ 'product.update.product-update-failed' | translate}}</p>
+  <div class="form-group-error product-updater-failed-container" *ngIf="updateFailed">
+    <p>{{ 'product.update.update-failed' | translate}}</p>
   </div>
   <div class="form-control">
     <label class="form-label" for="product-name">
@@ -29,7 +29,7 @@
   </div>
   <div class="form-submit-group">
     <button class="super-valid-button" type="submit" [disabled]="productUpdateForm.invalid">
-      {{ 'product.update.update-product' | translate}}
+      {{ 'product.update.update' | translate}}
     </button>
   </div>
 </form>

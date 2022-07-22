@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-prestation-creation',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrestationCreationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) {
+    // Nothing
+  }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  goBack() {
+    this.location.back();
   }
 
 }

@@ -10,7 +10,7 @@ import {ProductCreationInformation} from "../../../../../data/company-management
 })
 export class ProductFormCreatorComponent implements OnInit {
 
-  productCreationFailed = false;
+  creationFailed = false;
 
   @Output() productCreated = new EventEmitter<boolean>();
 
@@ -37,9 +37,9 @@ export class ProductFormCreatorComponent implements OnInit {
     }
     this.productManagementService.createProduct(productInformation).then(() => {
       this.productCreated.emit(true);
-      this.productCreationFailed = false;
+      this.creationFailed = false;
     }).catch(() => {
-      this.productCreationFailed = true;
+      this.creationFailed = true;
     })
   }
 }

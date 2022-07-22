@@ -1,0 +1,7 @@
+.prestation-creation-container {
+  padding: var(--common-container-padding);
+}
+
+.prestation-creation-form {
+  margin-top: 1em;
+}

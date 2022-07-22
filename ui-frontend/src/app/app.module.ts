@@ -42,6 +42,8 @@ import { ProductFormCreatorComponent } from './application/product-management/pr
 import { BasicInputFormComponent } from './libairy/form/basic-input-form/basic-input-form.component';
 import { AdvancedTitleCardComponent } from './libairy/advanced-title-card/advanced-title-card.component';
 import { ProductFormUpdaterComponent } from './application/product-management/product-information/product-form-updater/product-form-updater.component';
+import { PrestationFormCreatorComponent } from './application/prestation-management/prestation-creation/prestation-form-creator/prestation-form-creator.component';
+import { PrestationFormUpdaterComponent } from './application/prestation-management/prestation-information/prestation-form-updater/prestation-form-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -111,7 +113,9 @@ const appRoutes: Routes = [
     ProductFormCreatorComponent,
     BasicInputFormComponent,
     AdvancedTitleCardComponent,
-    ProductFormUpdaterComponent
+    ProductFormUpdaterComponent,
+    PrestationFormCreatorComponent,
+    PrestationFormUpdaterComponent
   ],
   imports: [
     BrowserModule,

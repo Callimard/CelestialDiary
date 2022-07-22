@@ -1,13 +1,10 @@
-<div class="product-update-container" *ngIf="product != null">
+<div class="product-information-container" *ngIf="product != null">
   <div app-card-advanced-title
        [title]="product.name"
        [subtitle]="product.suggestedPrice + '€'"
        [img]="'/assets/images/kraken.jpg'"
-       (goBack)="goBack()">
-
-  </div>
+       (goBack)="goBack()"></div>
   <div app-product-form-updater class="floating-card product-update-form"
        [product]="product">
-
   </div>
 </div>
