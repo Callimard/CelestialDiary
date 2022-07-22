@@ -18,7 +18,7 @@ public class EmbeddedPrestation {
     private String description;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Service")
+    @DocumentReference(collection = "Prestation")
     private Prestation prestation;
 
     // Methods.

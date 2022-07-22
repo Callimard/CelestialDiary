@@ -10,6 +10,8 @@ export class InformationTicketComponent implements OnInit {
   @Input() title?: string = "";
   @Input() subTitle?: string = "";
   @Input() img?: string = "";
+  @Input() ticketHeight: string = "75px";
+  @Input() roundImage: boolean = true;
 
   constructor() {
     // Nothing

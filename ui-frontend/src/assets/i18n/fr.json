@@ -138,6 +138,33 @@
       "update-failed": "Mise à jour de la prestation échouée"
     }
   },
+  "bundle": {
+    "name": "Nom du paquet",
+    "description": "Description",
+    "suggested-price": "Prix suggéré",
+    "price": "Prix",
+    "products": "Produits",
+    "product-selection": {
+      "selection": "Sélection des produits",
+      "available": "Produits disponibles",
+      "selected": "Produits sélectionnés"
+    },
+    "prestations": "Prestations",
+    "prestation-selection": {
+      "selection": "Sélection des prestations",
+      "available": "Prestations disponibles",
+      "selected": "Prestations sélectionnées"
+    },
+    "creation": {
+      "bundle-creation": "Création d'un paquet",
+      "create": "Créer",
+      "creation-failed": "La création du paquet a échouée"
+    },
+    "update": {
+      "update": "Metre à jour",
+      "update-failed": "Mise à jour du paquet échouée"
+    }
+  },
   "time": {
     "time-interval-form": {
       "start": "Début",

@@ -44,6 +44,8 @@ import { AdvancedTitleCardComponent } from './libairy/advanced-title-card/advanc
 import { ProductFormUpdaterComponent } from './application/product-management/product-information/product-form-updater/product-form-updater.component';
 import { PrestationFormCreatorComponent } from './application/prestation-management/prestation-creation/prestation-form-creator/prestation-form-creator.component';
 import { PrestationFormUpdaterComponent } from './application/prestation-management/prestation-information/prestation-form-updater/prestation-form-updater.component';
+import { BundleFormCreatorComponent } from './application/bundle-management/bundle-creation/bundle-form-creator/bundle-form-creator.component';
+import { BundleFormUpdaterComponent } from './application/bundle-management/bundle-information/bundle-form-updater/bundle-form-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -115,7 +117,9 @@ const appRoutes: Routes = [
     AdvancedTitleCardComponent,
     ProductFormUpdaterComponent,
     PrestationFormCreatorComponent,
-    PrestationFormUpdaterComponent
+    PrestationFormUpdaterComponent,
+    BundleFormCreatorComponent,
+    BundleFormUpdaterComponent
   ],
   imports: [
     BrowserModule,

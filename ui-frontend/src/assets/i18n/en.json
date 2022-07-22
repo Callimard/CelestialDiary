@@ -138,6 +138,33 @@
       "update-failed": "Prestation update failed"
     }
   },
+  "bundle": {
+    "name": "Bundle name",
+    "description": "Description",
+    "suggested-price": "Suggested price",
+    "price": "Price",
+    "products": "Products",
+    "product-selection": {
+      "selection": "Product selection",
+      "available": "Available products",
+      "selected": "Selected products"
+    },
+    "prestations": "Prestations",
+    "prestation-selection": {
+      "selection": "Prestation selection",
+      "available": "Available prestations",
+      "selected": "Selected prestations"
+    },
+    "creation": {
+      "bundle-creation": "Bundle creation",
+      "create": "Create",
+      "creation-failed": "Bundle creation failed"
+    },
+    "update": {
+      "update": "Update",
+      "update-failed": "Bundle update failed"
+    }
+  },
   "time": {
     "time-interval-form": {
       "start": "Start",

@@ -1,0 +1,8 @@
+.bundle-information-container {
+  padding: var(--common-container-padding);
+
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}

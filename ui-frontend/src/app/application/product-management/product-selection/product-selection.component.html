@@ -2,6 +2,8 @@
      [allElements]="allProducts"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
      [elementTitleField]="'name'"
+     [elementSubtitleField]="'suggestedPrice'"
+     [subTitleSuffix]="' €'"
      (elementSelected)="navigateToProductInformation($event)"
      (searchFilter)="filterProduct($event)"
 >

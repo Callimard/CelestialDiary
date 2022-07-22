@@ -1,1 +1,11 @@
-<p>bundle-information works!</p>
+<div class="bundle-information-container" *ngIf="bundle != null">
+  <div app-card-advanced-title
+       [title]="bundle.name"
+       [subtitle]="bundle.suggestedPrice + '€'"
+       [img]="'/assets/images/kraken.jpg'"
+       (goBack)="goBack()"></div>
+  <div app-bundle-form-updater class="floating-card need-top-space"
+  [bundle]="bundle">
+
+  </div>
+</div>
