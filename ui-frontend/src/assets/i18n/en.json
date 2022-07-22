@@ -92,7 +92,7 @@
           "add": "Add exceptional opening",
           "remove": "Remove exceptional opening"
         },
-        "exceptional-closing":  {
+        "exceptional-closing": {
           "title": "Exceptional closing",
           "add": "Add exceptional closing",
           "remove": "Remove exceptional closing"
@@ -100,9 +100,24 @@
       }
     }
   },
-  "product-management":{
+  "product-management": {
     "product-selection": {
       "search-product": "Search a product"
+    }
+  },
+  "product": {
+    "product-name": "Product name",
+    "product-description": "Description",
+    "suggested-price": "Suggested price",
+    "price": "Price",
+    "creation": {
+      "product-creation": "Product creation",
+      "create-product": "Create",
+      "product-creation-failed": "Product creation failed"
+    },
+    "update": {
+      "update-product": "Update",
+      "product-update-failed": "Product update failed"
     }
   },
   "time": {

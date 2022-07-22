@@ -1,0 +1,12 @@
+<div class="advanced-title-card-container floating-card">
+  <div class="back-arrow basic-clickable" (click)="goBack.emit(true)" *ngIf="displayBackArrow">
+    <i class="fa-solid fa-arrow-left"></i>
+  </div>
+  <div class="title-container">
+    <h3 class="advanced-title-card-title">{{title}}</h3>
+    <h4 class="advanced-title-card-sub-title">{{subtitle}}</h4>
+  </div>
+  <div class="img-container">
+    <img class="img" [src]="img" alt="Advanced title image">
+  </div>
+</div>

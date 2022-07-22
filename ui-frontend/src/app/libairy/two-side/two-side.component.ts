@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ScreenService} from "../../../service/screen/screen.service";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-two-side',
@@ -9,9 +8,8 @@ import {Router} from "@angular/router";
 })
 export class TwoSideComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor() {
     // Nothing
-   console.log(this.router.routerState);
   }
 
   ngOnInit(): void {

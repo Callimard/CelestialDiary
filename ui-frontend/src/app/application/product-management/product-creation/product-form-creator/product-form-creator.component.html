@@ -1,0 +1,35 @@
+<form class="product-creator-form-container" [formGroup]="productCreatorForm" (ngSubmit)="onProductCreation()">
+  <div class="form-group-error product-creation-failed-container" *ngIf="productCreationFailed">
+    <p>{{ 'product.creation.product-creation-failed' | translate}}</p>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="product-name">
+      {{ 'product.product-name' | translate }}
+    </label>
+    <input class="form-input" name="product-name" id="product-name" type="text"
+           placeholder="{{ 'product.product-name' | translate }}"
+           formControlName="name">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="product-description">
+      {{ 'product.product-description' | translate }}
+    </label>
+    <input class="form-input" name="product-description" id="product-description" type="text"
+           placeholder="{{ 'product.product-description' | translate }}"
+           formControlName="description">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="product-suggested-price">
+      {{ 'product.suggested-price' | translate }}
+    </label>
+    <input class="form-input" name="product-suggested-price" id="product-suggested-price" type="number"
+           placeholder="{{ 'product.suggested-price' | translate }}"
+           formControlName="suggestedPrice">
+    <span>€</span>
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button" type="submit" [disabled]="productCreatorForm.invalid">
+      {{ 'product.creation.create-product' | translate}}
+    </button>
+  </div>
+</form>

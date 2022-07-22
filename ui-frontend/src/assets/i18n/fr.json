@@ -92,7 +92,7 @@
           "add": "Ajouter une ouverture exceptionnelle",
           "remove": "Retirer une ouverture exceptionnelle"
         },
-        "exceptional-closing":  {
+        "exceptional-closing": {
           "title": "Fermeture exceptionnelle",
           "add": "Ajouter une fermeture exceptionnelle",
           "remove": "Retirer une fermeture exceptionnelle"
@@ -100,9 +100,24 @@
       }
     }
   },
-  "product-management":{
+  "product-management": {
     "product-selection": {
       "search-product": "Rechercher un produit"
+    }
+  },
+  "product": {
+    "product-name": "Nom du produit",
+    "product-description": "Description",
+    "suggested-price": "Prix suggéré",
+    "price": "Prix",
+    "creation": {
+      "product-creation": "Création d'un produit",
+      "create-product": "Créer",
+      "product-creation-failed": "La création du produit a échouée"
+    },
+    "update": {
+      "update-product": "Mettre à jour",
+      "product-update-failed": "Mise à jour du produit échouée"
     }
   },
   "time": {

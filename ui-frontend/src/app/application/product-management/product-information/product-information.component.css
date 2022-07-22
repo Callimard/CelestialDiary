@@ -1,0 +1,7 @@
+.product-update-container {
+  padding: var(--common-container-padding);
+}
+
+.product-update-form {
+  margin-top: 1em;
+}

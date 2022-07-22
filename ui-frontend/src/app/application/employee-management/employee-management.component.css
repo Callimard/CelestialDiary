@@ -3,13 +3,6 @@
   --employee-container-transition: 0.5s;
   --employee-information-header-height: 60px;
   --employee-create-employee-floating-button-size: 45px;
-  --employee-card-margin: 0.8em 0.6em;
-  --employee-car-padding: 1.5em;
-}
-
-.floating-card {
-  margin: var(--employee-card-margin);
-  padding: var(--employee-car-padding);
 }
 
 /* Employee selection */

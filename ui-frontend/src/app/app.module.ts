@@ -37,6 +37,11 @@ import {PrestationCreationComponent} from './application/prestation-management/p
 import {BundleSelectionComponent} from './application/bundle-management/bundle-selection/bundle-selection.component';
 import {BundleInformationComponent} from './application/bundle-management/bundle-information/bundle-information.component';
 import {BundleCreationComponent} from './application/bundle-management/bundle-creation/bundle-creation.component';
+import { TitleCardComponent } from './libairy/title-card/title-card.component';
+import { ProductFormCreatorComponent } from './application/product-management/product-creation/product-form-creator/product-form-creator.component';
+import { BasicInputFormComponent } from './libairy/form/basic-input-form/basic-input-form.component';
+import { AdvancedTitleCardComponent } from './libairy/advanced-title-card/advanced-title-card.component';
+import { ProductFormUpdaterComponent } from './application/product-management/product-information/product-form-updater/product-form-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -101,7 +106,12 @@ const appRoutes: Routes = [
     PrestationCreationComponent,
     BundleSelectionComponent,
     BundleInformationComponent,
-    BundleCreationComponent
+    BundleCreationComponent,
+    TitleCardComponent,
+    ProductFormCreatorComponent,
+    BasicInputFormComponent,
+    AdvancedTitleCardComponent,
+    ProductFormUpdaterComponent
   ],
   imports: [
     BrowserModule,

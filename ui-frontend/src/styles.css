@@ -51,6 +51,10 @@
   --company-management-car-padding: 1em;
   --company-management-floating-button-size: 45px;
 
+  --floating-card-padding: 1em;
+
+  --common-container-padding: 0.8em 0.6em;
+
   font-family: 'Sarala', sans-serif;
 }
 
@@ -130,6 +134,8 @@ main {
 .floating-card {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px 0, rgba(0, 0, 0, 0.1) 0 0 2px 0;
+
+  padding: var(--floating-card-padding);
 }
 
 .form-group {
