@@ -1,0 +1,9 @@
+<div class="bundle-creation-container">
+  <div app-title-card class="bundle-creation-title-card"
+       title="{{ 'bundle.creation.bundle-creation' | translate }}"
+       (goBack)="goBack()">
+  </div>
+  <div app-bundle-form-creator class="floating-card bundle-creation-form"
+       (bundleCreated)="goBack()">
+  </div>
+</div>

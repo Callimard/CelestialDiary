@@ -1,0 +1,13 @@
+<div app-searching-list class="bundle-selection-container"
+     [allElements]="allBundles"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [elementTitleField]="'name'"
+     [elementSubtitleField]="'suggestedPrice'"
+     [subTitleSuffix]="' €'"
+     (elementSelected)="navigateToBundleInformation($event)"
+     (searchFilter)="filterBundle($event)"
+>
+</div>
+<button class="floating-button create-bundle-button" (click)="navigateToCreateBundle()">
+  <i class="fa-solid fa-plus"></i>
+</button>

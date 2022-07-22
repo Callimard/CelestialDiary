@@ -3,6 +3,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.BundleManagementService;
+import org.bandrsoftwares.celestialdiary.model.dto.saleable.bundle.BundleDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.saleable.bundle.WrappedBundleDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.saleable.ActivateSaleablePrivilege;
@@ -29,9 +30,13 @@ public class BundleManagementController {
 
     @ReadSaleablePrivilege
     @GetMapping
-    public List<WrappedBundleDTO> getBundles(@PathVariable(name = "idCompany") String idCompany) {
-        List<Bundle> products = bundleManagementService.allRegisteredBundle(idCompany);
-        return products.stream().map(WrappedBundleDTO::new).toList();
+    public List<WrappedBundleDTO> getBundles(@PathVariable(name = "idCompany") String idCompany,
+                                             @RequestParam(name = "filter", required = false) String filter) {
+        if (filter == null) {
+            return bundleManagementService.allRegisteredBundle(idCompany).stream().map(WrappedBundleDTO::new).toList();
+        } else {
+            return bundleManagementService.searchBundle(idCompany, filter).stream().map(WrappedBundleDTO::new).toList();
+        }
     }
 
     @CreateSaleablePrivilege
@@ -40,6 +45,13 @@ public class BundleManagementController {
                                          @RequestBody BundleManagementService.BundleCreationInformation information) {
         Bundle bundle = bundleManagementService.createBundle(idCompany, information);
         return new WrappedBundleDTO(bundle);
+    }
+
+    @ReadSaleablePrivilege
+    @GetMapping(SPECIFIC_BUNDLE)
+    public BundleDTO getSpecificBundle(@PathVariable(name = "idCompany") String idCompany,
+                                       @PathVariable(name = "idBundle") String idBundle) {
+        return new BundleDTO(bundleManagementService.getSpecificBundle(idCompany, idBundle));
     }
 
     @UpdateSaleablePrivilege

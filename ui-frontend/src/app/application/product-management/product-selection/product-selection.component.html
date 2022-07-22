@@ -1,0 +1,13 @@
+<div app-searching-list class="product-searching-list-container"
+     [allElements]="allProducts"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [elementTitleField]="'name'"
+     [elementSubtitleField]="'suggestedPrice'"
+     [subTitleSuffix]="' €'"
+     (elementSelected)="navigateToProductInformation($event)"
+     (searchFilter)="filterProduct($event)"
+>
+</div>
+<button class="floating-button create-product-button" (click)="navigateToCreateProduct()">
+  <i class="fa-solid fa-plus"></i>
+</button>

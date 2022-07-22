@@ -43,6 +43,20 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         return productRepository.insert(product);
     }
 
+    @SearchCompany
+    @Override
+    public List<Product> searchProduct(@CompanyId String companyId, String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return productRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchProduct
+    @CheckCompanyCoherence
+    @Override
+    public Product getSpecificProduct(@CompanyId String companyId, @ProductId String productId) {
+        return SearchingAspect.PRODUCT_FOUND.get();
+    }
+
     private Product createProductFrom(Company company, ProductCreationInformation info) {
         return Product.builder()
                 .name(info.name())

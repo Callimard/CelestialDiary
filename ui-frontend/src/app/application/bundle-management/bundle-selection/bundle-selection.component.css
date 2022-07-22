@@ -1,0 +1,27 @@
+.bundle-selection-container {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+.create-bundle-button {
+  position: absolute;
+
+  bottom: 1em;
+  left: 1em;
+
+  width: var(--company-management-floating-button-size);
+  height: var(--company-management-floating-button-size);
+
+  color: white;
+
+  font-size: 25px;
+
+  z-index: 75;
+}

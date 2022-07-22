@@ -1,5 +1,6 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.aop.SearchingAspect;
@@ -42,6 +43,20 @@ public class BundleManagementServiceImpl implements BundleManagementService {
     @Override
     public List<Bundle> allRegisteredBundle(@CompanyId String companyId) {
         return bundleRepository.findByCompany(SearchingAspect.COMPANY_FOUND.get());
+    }
+
+    @SearchCompany
+    @Override
+    public List<Bundle> searchBundle(@CompanyId String companyId, String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return bundleRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchBundle
+    @CheckCompanyCoherence
+    @Override
+    public Bundle getSpecificBundle(@CompanyId String companyId, @BundleId String bundleId) {
+        return SearchingAspect.BUNDLE_FOUND.get();
     }
 
     @SearchCompany
@@ -90,11 +105,17 @@ public class BundleManagementServiceImpl implements BundleManagementService {
         if (update.prestations() != null && !update.prestations().isEmpty()) {
             List<Prestation> prestations = prestationRepository.findByCompanyAndIdIn(company, update.prestations());
             bundle.setPrestations(prestations.stream().map(EmbeddedPrestation::from).toList());
+        } else if (update.prestations() != null) {
+            // Empty prestations
+            bundle.setPrestations(Lists.newArrayList());
         }
 
         if (update.products() != null && !update.products().isEmpty()) {
             List<Product> products = productRepository.findByCompanyAndIdIn(company, update.products());
             bundle.setProducts(products.stream().map(EmbeddedProduct::from).toList());
+        } else if (update.products() != null) {
+            // Empty products
+            bundle.setProducts(Lists.newArrayList());
         }
 
         return bundleRepository.save(bundle);

@@ -14,6 +14,10 @@ public interface ProductManagementService {
 
     List<Product> allRegisteredProduct(@CompanyId String companyId);
 
+    List<Product> searchProduct(@CompanyId String companyId, String filter);
+
+    Product getSpecificProduct(@CompanyId String companyId, @ProductId String productId);
+
     Product createProduct(@CompanyId String companyId, @Valid ProductCreationInformation information);
 
     record ProductCreationInformation(@NotNull @NotBlank String name, String description, @NotNull @DecimalMin("0.01") Double suggestedPrice) {

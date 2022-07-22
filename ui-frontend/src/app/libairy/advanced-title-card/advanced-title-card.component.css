@@ -1,0 +1,41 @@
+.advanced-title-card-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.back-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--back-arrow-size);
+
+  font-size: 20px;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+
+  white-space: nowrap;
+}
+
+.advanced-title-card-sub-title {
+  color: var(--place-holder-text-color);
+}
+
+.img-container {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.5);
+}

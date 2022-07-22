@@ -30,7 +30,7 @@
   --main-text-color: #000000;
   --secondary-text-color: #000000;
   --place-holder-text-color: #c9c7c7;
-  --place-holder-text-color-light: #f2f2f2;
+  --place-holder-text-color-light: #e5e5e5;
 
   --basic-clickable-color: #fff;
   --basic-clickable-hover-color: #fafafa;
@@ -43,6 +43,17 @@
   --danger-button-background-color: var(--danger-color);
   --danger-button-hover-background-color: var(--primary-light-light);
   --danger-button-active-background-color: var(--primary);
+
+  --company-management-search-bar-height: 60px;
+  --company-management-container-transition: 0.5s;
+  --company-management-information-header-height: 60px;
+  --company-management-card-margin: 0.8em 0.6em;
+  --company-management-car-padding: 1em;
+  --company-management-floating-button-size: 45px;
+
+  --floating-card-padding: 1em;
+
+  --common-container-padding: 0.8em 0.6em;
 
   font-family: 'Sarala', sans-serif;
 }
@@ -97,8 +108,6 @@ main {
 }
 
 .floating-button {
-  position: absolute;
-
   border-radius: 100%;
 
   border: none;
@@ -125,6 +134,8 @@ main {
 .floating-card {
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px 0, rgba(0, 0, 0, 0.1) 0 0 2px 0;
+
+  padding: var(--floating-card-padding);
 }
 
 .form-group {
@@ -201,7 +212,7 @@ button {
 }
 
 .super-valid-button:disabled {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .valid-button, .danger-button {
@@ -247,4 +258,8 @@ input[type=time] {
   font-size: 15px;
   padding: 0.7em 0.5em;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 6px 0, rgba(0, 0, 0, 0.1) 0 0 2px 0;
+}
+
+.need-top-space {
+  margin-top: 1em;
 }

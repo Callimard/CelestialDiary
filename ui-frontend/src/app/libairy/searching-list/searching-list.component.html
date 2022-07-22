@@ -1,0 +1,20 @@
+<div app-search-bar class="element-list-search-bar"
+     placeHolder="{{ 'product-management.product-selection.search-product' | translate }}"
+     [style.height]="listPaddingHeight"
+     (inputText)="searchElement($event)">
+</div>
+<div app-element-list class="searching-list-element"
+     [allElements]="this.allElements"
+     [listPaddingHeight]="this.listPaddingHeight"
+     [elementTitleField]="this.elementTitleField"
+     [titlePrefix]="this.titlePrefix"
+     [titleSuffix]="this.titleSuffix"
+     [elementSubtitleField]="this.elementSubtitleField"
+     [subTitlePrefix]="this.subTitlePrefix"
+     [subTitleSuffix]="this.subTitleSuffix"
+     [elementSize]="this.elementSize"
+     [elementImageField]="this.elementImageField"
+     [roundImage]="this.roundImage"
+     (elementSelected)="onTicketClick($event)">
+
+</div>

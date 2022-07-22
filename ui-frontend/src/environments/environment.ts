@@ -8,10 +8,24 @@ export const environment = {
   frontApplicationPage: "application",
   employeeManagement: "employees",
   establishmentManagement: "establishments",
+  productManagement: "products",
   langageFr: "fr",
   langageEn: "en",
   bigScreenWidth: 1280,
 };
+
+export const frontend = {
+  login: "login",
+  application: "application",
+  companyManagement: "company/management",
+  products: "products",
+  productInformation: "information/:productId",
+  prestations: "prestations",
+  prestationInformation: "information/:prestationId",
+  bundles: "bundles",
+  bundleInformation: "information/:bundleId",
+  create: "create"
+}
 
 export const backend = {
   companyAuthenticationIdentifier: "C",
@@ -22,5 +36,8 @@ export const backend = {
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",
   employeesUrl: "/employees",
-  establishmentUrl: "/establishments"
+  establishmentUrl: "/establishments",
+  productUrl: "/products",
+  prestationUrl: "/prestations",
+  bundleUrl: "/bundles"
 }

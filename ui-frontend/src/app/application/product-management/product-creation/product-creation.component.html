@@ -1,0 +1,8 @@
+<div class="product-creation-container">
+  <div app-title-card class="product-creation-title-card"
+       title="{{ 'product.creation.product-creation' | translate }}"
+       (goBack)="goBack()"></div>
+  <div app-product-form-creator class="floating-card product-creation-form" (productCreated)="goBack()">
+
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.bundle-creation-container {
+  padding: var(--common-container-padding);
+
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.bundle-creation-form {
+  margin-top: 1em;
+}

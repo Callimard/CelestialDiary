@@ -6,8 +6,8 @@ import org.bandrsoftwares.celestialdiary.aop.SearchingAspect;
 import org.bandrsoftwares.celestialdiary.aop.company.CheckCompanyCoherence;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
-import org.bandrsoftwares.celestialdiary.aop.saleable.service.SearchService;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
+import org.bandrsoftwares.celestialdiary.aop.saleable.service.SearchPrestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
@@ -38,6 +38,20 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
 
     @SearchCompany
     @Override
+    public List<Prestation> searchPrestation(@CompanyId String companyId, String filter) {
+        String regexFilter = ".*" + filter + ".*";
+        return prestationRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchPrestation
+    @CheckCompanyCoherence
+    @Override
+    public Prestation getSpecificPrestation(@CompanyId String companyId, @PrestationId String prestationId) {
+        return SearchingAspect.PRESTATION_FOUND.get();
+    }
+
+    @SearchCompany
+    @Override
     public Prestation createPrestation(@CompanyId String companyId, @Valid PrestationManagementService.PrestationCreationInformation information) {
         Prestation prestation = createPrestationFrom(SearchingAspect.COMPANY_FOUND.get(), information);
         return prestationRepository.insert(prestation);
@@ -57,11 +71,12 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
                 .build();
     }
 
-    @SearchService
+    @SearchPrestation
     @CheckCompanyCoherence
     @Override
-    public Prestation updatePrestation(@CompanyId String companyId, @PrestationId String prestationId, @Valid PrestationManagementService.PrestationUpdatedInformation update) {
-        Prestation prestation = SearchingAspect.SERVICE_FOUND.get();
+    public Prestation updatePrestation(@CompanyId String companyId, @PrestationId String prestationId,
+                                       @Valid PrestationManagementService.PrestationUpdatedInformation update) {
+        Prestation prestation = SearchingAspect.PRESTATION_FOUND.get();
 
         if (update.name() != null && !update.name().isBlank()) {
             prestation.setName(update.name());
@@ -90,11 +105,11 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
         return prestationRepository.save(prestation);
     }
 
-    @SearchService
+    @SearchPrestation
     @CheckCompanyCoherence
     @Override
     public boolean activatePrestation(@CompanyId String companyId, @PrestationId String prestationId) {
-        Prestation prestation = SearchingAspect.SERVICE_FOUND.get();
+        Prestation prestation = SearchingAspect.PRESTATION_FOUND.get();
 
         if (Boolean.FALSE.equals(prestation.getActivated())) {
             prestation.setActivated(true);
@@ -104,11 +119,11 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
         return false;
     }
 
-    @SearchService
+    @SearchPrestation
     @CheckCompanyCoherence
     @Override
     public boolean deactivatePrestation(@CompanyId String companyId, @PrestationId String prestationId) {
-        Prestation prestation = SearchingAspect.SERVICE_FOUND.get();
+        Prestation prestation = SearchingAspect.PRESTATION_FOUND.get();
 
         if (Boolean.TRUE.equals(prestation.getActivated())) {
             prestation.setActivated(false);

@@ -15,6 +15,10 @@ public interface PrestationManagementService {
 
     List<Prestation> allRegisteredPrestation(@CompanyId String companyId);
 
+    List<Prestation> searchPrestation(@CompanyId String companyId, String filter);
+
+    Prestation getSpecificPrestation(@CompanyId String companyId, @PrestationId String prestationId);
+
     Prestation createPrestation(@CompanyId String companyId, @Valid PrestationCreationInformation information);
 
     record PrestationCreationInformation(@NotNull @NotBlank String name, String description, @NotNull @DecimalMin("0.01") Double suggestedPrice,

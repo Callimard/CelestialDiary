@@ -1,0 +1,5 @@
+.two-side-left, .two-side-right {
+  height: 100%;
+
+  transition: 0.7s;
+}

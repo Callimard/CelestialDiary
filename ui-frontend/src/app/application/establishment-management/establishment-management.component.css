@@ -2,14 +2,7 @@
   --establishment-search-bar-height: 60px;
   --establishment-container-transition: 0.5s;
   --establishment-information-header-height: 60px;
-  --establishment-card-margin: 0.8em 0.6em;
-  --establishment-car-padding: 1em;
   --establishment-create-establishment-floating-button-size: 45px;
-}
-
-.floating-card {
-  margin: var(--establishment-card-margin);
-  padding: var(--establishment-car-padding);
 }
 
 /* Left */
@@ -51,6 +44,8 @@
 }
 
 .create-establishment-button {
+  position: absolute;
+
   bottom: 1em;
   left: 1em;
 

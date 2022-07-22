@@ -5,5 +5,5 @@ import java.lang.annotation.*;
 @Inherited
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SearchService {
+public @interface SearchPrestation {
 }

@@ -1,0 +1,61 @@
+<form class="prestation-creator-form-container" [formGroup]="prestationUpdateForm" (ngSubmit)="onPrestationUpdate()">
+  <div class="form-group-error prestation-creation-failed-container" *ngIf="updateFailed">
+    <p>{{ 'prestation.update.update-failed' | translate}}</p>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="prestation-name">
+      {{ 'prestation.name' | translate }}
+    </label>
+    <input class="form-input" name="prestation-name" id="prestation-name" type="text"
+           placeholder="{{ 'prestation.name' | translate }}"
+           formControlName="name">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="prestation-description">
+      {{ 'prestation.description' | translate }}
+    </label>
+    <input class="form-input" name="prestation-description" id="prestation-description" type="text"
+           placeholder="{{ 'prestation.description' | translate }}"
+           formControlName="description">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="prestation-suggested-price">
+      {{ 'prestation.suggested-price' | translate }}
+    </label>
+    <input class="form-input" name="prestation-suggested-price" id="prestation-suggested-price" type="number"
+           placeholder="{{ 'prestation.suggested-price' | translate }}"
+           formControlName="suggestedPrice">
+    <span>€</span>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="prestation-nb-technician">
+      {{ 'prestation.nb-technician' | translate }}
+    </label>
+    <input class="form-input" name="prestation-nb-technician" id="prestation-nb-technician" type="number"
+           placeholder="{{ 'prestation.nb-technician' | translate }}"
+           formControlName="nbNeededTechnician" style="flex: 0 1">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="prestation-nb-client">
+      {{ 'prestation.nb-client' | translate }}
+    </label>
+    <input class="form-input" name="prestation-nb-client" id="prestation-nb-client" type="number"
+           placeholder="{{ 'prestation.nb-client' | translate }}"
+           formControlName="nbClient" style="flex: 0 1">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="prestation-suggested-execution-time">
+      {{ 'prestation.suggested-execution-time' | translate }}
+    </label>
+    <input class="form-input" name="prestation-suggested-execution-time" id="prestation-suggested-execution-time" type="number"
+           placeholder="{{ 'prestation.suggested-execution-time' | translate }}"
+           formControlName="suggestedExecutionTime" style="flex: 0 1">
+    <span>min</span>
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button" type="submit" [disabled]="prestationUpdateForm.invalid">
+      {{ 'prestation.update.update' | translate}}
+    </button>
+  </div>
+</form>

@@ -1,0 +1,91 @@
+<form class="bundle-creator-form-container" [formGroup]="bundleCreatorForm" (ngSubmit)="onBundleCreation()">
+  <div class="form-group-error bundle-creation-failed-container" *ngIf="creationFailed">
+    <p>{{ 'bundle.creation.creation-failed' | translate}}</p>
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="bundle-name">
+      {{ 'bundle.name' | translate }}
+    </label>
+    <input class="form-input" name="bundle-name" id="bundle-name" type="text"
+           placeholder="{{ 'bundle.name' | translate }}"
+           formControlName="name">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="bundle-description">
+      {{ 'bundle.description' | translate }}
+    </label>
+    <input class="form-input" name="bundle-description" id="bundle-description" type="text"
+           placeholder="{{ 'bundle.description' | translate }}"
+           formControlName="description">
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="bundle-suggested-price">
+      {{ 'bundle.suggested-price' | translate }}
+    </label>
+    <input class="form-input" name="bundle-suggested-price" id="bundle-suggested-price" type="number"
+           placeholder="{{ 'bundle.suggested-price' | translate }}"
+           formControlName="suggestedPrice">
+    <span>€</span>
+  </div>
+
+  <div class="form-group product-selection-container need-top-space">
+    <h2>{{ 'bundle.product-selection.selection' | translate }}</h2>
+    <div class="available-products-container">
+      <h3>{{ 'bundle.product-selection.available' | translate}}</h3>
+      <div app-element-list class="available-product-list need-top-space"
+           [allElements]="availableProducts"
+           [elementTitleField]="'name'"
+           [elementSubtitleField]="'suggestedPrice'"
+           [subTitleSuffix]="' €'"
+           [elementSize]="'50px'"
+           (elementSelected)="choseProduct($event)">
+      </div>
+    </div>
+    <div class="selected-products-container need-top-space">
+      <h3>{{ 'bundle.product-selection.selected' | translate }}</h3>
+      <div app-element-list class="chosen-product-list"
+           [allElements]="chosenProducts"
+           [elementTitleField]="'name'"
+           [elementSubtitleField]="'suggestedPrice'"
+           [subTitleSuffix]="' €'"
+           [elementSize]="'50px'"
+           (elementSelected)="removeProduct($event)">
+      </div>
+      <span class="total-price">Total: <strong>{{productTotalPrice}} €</strong></span>
+    </div>
+  </div>
+
+  <div class="form-group prestation-selection-container need-top-space">
+    <h2>{{ 'bundle.prestation-selection.selection' | translate }}</h2>
+    <div class="available-prestations-container">
+      <h3>{{ 'bundle.prestation-selection.available' | translate}}</h3>
+      <div app-element-list class="available-prestation-list need-top-space"
+           [allElements]="availablePrestations"
+           [elementTitleField]="'name'"
+           [elementSubtitleField]="'suggestedPrice'"
+           [subTitleSuffix]="' €'"
+           [elementSize]="'50px'"
+           (elementSelected)="chosePrestation($event)">
+      </div>
+    </div>
+    <div class="selected-prestations-container need-top-space">
+      <h3>{{ 'bundle.prestation-selection.selected' | translate }}</h3>
+      <div app-element-list class="chosen-prestation-list"
+           [allElements]="chosenPrestations"
+           [elementTitleField]="'name'"
+           [elementSubtitleField]="'suggestedPrice'"
+           [subTitleSuffix]="' €'"
+           [elementSize]="'50px'"
+           (elementSelected)="removePrestation($event)">
+      </div>
+      <span class="total-price">Total: <strong>{{prestationTotalPrice}} €</strong></span>
+    </div>
+  </div>
+
+  <div class="form-submit-group">
+    <button class="super-valid-button" type="submit" [disabled]="bundleCreatorForm.invalid">
+      {{ 'bundle.creation.create' | translate}}
+    </button>
+  </div>
+</form>
