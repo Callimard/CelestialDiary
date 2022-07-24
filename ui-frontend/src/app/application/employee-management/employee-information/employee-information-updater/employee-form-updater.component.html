@@ -1,0 +1,60 @@
+<form class="employee-update-form" [formGroup]="employeeUpdateForm" *ngIf="employeeUpdateForm != null" (ngSubmit)="onUpdate()">
+  <div class="update-fail-container form-group-error" *ngIf="updateFail">
+    <p>{{ 'employee.update.update-failed' | translate }}</p>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-email">{{ 'employee.email' | translate }}</label>
+    <input class="form-input" type="email" id="update-email" name="update-email" formControlName="email"
+           placeholder="{{ 'employee.email' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-password">{{ 'employee.password' | translate }}</label>
+    <input class="form-input" type="password" id="update-password" name="update-password" formControlName="password"
+           placeholder="{{ 'employee.password' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-first-name">{{ 'employee.first-name' | translate }}</label>
+    <input class="form-input" type="text" id="update-first-name" name="update-first-name" formControlName="firstName"
+           placeholder="{{ 'employee.first-name' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-last-name">{{ 'employee.last-name' | translate }}</label>
+    <input class="form-input" type="text" id="update-last-name" name="update-last-name" formControlName="lastName"
+           placeholder="{{ 'employee.last-name' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-comment">{{ 'employee.comment' | translate }}</label>
+    <textarea class="form-input" id="update-comment" name="update-comment" formControlName="comment"
+              placeholder="{{ 'employee.comment' | translate }}">
+          </textarea>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-gender">{{ 'employee.gender' | translate }}</label>
+    <select class="form-input" id="update-gender" name="update-gender" formControlName="gender">
+      <option value="MALE">{{ 'employee.gender-type.male' | translate }}</option>
+      <option value="FEMALE">{{ 'employee.gender-type.female' | translate }}</option>
+      <option value="NO_GENDER">{{ 'employee.gender-type.no-gender' | translate }}</option>
+    </select>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-phone">{{ 'employee.phone' | translate }}</label>
+    <input class="form-input" type="tel" id="update-phone" name="update-phone" formControlName="phone"
+           placeholder="{{ 'employee.phone' | translate }}"/>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-is-technician">{{ 'employee.is-technician' | translate }}</label>
+    <select class="form-input" id="update-is-technician" name="update-is-techinician" formControlName="isTechnician">
+      <option value="true">{{'employee.is-technician-value.yes' | translate}}</option>
+      <option value="false">{{'employee.is-technician-value.no' | translate}}</option>
+    </select>
+  </div>
+  <div class="form-control">
+    <label class="form-label" for="update-tags">{{ 'employee.tags' | translate }}</label>
+    <input class="form-input" type="text" id="update-tags" name="update-tags" formControlName="tags"
+           placeholder="{{ 'employee.tags' | translate }}"/>
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button employee-creation-button" [disabled]="employeeUpdateForm.invalid"
+            type="submit">{{ 'employee.update.update' | translate }}</button>
+  </div>
+</form>

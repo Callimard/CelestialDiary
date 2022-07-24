@@ -1,27 +1,24 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {EstablishmentDTO} from "../../../../data/company-management/establishment/establishment-dto";
+import {Component, Input, OnInit} from '@angular/core';
+import {EstablishmentDTO} from "../../../../../data/company-management/establishment/establishment-dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {EstablishmentManagementService} from "../../../../service/company-management/establishment-management.service";
-import {TimeIntervalFormArray} from "../../../../service/time/time-interval-form-array";
-import {TimeIntervalFormGroup} from "../../../../service/time/time-interval-form-group";
-import {EstablishmentUpdatedInformation} from "../../../../data/company-management/establishment/establishment-updated-information";
-import {ArrayDatedTimeIntervalFormArray} from "../../../../service/time/array-dated-time-interval-form-array";
-import {DatedTimeIntervalFormGroup} from "../../../../service/time/dated-time-interval-form-group";
-import {DatedTimeIntervalListDTO} from "../../../../data/general/time/dated-time-interval-list-dto";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment-management.service";
+import {TimeIntervalFormArray} from "../../../../../service/time/time-interval-form-array";
+import {TimeIntervalFormGroup} from "../../../../../service/time/time-interval-form-group";
+import {EstablishmentUpdatedInformation} from "../../../../../data/company-management/establishment/establishment-updated-information";
+import {ArrayDatedTimeIntervalFormArray} from "../../../../../service/time/array-dated-time-interval-form-array";
+import {DatedTimeIntervalFormGroup} from "../../../../../service/time/dated-time-interval-form-group";
+import {DatedTimeIntervalListDTO} from "../../../../../data/general/time/dated-time-interval-list-dto";
 
 @Component({
-  selector: '[app-establishment-information-updater]',
-  templateUrl: './establishment-information-updater.component.html',
-  styleUrls: ['./establishment-information-updater.component.css']
+  selector: '[app-establishment-form-updater]',
+  templateUrl: './establishment-form-updater.component.html',
+  styleUrls: ['./establishment-form-updater.component.css']
 })
-export class EstablishmentInformationUpdaterComponent implements OnInit, OnChanges {
+export class EstablishmentFormUpdaterComponent implements OnInit {
 
-  @Input() establishmentId?: string;
-  @Output() updateSuccess = new EventEmitter<boolean>();
+  @Input() establishment!: EstablishmentDTO;
 
-  updateFail = false;
-
-  establishment!: EstablishmentDTO;
+  updateFailed = false;
 
   establishmentUpdateForm!: FormGroup;
 
@@ -30,20 +27,7 @@ export class EstablishmentInformationUpdaterComponent implements OnInit, OnChang
   }
 
   ngOnInit(): void {
-    this.chargeEstablishment();
-  }
-
-  ngOnChanges(_changes: SimpleChanges): void {
-    this.chargeEstablishment();
-  }
-
-  private chargeEstablishment() {
-    if (this.establishmentId != null) {
-      this.establishmentManagerService.getSpecificEstablishment(this.establishmentId).then((establishment) => {
-        this.establishment = establishment;
-        this.initializeEstablishmentFormGroup();
-      })
-    }
+    this.initializeEstablishmentFormGroup();
   }
 
   private initializeEstablishmentFormGroup() {
@@ -91,13 +75,14 @@ export class EstablishmentInformationUpdaterComponent implements OnInit, OnChang
       exceptionalClosing: exceptionClosing != null ? exceptionClosing : undefined
     }
 
-    this.establishmentManagerService.updateEstablishment(this.establishment.id, establishmentUpdates).then(() => {
-      this.chargeEstablishment();
-      this.updateFail = false;
-      this.updateSuccess.emit(true);
+    this.establishmentManagerService.updateEstablishment(this.establishment.id, establishmentUpdates).then((wrappedEstablishment) => {
+      this.establishment.name = wrappedEstablishment.name;
+      this.establishment.description = wrappedEstablishment.description;
+      this.establishment.address = wrappedEstablishment.address;
+      this.establishment.activated = wrappedEstablishment.activated;
+      this.updateFailed = false;
     }).catch(() => {
-      this.updateFail = true;
-      this.updateSuccess.emit(false)
+      this.updateFailed = true;
     });
   }
 

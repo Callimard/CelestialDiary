@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {Router} from "@angular/router";
-import {environment} from "../../environments/environment";
+import {frontend} from "../../environments/environment";
 
 @Component({
   selector: 'app-login',
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
   }
 
   private navigateToApplication() {
-    this.router.navigate([environment.frontApplicationPage, environment.employeeManagement ]).catch((reason => {
+    this.router.navigate([frontend.application, frontend.company, frontend.management, frontend.employees]).catch((reason => {
       console.error("Fail to navigate to Application page", reason);
     }));
   }

@@ -17,12 +17,14 @@ public class WrappedSaleableDTO {
     private String name;
     private String description;
     private Double suggestedPrice;
+    private Boolean activated;
 
     // Constructors.
 
-    public WrappedSaleableDTO() {}
+    public WrappedSaleableDTO() {
+    }
 
     public WrappedSaleableDTO(Saleable saleable) {
-        this(saleable.getId(), saleable.getName(), saleable.getDescription(), saleable.getSuggestedPrice());
+        this(saleable.getId(), saleable.getName(), saleable.getDescription(), saleable.getSuggestedPrice(), saleable.getActivated());
     }
 }

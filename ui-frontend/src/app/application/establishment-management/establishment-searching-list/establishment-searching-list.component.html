@@ -1,7 +1,0 @@
-<ul class="establishment-list">
-  <li class="establishment-list-padding" [style.height]="paddingHeight"></li>
-  <li app-information-ticket *ngFor="let establishment of allEstablishments" class="basic-clickable establishment-ticket-information"
-      [title]="establishment.name"
-      img="/assets/images/kraken.jpg" (click)="onTicketClick(establishment)">
-  </li>
-</ul>

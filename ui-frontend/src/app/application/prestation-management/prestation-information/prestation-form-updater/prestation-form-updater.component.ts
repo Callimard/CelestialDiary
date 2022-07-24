@@ -46,6 +46,7 @@ export class PrestationFormUpdaterComponent implements OnInit {
       this.prestation.name = wrappedPrestation.name;
       this.prestation.description = wrappedPrestation.description;
       this.prestation.suggestedPrice = wrappedPrestation.suggestedPrice;
+      this.prestation.activated = wrappedPrestation.activated;
 
       this.updateFailed = false;
     }).catch(() => {

@@ -1,0 +1,13 @@
+<div app-searching-list class="employee-searching-list-container"
+     [allElements]="allEmployees"
+     searchBarPlaceHolder="{{ 'employee.search' | translate }}"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [elementTitleFields]="['firstName', 'lastName']"
+     [elementSubtitleField]="'email'"
+     (elementSelected)="navigateToEmployeeInformation($event)"
+     (searchFilter)="filterEmployee($event)"
+>
+</div>
+<button class="floating-button create-employee-button" (click)="navigateToCreateEmployee()">
+  <i class="fa-solid fa-plus"></i>
+</button>

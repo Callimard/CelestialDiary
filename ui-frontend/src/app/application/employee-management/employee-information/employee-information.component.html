@@ -1,0 +1,11 @@
+<div class="employee-information-container" *ngIf="employee != null">
+  <div app-card-advanced-title
+       [title]="employee.firstName + ' ' + employee.lastName"
+       [subtitle]="employee.email"
+       [img]="'/assets/images/kraken.jpg'"
+       (goBack)="goBack()"></div>
+  <div app-employee-form-updater class="floating-card need-top-space"
+       [employee]="employee">
+  </div>
+</div>
+

@@ -1,0 +1,9 @@
+<div class="establishment-information-container" *ngIf="establishment != null">
+  <div app-card-advanced-title
+       [title]="establishment.name"
+       [img]="'/assets/images/kraken.jpg'"
+       (goBack)="goBack()"></div>
+  <div app-establishment-form-updater class="floating-card need-top-space"
+       [establishment]="establishment">
+  </div>
+</div>

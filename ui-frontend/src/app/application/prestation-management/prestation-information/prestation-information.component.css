@@ -1,7 +1,8 @@
 .prestation-information-container {
   padding: var(--common-container-padding);
-}
 
-.prestation-update-form {
-  margin-top: 1em;
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 }

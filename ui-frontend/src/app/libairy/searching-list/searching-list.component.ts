@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ElementListComponent} from "../element-list/element-list.component";
 
 @Component({
@@ -7,6 +7,8 @@ import {ElementListComponent} from "../element-list/element-list.component";
   styleUrls: ['./searching-list.component.css']
 })
 export class SearchingListComponent extends ElementListComponent implements OnInit {
+
+  @Input() searchBarPlaceHolder: string = "";
 
   @Output() searchFilter = new EventEmitter<string>();
 

@@ -3,4 +3,5 @@ export interface WrappedSaleableDTO {
   name: string,
   description?: string,
   suggestedPrice: number
+  activated: boolean
 }

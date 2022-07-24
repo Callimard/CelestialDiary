@@ -9,7 +9,7 @@ import {WrappedEmployeeDTO} from "../employee/wrapped-employee-dto";
 export interface EstablishmentDTO {
   id: string,
   name: string,
-  description: string,
+  description?: string,
   address: Address,
   mondayOpening: NonDatedTimeIntervalListDTO,
   tuesdayOpening: NonDatedTimeIntervalListDTO,

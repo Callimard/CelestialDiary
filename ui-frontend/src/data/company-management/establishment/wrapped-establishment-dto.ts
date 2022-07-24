@@ -4,6 +4,6 @@ export interface WrappedEstablishmentDTO {
   id: string,
   name: string,
   description?: string,
-  address?: Address,
+  address: Address,
   activated: boolean
 }
