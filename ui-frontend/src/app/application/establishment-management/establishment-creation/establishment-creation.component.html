@@ -1,0 +1,8 @@
+<div class="establishment-creation-container">
+  <div app-title-card class="establishment-creation-title-card"
+       title="{{ 'establishment.creation.establishment-creation' | translate }}"
+       (goBack)="goBack()"></div>
+  <div app-establishment-form-creator class="floating-card establishment-creation-form need-top-space" (establishmentCreated)="goBack()">
+
+  </div>
+</div>

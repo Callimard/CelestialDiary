@@ -43,6 +43,7 @@ export class ProductFormUpdaterComponent implements OnInit {
       this.product.name = wrappedProduct.name;
       this.product.description = wrappedProduct.description;
       this.product.suggestedPrice = wrappedProduct.suggestedPrice;
+      this.product.activated = wrappedProduct.activated;
     }).catch(() => {
       this.updateFailed = true
     })

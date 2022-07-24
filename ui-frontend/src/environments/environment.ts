@@ -18,6 +18,8 @@ export const frontend = {
   login: "login",
   application: "application",
   companyManagement: "company/management",
+  establishments: "establishments",
+  establishmentInformation: "information/:establishmentId",
   products: "products",
   productInformation: "information/:productId",
   prestations: "prestations",

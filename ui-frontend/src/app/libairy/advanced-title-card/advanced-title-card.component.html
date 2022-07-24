@@ -4,7 +4,7 @@
   </div>
   <div class="title-container">
     <h3 class="advanced-title-card-title">{{title}}</h3>
-    <h4 class="advanced-title-card-sub-title">{{subtitle}}</h4>
+    <h4 class="advanced-title-card-sub-title" *ngIf="subtitle != null && subtitle.length > 0">{{subtitle}}</h4>
   </div>
   <div class="img-container">
     <img class="img" [src]="img" alt="Advanced title image">

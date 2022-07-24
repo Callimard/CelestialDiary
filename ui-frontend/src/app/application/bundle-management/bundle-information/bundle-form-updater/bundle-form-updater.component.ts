@@ -118,6 +118,7 @@ export class BundleFormUpdaterComponent implements OnInit {
       this.bundle.name = wrappedBundle.name;
       this.bundle.description = wrappedBundle.description;
       this.bundle.suggestedPrice = wrappedBundle.suggestedPrice;
+      this.bundle.activated = wrappedBundle.activated;
 
       this.updateFailed = false;
     }).catch(() => {

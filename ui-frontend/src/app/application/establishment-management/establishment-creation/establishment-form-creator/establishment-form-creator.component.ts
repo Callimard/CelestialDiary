@@ -1,21 +1,21 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {EstablishmentManagementService} from "../../../../service/company-management/establishment-management.service";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment-management.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TimeIntervalFormGroup} from "../../../../service/time/time-interval-form-group";
-import {TimeIntervalFormArray} from "../../../../service/time/time-interval-form-array";
-import {EstablishmentCreationInformation} from "../../../../data/company-management/establishment/establishment-creation-information";
+import {TimeIntervalFormGroup} from "../../../../../service/time/time-interval-form-group";
+import {TimeIntervalFormArray} from "../../../../../service/time/time-interval-form-array";
+import {EstablishmentCreationInformation} from "../../../../../data/company-management/establishment/establishment-creation-information";
 
 
 @Component({
-  selector: '[app-establishment-creator]',
-  templateUrl: './establishment-creator.component.html',
-  styleUrls: ['./establishment-creator.component.css']
+  selector: '[app-establishment-form-creator]',
+  templateUrl: './establishment-form-creator.component.html',
+  styleUrls: ['./establishment-form-creator.component.css']
 })
-export class EstablishmentCreatorComponent implements OnInit {
+export class EstablishmentFormCreatorComponent implements OnInit {
 
   creationFailed = false;
 
-  @Output() creationSuccess = new EventEmitter<boolean>();
+  @Output() establishmentCreated = new EventEmitter<boolean>();
 
   establishmentCreationForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
@@ -62,10 +62,10 @@ export class EstablishmentCreatorComponent implements OnInit {
     console.log(establishmentInfo);
     this.establishmentManagementService.createEstablishment(establishmentInfo).then(() => {
       this.creationFailed = false;
-      this.creationSuccess.emit(true);
+      this.establishmentCreated.emit(true);
     }).catch(() => {
       this.creationFailed = true;
-      this.creationSuccess.emit(false);
+      this.establishmentCreated.emit(false);
     })
   }
 

@@ -51,61 +51,53 @@
       "employee-update-fail": "Échec de la mise à jour de l'employée"
     }
   },
-  "establishment-management": {
-    "establishment-selection": {
-      "search-establishment": "Rechercher un établissement"
+  "establishment": {
+    "search": "Rechercher un établissement",
+    "name": "Nom",
+    "description": "Description",
+    "address": {
+      "title": "Adresse",
+      "street": "Rue",
+      "zipCode": "Code postal",
+      "city": "Ville",
+      "country": "Pays"
     },
-    "establishment-creation": {
-      "establishment-creation-title": "Créer un établissement",
-      "create-title": "Créer",
-      "name": "Nom",
-      "description": "Description",
-      "address": {
-        "title": "Adresse",
-        "street": "Rue",
-        "zipCode": "Code postal",
-        "city": "Ville",
-        "Country": "Pays"
-      },
-      "openingHours": {
-        "title": "Heures d'ouvertures",
-        "monday": "Lundi",
-        "tuesday": "Mardi",
-        "wednesday": "Mercredi",
-        "thursday": "Jeudi",
-        "friday": "Vendredi",
-        "saturday": "Samedi",
-        "sunday": "Dimanche",
-        "start": "Début",
-        "end": "Fin",
-        "add": "Ajouter des heures",
-        "remove": "supprimer des heures"
-      }
+    "hours": {
+      "opening-hours": "Heures d'ouvertures",
+      "monday": "Lundi",
+      "tuesday": "Mardi",
+      "wednesday": "Mercredi",
+      "thursday": "Jeudi",
+      "friday": "Vendredi",
+      "saturday": "Samedi",
+      "sunday": "Dimanche",
+      "start": "Début",
+      "end": "Fin",
+      "add": "Ajouter des heures",
+      "remove": "supprimer des heures"
     },
-    "establishment-information": {
-      "title": "Information de l'établissement",
-      "update": {
-        "title": "Mettre à jour",
-        "failed": "Mise à jour de l'établissement échouée",
-        "exceptional-opening": {
-          "title": "Ouverture exceptionnelle",
-          "add": "Ajouter une ouverture exceptionnelle",
-          "remove": "Retirer une ouverture exceptionnelle"
-        },
-        "exceptional-closing": {
-          "title": "Fermeture exceptionnelle",
-          "add": "Ajouter une fermeture exceptionnelle",
-          "remove": "Retirer une fermeture exceptionnelle"
-        }
-      }
-    }
-  },
-  "product-management": {
-    "product-selection": {
-      "search-product": "Rechercher un produit"
+    "exceptional-opening": {
+      "title": "Ouverture exceptionnelle",
+      "add": "Ajouter une ouverture exceptionnelle",
+      "remove": "Retirer une ouverture exceptionnelle"
+    },
+    "exceptional-closing": {
+      "title": "Fermeture exceptionnelle",
+      "add": "Ajouter une fermeture exceptionnelle",
+      "remove": "Retirer une fermeture exceptionnelle"
+    },
+    "creation": {
+      "establishment-creation": "Créer un établissement",
+      "create": "Créer",
+      "creation-failed": "La création de l'établissement a échouée"
+    },
+    "update": {
+      "update": "Mettre à jour",
+      "update-failed": "Mise à jour de l'établissement échouée"
     }
   },
   "product": {
+    "search": "Rechercher un produit",
     "name": "Nom du produit",
     "description": "Description",
     "suggested-price": "Prix suggéré",
@@ -121,6 +113,7 @@
     }
   },
   "prestation": {
+    "search": "Rechercher une prestation",
     "name": "Nom de la prestation",
     "description": "Description",
     "suggested-price": "Prix suggéré",
@@ -139,6 +132,7 @@
     }
   },
   "bundle": {
+    "search": "Rechercher un paquet",
     "name": "Nom du paquet",
     "description": "Description",
     "suggested-price": "Prix suggéré",

@@ -1,5 +1,5 @@
 <div app-search-bar class="element-list-search-bar"
-     placeHolder="{{ 'product-management.product-selection.search-product' | translate }}"
+     [placeHolder]="searchBarPlaceHolder"
      [style.height]="listPaddingHeight"
      (inputText)="searchElement($event)">
 </div>
