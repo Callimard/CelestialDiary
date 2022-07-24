@@ -1,18 +1,18 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {EmployeeManagementService} from "../../../../service/company-management/employee-management.service";
-import {EmployeeCreationInformation} from "../../../../data/company-management/employee/employee-creation-information";
+import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
+import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
 
 @Component({
-  selector: '[app-employee-creator]',
-  templateUrl: './employee-creator.component.html',
-  styleUrls: ['./employee-creator.component.css']
+  selector: '[app-employee-form-creator]',
+  templateUrl: './employee-form-creator.component.html',
+  styleUrls: ['./employee-form-creator.component.css']
 })
-export class EmployeeCreatorComponent implements OnInit {
+export class EmployeeFormCreatorComponent implements OnInit {
 
-  employeeCreationFailed = false;
+  creationFailed = false;
 
-  @Output() creationSuccess = new EventEmitter<boolean>();
+  @Output() employeeCreated = new EventEmitter<boolean>();
 
   employeeCreationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,11 +50,11 @@ export class EmployeeCreatorComponent implements OnInit {
       roles: []
     }
     this.employeeManagementService.createEmployee(employeeInfo).then(() => {
-      this.creationSuccess.emit(true);
-      this.employeeCreationFailed = false
+      this.employeeCreated.emit(true);
+      this.creationFailed = false
     }).catch(() => {
-      this.creationSuccess.emit(false);
-      this.employeeCreationFailed = true;
+      this.employeeCreated.emit(false);
+      this.creationFailed = true;
     });
   }
 

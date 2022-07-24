@@ -17,38 +17,35 @@
     "bundles": "Bundles",
     "logout": "Logout"
   },
-  "employee-management": {
-    "employee-selection": {
-      "search-employee": "Search an employee"
+  "employee": {
+    "search": "Search an employee",
+    "email": "Email",
+    "password": "Password",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "comment": "Comment",
+    "gender": "Gender",
+    "gender-type": {
+      "male": "Male",
+      "female": "Female",
+      "no-gender": "No gender"
     },
-    "employee-creation": {
-      "employee-creation-title": "Create an employee",
-      "email": "Email",
-      "password": "Password",
-      "first-name": "First Name",
-      "last-name": "Last Name",
-      "comment": "Comment",
-      "gender": "Gender",
-      "gender-type": {
-        "male": "Male",
-        "female": "Female",
-        "no-gender": "No gender"
-      },
-      "phone": "Phone",
-      "is-technician": "Is technician",
-      "is-technician-value": {
-        "yes": "Yes",
-        "no": "No"
-      },
-      "tags": "Tags",
-      "roles": "Roles",
+    "phone": "Phone",
+    "is-technician": "Is technician",
+    "is-technician-value": {
+      "yes": "Yes",
+      "no": "No"
+    },
+    "tags": "Tags",
+    "roles": "Roles",
+    "creation": {
+      "employee-creation": "Create an employee",
       "create": "Create",
       "creation-failed": "Employee creation failed"
     },
-    "employee-information": {
+    "update": {
       "update": "Update",
-      "employee-information-title": "Employee information",
-      "employee-update-fail": "Fail to update employee information"
+      "update-failed": "Employee update failed"
     }
   },
   "establishment": {

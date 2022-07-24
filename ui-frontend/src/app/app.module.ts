@@ -12,13 +12,12 @@ import {environment, frontend} from "../environments/environment";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LangageSelectionComponent} from './langage-selection/langage-selection.component';
-import {EmployeeManagementComponent} from './application/employee-management/employee-management.component';
 import {SearchBarComponent} from './libairy/search-bar/search-bar.component';
 import {InformationTicketComponent} from './libairy/information-ticket/information-ticket.component';
 import {HttpAuthenticationInterceptor} from "../service/authentication/http-authentication.interceptor";
 import {UnwrapArrowComponent} from './libairy/unwrap-arrow/unwrap-arrow.component';
-import {EmployeeInformationUpdaterComponent} from './application/employee-management/employee-information-updater/employee-information-updater.component';
-import {EmployeeCreatorComponent} from './application/employee-management/employee-creator/employee-creator.component';
+import {EmployeeFormUpdaterComponent} from './application/employee-management/employee-information/employee-information-updater/employee-form-updater.component';
+import {EmployeeFormCreatorComponent} from './application/employee-management/employee-creation/employee-form-creator/employee-form-creator.component';
 import {EstablishmentFormCreatorComponent} from './application/establishment-management/establishment-creation/establishment-form-creator/establishment-form-creator.component';
 import {EstablishmentFormUpdaterComponent} from './application/establishment-management/establishment-information/establishment-information-updater/establishment-form-updater.component';
 import {TimeIntervalFormComponent} from './libairy/form/time-interval-form/time-interval-form.component';
@@ -47,14 +46,23 @@ import {BundleFormUpdaterComponent} from './application/bundle-management/bundle
 import {EstablishmentSelectionComponent} from './application/establishment-management/establishment-selection/establishment-selection.component';
 import {EstablishmentCreationComponent} from './application/establishment-management/establishment-creation/establishment-creation.component';
 import {EstablishmentInformationComponent} from './application/establishment-management/establishment-information/establishment-information.component';
+import {EmployeeSelectionComponent} from './application/employee-management/employee-selection/employee-selection.component';
+import {EmployeeCreationComponent} from './application/employee-management/employee-creation/employee-creation.component';
+import {EmployeeInformationComponent} from './application/employee-management/employee-information/employee-information.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
   {
     path: frontend.application, component: ApplicationComponent, children: [
-      {path: environment.employeeManagement, component: EmployeeManagementComponent},
       {
         path: frontend.companyManagement, children: [
+          {
+            path: frontend.employees, component: TwoSideComponent, children: [
+              {path: '', component: EmployeeSelectionComponent},
+              {path: frontend.employeeInformation, component: EmployeeInformationComponent, outlet: 'right'},
+              {path: frontend.create, component: EmployeeCreationComponent, outlet: 'right'}
+            ]
+          },
           {
             path: frontend.establishments, component: TwoSideComponent, children: [
               {path: '', component: EstablishmentSelectionComponent},
@@ -94,12 +102,11 @@ const appRoutes: Routes = [
     LoginComponent,
     ApplicationComponent,
     LangageSelectionComponent,
-    EmployeeManagementComponent,
     SearchBarComponent,
     InformationTicketComponent,
     UnwrapArrowComponent,
-    EmployeeInformationUpdaterComponent,
-    EmployeeCreatorComponent,
+    EmployeeFormUpdaterComponent,
+    EmployeeFormCreatorComponent,
     EstablishmentFormCreatorComponent,
     EstablishmentFormUpdaterComponent,
     TimeIntervalFormComponent,
@@ -127,7 +134,10 @@ const appRoutes: Routes = [
     BundleFormUpdaterComponent,
     EstablishmentSelectionComponent,
     EstablishmentCreationComponent,
-    EstablishmentInformationComponent
+    EstablishmentInformationComponent,
+    EmployeeSelectionComponent,
+    EmployeeCreationComponent,
+    EmployeeInformationComponent
   ],
   imports: [
     BrowserModule,

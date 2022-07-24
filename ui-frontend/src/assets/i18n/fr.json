@@ -17,38 +17,35 @@
     "bundles": "Paquets",
     "logout": "Déconnexion"
   },
-  "employee-management": {
-    "employee-selection": {
-      "search-employee": "Rechercher un employé"
+  "employee": {
+    "search": "Rechercher un employé",
+    "email": "Email",
+    "password": "Mot de passe",
+    "first-name": "Prénom",
+    "last-name": "Nom",
+    "comment": "Commentaire",
+    "gender": "Genre",
+    "gender-type": {
+      "male": "Homme",
+      "female": "Femme",
+      "no-gender": "Non précisé"
     },
-    "employee-creation": {
-      "employee-creation-title": "Créer un employé",
-      "email": "Email",
-      "password": "Mot de passe",
-      "first-name": "Prénom",
-      "last-name": "Nom",
-      "comment": "Commentaire",
-      "gender": "Genre",
-      "gender-type": {
-        "male": "Homme",
-        "female": "Femme",
-        "no-gender": "Non précisé"
-      },
-      "phone": "Téléphone",
-      "is-technician": "Est un technicien(ne)",
-      "is-technician-value": {
-        "yes": "Oui",
-        "no": "Non"
-      },
-      "tags": "Tags",
-      "roles": "Roles",
+    "phone": "Téléphone",
+    "is-technician": "Est un(e) technicien(ne)",
+    "is-technician-value": {
+      "yes": "Oui",
+      "no": "Non"
+    },
+    "tags": "Tags",
+    "roles": "Roles",
+    "creation": {
+      "employee-creation": "Créer un employé",
       "create": "Créer",
       "creation-failed": "La création de l'employé a échouée"
     },
-    "employee-information": {
+    "update": {
       "update": "Mettre à jour",
-      "employee-information-title": "Informations de l'employé",
-      "employee-update-fail": "Échec de la mise à jour de l'employée"
+      "update-failed": "Mise à jour de l'employé échouée"
     }
   },
   "establishment": {

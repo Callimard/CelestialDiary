@@ -2,7 +2,7 @@
      [allElements]="allProducts"
      searchBarPlaceHolder="{{ 'product.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
-     [elementTitleField]="'name'"
+     [elementTitleFields]="['name']"
      [elementSubtitleField]="'suggestedPrice'"
      [subTitleSuffix]="' €'"
      (elementSelected)="navigateToProductInformation($event)"

@@ -35,7 +35,7 @@
       <h3>{{ 'bundle.product-selection.available' | translate}}</h3>
       <div app-element-list class="available-product-list need-top-space"
            [allElements]="availableProducts"
-           [elementTitleField]="'name'"
+           [elementTitleFields]="['name']"
            [elementSubtitleField]="'suggestedPrice'"
            [subTitleSuffix]="' €'"
            [elementSize]="'50px'"
@@ -46,7 +46,7 @@
       <h3>{{ 'bundle.product-selection.selected' | translate }}</h3>
       <div app-element-list class="chosen-product-list"
            [allElements]="chosenProducts"
-           [elementTitleField]="'name'"
+           [elementTitleFields]="['name']"
            [elementSubtitleField]="'suggestedPrice'"
            [subTitleSuffix]="' €'"
            [elementSize]="'50px'"
@@ -62,7 +62,7 @@
       <h3>{{ 'bundle.prestation-selection.available' | translate}}</h3>
       <div app-element-list class="available-prestation-list need-top-space"
            [allElements]="availablePrestations"
-           [elementTitleField]="'name'"
+           [elementTitleFields]="['name']"
            [elementSubtitleField]="'suggestedPrice'"
            [subTitleSuffix]="' €'"
            [elementSize]="'50px'"
@@ -73,7 +73,7 @@
       <h3>{{ 'bundle.prestation-selection.selected' | translate }}</h3>
       <div app-element-list class="chosen-prestation-list"
            [allElements]="chosenPrestations"
-           [elementTitleField]="'name'"
+           [elementTitleFields]="['name']"
            [elementSubtitleField]="'suggestedPrice'"
            [subTitleSuffix]="' €'"
            [elementSize]="'50px'"
