@@ -32,10 +32,10 @@ import {PrestationCreationComponent} from './application/prestation-management/p
 import {BundleSelectionComponent} from './application/bundle-management/bundle-selection/bundle-selection.component';
 import {BundleInformationComponent} from './application/bundle-management/bundle-information/bundle-information.component';
 import {BundleCreationComponent} from './application/bundle-management/bundle-creation/bundle-creation.component';
-import {TitleCardComponent} from './libairy/informative/title-card/title-card.component';
+import {BasicTitleComponent} from './libairy/informative/title/basic-title/basic-title.component';
 import {ProductFormCreatorComponent} from './application/product-management/product-creation/product-form-creator/product-form-creator.component';
 import {BasicInputFormComponent} from './libairy/form/basic-input-form/basic-input-form.component';
-import {AdvancedTitleCardComponent} from './libairy/informative/advanced-title-card/advanced-title-card.component';
+import {AdvancedTitleComponent} from './libairy/informative/title/advanced-title/advanced-title.component';
 import {ProductFormUpdaterComponent} from './application/product-management/product-information/product-form-updater/product-form-updater.component';
 import {PrestationFormCreatorComponent} from './application/prestation-management/prestation-creation/prestation-form-creator/prestation-form-creator.component';
 import {PrestationFormUpdaterComponent} from './application/prestation-management/prestation-information/prestation-form-updater/prestation-form-updater.component';
@@ -119,10 +119,10 @@ const appRoutes: Routes = [
     BundleSelectionComponent,
     BundleInformationComponent,
     BundleCreationComponent,
-    TitleCardComponent,
+    BasicTitleComponent,
     ProductFormCreatorComponent,
     BasicInputFormComponent,
-    AdvancedTitleCardComponent,
+    AdvancedTitleComponent,
     ProductFormUpdaterComponent,
     PrestationFormCreatorComponent,
     PrestationFormUpdaterComponent,
