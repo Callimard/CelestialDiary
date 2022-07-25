@@ -44,8 +44,6 @@ export class BundleFormUpdaterComponent implements OnInit {
       suggestedPrice: new FormControl(this.bundle.suggestedPrice),
     });
 
-    console.log(this.bundle);
-
     this.chargeAllProducts();
     this.chargeAllPrestations();
   }

@@ -81,32 +81,6 @@ main {
   background: var(--basic-clickable-active-color);
 }
 
-.horizontal-slider-first {
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-}
-
-.horizontal-slider-first.swiped {
-  left: -100%;
-
-  width: 100%;
-}
-
-.horizontal-slider-second {
-  position: absolute;
-  top: 0;
-  left: 100%;
-
-  width: 100%;
-}
-
-.horizontal-slider-second.swiped {
-  left: 0;
-}
-
 .floating-button {
   border-radius: 100%;
 

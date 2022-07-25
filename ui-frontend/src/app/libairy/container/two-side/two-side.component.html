@@ -1,8 +1,10 @@
 <div class="two-side-main-container">
-  <div class="two-side-left" [class.horizontal-slider-first]="!isBigScreen()" [class.swiped]="leftOutlet.isActivated && rightOutlet.isActivated">
+  <div class="horizontal-side-left"
+       [class.swiped]="!isBigScreen() && leftOutlet.isActivated && rightOutlet.isActivated">
     <router-outlet #leftOutlet="outlet"></router-outlet>
   </div>
-  <div class="two-side-right" [class.horizontal-slider-second]="!isBigScreen()" [class.swiped]="rightOutlet.isActivated">
+  <div class="horizontal-side-right"
+       [class.swiped]="!isBigScreen() && rightOutlet.isActivated">
     <router-outlet name="right" #rightOutlet="outlet"></router-outlet>
   </div>
 </div>
