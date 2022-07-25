@@ -74,7 +74,7 @@ public class Employee {
         if (roles != null)
             for (Role role : roles) {
                 Company roleCompany = role.getCompany();
-                Establishment roleEstablishment = role.getEstablishment();
+                List<Establishment> roleEstablishments = role.getEstablishments();
                 for (Privilege privilege : role.getPrivileges()) {
                     Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
                     Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
@@ -82,7 +82,9 @@ public class Employee {
                     if (opCompanyPrivilege.isPresent()) {
                         authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
                     } else if (opEstablishmentPrivilege.isPresent()) {
-                        authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), roleEstablishment.getId()));
+                        for (Establishment establishment : roleEstablishments) {
+                            authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), establishment.getId()));
+                        }
                     } else {
                         log.error("No convertible privilege {} -> privilege ignored", privilege);
                     }

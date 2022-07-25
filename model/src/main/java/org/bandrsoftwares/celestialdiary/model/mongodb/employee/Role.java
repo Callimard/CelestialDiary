@@ -31,5 +31,5 @@ public class Role {
 
     @ToString.Exclude
     @DocumentReference(collection = "Establishment")
-    private Establishment establishment;
+    private List<Establishment> establishments;
 }

@@ -48,4 +48,10 @@ public class ApiCompanyV1 {
 
     public static final String SPECIFIC_BUNDLE = "/{idBundle}";
     public static final String SPECIFIC_BUNDLE_ACTIVATION = SPECIFIC_BUNDLE + "/activation";
+
+    // Role Management.
+
+    public static final String ROLES_URL = SPECIFIC_COMPANY_URL + "/roles";
+
+    public static final String SPECIFIC_ROLE = "/{idRole}";
 }

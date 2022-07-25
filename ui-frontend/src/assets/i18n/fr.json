@@ -203,6 +203,18 @@
         "update-description": "Mettre à jour les informations d'un vendable",
         "activate": "Activer",
         "activate-description": "Activer/Désactiver un vendable"
+      },
+      "role": {
+        "all": "Admin",
+        "all-description": "Tous les droits de gestions des rôles",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les rôles et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer un rôle",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'un rôle",
+        "delete": "Supprimer",
+        "delete-description": "Supprimer un rôle"
       }
     }
   }

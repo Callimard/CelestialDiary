@@ -196,13 +196,25 @@
         "all": "Admin",
         "all-description": "All saleable management privileges",
         "read": "Read",
-        "read-description": "See all saleable list and their information",
+        "read-description": "See all saleables list and their information",
         "create": "Create",
         "create-description": "Create a saleable",
         "update": "Update",
         "update-description": "Update saleable information",
         "activate": "Activate",
         "activate-description": "Activate/Deactivate a saleable"
+      },
+      "role": {
+        "all": "Admin",
+        "all-description": "All role management privileges",
+        "read": "Read",
+        "read-description": "See all roles list and their information",
+        "create": "Create",
+        "create-description": "Create a role",
+        "update": "Update",
+        "update-description": "Update role information",
+        "delete": "Activate",
+        "delete-description": "Delete a role"
       }
     }
   }

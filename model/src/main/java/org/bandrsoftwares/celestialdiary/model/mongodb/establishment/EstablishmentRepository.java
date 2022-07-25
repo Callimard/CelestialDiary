@@ -9,5 +9,7 @@ public interface EstablishmentRepository extends MongoRepository<Establishment, 
 
     List<Establishment> findByCompany(Company company);
 
+    List<Establishment> findByCompanyAndIdIn(Company company, Iterable<String> ids);
+
     List<Establishment> findByCompanyAndNameRegex(Company company, String name);
 }

@@ -7,4 +7,13 @@ public record PrivilegeDTO(String identifierName, String name, String descriptio
     public PrivilegeDTO(Privilege privilege) {
         this(privilege.getIdentifierName(), privilege.getName(), privilege.getDescription());
     }
+
+    public Privilege toPrivilege() {
+        return Privilege.builder()
+                .identifierName(identifierName)
+                .name(name)
+                .description(description)
+                .build();
+
+    }
 }
