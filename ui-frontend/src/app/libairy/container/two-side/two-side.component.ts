@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ScreenService} from "../../../service/screen/screen.service";
+import {ScreenService} from "../../../../service/screen/screen.service";
 
 @Component({
   selector: 'app-two-side',
