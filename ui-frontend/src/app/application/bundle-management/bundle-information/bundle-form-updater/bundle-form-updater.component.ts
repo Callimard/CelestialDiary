@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {BundleDTO} from "../../../../../data/company-management/saleable/bundle/bundle-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {BundleManagementService} from "../../../../../service/company-management/bundle-management.service";
@@ -7,13 +7,14 @@ import {PrestationManagementService} from "../../../../../service/company-manage
 import {WrappedProductDTO} from "../../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {BundleUpdatedInformation} from "../../../../../data/company-management/saleable/bundle/bundle-updated-information";
+import {ArrayService} from "../../../../../service/array/array.service";
 
 @Component({
   selector: '[app-bundle-form-updater]',
   templateUrl: './bundle-form-updater.component.html',
   styleUrls: ['./bundle-form-updater.component.css']
 })
-export class BundleFormUpdaterComponent implements OnInit {
+export class BundleFormUpdaterComponent implements OnInit, OnChanges {
 
   updateFailed = false;
 
@@ -38,37 +39,45 @@ export class BundleFormUpdaterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.chargeAllProducts();
+    this.chargeAllPrestations();
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.initUpdaterForm();
+    this.availableProducts = ArrayService.copy(this.allProducts);
+    this.availablePrestations = ArrayService.copy(this.allPrestations);
+    this.mergeProductInformation();
+    this.mergePrestationInformation();
+  }
+
+  private initUpdaterForm() {
     this.bundleUpdaterForm = new FormGroup({
       name: new FormControl(this.bundle.name),
       description: new FormControl(this.bundle.description),
       suggestedPrice: new FormControl(this.bundle.suggestedPrice),
     });
-
-    this.chargeAllProducts();
-    this.chargeAllPrestations();
   }
 
   private chargeAllProducts() {
     this.productManagementService.allProducts().then((allProducts) => {
       this.allProducts = allProducts;
-      for (let product of this.allProducts) {
-        this.availableProducts.push(product);
-      }
+      this.availableProducts = ArrayService.copy(this.allProducts);
       this.mergeProductInformation();
     });
   }
 
+
   private chargeAllPrestations() {
     this.prestationManagementService.allPrestations().then((allPrestations) => {
       this.allPrestations = allPrestations;
-      for (let prestation of this.allPrestations) {
-        this.availablePrestations.push(prestation);
-      }
+      this.availablePrestations = ArrayService.copy(this.allPrestations);
       this.mergePrestationInformation();
     })
   }
 
   private mergeProductInformation() {
+    this.chosenProducts = [];
     if (this.bundle.products != null) {
       let chosen: WrappedProductDTO[] = [];
       for (let product of this.availableProducts) {
@@ -86,6 +95,7 @@ export class BundleFormUpdaterComponent implements OnInit {
   }
 
   private mergePrestationInformation() {
+    this.chosenPrestations = [];
     if (this.bundle.prestations != null) {
       let chosen: WrappedPrestationDTO[] = [];
       for (let prestation of this.availablePrestations) {
