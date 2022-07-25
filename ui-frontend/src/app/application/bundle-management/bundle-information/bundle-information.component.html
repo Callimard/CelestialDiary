@@ -1,11 +1,10 @@
 <div class="bundle-information-container" *ngIf="bundle != null">
-  <div app-card-advanced-title
+  <div app-advanced-title class="floating-card"
        [title]="bundle.name"
        [subtitle]="bundle.suggestedPrice + '€'"
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
   <div app-bundle-form-updater class="floating-card need-top-space"
   [bundle]="bundle">
-
   </div>
 </div>

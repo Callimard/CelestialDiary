@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PrestationDTO} from "../../../../../data/company-management/saleable/prestation/prestation-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {PrestationUpdatedInformation} from "../../../../../data/company-management/saleable/prestation/prestation-updated-information";
@@ -9,7 +9,7 @@ import {PrestationManagementService} from "../../../../../service/company-manage
   templateUrl: './prestation-form-updater.component.html',
   styleUrls: ['./prestation-form-updater.component.css']
 })
-export class PrestationFormUpdaterComponent implements OnInit {
+export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() prestation!: PrestationDTO
 
@@ -22,6 +22,14 @@ export class PrestationFormUpdaterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.initUpdaterForm();
+  }
+
+  private initUpdaterForm() {
     this.prestationUpdateForm = new FormGroup({
       name: new FormControl(this.prestation.name),
       description: new FormControl(this.prestation.description),

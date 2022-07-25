@@ -1,0 +1,10 @@
+<div class="two-side-main-container">
+  <div class="horizontal-side-left"
+       [class.swiped]="!isBigScreen() && leftOutlet.isActivated && rightOutlet.isActivated">
+    <router-outlet #leftOutlet="outlet"></router-outlet>
+  </div>
+  <div class="horizontal-side-right"
+       [class.swiped]="!isBigScreen() && rightOutlet.isActivated">
+    <router-outlet name="right" #rightOutlet="outlet"></router-outlet>
+  </div>
+</div>

@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: '[app-title-card]',
-  templateUrl: './title-card.component.html',
-  styleUrls: ['./title-card.component.css']
+  selector: '[app-basic-title]',
+  templateUrl: './basic-title.component.html',
+  styleUrls: ['./basic-title.component.css']
 })
-export class TitleCardComponent implements OnInit {
+export class BasicTitleComponent implements OnInit {
 
   @Input() title!: string
   @Input() displayBackArrow: boolean = true;

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ProductDTO} from "../../../../../data/company-management/saleable/product/product-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProductManagementService} from "../../../../../service/company-management/product-management.service";
@@ -9,7 +9,7 @@ import {ProductUpdatedInformation} from "../../../../../data/company-management/
   templateUrl: './product-form-updater.component.html',
   styleUrls: ['./product-form-updater.component.css']
 })
-export class ProductFormUpdaterComponent implements OnInit {
+export class ProductFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() product!: ProductDTO
 
@@ -22,6 +22,14 @@ export class ProductFormUpdaterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.initUpdaterForm();
+  }
+
+  private initUpdaterForm() {
     this.productUpdateForm = new FormGroup(
       {
         name: new FormControl(this.product.name),

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EstablishmentDTO} from "../../../../../data/company-management/establishment/establishment-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {EstablishmentManagementService} from "../../../../../service/company-management/establishment-management.service";
@@ -14,7 +14,7 @@ import {DatedTimeIntervalListDTO} from "../../../../../data/general/time/dated-t
   templateUrl: './establishment-form-updater.component.html',
   styleUrls: ['./establishment-form-updater.component.css']
 })
-export class EstablishmentFormUpdaterComponent implements OnInit {
+export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() establishment!: EstablishmentDTO;
 
@@ -27,6 +27,10 @@ export class EstablishmentFormUpdaterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
     this.initializeEstablishmentFormGroup();
   }
 
