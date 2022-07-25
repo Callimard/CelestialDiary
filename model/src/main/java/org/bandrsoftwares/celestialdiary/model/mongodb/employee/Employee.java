@@ -80,7 +80,7 @@ public class Employee {
                     Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
 
                     if (opCompanyPrivilege.isPresent()) {
-                        authorities.add(opCompanyPrivilege.get().getPrivilege(roleCompany.getId()));
+                        authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
                     } else if (opEstablishmentPrivilege.isPresent()) {
                         authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), roleEstablishment.getId()));
                     } else {

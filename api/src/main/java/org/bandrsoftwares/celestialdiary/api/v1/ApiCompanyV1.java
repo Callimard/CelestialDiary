@@ -24,27 +24,27 @@ public class ApiCompanyV1 {
 
     // Establishment Management.
 
-    public static final String ESTABLISHMENT_URL = SPECIFIC_COMPANY_URL + "/establishments";
+    public static final String ESTABLISHMENTS_URL = SPECIFIC_COMPANY_URL + "/establishments";
 
     public static final String SPECIFIC_ESTABLISHMENT = "/{idEstablishment}";
     public static final String SPECIFIC_ESTABLISHMENT_ACTIVATION = SPECIFIC_ESTABLISHMENT + "/activation";
 
     // Product Management.
 
-    public static final String PRODUCT_URL = SPECIFIC_COMPANY_URL + "/products";
+    public static final String PRODUCTS_URL = SPECIFIC_COMPANY_URL + "/products";
     public static final String SPECIFIC_PRODUCT = "/{idProduct}";
     public static final String SPECIFIC_PRODUCT_ACTIVATION = SPECIFIC_PRODUCT + "/activation";
 
     // Prestation Management.
 
-    public static final String PRESTATION_URL = SPECIFIC_COMPANY_URL + "/prestations";
+    public static final String PRESTATIONS_URL = SPECIFIC_COMPANY_URL + "/prestations";
 
     public static final String SPECIFIC_PRESTATION = "/{idPrestation}";
     public static final String SPECIFIC_PRESTATION_ACTIVATION = SPECIFIC_PRESTATION + "/activation";
 
     // Bundle Management.
 
-    public static final String BUNDLE_URL = SPECIFIC_COMPANY_URL + "/bundles";
+    public static final String BUNDLES_URL = SPECIFIC_COMPANY_URL + "/bundles";
 
     public static final String SPECIFIC_BUNDLE = "/{idBundle}";
     public static final String SPECIFIC_BUNDLE_ACTIVATION = SPECIFIC_BUNDLE + "/activation";

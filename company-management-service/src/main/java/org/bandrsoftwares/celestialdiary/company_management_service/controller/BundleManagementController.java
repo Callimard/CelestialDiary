@@ -19,7 +19,7 @@ import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.*;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(BUNDLE_URL)
+@RequestMapping(BUNDLES_URL)
 public class BundleManagementController {
 
     // Variables.

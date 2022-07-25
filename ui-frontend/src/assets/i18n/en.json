@@ -161,5 +161,49 @@
       "start": "Start",
       "end": "End"
     }
+  },
+  "privilege": {
+    "company": {
+      "employee": {
+        "all": "Admin",
+        "all-description": "All employee management privileges",
+        "read": "Read",
+        "read-description": "See all employees list and their personal information",
+        "create": "Create",
+        "create-description": "Create an employee",
+        "update": "Update",
+        "update-description": "Update employee information",
+        "update-role": "Role update",
+        "update-role-description": "Update employee role",
+        "assign-to": "Assign",
+        "assign-to-description": "Assign/de assign an employee of an establishment",
+        "activate": "Activate",
+        "activate-description": "Activate/Deactivate an employee"
+      },
+      "establishment": {
+        "all": "Admin",
+        "all-description": "All establishment management privileges",
+        "read": "Read",
+        "read-description": "See all establishments list and their information",
+        "create": "Create",
+        "create-description": "Create an establishment",
+        "update": "Update",
+        "update-description": "Update establishment information",
+        "activate": "Activate",
+        "activate-description": "Activate/Deactivate an establishment"
+      },
+      "saleable": {
+        "all": "Admin",
+        "all-description": "All saleable management privileges",
+        "read": "Read",
+        "read-description": "See all saleable list and their information",
+        "create": "Create",
+        "create-description": "Create a saleable",
+        "update": "Update",
+        "update-description": "Update saleable information",
+        "activate": "Activate",
+        "activate-description": "Activate/Deactivate a saleable"
+      }
+    }
   }
 }

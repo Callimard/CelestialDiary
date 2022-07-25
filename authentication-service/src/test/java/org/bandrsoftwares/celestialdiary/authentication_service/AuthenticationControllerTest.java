@@ -24,7 +24,7 @@ import java.time.Instant;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.*;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiAuthenticationV1.*;
 import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.basicAuthorization;
 import static org.bandrsoftwares.celestialdiary.utils.http.HttpTool.bearerAuthorization;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

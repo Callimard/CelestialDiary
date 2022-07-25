@@ -2,7 +2,7 @@ package org.bandrsoftwares.celestialdiary.api.v1;
 
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiV1.API_V1;
 
-public class AuthenticationV1 {
+public class ApiAuthenticationV1 {
 
     // Authentication API.
 
@@ -23,6 +23,6 @@ public class AuthenticationV1 {
     public static final String EMPLOYEE_TOKEN_REFRESH_URL = EMPLOYEE_AUTHENTICATION_URL + "/refresh";
 
 
-    private AuthenticationV1() {
+    private ApiAuthenticationV1() {
     }
 }

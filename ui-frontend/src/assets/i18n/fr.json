@@ -161,5 +161,49 @@
       "start": "Début",
       "end": "Fin"
     }
+  },
+  "privilege": {
+    "company": {
+      "employee": {
+        "all": "Admin",
+        "all-description": "Tous les droits de gestion des employées",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les employés et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer un employé",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'un employé",
+        "update-role": "Role MàJ",
+        "update-role-description": "Mettre à jour les roles d'un employé",
+        "assign-to": "Assigner",
+        "assign-to-description": "Assigné/Dé assigner un employé à un établissement",
+        "activate": "Activer",
+        "activate-description": "Activer/Désactiver un employé"
+      },
+      "establishment": {
+        "all": "Admin",
+        "all-description": "Tous les droits de gestion des établissement",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les établissements et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer un établissement",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'un établissement",
+        "activate": "Activer",
+        "activate-description": "Activer/Désactiver un établissement"
+      },
+      "saleable": {
+        "all": "Admin",
+        "all-description": "Tous les droits de gestion des employées",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les vendables et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer un vendable",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'un vendable",
+        "activate": "Activer",
+        "activate-description": "Activer/Désactiver un vendable"
+      }
+    }
   }
 }

@@ -1,41 +1,67 @@
 package org.bandrsoftwares.celestialdiary.security.privilege.company;
 
-public enum CompanyManagementPrivilege {
-    COMPANY_ALL("company:%s:all"),
+import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
+
+public enum CompanyManagementPrivilege implements PrivilegeEnum {
+    COMPANY_ALL("company:%s:all", "privilege.company.all", "privilege.company.all-description"),
 
     // Employee Management Privilege
 
-    EMPLOYEE_ALL("company:%s:employee:all"),
-    EMPLOYEE_READ("company:%s:employee:read"),
-    EMPLOYEE_CREATE("company:%s:employee:create"),
-    EMPLOYEE_UPDATE_INFORMATION("company:%s:employee:update"),
-    EMPLOYEE_UPDATE_ROLE("company:%s:employee:update_role"),
-    EMPLOYEE_ASSIGN_TO("company:%s:employee:assign_to"),
-    EMPLOYEE_ACTIVATE("company:%s:employee:activate"),
+    EMPLOYEE_ALL("company:%s:employee:all", "privilege.company.employee.all", "privilege.company.employee.all-description"),
+    EMPLOYEE_READ("company:%s:employee:read", "privilege.company.employee.read", "privilege.company.employee.read-description"),
+    EMPLOYEE_CREATE("company:%s:employee:create", "privilege.company.employee.create", "privilege.company.employee.create-description"),
+    EMPLOYEE_UPDATE_INFORMATION("company:%s:employee:update", "privilege.company.employee.update", "privilege.company.employee.update-description"),
+    EMPLOYEE_UPDATE_ROLE("company:%s:employee:update_role", "privilege.company.employee.update-role",
+                         "privilege.company.employee.update-role-description"),
+    EMPLOYEE_ASSIGN_TO("company:%s:employee:assign_to", "privilege.company.employee.assign-to", "privilege.company.employee.assign-to-description"),
+    EMPLOYEE_ACTIVATE("company:%s:employee:activate", "privilege.company.employee.activate", "privilege.company.employee.activate-description"),
 
     // Establishment Management Privilege
 
-    ESTABLISHMENT_ALL("company:%s:establishment:all"),
-    ESTABLISHMENT_READ("company:%s:establishment:read"),
-    ESTABLISHMENT_CREATE("company:%s:establishment:create"),
-    ESTABLISHMENT_UPDATE("company:%s:establishment:update"),
-    ESTABLISHMENT_ACTIVATE("company:%s:establishment:activate"),
+    ESTABLISHMENT_ALL("company:%s:establishment:all", "privilege.company.establishment.all", "privilege.company.establishment.all-description"),
+    ESTABLISHMENT_READ("company:%s:establishment:read", "privilege.company.establishment.read", "privilege.company.establishment.read-description"),
+    ESTABLISHMENT_CREATE("company:%s:establishment:create", "privilege.company.establishment.create",
+                         "privilege.company.establishment.create-description"),
+    ESTABLISHMENT_UPDATE("company:%s:establishment:update", "privilege.company.establishment.update",
+                         "privilege.company.establishment.update-description"),
+    ESTABLISHMENT_ACTIVATE("company:%s:establishment:activate", "privilege.company.establishment.activate",
+                           "privilege.company.establishment.activate-description"),
 
     // Saleable Management Privilege
 
-    SALEABLE_ALL("company:%s:saleable:all"),
-    SALEABLE_READ("company:%s:saleable:read"),
-    SALEABLE_CREATE("company:%s:saleable:create"),
-    SALEABLE_UPDATE("company:%s:saleable:update"),
-    SALEABLE_ACTIVATE("company:%s:saleable:activate");
+    SALEABLE_ALL("company:%s:saleable:all", "privilege.company.saleable.all", "privilege.company.saleable.all-description"),
+    SALEABLE_READ("company:%s:saleable:read", "privilege.company.saleable.read", "privilege.company.saleable.read-description"),
+    SALEABLE_CREATE("company:%s:saleable:create", "privilege.company.saleable.create", "privilege.company.saleable.create-description"),
+    SALEABLE_UPDATE("company:%s:saleable:update", "privilege.company.saleable.update", "privilege.company.saleable.update-description"),
+    SALEABLE_ACTIVATE("company:%s:saleable:activate", "privilege.company.saleable.activate", "privilege.company.saleable.activate-description");
 
-    private final String privilege;
+    private final String privilegePattern;
+    private final String privilegeName;
+    private final String privilegeDescription;
 
-    CompanyManagementPrivilege(String privilegeName) {
-        this.privilege = privilegeName;
+    CompanyManagementPrivilege(String privilegePattern, String privilegeName, String privilegeDescription) {
+        this.privilegePattern = privilegePattern;
+        this.privilegeName = privilegeName;
+        this.privilegeDescription = privilegeDescription;
     }
 
-    public String getPrivilege(String companyId) {
-        return privilege.formatted(companyId);
+    public String getPrivilegeFormatted(String companyId) {
+        return privilegePattern.formatted(companyId);
+    }
+
+
+    @Override
+    public String enumName() {
+        return this.name();
+    }
+
+    @Override
+    public String getPrivilegeName() {
+        return privilegeName;
+    }
+
+    @Override
+    public String getPrivilegeDescription() {
+        return privilegeDescription;
     }
 }

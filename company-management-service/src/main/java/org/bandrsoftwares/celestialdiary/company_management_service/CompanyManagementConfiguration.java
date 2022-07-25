@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.COMPANIES_URL;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiPrivilegeV1.PRIVILEGES_URL;
 
 @RequiredArgsConstructor
 @Configuration
@@ -27,7 +28,7 @@ public class CompanyManagementConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.httpBasic()
-                .and().anonymous().disable()
+                .and()
                 .cors().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -36,6 +37,7 @@ public class CompanyManagementConfiguration {
                 .logout().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, PRIVILEGES_URL + "/**").permitAll()
                 .antMatchers(HttpMethod.GET, COMPANIES_URL + "/**").authenticated()
                 .antMatchers(HttpMethod.POST, COMPANIES_URL + "/**").authenticated()
                 .antMatchers(HttpMethod.PUT, COMPANIES_URL + "/**").authenticated()

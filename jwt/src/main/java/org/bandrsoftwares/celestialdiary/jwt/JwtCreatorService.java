@@ -76,7 +76,7 @@ public class JwtCreatorService {
                 .companyId(company.getId())
                 .companyEmail(company.getEmail())
                 .companyName(company.getName())
-                .accountAuthorities(Lists.newArrayList(CompanyManagementPrivilege.COMPANY_ALL.getPrivilege(company.getId())))
+                .accountAuthorities(Lists.newArrayList(CompanyManagementPrivilege.COMPANY_ALL.getPrivilegeFormatted(company.getId())))
                 .build();
     }
 

@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.AUTHENTICATION_URL;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiAuthenticationV1.AUTHENTICATION_URL;
 
 @Slf4j
 @RequiredArgsConstructor
