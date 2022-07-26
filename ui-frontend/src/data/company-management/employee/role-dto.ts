@@ -6,5 +6,5 @@ export interface RoleDTO {
   name: string,
   description: string,
   privileges: PrivilegeDTO[],
-  establishments: WrappedEstablishmentDTO[]
+  establishment: WrappedEstablishmentDTO
 }

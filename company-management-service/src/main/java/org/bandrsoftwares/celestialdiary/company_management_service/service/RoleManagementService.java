@@ -20,12 +20,12 @@ public interface RoleManagementService {
 
     Role createRole(@CompanyId String companyId, @Valid RoleCreationInformation information);
 
-    record RoleCreationInformation(@NotNull @NotBlank String name, String description, List<PrivilegeDTO> privileges, List<String> establishments) {
+    record RoleCreationInformation(@NotNull @NotBlank String name, String description, List<PrivilegeDTO> privileges, String establishmentId) {
     }
 
     Role updateRole(@CompanyId String companyId, @RoleId String roleId, @Valid RoleUpdatedInformation updates);
 
-    record RoleUpdatedInformation(String name, String description, List<PrivilegeDTO> privileges, List<String> establishments) {
+    record RoleUpdatedInformation(String name, String description, List<PrivilegeDTO> privileges, String establishmentId) {
     }
 
     void deleteRole(@CompanyId String companyId, @RoleId String roleId);

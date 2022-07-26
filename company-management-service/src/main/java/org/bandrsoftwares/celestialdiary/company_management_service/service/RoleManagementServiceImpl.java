@@ -20,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -62,12 +63,12 @@ public class RoleManagementServiceImpl implements RoleManagementService {
     }
 
     private Role createRoleForm(Company company, RoleCreationInformation info) {
-        List<Establishment> establishments = establishmentRepository.findByCompanyAndIdIn(company, info.establishments());
+        Establishment establishment = establishmentRepository.findByCompanyAndId(company, info.establishmentId());
         return Role.builder()
                 .name(info.name())
                 .description(info.description())
                 .privileges(info.privileges().stream().map(PrivilegeDTO::toPrivilege).toList())
-                .establishments(establishments)
+                .establishment(establishment)
                 .build();
     }
 
@@ -75,8 +76,7 @@ public class RoleManagementServiceImpl implements RoleManagementService {
     @CheckCompanyCoherence
     @Override
     public Role updateRole(@CompanyId String companyId, @RoleId String roleId, @Valid RoleUpdatedInformation updates) {
-        List<Establishment> establishments =
-                establishmentRepository.findByCompanyAndIdIn(SearchingAspect.COMPANY_FOUND.get(), updates.establishments());
+        Optional<Establishment> establishment = establishmentRepository.findById(updates.establishmentId());
 
         Role role = SearchingAspect.ROLE_FOUND.get();
 
@@ -94,11 +94,7 @@ public class RoleManagementServiceImpl implements RoleManagementService {
             role.setPrivileges(Lists.newArrayList());
         }
 
-        if (updates.establishments() != null) {
-            role.setEstablishments(establishments);
-        } else {
-            role.setEstablishments(Lists.newArrayList());
-        }
+        role.setEstablishment(establishment.orElse(null));
 
         return roleRepository.save(role);
     }

@@ -27,7 +27,7 @@ public interface EstablishmentManagementService {
      * @param companyId the company id
      * @param filter    the filter (either first name)
      *
-     * @return the list of establishments corresponding to the filter
+     * @return the list of establishmentId corresponding to the filter
      */
     List<Establishment> searchEstablishment(@CompanyId String companyId, String filter);
 
