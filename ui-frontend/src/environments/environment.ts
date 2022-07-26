@@ -15,7 +15,7 @@ export const environment = {
 export const frontend = {
   login: "login",
   application: "application",
-  companyManagement: "company/management",
+  companyManagementPrivileges: "company/management",
   company: "company",
   management: "management",
   employees: "employees",
@@ -38,6 +38,8 @@ export const backend = {
   employeeAuthenticationIdentifier: "E",
   backendUrl: "http://192.168.1.14:8080",
   apiV1Url: "/api/v1",
+  privilegesUrl: "/privileges",
+  company: "/company",
   employeeLogin: "/authentication/employee/token",
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",
@@ -45,5 +47,6 @@ export const backend = {
   establishmentUrl: "/establishments",
   productUrl: "/products",
   prestationUrl: "/prestations",
-  bundleUrl: "/bundles"
+  bundleUrl: "/bundles",
+  roleUrl: "/roles"
 }

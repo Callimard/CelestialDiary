@@ -5,7 +5,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-public class JWTCompanyAuthenticationDSL extends AbstractHttpConfigurer<JWTCompanyAuthenticationDSL, HttpSecurity> {
+public class JwtCompanyAuthenticationDSL extends AbstractHttpConfigurer<JwtCompanyAuthenticationDSL, HttpSecurity> {
 
     @Override
     public void configure(HttpSecurity http) {
@@ -13,7 +13,7 @@ public class JWTCompanyAuthenticationDSL extends AbstractHttpConfigurer<JWTCompa
         http.addFilterBefore(new JwtAuthenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class);
     }
 
-    public static JWTCompanyAuthenticationDSL jwtAuthenticationDSL() {
-        return new JWTCompanyAuthenticationDSL();
+    public static JwtCompanyAuthenticationDSL jwtAuthenticationDSL() {
+        return new JwtCompanyAuthenticationDSL();
     }
 }

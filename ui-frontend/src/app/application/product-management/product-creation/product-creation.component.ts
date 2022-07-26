@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-product-creation',
@@ -8,7 +8,7 @@ import {Location} from "@angular/common";
 })
 export class ProductCreationComponent implements OnInit {
 
-  constructor(private location: Location) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     // Nothing
   }
 
@@ -17,7 +17,6 @@ export class ProductCreationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['..'], {relativeTo: this.activatedRoute});
   }
-
 }

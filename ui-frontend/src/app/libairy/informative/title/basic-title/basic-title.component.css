@@ -4,11 +4,6 @@
   display: flex;
   justify-content: flex-start;
   align-items: stretch;
-
-  height: 100%;
-  width: 100%;
-
-  padding: 1em;
 }
 
 .back-arrow {

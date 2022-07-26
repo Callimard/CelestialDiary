@@ -1,0 +1,9 @@
+<div class="button-div-container floating-card basic-clickable"
+     [ngStyle]="{
+       'color': textColor,
+       'font-weight': textFontWeight,
+       'font-size': textSize
+     }"
+     (click)="buttonClick.emit(true)">
+  <p>{{text}}</p>
+</div>

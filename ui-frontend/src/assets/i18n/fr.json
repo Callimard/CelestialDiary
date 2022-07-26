@@ -157,6 +157,23 @@
       "update-failed": "Mise à jour du paquet échouée"
     }
   },
+  "role": {
+    "search": "Rechercher un rôle",
+    "name": "Nom du rôle",
+    "description": "Description",
+    "privileges": "Privilèges",
+    "establishment": "Établissement",
+    "creation": {
+      "role-creation": "Création d'un rôle",
+      "create": "Créer",
+      "creation-failed": "La création du rôle a échouée"
+    },
+    "update": {
+      "update": "Mettre à jour",
+      "update-failed": "Mise à jour du rôle échouée"
+    },
+    "delete": "Supprimer"
+  },
   "time": {
     "time-interval-form": {
       "start": "Début",
@@ -165,7 +182,11 @@
   },
   "privilege": {
     "company": {
+      "title": "Droits de gestion d'entreprises",
+      "all": "Admin",
+      "all-description": "Tous les droits de gestions de l'entreprise",
       "employee": {
+        "title": "Droits de gestion des employés",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des employées",
         "read": "Lire",
@@ -182,6 +203,7 @@
         "activate-description": "Activer/Désactiver un employé"
       },
       "establishment": {
+        "title": "Droits de gestion des établissements",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des établissement",
         "read": "Lire",
@@ -194,6 +216,7 @@
         "activate-description": "Activer/Désactiver un établissement"
       },
       "saleable": {
+        "title": "Droits de gestion des vendables",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des employées",
         "read": "Lire",
@@ -206,6 +229,7 @@
         "activate-description": "Activer/Désactiver un vendable"
       },
       "role": {
+        "title": "Droits de gestion des rôles",
         "all": "Admin",
         "all-description": "Tous les droits de gestions des rôles",
         "read": "Lire",

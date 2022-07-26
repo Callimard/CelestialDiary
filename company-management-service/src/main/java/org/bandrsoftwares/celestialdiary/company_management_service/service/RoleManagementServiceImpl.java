@@ -9,8 +9,8 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
 import org.bandrsoftwares.celestialdiary.aop.employee.SearchRole;
-import org.bandrsoftwares.celestialdiary.model.dto.employee.PrivilegeDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Privilege;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
@@ -67,8 +67,11 @@ public class RoleManagementServiceImpl implements RoleManagementService {
         return Role.builder()
                 .name(info.name())
                 .description(info.description())
-                .privileges(info.privileges().stream().map(PrivilegeDTO::toPrivilege).toList())
+                .privileges(info.privilegeIdentifiers() != null ?
+                                    info.privilegeIdentifiers().stream().map(Privilege::extractPrivilegeFromIdentifier).toList() :
+                                    Lists.newArrayList())
                 .establishment(establishment)
+                .company(company)
                 .build();
     }
 
@@ -76,7 +79,6 @@ public class RoleManagementServiceImpl implements RoleManagementService {
     @CheckCompanyCoherence
     @Override
     public Role updateRole(@CompanyId String companyId, @RoleId String roleId, @Valid RoleUpdatedInformation updates) {
-        Optional<Establishment> establishment = establishmentRepository.findById(updates.establishmentId());
 
         Role role = SearchingAspect.ROLE_FOUND.get();
 
@@ -88,13 +90,18 @@ public class RoleManagementServiceImpl implements RoleManagementService {
             role.setDescription(updates.description());
         }
 
-        if (updates.privileges() != null) {
-            role.setPrivileges(updates.privileges().stream().map(PrivilegeDTO::toPrivilege).toList());
+        if (updates.privilegeIdentifiers() != null) {
+            role.setPrivileges(updates.privilegeIdentifiers().stream().map(Privilege::extractPrivilegeFromIdentifier).toList());
         } else {
             role.setPrivileges(Lists.newArrayList());
         }
 
-        role.setEstablishment(establishment.orElse(null));
+        if (updates.establishmentId() != null) {
+            Optional<Establishment> establishment = establishmentRepository.findById(updates.establishmentId());
+            role.setEstablishment(establishment.orElse(null));
+        } else {
+            role.setEstablishment(null);
+        }
 
         return roleRepository.save(role);
     }

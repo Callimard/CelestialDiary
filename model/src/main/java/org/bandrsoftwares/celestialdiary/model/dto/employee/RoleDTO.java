@@ -9,7 +9,7 @@ public record RoleDTO(String id, String name, String description, List<Privilege
 
     public RoleDTO(Role role) {
         this(role.getId(), role.getName(), role.getDescription(),
-             role.getPrivileges().stream().map(PrivilegeDTO::new).toList(),
-             new WrappedEstablishmentDTO(role.getEstablishment()));
+             role.getPrivileges() != null ? role.getPrivileges().stream().map(PrivilegeDTO::new).toList() : null,
+             role.getEstablishment() != null ? new WrappedEstablishmentDTO(role.getEstablishment()) : null);
     }
 }

@@ -11,16 +11,17 @@ export class ElementListComponent implements OnInit {
     @Input() listPaddingHeight = "0px";
     @Input() elementSize: string = "75px";
 
-    @Input() titlePrefix: string = ""
-    @Input() elementTitleFields!: string[]
-    @Input() titleSuffix: string = ""
+    @Input() titlePrefix: string = "";
+    @Input() elementTitleFields!: string[];
+    @Input() titleSuffix: string = "";
 
-    @Input() subTitlePrefix: string = ""
-    @Input() elementSubtitleField?: string
-    @Input() subTitleSuffix: string = ""
+    @Input() subTitlePrefix: string = "";
+    @Input() elementSubtitleField?: string;
+    @Input() subTitleSuffix: string = "";
 
-    @Input() elementImageField?: string
-    @Input() roundImage: boolean = true
+    @Input() elementImageField?: string;
+    @Input() roundImage: boolean = true;
+    @Input() withImage: boolean = true;
 
     @Output() elementSelected = new EventEmitter<any>();
 

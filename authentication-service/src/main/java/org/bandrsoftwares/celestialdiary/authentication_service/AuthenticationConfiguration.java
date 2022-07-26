@@ -2,7 +2,7 @@ package org.bandrsoftwares.celestialdiary.authentication_service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bandrsoftwares.celestialdiary.jwt.JWTCompanyAuthenticationDSL;
+import org.bandrsoftwares.celestialdiary.jwt.JwtCompanyAuthenticationDSL;
 import org.bandrsoftwares.celestialdiary.jwt.JwtAuthenticationProvider;
 import org.bandrsoftwares.celestialdiary.jwt.JwtConfiguration;
 import org.bandrsoftwares.celestialdiary.model.mongodb.ModelConfiguration;
@@ -49,7 +49,7 @@ public class AuthenticationConfiguration {
 
         http.authenticationProvider(jwtAuthenticationProvider).authenticationProvider(basicAuthenticationProvider);
 
-        http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());
+        http.apply(JwtCompanyAuthenticationDSL.jwtAuthenticationDSL());
 
         return http.build();
     }

@@ -3,7 +3,8 @@
     <h4 class="ticket-title">{{title}}</h4>
     <h5 class="ticket-sub-title">{{subTitle}}</h5>
   </div>
-  <div class="ticket-img-container" [style.height]="ticketHeight" [style.width]="ticketHeight" [style.border-radius]="roundImage ? '100%' : 'none'">
+  <div class="ticket-img-container" [style.height]="ticketHeight" [style.width]="ticketHeight" [style.border-radius]="roundImage ? '100%' : 'none'"
+       *ngIf="withImage">
     <img class="ticket-img" [src]="img" alt="ticket image description">
   </div>
 </div>

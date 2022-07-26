@@ -157,6 +157,23 @@
       "update-failed": "Bundle update failed"
     }
   },
+  "role": {
+    "search": "Search a role",
+    "name": "Role name",
+    "description": "Description",
+    "privileges": "Privileges",
+    "establishment": "Establishment",
+    "creation": {
+      "role-creation": "Create a role",
+      "create": "Create",
+      "creation-failed": "Role creation failed"
+    },
+    "update": {
+      "update": "Update",
+      "update-failed": "Role update failed"
+    },
+    "delete": "Delete"
+  },
   "time": {
     "time-interval-form": {
       "start": "Start",
@@ -165,7 +182,11 @@
   },
   "privilege": {
     "company": {
+      "title": "Company management privileges",
+      "all": "Admin",
+      "all-description": "All company management privileges",
       "employee": {
+        "title": "Employee management privileges",
         "all": "Admin",
         "all-description": "All employee management privileges",
         "read": "Read",
@@ -182,6 +203,7 @@
         "activate-description": "Activate/Deactivate an employee"
       },
       "establishment": {
+        "title": "Establishment management privileges",
         "all": "Admin",
         "all-description": "All establishment management privileges",
         "read": "Read",
@@ -194,6 +216,7 @@
         "activate-description": "Activate/Deactivate an establishment"
       },
       "saleable": {
+        "title": "Saleable management privileges",
         "all": "Admin",
         "all-description": "All saleable management privileges",
         "read": "Read",
@@ -206,6 +229,7 @@
         "activate-description": "Activate/Deactivate a saleable"
       },
       "role": {
+        "title": "Role management privileges",
         "all": "Admin",
         "all-description": "All role management privileges",
         "read": "Read",

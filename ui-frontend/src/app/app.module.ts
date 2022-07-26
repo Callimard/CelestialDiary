@@ -50,13 +50,18 @@ import {EmployeeInformationComponent} from './application/employee-management/em
 import {RoleSelectionComponent} from './application/role-management/role-selection/role-selection.component';
 import {RoleInformationComponent} from './application/role-management/role-information/role-information.component';
 import {RoleCreationComponent} from './application/role-management/role-creation/role-creation.component';
+import { RoleFormCreatorComponent } from './application/role-management/role-creation/role-form-creator/role-form-creator.component';
+import { PrivilegeInputLineComponent } from './libairy/form/privilege-input-line/privilege-input-line.component';
+import { RoleFormUpdaterComponent } from './application/role-management/role-information/role-form-updater/role-form-updater.component';
+import { RoleFormContentComponent } from './libairy/company-management/role/role-form-content/role-form-content.component';
+import { FloatingCardButtonComponent } from './libairy/button/floating-card-button/floating-card-button.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
   {
     path: frontend.application, component: ApplicationComponent, children: [
       {
-        path: frontend.companyManagement, children: [
+        path: frontend.companyManagementPrivileges, children: [
           {
             path: frontend.employees, component: TwoSideComponent, children: [
               {path: '', component: EmployeeSelectionComponent},
@@ -146,7 +151,12 @@ const appRoutes: Routes = [
     EmployeeInformationComponent,
     RoleSelectionComponent,
     RoleInformationComponent,
-    RoleCreationComponent
+    RoleCreationComponent,
+    RoleFormCreatorComponent,
+    PrivilegeInputLineComponent,
+    RoleFormUpdaterComponent,
+    RoleFormContentComponent,
+    FloatingCardButtonComponent
   ],
   imports: [
     BrowserModule,

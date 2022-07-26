@@ -57,7 +57,6 @@ public enum CompanyManagementPrivilege implements PrivilegeEnum {
         return privilegePattern.formatted(companyId);
     }
 
-
     @Override
     public String enumName() {
         return this.name();

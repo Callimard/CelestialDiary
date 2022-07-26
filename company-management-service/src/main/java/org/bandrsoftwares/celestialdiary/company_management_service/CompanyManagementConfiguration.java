@@ -2,7 +2,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service;
 
 import lombok.RequiredArgsConstructor;
 import org.bandrsoftwares.celestialdiary.aop.AopConfiguration;
-import org.bandrsoftwares.celestialdiary.jwt.JWTCompanyAuthenticationDSL;
+import org.bandrsoftwares.celestialdiary.jwt.JwtCompanyAuthenticationDSL;
 import org.bandrsoftwares.celestialdiary.jwt.JwtConfiguration;
 import org.bandrsoftwares.celestialdiary.model.mongodb.ModelConfiguration;
 import org.bandrsoftwares.celestialdiary.security.SecurityConfiguration;
@@ -44,7 +44,7 @@ public class CompanyManagementConfiguration {
                 .antMatchers(HttpMethod.DELETE, COMPANIES_URL + "/**").authenticated()
                 .anyRequest().denyAll();
 
-        http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());
+        http.apply(JwtCompanyAuthenticationDSL.jwtAuthenticationDSL());
 
         return http.build();
     }

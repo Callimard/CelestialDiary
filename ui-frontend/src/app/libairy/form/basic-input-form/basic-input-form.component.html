@@ -1,7 +1,7 @@
-<div class="form-control" [formGroup]="formGroup">
+<div class="form-control" [formGroup]="group" *ngIf="group != null && controlName != null">
   <label class="form-label" [for]="labelFor">{{label}}</label>
   <input class="form-input" [name]="labelFor" [id]="labelFor"
          [type]="inputType"
          [placeholder]="placeHolder"
-         [formControlName]="formControlName"/>
+         [formControlName]="controlName"/>
 </div>

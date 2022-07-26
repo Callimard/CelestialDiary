@@ -81,8 +81,8 @@ public class Employee {
 
     private void addAuthorities(Set<String> authorities, Role role, Company roleCompany, Establishment roleEstablishment) {
         for (Privilege privilege : role.getPrivileges()) {
-            Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
-            Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
+            Optional<CompanyManagementPrivilege> opCompanyPrivilege = Privilege.extractCompanyPrivilege(privilege);
+            Optional<EstablishmentPrivilege> opEstablishmentPrivilege = Privilege.extractEstablishmentPrivilege(privilege);
 
             if (opCompanyPrivilege.isPresent()) {
                 authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
@@ -91,22 +91,6 @@ public class Employee {
             } else {
                 log.error("No convertible privilege {} -> privilege ignored", privilege);
             }
-        }
-    }
-
-    private Optional<CompanyManagementPrivilege> extractCompanyPrivilege(Privilege privilege) {
-        try {
-            return Optional.of(CompanyManagementPrivilege.valueOf(privilege.getIdentifierName()));
-        } catch (IllegalArgumentException e) {
-            return Optional.empty();
-        }
-    }
-
-    private Optional<EstablishmentPrivilege> extractEmployeePrivilege(Privilege privilege) {
-        try {
-            return Optional.of(EstablishmentPrivilege.valueOf(privilege.getIdentifierName()));
-        } catch (IllegalArgumentException e) {
-            return Optional.empty();
         }
     }
 
