@@ -28,6 +28,8 @@ export const frontend = {
   prestationInformation: "information/:prestationId",
   bundles: "bundles",
   bundleInformation: "information/:bundleId",
+  roles: "roles",
+  roleInformation: "information/:roleId",
   create: "create"
 }
 

@@ -75,22 +75,26 @@ public class Employee {
             for (Role role : roles) {
                 Company roleCompany = role.getCompany();
                 List<Establishment> roleEstablishments = role.getEstablishments();
-                for (Privilege privilege : role.getPrivileges()) {
-                    Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
-                    Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
-
-                    if (opCompanyPrivilege.isPresent()) {
-                        authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
-                    } else if (opEstablishmentPrivilege.isPresent()) {
-                        for (Establishment establishment : roleEstablishments) {
-                            authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), establishment.getId()));
-                        }
-                    } else {
-                        log.error("No convertible privilege {} -> privilege ignored", privilege);
-                    }
-                }
+                addAuthorities(authorities, role, roleCompany, roleEstablishments);
             }
         return authorities;
+    }
+
+    private void addAuthorities(Set<String> authorities, Role role, Company roleCompany, List<Establishment> roleEstablishments) {
+        for (Privilege privilege : role.getPrivileges()) {
+            Optional<CompanyManagementPrivilege> opCompanyPrivilege = extractCompanyPrivilege(privilege);
+            Optional<EstablishmentPrivilege> opEstablishmentPrivilege = extractEmployeePrivilege(privilege);
+
+            if (opCompanyPrivilege.isPresent()) {
+                authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
+            } else if (opEstablishmentPrivilege.isPresent()) {
+                for (Establishment establishment : roleEstablishments) {
+                    authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), establishment.getId()));
+                }
+            } else {
+                log.error("No convertible privilege {} -> privilege ignored", privilege);
+            }
+        }
     }
 
     private Optional<CompanyManagementPrivilege> extractCompanyPrivilege(Privilege privilege) {

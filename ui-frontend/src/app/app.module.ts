@@ -47,6 +47,9 @@ import {EstablishmentInformationComponent} from './application/establishment-man
 import {EmployeeSelectionComponent} from './application/employee-management/employee-selection/employee-selection.component';
 import {EmployeeCreationComponent} from './application/employee-management/employee-creation/employee-creation.component';
 import {EmployeeInformationComponent} from './application/employee-management/employee-information/employee-information.component';
+import {RoleSelectionComponent} from './application/role-management/role-selection/role-selection.component';
+import {RoleInformationComponent} from './application/role-management/role-information/role-information.component';
+import {RoleCreationComponent} from './application/role-management/role-creation/role-creation.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -86,6 +89,13 @@ const appRoutes: Routes = [
               {path: '', component: BundleSelectionComponent},
               {path: frontend.bundleInformation, component: BundleInformationComponent, outlet: 'right'},
               {path: frontend.create, component: BundleCreationComponent, outlet: 'right'}
+            ]
+          },
+          {
+            path: frontend.roles, component: TwoSideComponent, children: [
+              {path: '', component: RoleSelectionComponent},
+              {path: frontend.roleInformation, component: RoleInformationComponent, outlet: 'right'},
+              {path: frontend.create, component: RoleCreationComponent, outlet: 'right'}
             ]
           }
         ]
@@ -133,7 +143,10 @@ const appRoutes: Routes = [
     EstablishmentInformationComponent,
     EmployeeSelectionComponent,
     EmployeeCreationComponent,
-    EmployeeInformationComponent
+    EmployeeInformationComponent,
+    RoleSelectionComponent,
+    RoleInformationComponent,
+    RoleCreationComponent
   ],
   imports: [
     BrowserModule,

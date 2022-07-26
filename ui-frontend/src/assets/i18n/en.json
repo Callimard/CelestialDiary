@@ -15,6 +15,7 @@
     "products": "Products",
     "prestations": "Prestations",
     "bundles": "Bundles",
+    "roles": "Roles",
     "logout": "Logout"
   },
   "employee": {
