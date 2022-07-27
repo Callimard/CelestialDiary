@@ -1,0 +1,22 @@
+<div class="advanced-input-container" [formGroup]="group" *ngIf="group != null && controlName != null">
+  <label class="advanced-input-label"
+         [for]="labelFor">
+    {{label}}
+  </label>
+  <div class="input-content-right">
+    <input class="advanced-input-input"
+           [name]="labelFor"
+           [id]="labelFor"
+           [type]="inputType"
+           [placeholder]="placeHolder"
+           [formControlName]="controlName"
+           (ngModelChange)="inputChange.emit($event)"/>
+    <div class="advanced-input-img-container"
+         [style.height]="inputHeight"
+         [style.width]="inputHeight"
+         [style.border-radius]="roundImage ? '100%' : '0'"
+         *ngIf="imageSrc">
+      <img class="input-image" [src]="imageSrc" alt="The input image"/>
+    </div>
+  </div>
+</div>

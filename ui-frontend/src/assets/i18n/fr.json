@@ -138,6 +138,7 @@
     "name": "Nom du paquet",
     "description": "Description",
     "suggested-price": "Prix suggéré",
+    "computed-total-price": "Prix total calculé",
     "price": "Prix",
     "products": "Produits",
     "product-selection": {

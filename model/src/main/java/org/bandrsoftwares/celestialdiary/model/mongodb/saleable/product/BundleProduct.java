@@ -12,22 +12,11 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmbeddedProduct {
-
-    private String name;
-    private String description;
+public class BundleProduct {
 
     @ToString.Exclude
     @DocumentReference(collection = "Product")
     private Product product;
 
-    // Methods.
-
-    public static EmbeddedProduct from(Product product) {
-        return EmbeddedProduct.builder()
-                .name(product.getName())
-                .description(product.getDescription())
-                .product(product)
-                .build();
-    }
+    private Integer quantity;
 }

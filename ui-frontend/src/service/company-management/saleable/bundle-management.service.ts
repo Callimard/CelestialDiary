@@ -85,10 +85,10 @@ export class BundleManagementService {
     }))
   }
 
-  public updateBundle(bundleId: string, bundleUpdates: BundleUpdatedInformation): Promise<WrappedBundleDTO> {
+  public updateBundle(bundleId: string, bundleUpdates: BundleUpdatedInformation): Promise<BundleDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return new Promise<WrappedBundleDTO>(((resolve, reject) => {
-      this.http.put<WrappedBundleDTO>(BundleManagementService.companySpecificBundleUrl(jwtAccount.companyId, bundleId), bundleUpdates).subscribe({
+    return new Promise<BundleDTO>(((resolve, reject) => {
+      this.http.put<BundleDTO>(BundleManagementService.companySpecificBundleUrl(jwtAccount.companyId, bundleId), bundleUpdates).subscribe({
         next: (bundle) => {
           resolve(bundle);
         },

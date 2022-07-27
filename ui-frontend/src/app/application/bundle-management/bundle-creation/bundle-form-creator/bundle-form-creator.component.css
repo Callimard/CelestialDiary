@@ -1,9 +1,1 @@
-.available-product-list, .chosen-product-list, .available-prestation-list, .chosen-prestation-list {
-  height: 150px;
 
-  overflow-x: hidden;
-  overflow-y: auto;
-
-  border: 1px solid var(--place-holder-text-color-light);
-  padding: 0.5em;
-}

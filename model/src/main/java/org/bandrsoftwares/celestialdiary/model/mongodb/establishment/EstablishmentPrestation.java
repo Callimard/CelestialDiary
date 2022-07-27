@@ -1,7 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.EmbeddedPrestation;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.BundlePrestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 
 /**
@@ -19,5 +19,5 @@ public class EstablishmentPrestation {
     private Double customPrice;
     private Boolean usingCustomPrice;
 
-    private EmbeddedPrestation embeddedService;
+    private BundlePrestation embeddedService;
 }

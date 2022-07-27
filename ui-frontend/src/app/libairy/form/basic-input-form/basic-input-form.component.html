@@ -3,5 +3,6 @@
   <input class="form-input" [name]="labelFor" [id]="labelFor"
          [type]="inputType"
          [placeholder]="placeHolder"
-         [formControlName]="controlName"/>
+         [formControlName]="controlName"
+         (ngModelChange)="inputChange.emit($event)"/>
 </div>

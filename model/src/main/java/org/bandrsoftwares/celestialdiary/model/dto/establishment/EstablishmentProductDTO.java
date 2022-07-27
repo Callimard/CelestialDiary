@@ -7,6 +7,6 @@ public record EstablishmentProductDTO(double customPrice, boolean usingCustomPri
 
     public EstablishmentProductDTO(EstablishmentProduct establishmentProduct) {
         this(establishmentProduct.getCustomPrice(), establishmentProduct.getUsingCustomPrice(), establishmentProduct.getRemainingStock(),
-             new WrappedProductDTO(establishmentProduct.getEmbeddedProduct().getProduct()));
+             new WrappedProductDTO(establishmentProduct.getBundleProduct().getProduct()));
     }
 }
