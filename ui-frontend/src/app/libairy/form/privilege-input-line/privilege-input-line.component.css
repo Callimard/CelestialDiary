@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 3fr 5fr 17fr;
   align-items: center;
-  gap: 1em;
 }
 
 .privilege-label, .privilege-description {

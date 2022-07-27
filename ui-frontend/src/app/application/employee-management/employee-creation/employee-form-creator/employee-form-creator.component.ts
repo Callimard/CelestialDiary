@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
 import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
+import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
 
 @Component({
   selector: '[app-employee-form-creator]',
@@ -24,7 +25,7 @@ export class EmployeeFormCreatorComponent implements OnInit {
     phone: new FormControl('', [Validators.required]),
     isTechnician: new FormControl('', [Validators.required]),
     tags: new FormControl(''),
-    roles: new FormControl('')
+    roles: new RoleFormGroup()
   })
 
   constructor(private employeeManagementService: EmployeeManagementService) {
@@ -32,7 +33,7 @@ export class EmployeeFormCreatorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Nothing.
+    // Nothing
   }
 
   onEmployeeCreation() {
@@ -47,8 +48,9 @@ export class EmployeeFormCreatorComponent implements OnInit {
       phone: form.phone,
       isTechnician: JSON.parse(form.isTechnician),
       tags: form.tags != null && form.tags.lenght > 0 ? form.tags.split(' ') : [],
-      roles: []
+      roles: this.roleFormGroup.extractRoles()
     }
+
     this.employeeManagementService.createEmployee(employeeInfo).then(() => {
       this.employeeCreated.emit(true);
       this.creationFailed = false
@@ -56,6 +58,10 @@ export class EmployeeFormCreatorComponent implements OnInit {
       this.employeeCreated.emit(false);
       this.creationFailed = true;
     });
+  }
+
+  get roleFormGroup(): RoleFormGroup {
+    return this.employeeCreationForm.get('roles') as RoleFormGroup;
   }
 
 }
