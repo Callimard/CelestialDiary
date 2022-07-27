@@ -98,19 +98,7 @@ public interface EmployeeManagementService {
      */
     Employee updateEmployeeRoles(@CompanyId String companyId, @EmployeeId String employeeId, @Valid EmployeeUpdatedRoles employeeUpdatedRoles);
 
-    record EmployeeUpdatedRoles(@NotNull List<String> rolesToRemove, @NotNull List<String> rolesToAdd) {
-
-        boolean hasRolesToRemove() {
-            return rolesToRemove != null && !rolesToRemove.isEmpty();
-        }
-
-        boolean hasRolesToAdd() {
-            return rolesToAdd != null && !rolesToAdd.isEmpty();
-        }
-
-        boolean isEmpty() {
-            return !hasRolesToRemove() && !hasRolesToAdd();
-        }
+    record EmployeeUpdatedRoles(@NotNull List<String> roles) {
     }
 
     /**

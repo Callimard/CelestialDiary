@@ -35,7 +35,6 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   private initializeEmployeeUpdateFormGroup() {
     let allTagsConcat = this.extractEmployeeTags();
     this.employeeUpdateForm = this.createEmployeeForm(allTagsConcat);
-    this.mergeEmployeeRole();
   }
 
   private extractEmployeeTags() {
@@ -78,27 +77,16 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
         tags: (form.tags != null ? form.tags.split(' ') : []),
       }
 
-      this.employeeManagementService.updateEmployee(this.employee.id, employeeUpdatedInfo).then((wrappedEmployee) => {
-        this.employee.email = wrappedEmployee.email;
-        this.employee.firstName = wrappedEmployee.firstName;
-        this.employee.lastName = wrappedEmployee.lastName;
-        this.employee.gender = wrappedEmployee.gender;
-        this.employee.phone = wrappedEmployee.phone;
-        this.employee.isTechnician = wrappedEmployee.isTechnician;
-        this.employee.activated = wrappedEmployee.activated;
-
+      this.employeeManagementService.updateEmployee(this.employee.id, employeeUpdatedInfo).then((employee) => {
         this.updateFail = false;
+        this.employee = employee;
       }).catch(() => {
         this.updateFail = true;
       });
     }
   }
 
-  private mergeEmployeeRole() {
-    for (let role of this.employee.roles) {
-      this.roleFormGroup.addControl(role.id, new FormControl(true));
-    }
-  }
+
 
   get roleFormGroup(): RoleFormGroup {
     return this.employeeUpdateForm.get('roles') as RoleFormGroup;

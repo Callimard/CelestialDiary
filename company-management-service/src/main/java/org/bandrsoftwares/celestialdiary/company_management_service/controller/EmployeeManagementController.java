@@ -54,20 +54,20 @@ public class EmployeeManagementController {
 
     @UpdateEmployeePrivilege
     @PutMapping(SPECIFIC_EMPLOYEE)
-    public WrappedEmployeeDTO updateEmployeeInformation(@PathVariable(name = "idCompany") String idCompany,
+    public EmployeeDTO updateEmployeeInformation(@PathVariable(name = "idCompany") String idCompany,
                                                         @PathVariable(name = "idEmployee") String idEmployee,
                                                         @RequestBody EmployeeManagementService.EmployeeUpdatedInformation employeeUpdatedInformation) {
         Employee employee = employeeManagementService.updateEmployeeInformation(idCompany, idEmployee, employeeUpdatedInformation);
-        return new WrappedEmployeeDTO(employee);
+        return new EmployeeDTO(employee);
     }
 
     @UpdateEmployeeRolePrivilege
     @PutMapping(SPECIFIC_EMPLOYEE_ROLES)
-    public WrappedEmployeeDTO updateEmployeeRoles(@PathVariable(name = "idCompany") String idCompany,
+    public EmployeeDTO updateEmployeeRoles(@PathVariable(name = "idCompany") String idCompany,
                                                   @PathVariable(name = "idEmployee") String idEmployee,
                                                   @RequestBody EmployeeManagementService.EmployeeUpdatedRoles employeeUpdatedRoles) {
         Employee employee = employeeManagementService.updateEmployeeRoles(idCompany, idEmployee, employeeUpdatedRoles);
-        return new WrappedEmployeeDTO(employee);
+        return new EmployeeDTO(employee);
     }
 
     @AssignEmployeePrivilege

@@ -7,6 +7,7 @@ import {AuthenticationService} from "../authentication/authentication.service";
 import {EmployeeCreationInformation} from "../../data/company-management/employee/employee-creation-information";
 import {EmployeeDTO} from "../../data/company-management/employee/employee-dto";
 import {EmployeeUpdatedInformation} from "../../data/company-management/employee/employee-updated-information";
+import {EmployeeUpdatedRoles} from "../../data/company-management/employee/employee-updated-roles";
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,22 @@ export class EmployeeManagementService {
     // Nothing
   }
 
+  public static companyEmployeeUrl(companyId: string): string {
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.employeesUrl
+  }
+
+  private static companySpecificEmployeeUrl(companyId: string, employeeId: string): string {
+    return EmployeeManagementService.companyEmployeeUrl(companyId) + '/' + employeeId;
+  }
+
+  private static companyUpdateEmployeeRoleUrl(companyId: string, employeeId: string): string {
+    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/roles';
+  }
+
   public allEmployees(): Promise<WrappedEmployeeDTO[]> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
     return new Promise<WrappedEmployeeDTO[]>(((resolve, reject) => {
-      this.http.get<WrappedEmployeeDTO[]>(backend.backendUrl
-        + backend.apiV1Url + backend.companiesUrl + '/' + jwtAccount.companyId + backend.employeesUrl)
+      this.http.get<WrappedEmployeeDTO[]>(EmployeeManagementService.companyEmployeeUrl(jwtAccount.companyId))
         .subscribe({
           next: (allEmployees) => {
             resolve(allEmployees);
@@ -37,8 +49,7 @@ export class EmployeeManagementService {
   public searchEmployee(filter: string): Promise<WrappedEmployeeDTO[]> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
     return new Promise<WrappedEmployeeDTO[]>(((resolve, reject) => {
-      this.http.get<WrappedEmployeeDTO[]>(backend.backendUrl
-        + backend.apiV1Url + backend.companiesUrl + '/' + jwtAccount.companyId + backend.employeesUrl + "?filter=" + filter)
+      this.http.get<WrappedEmployeeDTO[]>(EmployeeManagementService.companyEmployeeUrl(jwtAccount.companyId) + "?filter=" + filter)
         .subscribe({
           next: (allEmployees) => {
             resolve(allEmployees);
@@ -54,8 +65,7 @@ export class EmployeeManagementService {
   public getSpecificEmployee(employeeId: string): Promise<EmployeeDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
     return new Promise<EmployeeDTO>(((resolve, reject) => {
-      this.http.get<EmployeeDTO>(backend.backendUrl
-        + backend.apiV1Url + backend.companiesUrl + '/' + jwtAccount.companyId + backend.employeesUrl + '/' + employeeId)
+      this.http.get<EmployeeDTO>(EmployeeManagementService.companySpecificEmployeeUrl(jwtAccount.companyId, employeeId))
         .subscribe({
           next: (employee) => {
             resolve(employee);
@@ -71,8 +81,7 @@ export class EmployeeManagementService {
   public createEmployee(employeeInfo: EmployeeCreationInformation): Promise<WrappedEmployeeDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
     return new Promise<WrappedEmployeeDTO>(((resolve, reject) => {
-      this.http.post<WrappedEmployeeDTO>(backend.backendUrl + backend.apiV1Url + backend.companiesUrl
-        + '/' + jwtAccount.companyId + backend.employeesUrl, employeeInfo).subscribe({
+      this.http.post<WrappedEmployeeDTO>(EmployeeManagementService.companyEmployeeUrl(jwtAccount.companyId), employeeInfo).subscribe({
         next: (employeeCreated) => {
           resolve(employeeCreated)
         },
@@ -84,13 +93,27 @@ export class EmployeeManagementService {
     }))
   }
 
-  public updateEmployee(employeeId: string, employeeUpdateInfo: EmployeeUpdatedInformation): Promise<WrappedEmployeeDTO> {
+  public updateEmployee(employeeId: string, employeeUpdateInfo: EmployeeUpdatedInformation): Promise<EmployeeDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return new Promise<WrappedEmployeeDTO>(((resolve, reject) => {
-      this.http.put<WrappedEmployeeDTO>(backend.backendUrl + backend.apiV1Url + backend.companiesUrl
-        + '/' + jwtAccount.companyId + backend.employeesUrl + '/' + employeeId, employeeUpdateInfo).subscribe({
+    return new Promise<EmployeeDTO>(((resolve, reject) => {
+      this.http.put<EmployeeDTO>(EmployeeManagementService.companySpecificEmployeeUrl(jwtAccount.companyId, employeeId), employeeUpdateInfo).subscribe({
         next: (employeeUpdated) => {
           resolve(employeeUpdated)
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err.error);
+          reject(err.error);
+        }
+      })
+    }))
+  }
+
+  public updateEmployeeRoles(employeeId: string, employeeRoleUpdates: EmployeeUpdatedRoles): Promise<EmployeeDTO> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<EmployeeDTO>(((resolve, reject) => {
+      this.http.put<EmployeeDTO>(EmployeeManagementService.companyUpdateEmployeeRoleUrl(jwtAccount.companyId, employeeId), employeeRoleUpdates).subscribe({
+        next: (employee) => {
+          resolve(employee);
         },
         error: (err: HttpErrorResponse) => {
           console.error(err.error);

@@ -18,7 +18,7 @@ export class ProductManagementService {
   }
 
   private static companyProductUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.productUrl;
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.productsUrl;
   }
 
   private static companySpecificProductUrl(companyId: string, productId: string): string {

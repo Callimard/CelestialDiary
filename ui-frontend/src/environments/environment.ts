@@ -44,9 +44,9 @@ export const backend = {
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",
   employeesUrl: "/employees",
-  establishmentUrl: "/establishments",
-  productUrl: "/products",
-  prestationUrl: "/prestations",
-  bundleUrl: "/bundles",
-  roleUrl: "/roles"
+  establishmentsUrl: "/establishments",
+  productsUrl: "/products",
+  prestationsUrl: "/prestations",
+  bundlesUrl: "/bundles",
+  rolesUrl: "/roles"
 }

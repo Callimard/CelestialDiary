@@ -46,7 +46,11 @@
     },
     "update": {
       "update": "Update",
-      "update-failed": "Employee update failed"
+      "update-failed": "Employee update failed",
+      "roles": {
+        "title": "Update employee roles",
+        "update": "Update roles"
+      }
     }
   },
   "establishment": {

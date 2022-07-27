@@ -57,6 +57,7 @@ import { RoleFormContentComponent } from './libairy/company-management/role/role
 import { FloatingCardButtonComponent } from './libairy/button/floating-card-button/floating-card-button.component';
 import { EmployeeFormContentComponent } from './libairy/company-management/employee/employee-form-content/employee-form-content.component';
 import { EmployeeRoleSelectionComponent } from './libairy/company-management/employee/employee-role-selection/employee-role-selection.component';
+import { EmployeeRoleUpdaterComponent } from './application/employee-management/employee-information/employee-role-updater/employee-role-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -160,7 +161,8 @@ const appRoutes: Routes = [
     RoleFormContentComponent,
     FloatingCardButtonComponent,
     EmployeeFormContentComponent,
-    EmployeeRoleSelectionComponent
+    EmployeeRoleSelectionComponent,
+    EmployeeRoleUpdaterComponent
   ],
   imports: [
     BrowserModule,

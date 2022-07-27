@@ -18,7 +18,7 @@ export class EstablishmentManagementService {
   }
 
   private static companyEstablishmentUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.establishmentUrl
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.establishmentsUrl
   }
 
   private static companySpecificEstablishmentUrl(companyId: string, establishmentId: string): string {

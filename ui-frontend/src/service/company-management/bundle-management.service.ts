@@ -18,7 +18,7 @@ export class BundleManagementService {
   }
 
   private static companyBundleUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.bundleUrl;
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.bundlesUrl;
   }
 
   private static companySpecificBundleUrl(companyId: string, bundleId: string): string {

@@ -1,6 +1,5 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
-import com.google.common.collect.Sets;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +21,6 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import java.time.Instant;
 import java.util.List;
-import java.util.Set;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -133,19 +131,17 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     @CheckCompanyCoherence
     @Override
     public Employee updateEmployeeRoles(@CompanyId String companyId, @EmployeeId String employeeId,
-                                        @Valid EmployeeUpdatedRoles employeeUpdatedRoles) {
+                                        @Valid EmployeeUpdatedRoles roleUpdate) {
         Company company = SearchingAspect.COMPANY_FOUND.get();
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
+        if (!roleUpdate.roles().isEmpty()) {
+            List<Role> roles = roleRepository.findByCompanyAndIdIn(company, roleUpdate.roles());
+            employee.setRoles(roles);
 
-        Set<String> rolesToRemove = Sets.newHashSet(employeeUpdatedRoles.rolesToRemove());
-        Set<String> rolesToAdd = Sets.newHashSet(employeeUpdatedRoles.rolesToAdd());
-
-        employee.getRoles().removeIf(r -> rolesToRemove.contains(r.getId()));
-
-        List<Role> newRoles = roleRepository.findByCompanyAndIdIn(company, rolesToAdd);
-        employee.getRoles().addAll(newRoles);
-
-        return employeeRepository.save(employee);
+            return employeeRepository.save(employee);
+        } else {
+            return employee;
+        }
     }
 
     @SearchEmployee

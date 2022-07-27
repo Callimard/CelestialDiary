@@ -200,7 +200,7 @@ class EmployeeManagementPrestationImplTest {
         }
 
         private EmployeeManagementService.EmployeeUpdatedRoles buildCorrectEmployeeUpdateRoleInfo() {
-            return new EmployeeManagementService.EmployeeUpdatedRoles(Lists.newArrayList(), Lists.newArrayList());
+            return new EmployeeManagementService.EmployeeUpdatedRoles(Lists.newArrayList());
         }
     }
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
 import {RoleManagementService} from "../../../../../service/company-management/role-management.service";
 import {FormControl} from "@angular/forms";
@@ -9,7 +9,7 @@ import {RoleDTO} from "../../../../../data/company-management/employee/role-dto"
   templateUrl: './employee-role-selection.component.html',
   styleUrls: ['./employee-role-selection.component.css']
 })
-export class EmployeeRoleSelectionComponent implements OnInit {
+export class EmployeeRoleSelectionComponent implements OnInit, OnChanges {
 
   @Input() roleFormGroup!: RoleFormGroup;
 
@@ -20,6 +20,10 @@ export class EmployeeRoleSelectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
     this.chargeAllRoles();
   }
 

@@ -17,7 +17,7 @@ export class RoleManagementService {
   }
 
   private static companyRoleUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.roleUrl;
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.rolesUrl;
   }
 
   private static companySpecificRoleUrl(companyId: string, roleId: string): string {
