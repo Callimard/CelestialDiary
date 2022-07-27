@@ -41,16 +41,16 @@
     <div class="selected-products-container need-top-space">
       <h3>{{ 'bundle.product-selection.selected' | translate }}</h3>
       <ul class="chosen-product-list">
-        <li class="product-item" *ngFor="let product of chosenProducts">
-          <button class="danger-button remove-button" type="button" (click)="removeProduct(product)">
+        <li class="product-item" *ngFor="let productId of productFormGroupKeys">
+          <button class="danger-button remove-button" type="button" (click)="removeProduct(productId)">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div app-advanced-basic-input-form
                class="product-item-input"
                [group]="this.productsFormGroup"
-               [controlName]="product.id"
-               [labelFor]="product.id"
-               [label]="product.name"
+               [controlName]="productId"
+               [labelFor]="productId"
+               [label]="getProductName(productId)"
                [inputType]="'number'"
                [imageSrc]="'/assets/images/kraken.jpg'">
           </div>
@@ -76,16 +76,16 @@
     <div class="selected-prestations-container need-top-space">
       <h3>{{ 'bundle.prestation-selection.selected' | translate }}</h3>
       <ul class="chosen-prestation-list">
-        <li class="prestation-item" *ngFor="let prestation of chosenPrestations">
-          <button class="danger-button remove-button" type="button" (click)="removePrestation(prestation)">
+        <li class="prestation-item" *ngFor="let prestationId of prestationFormGroupKeys">
+          <button class="danger-button remove-button" type="button" (click)="removePrestation(prestationId)">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div app-advanced-basic-input-form
                class="prestation-item-input"
                [group]="this.prestationsFormGroup"
-               [controlName]="prestation.id"
-               [labelFor]="prestation.id"
-               [label]="prestation.name"
+               [controlName]="prestationId"
+               [labelFor]="prestationId"
+               [label]="getPrestationName(prestationId)"
                [inputType]="'number'"
                [imageSrc]="'/assets/images/kraken.jpg'">
           </div>

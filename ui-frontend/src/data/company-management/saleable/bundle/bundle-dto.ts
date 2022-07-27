@@ -1,8 +1,8 @@
 import {SaleableDTO} from "../saleable-dto";
-import {WrappedPrestationDTO} from "../prestation/wrapped-prestation-dto";
-import {WrappedProductDTO} from "../product/wrapped-product-dto";
+import {BundlePrestation} from "../prestation/bundle-prestation";
+import {BundleProduct} from "../product/bundle-product";
 
 export interface BundleDTO extends SaleableDTO {
-  prestations?: WrappedPrestationDTO[],
-  products?: WrappedProductDTO[]
+  prestations?: BundlePrestation[],
+  products?: BundleProduct[]
 }

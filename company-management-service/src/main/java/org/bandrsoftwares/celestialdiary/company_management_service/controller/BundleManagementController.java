@@ -56,11 +56,11 @@ public class BundleManagementController {
 
     @UpdateSaleablePrivilege
     @PutMapping(SPECIFIC_BUNDLE)
-    public WrappedBundleDTO updateBundle(@PathVariable(name = "idCompany") String idCompany,
+    public BundleDTO updateBundle(@PathVariable(name = "idCompany") String idCompany,
                                          @PathVariable(name = "idBundle") String idBundle,
                                          @RequestBody BundleManagementService.BundleUpdatedInformation update) {
         Bundle bundle = bundleManagementService.updateBundle(idCompany, idBundle, update);
-        return new WrappedBundleDTO(bundle);
+        return new BundleDTO(bundle);
     }
 
     @ActivateSaleablePrivilege

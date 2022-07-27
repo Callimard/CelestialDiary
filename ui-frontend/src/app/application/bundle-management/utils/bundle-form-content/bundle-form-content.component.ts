@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {WrappedProductDTO} from "../../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
@@ -10,18 +10,16 @@ import {PrestationManagementService} from "../../../../../service/company-manage
   templateUrl: './bundle-form-content.component.html',
   styleUrls: ['./bundle-form-content.component.css']
 })
-export class BundleFormContentComponent implements OnInit {
+export class BundleFormContentComponent implements OnInit, OnChanges {
 
   @Input() bundleFormGroup!: FormGroup
 
-  allProducts: WrappedProductDTO[] = [];
+  allProducts = new Map<string, WrappedProductDTO>();
   availableProducts: WrappedProductDTO[] = [];
-  chosenProducts: WrappedProductDTO[] = [];
   productTotalPrice: number = 0;
 
-  allPrestations: WrappedPrestationDTO[] = [];
+  allPrestations = new Map<string, WrappedPrestationDTO>();
   availablePrestations: WrappedPrestationDTO[] = [];
-  chosenPrestations: WrappedPrestationDTO[] = [];
   prestationTotalPrice: number = 0;
 
   constructor(private productManagementService: ProductManagementService,
@@ -30,61 +28,134 @@ export class BundleFormContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
     this.chargeAllProducts();
     this.chargeAllPrestations();
   }
 
   private chargeAllProducts() {
     this.productManagementService.allProducts().then((allProducts) => {
-      this.allProducts = allProducts;
-      for (let product of this.allProducts) {
+      for (let product of allProducts) {
+        this.allProducts.set(product.id, product);
         this.availableProducts.push(product);
+        this.mergeProductChosen();
       }
     });
   }
 
+  private mergeProductChosen() {
+    let toRemove: WrappedProductDTO[] = [];
+    const keys = this.productFormGroupKeys;
+    for (let product of this.availableProducts) {
+      for (let key of keys) {
+        if (product.id === key) {
+          toRemove.push(product);
+        }
+      }
+    }
+
+    for (let product of toRemove) {
+      this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
+    }
+  }
+
   private chargeAllPrestations() {
     this.prestationManagementService.allPrestations().then((allPrestations) => {
-      this.allPrestations = allPrestations;
-      for (let prestation of this.allPrestations) {
+      for (let prestation of allPrestations) {
+        this.allPrestations.set(prestation.id, prestation);
         this.availablePrestations.push(prestation);
+        this.mergePrestationChosen();
       }
     })
+  }
+
+  private mergePrestationChosen() {
+    let toRemove: WrappedPrestationDTO[] = [];
+    const keys = this.productFormGroupKeys;
+    for (let prestation of this.availablePrestations) {
+      for (let key of keys) {
+        if (prestation.id === key) {
+          toRemove.push(prestation);
+        }
+      }
+    }
+
+    for (let prestation of toRemove) {
+      this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
+    }
+  }
+
+  getProduct(productId: string): WrappedProductDTO | null {
+    const product = this.allProducts.get(productId);
+    return product != null ? product : null;
+  }
+
+  getProductName(productId: string): string {
+    const product: WrappedProductDTO | null = this.getProduct(productId);
+    if (product != null) {
+      return product.name;
+    } else {
+      return "";
+    }
   }
 
   choseProduct(product: WrappedProductDTO) {
     this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
     this.productsFormGroup.addControl(product.id, new FormControl(1, [Validators.min(1)]));
-    this.chosenProducts.push(product);
-    this.productTotalPrice += product.suggestedPrice;
   }
 
-  removeProduct(product: WrappedProductDTO) {
-    this.chosenProducts.splice(this.chosenProducts.indexOf(product), 1);
-    this.productsFormGroup.removeControl(product.id);
-    this.availableProducts.push(product);
-    this.productTotalPrice -= product.suggestedPrice;
+  removeProduct(productId: string) {
+    const product = this.getProduct(productId);
+    if (product != null) {
+      this.productsFormGroup.removeControl(product.id);
+      this.availableProducts.push(product);
+    }
+  }
+
+  getPrestation(prestationId: string): WrappedPrestationDTO | null {
+    const prestation = this.allPrestations.get(prestationId);
+    return prestation != null ? prestation : null;
+  }
+
+  getPrestationName(prestationId: string): string {
+    const prestation: WrappedPrestationDTO | null = this.getPrestation(prestationId);
+    if (prestation != null) {
+      return prestation.name;
+    } else {
+      return "";
+    }
   }
 
   chosePrestation(prestation: WrappedPrestationDTO) {
     this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
     this.prestationsFormGroup.addControl(prestation.id, new FormControl(1, [Validators.min(1)]));
-    this.chosenPrestations.push(prestation);
-    this.prestationTotalPrice += prestation.suggestedPrice;
   }
 
-  removePrestation(prestation: WrappedPrestationDTO) {
-    this.chosenPrestations.splice(this.chosenPrestations.indexOf(prestation), 1);
-    this.prestationsFormGroup.removeControl(prestation.id);
-    this.availablePrestations.push(prestation);
-    this.prestationTotalPrice -= prestation.suggestedPrice;
+  removePrestation(prestationId: string) {
+    const prestation = this.getPrestation(prestationId);
+
+    if (prestation != null) {
+      this.prestationsFormGroup.removeControl(prestation.id);
+      this.availablePrestations.push(prestation);
+    }
   }
 
   get productsFormGroup(): FormGroup {
     return this.bundleFormGroup.get('products') as FormGroup;
   }
 
+  get productFormGroupKeys(): string[] {
+    return Object.keys(this.productsFormGroup.value);
+  }
+
   get prestationsFormGroup(): FormGroup {
     return this.bundleFormGroup.get('prestations') as FormGroup;
+  }
+
+  get prestationFormGroupKeys(): string[] {
+    return Object.keys(this.prestationsFormGroup.value);
   }
 }
