@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {WrappedEstablishmentDTO} from "../../data/company-management/establishment/wrapped-establishment-dto";
-import {JwtAccount} from "../authentication/jwt-account";
-import {AuthenticationService} from "../authentication/authentication.service";
-import {backend} from "../../environments/environment";
-import {EstablishmentDTO} from "../../data/company-management/establishment/establishment-dto";
-import {EstablishmentCreationInformation} from "../../data/company-management/establishment/establishment-creation-information";
-import {EstablishmentUpdatedInformation} from "../../data/company-management/establishment/establishment-updated-information";
+import {WrappedEstablishmentDTO} from "../../../data/company-management/establishment/wrapped-establishment-dto";
+import {JwtAccount} from "../../authentication/jwt-account";
+import {AuthenticationService} from "../../authentication/authentication.service";
+import {backend} from "../../../environments/environment";
+import {EstablishmentDTO} from "../../../data/company-management/establishment/establishment-dto";
+import {EstablishmentCreationInformation} from "../../../data/company-management/establishment/establishment-creation-information";
+import {EstablishmentUpdatedInformation} from "../../../data/company-management/establishment/establishment-updated-information";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class EstablishmentManagementService {
   }
 
   private static companyEstablishmentUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.establishmentUrl
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.establishmentsUrl
   }
 
   private static companySpecificEstablishmentUrl(companyId: string, establishmentId: string): string {

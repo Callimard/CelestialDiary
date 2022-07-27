@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {BundleDTO} from "../../../../../data/company-management/saleable/bundle/bundle-dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {BundleManagementService} from "../../../../../service/company-management/bundle-management.service";
-import {ProductManagementService} from "../../../../../service/company-management/product-management.service";
-import {PrestationManagementService} from "../../../../../service/company-management/prestation-management.service";
+import {BundleManagementService} from "../../../../../service/company-management/saleable/bundle-management.service";
+import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedProductDTO} from "../../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {BundleUpdatedInformation} from "../../../../../data/company-management/saleable/bundle/bundle-updated-information";

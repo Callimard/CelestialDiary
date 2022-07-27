@@ -9,6 +9,8 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
+import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
+import org.bandrsoftwares.celestialdiary.aop.employee.RoleNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.BundleId;
@@ -21,14 +23,16 @@ import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
+import org.bandrsoftwares.celestialdiary.model.mongodb.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.BundleRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.ProductRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.ProductRepository;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +51,7 @@ public class SearchingAspect {
     public static final ThreadLocal<Product> PRODUCT_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Prestation> PRESTATION_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Bundle> BUNDLE_FOUND = new ThreadLocal<>();
+    public static final ThreadLocal<Role> ROLE_FOUND = new ThreadLocal<>();
 
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;
@@ -54,6 +59,7 @@ public class SearchingAspect {
     private final ProductRepository productRepository;
     private final PrestationRepository prestationRepository;
     private final BundleRepository bundleRepository;
+    private final RoleRepository roleRepository;
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.company.SearchCompany)")
     void searchAndShareCompany(JoinPoint jp) {
@@ -142,6 +148,21 @@ public class SearchingAspect {
             throw new BundleNotFoundException(bundleId);
         } else {
             BUNDLE_FOUND.set(opBundle.get());
+        }
+    }
+
+    @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.employee.SearchRole)")
+    void searchAndShareRole(JoinPoint jp) {
+        String roleId = AopTool.extractSpecificParameter(jp, RoleId.class);
+        searchAndShareRole(roleId);
+    }
+
+    private void searchAndShareRole(String roleId) {
+        Optional<Role> opRole = roleRepository.findById(roleId);
+        if (opRole.isEmpty()) {
+            throw new RoleNotFoundException(roleId);
+        } else {
+            ROLE_FOUND.set(opRole.get());
         }
     }
 }

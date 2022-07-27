@@ -6,7 +6,7 @@
     <h3 class="advanced-title-card-title">{{title}}</h3>
     <h4 class="advanced-title-card-sub-title" *ngIf="subtitle != null && subtitle.length > 0">{{subtitle}}</h4>
   </div>
-  <div class="img-container">
+  <div class="img-container" *ngIf="img != null">
     <img class="img" [src]="img" alt="Advanced title image">
   </div>
 </div>

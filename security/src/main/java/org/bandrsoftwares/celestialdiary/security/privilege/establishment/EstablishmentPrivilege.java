@@ -1,15 +1,36 @@
 package org.bandrsoftwares.celestialdiary.security.privilege.establishment;
 
-public enum EstablishmentPrivilege {
-    ESTABLISHMENT_ALL("company:%s:establishment:%s:all");
+import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 
-    private final String privilege;
+public enum EstablishmentPrivilege implements PrivilegeEnum {
+    ESTABLISHMENT_ALL("company:%s:establishment:%s:all", "", "");
 
-    EstablishmentPrivilege(String privilegeName) {
-        this.privilege = privilegeName;
+    private final String privilegePattern;
+    private final String privilegeName;
+    private final String privilegeDescription;
+
+    EstablishmentPrivilege(String privilegePattern, String privilegeName, String privilegeDescription) {
+        this.privilegePattern = privilegePattern;
+        this.privilegeName = privilegeName;
+        this.privilegeDescription = privilegeDescription;
     }
 
     public String getPrivilege(String companyId, String establishmentId) {
-        return privilege.formatted(companyId, establishmentId);
+        return privilegePattern.formatted(companyId, establishmentId);
+    }
+
+    @Override
+    public String enumName() {
+        return this.name();
+    }
+
+    @Override
+    public String getPrivilegeName() {
+        return privilegeName;
+    }
+
+    @Override
+    public String getPrivilegeDescription() {
+        return privilegeDescription;
     }
 }

@@ -7,5 +7,9 @@ import java.util.List;
 
 public interface RoleRepository extends MongoRepository<Role, String> {
 
+    List<Role> findByCompany(Company company);
+
     List<Role> findByCompanyAndIdIn(Company company, Iterable<String> ids);
+
+    List<Role> findByCompanyAndNameRegex(Company company, String name);
 }

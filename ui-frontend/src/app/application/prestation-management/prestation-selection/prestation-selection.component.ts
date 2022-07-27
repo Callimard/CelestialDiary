@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {WrappedPrestationDTO} from "../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
-import {PrestationManagementService} from "../../../../service/company-management/prestation-management.service";
+import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 
 @Component({

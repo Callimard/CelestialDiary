@@ -2,65 +2,12 @@
   <div class="form-group-error" *ngIf="creationFailed">
     <p>{{ 'employee.creation.creation-failed' | translate }}</p>
   </div>
-  <div class="form-control need-top-space">
-    <label class="form-label" for="email">{{ 'employee.email' | translate }}</label>
-    <input class="form-input" type="email" id="email" name="email" formControlName="email"
-           placeholder="{{ 'employee.email' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="password">{{ 'employee.password' | translate }}</label>
-    <input class="form-input" type="password" id="password" name="password" formControlName="password"
-           placeholder="{{ 'employee.password' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="first-name">{{ 'employee.first-name' | translate }}</label>
-    <input class="form-input" type="text" id="first-name" name="first-name" formControlName="firstName"
-           placeholder="{{ 'employee.first-name' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="last-name">{{ 'employee.last-name' | translate }}</label>
-    <input class="form-input" type="text" id="last-name" name="last-name" formControlName="lastName"
-           placeholder="{{ 'employee.last-name' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="comment">{{ 'employee.comment' | translate }}</label>
-    <textarea class="form-input" id="comment" name="comment" formControlName="comment"
-              placeholder="{{ 'employee.comment' | translate }}">
-          </textarea>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="gender">{{ 'employee.gender' | translate }}</label>
-    <select class="form-input" id="gender" name="gender" formControlName="gender">
-      <option value="MALE">{{ 'employee.gender-type.male' | translate }}</option>
-      <option value="FEMALE">{{ 'employee.gender-type.female' | translate }}</option>
-      <option value="NO_GENDER">{{ 'employee.gender-type.no-gender' | translate }}</option>
-    </select>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="phone">{{ 'employee.phone' | translate }}</label>
-    <input class="form-input" type="tel" id="phone" name="phone" formControlName="phone"
-           placeholder="{{ 'employee.phone' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="is-technician">{{ 'employee.is-technician' | translate }}</label>
-    <select class="form-input" id="is-technician" name="is-technician" formControlName="isTechnician">
-      <option value="true">{{'employee.is-technician-value.yes' | translate}}</option>
-      <option value="false">{{'employee.is-technician-value.no' | translate}}</option>
-    </select>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="tags">{{ 'employee.tags' | translate }}</label>
-    <input class="form-input" type="text" id="tags" name="tags" formControlName="tags"
-           placeholder="{{ 'employee.tags' | translate }}"/>
-  </div>
-  <div class="form-control">
-    <label class="form-label" for="roles">{{ 'employee.roles'  | translate }}</label>
-    <select class="form-input" id="roles" name="roles" formControlName="roles">
-
-    </select>
+  <div app-employee-form-content class="need-top-space"
+       [employeeFormGroup]="employeeCreationForm"
+       [displayRoleSelection]="true">
   </div>
   <div class="form-submit-group">
-    <button class="super-valid-button employee-creation-button" [disabled]="employeeCreationForm.invalid"
+    <button class="super-valid-button employee-creation-button need-top-space" [disabled]="employeeCreationForm.invalid"
             type="submit">{{ 'employee.creation.create' | translate }}</button>
   </div>
 </form>

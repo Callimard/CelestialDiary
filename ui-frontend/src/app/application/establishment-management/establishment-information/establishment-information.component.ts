@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {EstablishmentDTO} from "../../../../data/company-management/establishment/establishment-dto";
-import {EstablishmentManagementService} from "../../../../service/company-management/establishment-management.service";
+import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 

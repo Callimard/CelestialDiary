@@ -5,6 +5,7 @@
       [subTitle]="subTitlePrefix + (elementSubtitleField != null ? element[elementSubtitleField] : '') + subTitleSuffix"
       [img]="elementImageField != null ? element[elementImageField] : '/assets/images/kraken.jpg'" (click)="onTicketClick(element)"
       [ticketHeight]="elementSize"
-      [roundImage]="roundImage">
+      [roundImage]="roundImage"
+      [withImage]="withImage">
   </li>
 </ul>

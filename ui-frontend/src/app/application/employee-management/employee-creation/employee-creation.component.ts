@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Location} from "@angular/common";
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-creation',
@@ -8,7 +8,7 @@ import {Location} from "@angular/common";
 })
 export class EmployeeCreationComponent implements OnInit {
 
-  constructor(private location: Location) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     // Nothing
   }
 
@@ -17,7 +17,7 @@ export class EmployeeCreationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.router.navigate(['..'], {relativeTo: this.activatedRoute});
   }
 
 }

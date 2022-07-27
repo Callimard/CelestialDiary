@@ -50,6 +50,15 @@
           <span class="nav-item-text">{{ 'side-bar.bundles' | translate}}</span>
         </a>
       </li>
+      <li class="nav-item nav-clickable"
+          [routerLink]="['company', 'management', 'roles']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.roles')">
+        <a>
+          <i class="fa-solid fa-user-group"></i>
+          <span class="nav-item-text">{{ 'side-bar.roles' | translate}}</span>
+        </a>
+      </li>
     </ul>
     <ul class="nav-zone nav-logout">
       <li class="nav-item nav-clickable">

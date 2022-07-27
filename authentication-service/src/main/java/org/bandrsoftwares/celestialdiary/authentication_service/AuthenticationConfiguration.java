@@ -2,7 +2,7 @@ package org.bandrsoftwares.celestialdiary.authentication_service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bandrsoftwares.celestialdiary.jwt.JWTCompanyAuthenticationDSL;
+import org.bandrsoftwares.celestialdiary.jwt.JwtCompanyAuthenticationDSL;
 import org.bandrsoftwares.celestialdiary.jwt.JwtAuthenticationProvider;
 import org.bandrsoftwares.celestialdiary.jwt.JwtConfiguration;
 import org.bandrsoftwares.celestialdiary.model.mongodb.ModelConfiguration;
@@ -15,7 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.AUTHENTICATION_URL;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiAuthenticationV1.AUTHENTICATION_URL;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -49,7 +49,7 @@ public class AuthenticationConfiguration {
 
         http.authenticationProvider(jwtAuthenticationProvider).authenticationProvider(basicAuthenticationProvider);
 
-        http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());
+        http.apply(JwtCompanyAuthenticationDSL.jwtAuthenticationDSL());
 
         return http.build();
     }

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {BundleManagementService} from "../../../../../service/company-management/bundle-management.service";
-import {ProductManagementService} from "../../../../../service/company-management/product-management.service";
-import {PrestationManagementService} from "../../../../../service/company-management/prestation-management.service";
+import {BundleManagementService} from "../../../../../service/company-management/saleable/bundle-management.service";
+import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {WrappedProductDTO} from "../../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {BundleCreationInformation} from "../../../../../data/company-management/saleable/bundle/bundle-creation-information";

@@ -1,4 +1,5 @@
 import {WrappedEstablishmentDTO} from "../establishment/wrapped-establishment-dto";
+import {RoleDTO} from "./role-dto";
 
 export interface EmployeeDTO {
   id: string,
@@ -13,6 +14,7 @@ export interface EmployeeDTO {
   isTechnician: boolean,
   activated: boolean,
   tags: string[],
+  roles: RoleDTO[],
   assignedEstablishments: WrappedEstablishmentDTO[],
   creationDate: string
 }

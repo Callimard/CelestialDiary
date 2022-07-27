@@ -1,0 +1,13 @@
+<div app-searching-list class="role-searching-list-container"
+     [allElements]="allRoles"
+     searchBarPlaceHolder="{{ 'role.search' | translate }}"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [elementTitleFields]="['name']"
+     [withImage]="false"
+     (elementSelected)="navigateToRoleInformation($event)"
+     (searchFilter)="filterRole($event)">
+</div>
+<button class="floating-button create-role-button" (click)="navigateToCreateRole()">
+  <i class="fa-solid fa-plus"></i>
+</button>
+

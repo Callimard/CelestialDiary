@@ -2,7 +2,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service;
 
 import lombok.RequiredArgsConstructor;
 import org.bandrsoftwares.celestialdiary.aop.AopConfiguration;
-import org.bandrsoftwares.celestialdiary.jwt.JWTCompanyAuthenticationDSL;
+import org.bandrsoftwares.celestialdiary.jwt.JwtCompanyAuthenticationDSL;
 import org.bandrsoftwares.celestialdiary.jwt.JwtConfiguration;
 import org.bandrsoftwares.celestialdiary.model.mongodb.ModelConfiguration;
 import org.bandrsoftwares.celestialdiary.security.SecurityConfiguration;
@@ -17,6 +17,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.bandrsoftwares.celestialdiary.api.v1.ApiCompanyV1.COMPANIES_URL;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiPrivilegeV1.PRIVILEGES_URL;
 
 @RequiredArgsConstructor
 @Configuration
@@ -27,7 +28,7 @@ public class CompanyManagementConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.httpBasic()
-                .and().anonymous().disable()
+                .and()
                 .cors().disable()
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -36,13 +37,14 @@ public class CompanyManagementConfiguration {
                 .logout().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .antMatchers(HttpMethod.GET, PRIVILEGES_URL + "/**").permitAll()
                 .antMatchers(HttpMethod.GET, COMPANIES_URL + "/**").authenticated()
                 .antMatchers(HttpMethod.POST, COMPANIES_URL + "/**").authenticated()
                 .antMatchers(HttpMethod.PUT, COMPANIES_URL + "/**").authenticated()
                 .antMatchers(HttpMethod.DELETE, COMPANIES_URL + "/**").authenticated()
                 .anyRequest().denyAll();
 
-        http.apply(JWTCompanyAuthenticationDSL.jwtAuthenticationDSL());
+        http.apply(JwtCompanyAuthenticationDSL.jwtAuthenticationDSL());
 
         return http.build();
     }

@@ -1,0 +1,10 @@
+<form [formGroup]="employeeRoleFormGroup" (ngSubmit)="onEmployeeUpdateRole()">
+  <h3>{{ 'employee.update.roles.title' | translate }}</h3>
+  <div app-employee-role-selection class="need-top-space"
+       [roleFormGroup]="employeeRoleFormGroup">
+  </div>
+  <div class="form-submit-group need-top-space">
+    <button class="super-valid-button need-top-space" [disabled]="employeeRoleFormGroup.invalid" type="submit">{{ 'employee.update.roles.update' |
+      translate }}</button>
+  </div>
+</form>

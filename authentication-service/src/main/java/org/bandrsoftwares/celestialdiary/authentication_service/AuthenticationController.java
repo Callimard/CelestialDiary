@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.bandrsoftwares.celestialdiary.api.v1.AuthenticationV1.*;
+import static org.bandrsoftwares.celestialdiary.api.v1.ApiAuthenticationV1.*;
 
 @Slf4j
 @RequiredArgsConstructor

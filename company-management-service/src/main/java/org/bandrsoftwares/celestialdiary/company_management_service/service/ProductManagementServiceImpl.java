@@ -43,6 +43,17 @@ public class ProductManagementServiceImpl implements ProductManagementService {
         return productRepository.insert(product);
     }
 
+    private Product createProductFrom(Company company, ProductCreationInformation info) {
+        return Product.builder()
+                .name(info.name())
+                .description(info.description())
+                .suggestedPrice(info.suggestedPrice())
+                .activated(true)
+                .creationDate(Instant.now())
+                .company(company)
+                .build();
+    }
+
     @SearchCompany
     @Override
     public List<Product> searchProduct(@CompanyId String companyId, String filter) {
@@ -55,17 +66,6 @@ public class ProductManagementServiceImpl implements ProductManagementService {
     @Override
     public Product getSpecificProduct(@CompanyId String companyId, @ProductId String productId) {
         return SearchingAspect.PRODUCT_FOUND.get();
-    }
-
-    private Product createProductFrom(Company company, ProductCreationInformation info) {
-        return Product.builder()
-                .name(info.name())
-                .description(info.description())
-                .suggestedPrice(info.suggestedPrice())
-                .activated(true)
-                .creationDate(Instant.now())
-                .company(company)
-                .build();
     }
 
     @SearchProduct

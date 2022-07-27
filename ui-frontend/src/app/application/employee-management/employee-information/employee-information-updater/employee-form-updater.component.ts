@@ -1,8 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
+import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {EmployeeUpdatedInformation} from "../../../../../data/company-management/employee/employee-updated-information";
+import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 
 @Component({
   selector: '[app-employee-form-updater]',
@@ -13,7 +14,7 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() employee!: EmployeeDTO;
 
-  employeeUpdateForm?: FormGroup;
+  employeeUpdateForm!: FormGroup;
 
   private defaultPassword = "***************";
 
@@ -32,6 +33,11 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initializeEmployeeUpdateFormGroup() {
+    let allTagsConcat = this.extractEmployeeTags();
+    this.employeeUpdateForm = this.createEmployeeForm(allTagsConcat);
+  }
+
+  private extractEmployeeTags() {
     let allTagsConcat: string | null = null;
     if (this.employee != null) {
       allTagsConcat = "";
@@ -39,8 +45,11 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
         allTagsConcat += tag + " ";
       }
     }
+    return allTagsConcat;
+  }
 
-    this.employeeUpdateForm = new FormGroup({
+  private createEmployeeForm(allTagsConcat: null | string) {
+    return new FormGroup({
       email: new FormControl({value: this.employee.email, disabled: true}),
       password: new FormControl(this.defaultPassword),
       firstName: new FormControl(this.employee.firstName),
@@ -49,7 +58,8 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
       gender: new FormControl(this.employee.gender),
       phone: new FormControl(this.employee.phone),
       isTechnician: new FormControl(String(this.employee.isTechnician)),
-      tags: new FormControl(allTagsConcat)
+      tags: new FormControl(allTagsConcat),
+      roles: new RoleFormGroup()
     });
   }
 
@@ -64,23 +74,21 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
         gender: form.gender,
         phone: form.phone,
         isTechnician: JSON.parse(form.isTechnician),
-        tags: form.tags != null ? form.tags.split(' ') : []
+        tags: (form.tags != null ? form.tags.split(' ') : []),
       }
-      console.log(employeeUpdatedInfo)
-      this.employeeManagementService.updateEmployee(this.employee.id, employeeUpdatedInfo).then((wrappedEmployee) => {
-        this.employee.email = wrappedEmployee.email;
-        this.employee.firstName = wrappedEmployee.firstName;
-        this.employee.lastName = wrappedEmployee.lastName;
-        this.employee.gender = wrappedEmployee.gender;
-        this.employee.phone = wrappedEmployee.phone;
-        this.employee.isTechnician = wrappedEmployee.isTechnician;
-        this.employee.activated = wrappedEmployee.activated;
 
+      this.employeeManagementService.updateEmployee(this.employee.id, employeeUpdatedInfo).then((employee) => {
         this.updateFail = false;
+        this.employee = employee;
       }).catch(() => {
         this.updateFail = true;
       });
     }
   }
 
+
+
+  get roleFormGroup(): RoleFormGroup {
+    return this.employeeUpdateForm.get('roles') as RoleFormGroup;
+  }
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {ProductDTO} from "../../../../data/company-management/saleable/product/product-dto";
-import {ProductManagementService} from "../../../../service/company-management/product-management.service";
+import {ProductManagementService} from "../../../../service/company-management/saleable/product-management.service";
 
 @Component({
   selector: 'app-product-information',

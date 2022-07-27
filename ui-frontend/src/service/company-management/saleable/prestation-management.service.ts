@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {backend} from "../../environments/environment";
-import {WrappedPrestationDTO} from "../../data/company-management/saleable/prestation/wrapped-prestation-dto";
-import {JwtAccount} from "../authentication/jwt-account";
-import {AuthenticationService} from "../authentication/authentication.service";
-import {PrestationDTO} from "../../data/company-management/saleable/prestation/prestation-dto";
-import {PrestationCreationInformation} from "../../data/company-management/saleable/prestation/prestation-creation-information";
-import {PrestationUpdatedInformation} from "../../data/company-management/saleable/prestation/prestation-updated-information";
+import {backend} from "../../../environments/environment";
+import {WrappedPrestationDTO} from "../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
+import {JwtAccount} from "../../authentication/jwt-account";
+import {AuthenticationService} from "../../authentication/authentication.service";
+import {PrestationDTO} from "../../../data/company-management/saleable/prestation/prestation-dto";
+import {PrestationCreationInformation} from "../../../data/company-management/saleable/prestation/prestation-creation-information";
+import {PrestationUpdatedInformation} from "../../../data/company-management/saleable/prestation/prestation-updated-information";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class PrestationManagementService {
   }
 
   private static companyPrestationUrl(companyId: string): string {
-    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.prestationUrl;
+    return backend.backendUrl + backend.apiV1Url + backend.companiesUrl + '/' + companyId + backend.prestationsUrl;
   }
 
   private static companySpecificPrestationUrl(companyId: string, prestationId: string): string {

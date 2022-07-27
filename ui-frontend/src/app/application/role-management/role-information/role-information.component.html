@@ -1,0 +1,15 @@
+<div class="role-information-container" *ngIf="role != null">
+  <div app-advanced-title class="floating-card"
+       [title]="role.name"
+       (goBack)="goBack()"></div>
+  <div app-role-form-updater class="floating-card need-top-space"
+       [role]="role">
+  </div>
+  <div app-floating-card-button class="need-top-space role-suppression-button"
+       text="{{ 'role.delete' | translate }}"
+       [textFontWeight]="'bold'"
+       [textColor]="'red'"
+       [textSize]="'1em'"
+       (buttonClick)="deleteRole()">
+  </div>
+</div>

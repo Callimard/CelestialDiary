@@ -2,7 +2,7 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {PrestationDTO} from "../../../../../data/company-management/saleable/prestation/prestation-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {PrestationUpdatedInformation} from "../../../../../data/company-management/saleable/prestation/prestation-updated-information";
-import {PrestationManagementService} from "../../../../../service/company-management/prestation-management.service";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 
 @Component({
   selector: '[app-prestation-form-updater]',

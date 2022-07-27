@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public record EmployeeDTO(String id, String email, String firstName, String lastName, String comment, String photo, String gender,
                           String phone, boolean isTechnician, boolean activated, List<String> tags,
+                          List<RoleDTO> roles,
                           Set<WrappedEstablishmentDTO> assignedEstablishments, String creationDate) {
 
     public EmployeeDTO(Employee employee) {
@@ -23,6 +24,7 @@ public record EmployeeDTO(String id, String email, String firstName, String last
              employee.getIsTechnician(),
              employee.getActivated(),
              employee.getTags(),
+             employee.getRoles().stream().map(RoleDTO::new).toList(),
              employee.getAssignedEstablishments().stream().map(WrappedEstablishmentDTO::new).collect(Collectors.toSet()),
              employee.getCreationDate().toString());
     }
