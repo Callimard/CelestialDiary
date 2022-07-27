@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EstablishmentDTO} from "../../../../../data/company-management/establishment/establishment-dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {EstablishmentManagementService} from "../../../../../service/company-management/establishment-management.service";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 import {TimeIntervalFormArray} from "../../../../../service/time/time-interval-form-array";
 import {TimeIntervalFormGroup} from "../../../../../service/time/time-interval-form-group";
 import {EstablishmentUpdatedInformation} from "../../../../../data/company-management/establishment/establishment-updated-information";

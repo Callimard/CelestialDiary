@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProductManagementService} from "../../../../../service/company-management/product-management.service";
+import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
 import {ProductCreationInformation} from "../../../../../data/company-management/saleable/product/product-creation-information";
 
 @Component({

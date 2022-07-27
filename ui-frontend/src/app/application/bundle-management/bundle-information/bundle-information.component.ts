@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BundleDTO} from "../../../../data/company-management/saleable/bundle/bundle-dto";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {BundleManagementService} from "../../../../service/company-management/bundle-management.service";
+import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 
 @Component({
   selector: 'app-bundle-information',

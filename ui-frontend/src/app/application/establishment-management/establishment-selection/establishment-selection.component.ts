@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WrappedEstablishmentDTO} from "../../../../data/company-management/establishment/wrapped-establishment-dto";
 import {ActivatedRoute, Router} from "@angular/router";
-import {EstablishmentManagementService} from "../../../../service/company-management/establishment-management.service";
+import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 
 @Component({
   selector: 'app-establishment-selection',

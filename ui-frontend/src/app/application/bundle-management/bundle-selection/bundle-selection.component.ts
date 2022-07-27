@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {BundleManagementService} from "../../../../service/company-management/bundle-management.service";
+import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 import {WrappedBundleDTO} from "../../../../data/company-management/saleable/bundle/wrapped-bundle-dto";
 import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 

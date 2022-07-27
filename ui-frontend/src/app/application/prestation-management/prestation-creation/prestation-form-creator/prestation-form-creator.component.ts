@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {PrestationManagementService} from "../../../../../service/company-management/prestation-management.service";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PrestationCreationInformation} from "../../../../../data/company-management/saleable/prestation/prestation-creation-information";
 

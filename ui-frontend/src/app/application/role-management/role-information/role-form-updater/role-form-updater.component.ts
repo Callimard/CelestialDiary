@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {RoleDTO} from "../../../../../data/company-management/employee/role-dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {CompanyManagementPrivilegeFormGroup} from "../../../../../service/company-management/company-management-privilege-form-group";
+import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
 import {RoleUpdatedInformation} from "../../../../../data/company-management/employee/role-updated-information";
-import {RoleManagementService} from "../../../../../service/company-management/role-management.service";
+import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 
 @Component({
   selector: '[app-role-form-updater]',
@@ -30,7 +30,7 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
     this.roleUpdateForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
-      companyManagementPrivileges: new CompanyManagementPrivilegeFormGroup()
+      companyManagementPrivileges: new CompanyPrivilegeFormGroup()
     });
 
     this.roleUpdateForm.setControl('name', new FormControl(this.role.name));
@@ -68,8 +68,8 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
     })
   }
 
-  get companyManagementPrivilegesFormGroup(): CompanyManagementPrivilegeFormGroup {
-    return this.roleUpdateForm.get('companyManagementPrivileges') as CompanyManagementPrivilegeFormGroup;
+  get companyManagementPrivilegesFormGroup(): CompanyPrivilegeFormGroup {
+    return this.roleUpdateForm.get('companyManagementPrivileges') as CompanyPrivilegeFormGroup;
   }
 
 }

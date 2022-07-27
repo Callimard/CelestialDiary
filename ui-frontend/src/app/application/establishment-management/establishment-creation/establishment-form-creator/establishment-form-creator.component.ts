@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {EstablishmentManagementService} from "../../../../../service/company-management/establishment-management.service";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TimeIntervalFormGroup} from "../../../../../service/time/time-interval-form-group";
 import {TimeIntervalFormArray} from "../../../../../service/time/time-interval-form-array";

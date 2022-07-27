@@ -51,12 +51,12 @@ import {RoleSelectionComponent} from './application/role-management/role-selecti
 import {RoleInformationComponent} from './application/role-management/role-information/role-information.component';
 import {RoleCreationComponent} from './application/role-management/role-creation/role-creation.component';
 import { RoleFormCreatorComponent } from './application/role-management/role-creation/role-form-creator/role-form-creator.component';
-import { PrivilegeInputLineComponent } from './libairy/form/privilege-input-line/privilege-input-line.component';
+import { PrivilegeInputLineComponent } from './application/role-management/utils/privilege-input-line/privilege-input-line.component';
 import { RoleFormUpdaterComponent } from './application/role-management/role-information/role-form-updater/role-form-updater.component';
-import { RoleFormContentComponent } from './libairy/company-management/role/role-form-content/role-form-content.component';
+import { RoleFormContentComponent } from './application/role-management/utils/role-form-content/role-form-content.component';
 import { FloatingCardButtonComponent } from './libairy/button/floating-card-button/floating-card-button.component';
-import { EmployeeFormContentComponent } from './libairy/company-management/employee/employee-form-content/employee-form-content.component';
-import { EmployeeRoleSelectionComponent } from './libairy/company-management/employee/employee-role-selection/employee-role-selection.component';
+import { EmployeeFormContentComponent } from './application/employee-management/utils/employee-form-content/employee-form-content.component';
+import { EmployeeRoleSelectionComponent } from './application/employee-management/utils/employee-role-selection/employee-role-selection.component';
 import { EmployeeRoleUpdaterComponent } from './application/employee-management/employee-information/employee-role-updater/employee-role-updater.component';
 
 const appRoutes: Routes = [

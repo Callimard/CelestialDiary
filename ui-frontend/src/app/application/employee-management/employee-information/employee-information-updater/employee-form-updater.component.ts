@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
+import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {EmployeeUpdatedInformation} from "../../../../../data/company-management/employee/employee-updated-information";
-import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
+import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 
 @Component({
   selector: '[app-employee-form-updater]',

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ProductManagementService} from "../../../../service/company-management/product-management.service";
+import {ProductManagementService} from "../../../../service/company-management/saleable/product-management.service";
 
 @Component({
   selector: '[app-product-management-left-side]',

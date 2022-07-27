@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
-import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
-import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
+import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
+import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeUpdatedRoles} from "../../../../../data/company-management/employee/employee-updated-roles";
 import {FormControl} from "@angular/forms";
 

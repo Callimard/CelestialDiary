@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
+import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 
 @Component({
   selector: '[app-employee-form-content]',

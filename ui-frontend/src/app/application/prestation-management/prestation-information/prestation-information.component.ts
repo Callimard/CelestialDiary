@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PrestationDTO} from "../../../../data/company-management/saleable/prestation/prestation-dto";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
-import {PrestationManagementService} from "../../../../service/company-management/prestation-management.service";
+import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
 
 @Component({
   selector: 'app-prestation-information',

@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {EmployeeManagementService} from "../../../../../service/company-management/employee-management.service";
+import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
-import {RoleFormGroup} from "../../../../../service/company-management/role-form-group";
+import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 
 @Component({
   selector: '[app-employee-form-creator]',

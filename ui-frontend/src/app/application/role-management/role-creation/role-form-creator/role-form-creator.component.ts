@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PrivilegeManagementService} from "../../../../../service/company-management/privilege-management.service";
+import {PrivilegeManagementService} from "../../../../../service/company-management/employee/role/privilege/privilege-management.service";
 import {RoleCreationInformation} from "../../../../../data/company-management/employee/role-creation-information";
-import {CompanyManagementPrivilegeFormGroup} from "../../../../../service/company-management/company-management-privilege-form-group";
-import {RoleManagementService} from "../../../../../service/company-management/role-management.service";
+import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
+import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 
 @Component({
   selector: '[app-role-form-creator]',
@@ -19,7 +19,7 @@ export class RoleFormCreatorComponent implements OnInit {
   roleCreationForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     description: new FormControl(null),
-    companyManagementPrivileges: new CompanyManagementPrivilegeFormGroup()
+    companyManagementPrivileges: new CompanyPrivilegeFormGroup()
   });
 
   constructor(private privilegeManagementService: PrivilegeManagementService, private roleManagementService: RoleManagementService) {
@@ -47,7 +47,7 @@ export class RoleFormCreatorComponent implements OnInit {
     })
   }
 
-  get companyManagementPrivilegesFormGroup(): CompanyManagementPrivilegeFormGroup {
-    return this.roleCreationForm.get('companyManagementPrivileges') as CompanyManagementPrivilegeFormGroup;
+  get companyManagementPrivilegesFormGroup(): CompanyPrivilegeFormGroup {
+    return this.roleCreationForm.get('companyManagementPrivileges') as CompanyPrivilegeFormGroup;
   }
 }

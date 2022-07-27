@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {backend} from "../../environments/environment";
-import {WrappedProductDTO} from "../../data/company-management/saleable/product/wrapped-product-dto";
-import {JwtAccount} from "../authentication/jwt-account";
-import {AuthenticationService} from "../authentication/authentication.service";
-import {ProductDTO} from "../../data/company-management/saleable/product/product-dto";
-import {ProductCreationInformation} from "../../data/company-management/saleable/product/product-creation-information";
-import {ProductUpdatedInformation} from "../../data/company-management/saleable/product/product-updated-information";
+import {backend} from "../../../environments/environment";
+import {WrappedProductDTO} from "../../../data/company-management/saleable/product/wrapped-product-dto";
+import {JwtAccount} from "../../authentication/jwt-account";
+import {AuthenticationService} from "../../authentication/authentication.service";
+import {ProductDTO} from "../../../data/company-management/saleable/product/product-dto";
+import {ProductCreationInformation} from "../../../data/company-management/saleable/product/product-creation-information";
+import {ProductUpdatedInformation} from "../../../data/company-management/saleable/product/product-updated-information";
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {PrivilegeDTO} from "../../../../../data/company-management/employee/privilege-dto";
-import {PrivilegeManagementService} from "../../../../../service/company-management/privilege-management.service";
+import {PrivilegeManagementService} from "../../../../../service/company-management/employee/role/privilege/privilege-management.service";
 
 @Component({
   selector: '[app-role-form-content]',

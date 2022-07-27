@@ -1,7 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ProductDTO} from "../../../../../data/company-management/saleable/product/product-dto";
 import {FormControl, FormGroup} from "@angular/forms";
-import {ProductManagementService} from "../../../../../service/company-management/product-management.service";
+import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
 import {ProductUpdatedInformation} from "../../../../../data/company-management/saleable/product/product-updated-information";
 
 @Component({

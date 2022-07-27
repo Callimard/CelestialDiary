@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {backend} from "../../environments/environment";
-import {RoleDTO} from "../../data/company-management/employee/role-dto";
-import {JwtAccount} from "../authentication/jwt-account";
-import {AuthenticationService} from "../authentication/authentication.service";
-import {RoleCreationInformation} from "../../data/company-management/employee/role-creation-information";
-import {RoleUpdatedInformation} from "../../data/company-management/employee/role-updated-information";
+import {backend} from "../../../../environments/environment";
+import {RoleDTO} from "../../../../data/company-management/employee/role-dto";
+import {JwtAccount} from "../../../authentication/jwt-account";
+import {AuthenticationService} from "../../../authentication/authentication.service";
+import {RoleCreationInformation} from "../../../../data/company-management/employee/role-creation-information";
+import {RoleUpdatedInformation} from "../../../../data/company-management/employee/role-updated-information";
 
 @Injectable({
   providedIn: 'root'
