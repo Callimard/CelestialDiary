@@ -1,0 +1,33 @@
+.advanced-input-container {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  align-items: center;
+}
+
+.advanced-input-label {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.input-content-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  gap: 0.3em;
+}
+
+.advanced-input-input {
+  width: 4em;
+}
+
+.advanced-input-img-container {
+  overflow: hidden;
+}
+
+.input-image {
+  width: 100%;
+  height: auto;
+  transform: scale(1.5);
+}

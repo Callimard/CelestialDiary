@@ -9,6 +9,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 public interface BundleManagementService {
 
@@ -21,14 +22,13 @@ public interface BundleManagementService {
     Bundle createBundle(@CompanyId String companyId, @Valid BundleCreationInformation information);
 
     record BundleCreationInformation(@NotNull @NotBlank String name, String description, @NotNull @DecimalMin("0.01") Double suggestedPrice,
-                                     @NotNull List<String> prestations, @NotNull List<String> products) {
+                                     @NotNull Map<String, Integer> prestations, @NotNull Map<String, Integer> products) {
     }
-
 
     Bundle updateBundle(@CompanyId String companyId, @BundleId String bundleId, @Valid BundleUpdatedInformation update);
 
     record BundleUpdatedInformation(String name, String description, Double suggestedPrice,
-                                    List<String> prestations, List<String> products) {
+                                    Map<String, Integer> prestations, Map<String, Integer> products) {
     }
 
     boolean activateBundle(@CompanyId String companyId, @BundleId String bundleId);

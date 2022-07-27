@@ -1,7 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.EmbeddedProduct;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.BundleProduct;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
 
 /**
@@ -21,5 +21,5 @@ public class EstablishmentProduct {
 
     private Integer remainingStock;
 
-    private EmbeddedProduct embeddedProduct;
+    private BundleProduct bundleProduct;
 }

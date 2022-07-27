@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from "@angular/forms";
 
 @Component({
@@ -15,6 +15,8 @@ export class BasicInputFormComponent implements OnInit {
   @Input() label?: string
   @Input() inputType: string = "text";
   @Input() placeHolder?: string;
+
+  @Output() inputChange = new EventEmitter<string>();
 
   constructor() {
     // Nothing

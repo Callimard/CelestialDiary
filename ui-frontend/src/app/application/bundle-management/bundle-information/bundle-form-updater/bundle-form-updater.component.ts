@@ -6,7 +6,6 @@ import {ProductManagementService} from "../../../../../service/company-managemen
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedProductDTO} from "../../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
-import {BundleUpdatedInformation} from "../../../../../data/company-management/saleable/bundle/bundle-updated-information";
 import {ArrayService} from "../../../../../service/array/array.service";
 
 @Component({
@@ -114,24 +113,24 @@ export class BundleFormUpdaterComponent implements OnInit, OnChanges {
 
   onBundleUpdate() {
     const form = this.bundleUpdaterForm.value;
-    const bundleUpdates: BundleUpdatedInformation = {
-      name: form.name,
-      description: form.description,
-      suggestedPrice: form.suggestedPrice,
-      products: this.chosenProducts.map(p => p.id),
-      prestations: this.chosenPrestations.map(p => p.id)
-    }
+    /*    const bundleUpdates: BundleUpdatedInformation = {
+          name: form.name,
+          description: form.description,
+          suggestedPrice: form.suggestedPrice,
+          products: this.chosenProducts.map(p => p.id),
+          prestations: this.chosenPrestations.map(p => p.id)
+        }
 
-    this.bundleManagementService.updateBundle(this.bundle.id, bundleUpdates).then((wrappedBundle) => {
-      this.bundle.name = wrappedBundle.name;
-      this.bundle.description = wrappedBundle.description;
-      this.bundle.suggestedPrice = wrappedBundle.suggestedPrice;
-      this.bundle.activated = wrappedBundle.activated;
+        this.bundleManagementService.updateBundle(this.bundle.id, bundleUpdates).then((wrappedBundle) => {
+          this.bundle.name = wrappedBundle.name;
+          this.bundle.description = wrappedBundle.description;
+          this.bundle.suggestedPrice = wrappedBundle.suggestedPrice;
+          this.bundle.activated = wrappedBundle.activated;
 
-      this.updateFailed = false;
-    }).catch(() => {
-      this.updateFailed = true;
-    })
+          this.updateFailed = false;
+        }).catch(() => {
+          this.updateFailed = true;
+        })*/
   }
 
   choseProduct(product: WrappedProductDTO) {

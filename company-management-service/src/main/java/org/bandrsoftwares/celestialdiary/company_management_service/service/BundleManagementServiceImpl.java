@@ -12,10 +12,10 @@ import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.SearchBundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.BundleRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.EmbeddedPrestation;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.BundlePrestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.EmbeddedProduct;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.BundleProduct;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -67,15 +67,17 @@ public class BundleManagementServiceImpl implements BundleManagementService {
     }
 
     private Bundle createBundleFrom(Company company, BundleCreationInformation info) {
-        List<Prestation> prestations = prestationRepository.findByCompanyAndIdIn(company, info.prestations());
-        List<Product> products = productRepository.findByCompanyAndIdIn(company, info.products());
+        List<Prestation> prestations = prestationRepository.findByCompanyAndIdIn(company, info.prestations().keySet());
+        List<Product> products = productRepository.findByCompanyAndIdIn(company, info.products().keySet());
 
         return Bundle.builder()
                 .name(info.name())
                 .description(info.description())
                 .suggestedPrice(info.suggestedPrice())
-                .prestations(prestations.stream().map(EmbeddedPrestation::from).toList())
-                .products(products.stream().map(EmbeddedProduct::from).toList())
+                .prestations(prestations.stream()
+                                     .map(prestation -> new BundlePrestation(prestation, info.prestations().get(prestation.getId()))).toList())
+                .products(products.stream()
+                                  .map(product -> new BundleProduct(product, info.products().get(product.getId()))).toList())
                 .activated(true)
                 .creationDate(Instant.now())
                 .company(company)
@@ -103,16 +105,20 @@ public class BundleManagementServiceImpl implements BundleManagementService {
         }
 
         if (update.prestations() != null && !update.prestations().isEmpty()) {
-            List<Prestation> prestations = prestationRepository.findByCompanyAndIdIn(company, update.prestations());
-            bundle.setPrestations(prestations.stream().map(EmbeddedPrestation::from).toList());
+            List<Prestation> prestations = prestationRepository.findByCompanyAndIdIn(company, update.prestations().keySet());
+            bundle.setPrestations(prestations.stream()
+                                          .map(prestation -> new BundlePrestation(prestation, update.prestations().get(prestation.getId())))
+                                          .toList());
         } else if (update.prestations() != null) {
             // Empty prestations
             bundle.setPrestations(Lists.newArrayList());
         }
 
         if (update.products() != null && !update.products().isEmpty()) {
-            List<Product> products = productRepository.findByCompanyAndIdIn(company, update.products());
-            bundle.setProducts(products.stream().map(EmbeddedProduct::from).toList());
+            List<Product> products = productRepository.findByCompanyAndIdIn(company, update.products().keySet());
+            bundle.setProducts(products.stream()
+                                       .map(product -> new BundleProduct(product, update.products().get(product.getId())))
+                                       .toList());
         } else if (update.products() != null) {
             // Empty products
             bundle.setProducts(Lists.newArrayList());

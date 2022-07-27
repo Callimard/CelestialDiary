@@ -3,8 +3,8 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle;
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.Saleable;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.EmbeddedProduct;
-import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.EmbeddedPrestation;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.BundleProduct;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.BundlePrestation;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.Instant;
@@ -19,16 +19,16 @@ public class Bundle extends Saleable {
 
     // Variables.
 
-    private List<EmbeddedPrestation> prestations;
-    private List<EmbeddedProduct> products;
+    private List<BundlePrestation> prestations;
+    private List<BundleProduct> products;
 
     // Constructors.
 
     @Builder
     public Bundle(String id, String name, String description, Double suggestedPrice, Boolean activated, Instant creationDate,
                   Company company,
-                  List<EmbeddedPrestation> prestations,
-                  List<EmbeddedProduct> products) {
+                  List<BundlePrestation> prestations,
+                  List<BundleProduct> products) {
         super(id, name, description, suggestedPrice, activated, creationDate, company);
         this.prestations = prestations;
         this.products = products;
