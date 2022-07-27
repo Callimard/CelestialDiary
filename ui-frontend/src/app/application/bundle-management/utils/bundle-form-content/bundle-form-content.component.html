@@ -24,6 +24,10 @@
            formControlName="suggestedPrice">
     <span>€</span>
   </div>
+  <div class="form-control">
+    <p style="font-weight: bold">{{ 'bundle.computed-total-price' | translate }}: {{this.productTotalPrice + this.prestationTotalPrice}} €</p>
+  </div>
+
 
   <div class="form-group product-selection-container need-top-space">
     <h2>{{ 'bundle.product-selection.selection' | translate }}</h2>
@@ -52,7 +56,8 @@
                [labelFor]="productId"
                [label]="getProductName(productId)"
                [inputType]="'number'"
-               [imageSrc]="'/assets/images/kraken.jpg'">
+               [imageSrc]="'/assets/images/kraken.jpg'"
+               (inputChange)="computeProductTotalPrice()">
           </div>
         </li>
       </ul>
@@ -87,7 +92,8 @@
                [labelFor]="prestationId"
                [label]="getPrestationName(prestationId)"
                [inputType]="'number'"
-               [imageSrc]="'/assets/images/kraken.jpg'">
+               [imageSrc]="'/assets/images/kraken.jpg'"
+               (inputChange)="computePrestationTotalPrice()">
           </div>
         </li>
       </ul>

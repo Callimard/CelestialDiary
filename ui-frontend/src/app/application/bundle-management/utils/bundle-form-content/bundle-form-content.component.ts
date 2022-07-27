@@ -42,6 +42,7 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
         this.allProducts.set(product.id, product);
         this.availableProducts.push(product);
         this.mergeProductChosen();
+        this.computeProductTotalPrice();
       }
     });
   }
@@ -68,6 +69,7 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
         this.allPrestations.set(prestation.id, prestation);
         this.availablePrestations.push(prestation);
         this.mergePrestationChosen();
+        this.computePrestationTotalPrice();
       }
     })
   }
@@ -105,6 +107,7 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
   choseProduct(product: WrappedProductDTO) {
     this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
     this.productsFormGroup.addControl(product.id, new FormControl(1, [Validators.min(1)]));
+    this.computeProductTotalPrice();
   }
 
   removeProduct(productId: string) {
@@ -112,6 +115,19 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
     if (product != null) {
       this.productsFormGroup.removeControl(product.id);
       this.availableProducts.push(product);
+      this.computeProductTotalPrice();
+    }
+  }
+
+  computeProductTotalPrice() {
+    const productIds: string[] = this.productFormGroupKeys;
+    this.productTotalPrice = 0;
+    for (let productId of productIds) {
+      const product = this.allProducts.get(productId);
+      if (product != null) {
+        const quantity = this.productsFormGroup.value[productId];
+        this.productTotalPrice += product.suggestedPrice * quantity;
+      }
     }
   }
 
@@ -132,6 +148,7 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
   chosePrestation(prestation: WrappedPrestationDTO) {
     this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
     this.prestationsFormGroup.addControl(prestation.id, new FormControl(1, [Validators.min(1)]));
+    this.computePrestationTotalPrice();
   }
 
   removePrestation(prestationId: string) {
@@ -140,6 +157,19 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
     if (prestation != null) {
       this.prestationsFormGroup.removeControl(prestation.id);
       this.availablePrestations.push(prestation);
+      this.computePrestationTotalPrice();
+    }
+  }
+
+  computePrestationTotalPrice() {
+    const prestationIds: string[] = this.prestationFormGroupKeys;
+    this.prestationTotalPrice = 0;
+    for (let prestationId of prestationIds) {
+      const prestation = this.allPrestations.get(prestationId);
+      if (prestation != null) {
+        const quantity = this.prestationsFormGroup.value[prestationId];
+        this.prestationTotalPrice += prestation.suggestedPrice * quantity;
+      }
     }
   }
 

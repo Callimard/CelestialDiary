@@ -138,6 +138,7 @@
     "name": "Bundle name",
     "description": "Description",
     "suggested-price": "Suggested price",
+    "computed-total-price": "Computed total price",
     "price": "Price",
     "products": "Products",
     "product-selection": {
