@@ -13,6 +13,7 @@ import {RoleFormGroup} from "../../../../../service/company-management/employee/
 export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() employee!: EmployeeDTO;
+  @Input() allDisable = false;
 
   employeeUpdateForm!: FormGroup;
 
@@ -51,14 +52,14 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   private createEmployeeForm(allTagsConcat: null | string) {
     return new FormGroup({
       email: new FormControl({value: this.employee.email, disabled: true}),
-      password: new FormControl(this.defaultPassword),
-      firstName: new FormControl(this.employee.firstName),
-      lastName: new FormControl(this.employee.lastName),
-      comment: new FormControl(this.employee.comment),
-      gender: new FormControl(this.employee.gender),
-      phone: new FormControl(this.employee.phone),
-      isTechnician: new FormControl(String(this.employee.isTechnician)),
-      tags: new FormControl(allTagsConcat),
+      password: new FormControl({value: this.defaultPassword, disabled: this.allDisable}),
+      firstName: new FormControl({value: this.employee.firstName, disabled: this.allDisable}),
+      lastName: new FormControl({value: this.employee.lastName, disabled: this.allDisable}),
+      comment: new FormControl({value: this.employee.comment, disabled: this.allDisable}),
+      gender: new FormControl({value: this.employee.gender, disabled: this.allDisable}),
+      phone: new FormControl({value: this.employee.phone, disabled: this.allDisable}),
+      isTechnician: new FormControl({value: String(this.employee.isTechnician), disabled: this.allDisable}),
+      tags: new FormControl({value: allTagsConcat, disabled: this.allDisable}),
       roles: new RoleFormGroup()
     });
   }
@@ -85,8 +86,6 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
       });
     }
   }
-
-
 
   get roleFormGroup(): RoleFormGroup {
     return this.employeeUpdateForm.get('roles') as RoleFormGroup;

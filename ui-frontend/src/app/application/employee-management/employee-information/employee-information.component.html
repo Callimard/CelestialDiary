@@ -4,10 +4,11 @@
        [subtitle]="employee.email"
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
-  <div app-employee-form-updater class="floating-card need-top-space"
+  <div app-employee-form-updater class="floating-card need-top-space" [allDisable]="!privilegeManagement.hasEmployeeUpdate()"
        [employee]="employee">
   </div>
   <div app-employee-role-updater class="floating-card need-top-space"
+       *ngIf="privilegeManagement.hasEmployeeUpdateRole() && privilegeManagement.hasRoleRead()"
        [employee]="employee">
 
   </div>

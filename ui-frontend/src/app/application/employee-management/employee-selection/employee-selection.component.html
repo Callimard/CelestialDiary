@@ -8,6 +8,6 @@
      (searchFilter)="filterEmployee($event)"
 >
 </div>
-<button class="floating-button create-employee-button" (click)="navigateToCreateEmployee()">
+<button class="floating-button create-employee-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="navigateToCreateEmployee()">
   <i class="fa-solid fa-plus"></i>
 </button>
