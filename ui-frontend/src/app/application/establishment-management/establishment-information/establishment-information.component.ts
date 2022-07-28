@@ -3,6 +3,7 @@ import {EstablishmentDTO} from "../../../../data/company-management/establishmen
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-establishment-information',
@@ -13,7 +14,8 @@ export class EstablishmentInformationComponent implements OnInit {
 
   establishment?: EstablishmentDTO;
 
-  constructor(private establishmentManagementService: EstablishmentManagementService, private location: Location, private activatedRoute: ActivatedRoute) {
+  constructor(private establishmentManagementService: EstablishmentManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     this.activatedRoute.params.subscribe({
       next: (param) => {
         const establishmentId: string | undefined = param["establishmentId"];
@@ -38,4 +40,7 @@ export class EstablishmentInformationComponent implements OnInit {
     this.location.back()
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }

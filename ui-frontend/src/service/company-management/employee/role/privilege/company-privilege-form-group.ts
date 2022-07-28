@@ -2,9 +2,9 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {PrivilegeFormGroup} from "./privilege-form-group";
 
 export class CompanyPrivilegeFormGroup extends FormGroup {
-  constructor() {
+  constructor(disabled: boolean = false) {
     super({
-      COMPANY_ALL: new FormControl(false),
+      COMPANY_ALL: new FormControl({value: false, disabled: disabled}),
       employeeManagement: new PrivilegeFormGroup(),
       establishmentManagement: new PrivilegeFormGroup(),
       saleableManagement: new PrivilegeFormGroup(),

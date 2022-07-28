@@ -5,8 +5,11 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementPrivilege;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,6 +20,7 @@ import org.springframework.security.oauth2.server.resource.BearerTokenAuthentica
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.bandrsoftwares.celestialdiary.jwt.JwtAccount.CLAIM_ACCOUNT;
 
@@ -48,8 +52,47 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     }
 
     private List<SimpleGrantedAuthority> extractAuthorities(JwtAccount jwtAccount) {
-        return jwtAccount.getAccountAuthorities() != null ? jwtAccount.getAccountAuthorities().stream()
-                .map(SimpleGrantedAuthority::new).toList() : null;
+        List<SimpleGrantedAuthority> authorities = Lists.newArrayList();
+        authorities.addAll(extractCompanyAuthorities(jwtAccount));
+        authorities.addAll(extractEstablishmentAuthorities(jwtAccount));
+        return authorities;
+    }
+
+    private List<SimpleGrantedAuthority> extractCompanyAuthorities(JwtAccount jwtAccount) {
+        List<SimpleGrantedAuthority> authorities = Lists.newArrayList();
+
+        if (jwtAccount.getCompanyPrivilegeIdentifiers() != null) {
+            for (String identifier : jwtAccount.getCompanyPrivilegeIdentifiers()) {
+                try {
+                    CompanyManagementPrivilege privilege = CompanyManagementPrivilege.valueOf(identifier);
+                    authorities.add(new SimpleGrantedAuthority(privilege.getPrivilegeFormatted(jwtAccount.getCompanyId())));
+                } catch (IllegalArgumentException e) {
+                    log.error("Unknown CompanyManagementPrivilege identifier", e);
+                }
+            }
+        }
+
+        return authorities;
+    }
+
+    private List<SimpleGrantedAuthority> extractEstablishmentAuthorities(JwtAccount jwtAccount) {
+        List<SimpleGrantedAuthority> authorities = Lists.newArrayList();
+
+        if (jwtAccount.getEstablishmentPrivilegeIdentifiers() != null) {
+            for (Map.Entry<String, List<String>> entry : jwtAccount.getEstablishmentPrivilegeIdentifiers().entrySet()) {
+                String establishmentId = entry.getKey();
+                for (String identifier : entry.getValue()) {
+                    try {
+                        EstablishmentManagementPrivilege privilege = EstablishmentManagementPrivilege.valueOf(identifier);
+                        authorities.add(new SimpleGrantedAuthority(privilege.getPrivilegeFormatted(jwtAccount.getCompanyId(), establishmentId)));
+                    } catch (IllegalArgumentException e) {
+                        log.error("Unknown EstablishmentManagementPrivilege identifier", e);
+                    }
+                }
+            }
+        }
+
+        return authorities;
     }
 
     @Override

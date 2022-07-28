@@ -4,13 +4,13 @@ import {TimeIntervalDTO} from "../../data/general/time/time-interval-dto";
 import {TimeIntervalFormGroup} from "./time-interval-form-group";
 
 export class TimeIntervalFormArray extends FormArray {
-  constructor(nonDatedTimeIntervalListDTO?: NonDatedTimeIntervalListDTO) {
+  constructor(nonDatedTimeIntervalListDTO?: NonDatedTimeIntervalListDTO, disabled: boolean = false) {
     super([]);
 
     if (nonDatedTimeIntervalListDTO != null) {
       for (let tI of nonDatedTimeIntervalListDTO.timeIntervals) {
         if (tI != null) {
-          this.push(new TimeIntervalFormGroup(tI));
+          this.push(new TimeIntervalFormGroup(tI, disabled));
         }
       }
     }

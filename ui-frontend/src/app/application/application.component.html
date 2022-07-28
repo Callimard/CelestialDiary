@@ -5,7 +5,7 @@
       <div class="close-nav-bar" (click)="closeNavigationBar()"><i class="fa-solid fa-xmark"></i></div>
     </div>
     <ul class="nav-zone">
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeEstablishmentPrivileges()"
           [routerLink]="['company', 'management', 'establishments']"
           routerLinkActive="active"
           (click)="navClick('side-bar.establishments')">
@@ -14,7 +14,7 @@
           <span class="nav-item-text">{{ 'side-bar.establishments' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeEmployeePrivileges()"
           [routerLink]="['company', 'management', 'employees']"
           routerLinkActive="active"
           (click)="navClick('side-bar.employees')">
@@ -23,7 +23,7 @@
           <span class="nav-item-text">{{ 'side-bar.employees' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
           [routerLink]="['company', 'management', 'products']"
           routerLinkActive="active"
           (click)="navClick('side-bar.products')">
@@ -32,7 +32,7 @@
           <span class="nav-item-text">{{ 'side-bar.products' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
           [routerLink]="['company', 'management', 'prestations']"
           routerLinkActive="active"
           (click)="navClick('side-bar.prestations')">
@@ -41,7 +41,7 @@
           <span class="nav-item-text">{{ 'side-bar.prestations' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
           [routerLink]="['company', 'management', 'bundles']"
           routerLinkActive="active"
           (click)="navClick('side-bar.bundles')">
@@ -50,7 +50,7 @@
           <span class="nav-item-text">{{ 'side-bar.bundles' | translate}}</span>
         </a>
       </li>
-      <li class="nav-item nav-clickable"
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeRolePrivileges()"
           [routerLink]="['company', 'management', 'roles']"
           routerLinkActive="active"
           (click)="navClick('side-bar.roles')">

@@ -50,3 +50,39 @@ export const backend = {
   bundlesUrl: "/bundles",
   rolesUrl: "/roles"
 }
+
+export const privileges = {
+  company: {
+    all: "COMPANY_ALL",
+    employee: {
+      all: "EMPLOYEE_ALL",
+      read: "EMPLOYEE_READ",
+      create: "EMPLOYEE_CREATE",
+      update: "EMPLOYEE_UPDATE_INFORMATION",
+      update_role: "EMPLOYEE_UPDATE_ROLE",
+      assign: "EMPLOYEE_ASSIGN_TO",
+      activate: "EMPLOYEE_ACTIVATE"
+    },
+    establishment: {
+      all: "ESTABLISHMENT_ALL",
+      read: "ESTABLISHMENT_READ",
+      create: "ESTABLISHMENT_CREATE",
+      update: "ESTABLISHMENT_UPDATE",
+      activate: "ESTABLISHMENT_ACTIVATE"
+    },
+    saleable: {
+      all: "SALEABLE_ALL",
+      read: "SALEABLE_READ",
+      create: "SALEABLE_CREATE",
+      update: "SALEABLE_UPDATE",
+      activate: "SALEABLE_ACTIVATE"
+    },
+    role: {
+      all: "ROLE_ALL",
+      read: "ROLE_READ",
+      create: "ROLE_CREATE",
+      update: "ROLE_UPDATE",
+      delete: "ROLE_DELETE"
+    }
+  },
+}

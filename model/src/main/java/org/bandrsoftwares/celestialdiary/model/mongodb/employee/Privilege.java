@@ -3,7 +3,7 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.employee;
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementPrivilege;
 
 import java.util.Optional;
 
@@ -17,6 +17,8 @@ public class Privilege {
     private String identifierName;
     private String name;
     private String description;
+
+    // Static methods.
 
     public static Privilege of(PrivilegeEnum privilegeEnum) {
         return Privilege.builder()
@@ -38,13 +40,13 @@ public class Privilege {
         }
     }
 
-    public static Optional<EstablishmentPrivilege> extractEstablishmentPrivilege(Privilege privilege) {
+    public static Optional<EstablishmentManagementPrivilege> extractEstablishmentPrivilege(Privilege privilege) {
         return extractEstablishmentPrivilege(privilege.getIdentifierName());
     }
 
-    public static Optional<EstablishmentPrivilege> extractEstablishmentPrivilege(String identifierName) {
+    public static Optional<EstablishmentManagementPrivilege> extractEstablishmentPrivilege(String identifierName) {
         try {
-            return Optional.of(EstablishmentPrivilege.valueOf(identifierName));
+            return Optional.of(EstablishmentManagementPrivilege.valueOf(identifierName));
         } catch (IllegalArgumentException e) {
             return Optional.empty();
         }
@@ -52,7 +54,7 @@ public class Privilege {
 
     public static Privilege extractPrivilegeFromIdentifier(String identifierName) {
         Optional<CompanyManagementPrivilege> opCMP = extractCompanyPrivilege(identifierName);
-        Optional<EstablishmentPrivilege> opEMP = extractEstablishmentPrivilege(identifierName);
+        Optional<EstablishmentManagementPrivilege> opEMP = extractEstablishmentPrivilege(identifierName);
 
         if (opCMP.isPresent()) {
             return Privilege.of(opCMP.get());

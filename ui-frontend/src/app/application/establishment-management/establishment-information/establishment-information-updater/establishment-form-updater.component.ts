@@ -17,6 +17,7 @@ import {DatedTimeIntervalListDTO} from "../../../../../data/general/time/dated-t
 export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() establishment!: EstablishmentDTO;
+  @Input() allDisabled = false;
 
   updateFailed = false;
 
@@ -36,25 +37,25 @@ export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
 
   private initializeEstablishmentFormGroup() {
     this.establishmentUpdateForm = new FormGroup({
-      name: new FormControl(this.establishment.name),
-      description: new FormControl(this.establishment.description),
+      name: new FormControl({value: this.establishment.name, disabled: this.allDisabled}),
+      description: new FormControl({value: this.establishment.description, disabled: this.allDisabled}),
       address: new FormGroup({
-        street: new FormControl(this.establishment.address.street),
-        zipCode: new FormControl(this.establishment.address.zipCode),
-        city: new FormControl(this.establishment.address.city),
-        country: new FormControl(this.establishment.address.country)
+        street: new FormControl({value: this.establishment.address.street, disabled: this.allDisabled}),
+        zipCode: new FormControl({value: this.establishment.address.zipCode, disabled: this.allDisabled}),
+        city: new FormControl({value: this.establishment.address.city, disabled: this.allDisabled}),
+        country: new FormControl({value: this.establishment.address.country, disabled: this.allDisabled})
       }),
       openingHours: new FormGroup({
-        mondayOpening: new TimeIntervalFormArray(this.establishment.mondayOpening),
-        tuesdayOpening: new TimeIntervalFormArray(this.establishment.tuesdayOpening),
-        wednesdayOpening: new TimeIntervalFormArray(this.establishment.wednesdayOpening),
-        thursdayOpening: new TimeIntervalFormArray(this.establishment.thursdayOpening),
-        fridayOpening: new TimeIntervalFormArray(this.establishment.fridayOpening),
-        saturdayOpening: new TimeIntervalFormArray(this.establishment.saturdayOpening),
-        sundayOpening: new TimeIntervalFormArray(this.establishment.sundayOpening)
+        mondayOpening: new TimeIntervalFormArray(this.establishment.mondayOpening, this.allDisabled),
+        tuesdayOpening: new TimeIntervalFormArray(this.establishment.tuesdayOpening, this.allDisabled),
+        wednesdayOpening: new TimeIntervalFormArray(this.establishment.wednesdayOpening, this.allDisabled),
+        thursdayOpening: new TimeIntervalFormArray(this.establishment.thursdayOpening, this.allDisabled),
+        fridayOpening: new TimeIntervalFormArray(this.establishment.fridayOpening, this.allDisabled),
+        saturdayOpening: new TimeIntervalFormArray(this.establishment.saturdayOpening, this.allDisabled),
+        sundayOpening: new TimeIntervalFormArray(this.establishment.sundayOpening, this.allDisabled)
       }),
-      exceptionalOpening: new ArrayDatedTimeIntervalFormArray(this.establishment.exceptionalOpening),
-      exceptionalClosing: new ArrayDatedTimeIntervalFormArray(this.establishment.exceptionalClosing)
+      exceptionalOpening: new ArrayDatedTimeIntervalFormArray(this.establishment.exceptionalOpening, this.allDisabled),
+      exceptionalClosing: new ArrayDatedTimeIntervalFormArray(this.establishment.exceptionalClosing, this.allDisabled)
     });
   }
 

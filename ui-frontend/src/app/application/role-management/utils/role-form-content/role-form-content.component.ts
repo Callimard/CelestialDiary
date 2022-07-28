@@ -11,6 +11,7 @@ import {PrivilegeManagementService} from "../../../../../service/company-managem
 export class RoleFormContentComponent implements OnInit {
 
   @Input() roleFormGroup!: FormGroup;
+  @Input() allDisabled = false;
 
   allCompanyPrivileges: PrivilegeDTO[] = [];
 
@@ -37,6 +38,7 @@ export class RoleFormContentComponent implements OnInit {
 
         if (identifier.startsWith('COMPANY_')) {
           this.allCompanyPrivilege = privilege;
+          this.companyManagementPrivilegesForm.addControl(this.allCompanyPrivilege.identifierName, new FormControl({value: false, disabled: this.allDisabled}));
         } else if (identifier.startsWith('EMPLOYEE_')) {
           this.addEmployeePrivilege(privilege);
         } else if (identifier.startsWith('ESTABLISHMENT_')) {
@@ -53,23 +55,23 @@ export class RoleFormContentComponent implements OnInit {
   }
 
   private addEmployeePrivilege(privilege: PrivilegeDTO) {
-    this.employeeManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl(false));
+    this.employeeManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl({value: false, disabled: this.allDisabled}));
     this.companyEmployeePrivilege.push(privilege);
   }
 
   private addEstablishmentPrivilege(privilege: PrivilegeDTO) {
-    this.establishmentManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl(false));
+    this.establishmentManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl({value: false, disabled: this.allDisabled}));
     this.companyEstablishmentPrivilege.push(privilege);
   }
 
   private addSaleablePrivilege(privilege: PrivilegeDTO) {
-    this.saleableManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl(false));
+    this.saleableManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl({value: false, disabled: this.allDisabled}));
     this.companySaleablePrivilege.push(privilege);
 
   }
 
   private addRolePrivilege(privilege: PrivilegeDTO) {
-    this.roleManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl(false));
+    this.roleManagementPrivilegeForm.addControl(privilege.identifierName, new FormControl({value: false, disabled: this.allDisabled}));
     this.companyRolePrivilege.push(privilege);
   }
 

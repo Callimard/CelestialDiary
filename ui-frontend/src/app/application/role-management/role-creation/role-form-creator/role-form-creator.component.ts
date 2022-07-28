@@ -32,11 +32,11 @@ export class RoleFormCreatorComponent implements OnInit {
 
   onRoleCreation() {
     const form = this.roleCreationForm.value;
-    let privileges: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
+    let companyManagementPrivilegeIdentifiers: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
     let roleInformation: RoleCreationInformation = {
       name: form.name,
       description: form.description,
-      privilegeIdentifiers: privileges
+      companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
     }
 
     this.roleManagementService.createRole(roleInformation).then(() => {

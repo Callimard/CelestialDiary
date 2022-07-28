@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
 import {RoleUpdatedInformation} from "../../../../../data/company-management/employee/role-updated-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
+import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 
 @Component({
   selector: '[app-role-form-updater]',
@@ -13,12 +14,13 @@ import {RoleManagementService} from "../../../../../service/company-management/e
 export class RoleFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() role!: RoleDTO;
+  @Input() allDisabled = false;
 
   updateFailed = false;
 
   roleUpdateForm = new FormGroup({});
 
-  constructor(private roleManagementService: RoleManagementService) {
+  constructor(private roleManagementService: RoleManagementService, private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -27,37 +29,41 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(_changes: SimpleChanges): void {
+    this.initRoleUpdateForm();
+  }
+
+  private initRoleUpdateForm() {
     this.roleUpdateForm = new FormGroup({
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
-      companyManagementPrivileges: new CompanyPrivilegeFormGroup()
+      companyManagementPrivileges: new CompanyPrivilegeFormGroup(this.allDisabled)
     });
 
-    this.roleUpdateForm.setControl('name', new FormControl(this.role.name));
-    this.roleUpdateForm.setControl('description', new FormControl(this.role.description));
+    this.roleUpdateForm.setControl('name', new FormControl({value: this.role.name, disabled: this.allDisabled}));
+    this.roleUpdateForm.setControl('description', new FormControl({value: this.role.description, disabled: this.allDisabled}));
 
-    for (let privilege of this.role.privileges) {
+    for (let privilege of this.role.companyPrivileges) {
       if (privilege.identifierName === 'COMPANY_ALL') {
-        this.companyManagementPrivilegesFormGroup.setControl('COMPANY_ALL', new FormControl(true));
+        this.companyManagementPrivilegesFormGroup.setControl('COMPANY_ALL', new FormControl({value: true, disabled: this.allDisabled}));
       } else if (privilege.identifierName.startsWith('EMPLOYEE_')) {
-        this.companyManagementPrivilegesFormGroup.employeeManagementFormGroup.setControl(privilege.identifierName, new FormControl(true));
+        this.companyManagementPrivilegesFormGroup.employeeManagementFormGroup.setControl(privilege.identifierName, new FormControl({value: true, disabled: this.allDisabled}));
       } else if (privilege.identifierName.startsWith('ESTABLISHMENT_')) {
-        this.companyManagementPrivilegesFormGroup.establishmentManagementFormGroup.setControl(privilege.identifierName, new FormControl(true))
+        this.companyManagementPrivilegesFormGroup.establishmentManagementFormGroup.setControl(privilege.identifierName, new FormControl({value: true, disabled: this.allDisabled}))
       } else if (privilege.identifierName.startsWith('SALEABLE_')) {
-        this.companyManagementPrivilegesFormGroup.saleableManagementFormGroup.setControl(privilege.identifierName, new FormControl(true))
+        this.companyManagementPrivilegesFormGroup.saleableManagementFormGroup.setControl(privilege.identifierName, new FormControl({value: true, disabled: this.allDisabled}))
       } else if (privilege.identifierName.startsWith('ROLE_')) {
-        this.companyManagementPrivilegesFormGroup.roleManagementFormGroup.setControl(privilege.identifierName, new FormControl(true))
+        this.companyManagementPrivilegesFormGroup.roleManagementFormGroup.setControl(privilege.identifierName, new FormControl({value: true, disabled: this.allDisabled}))
       }
     }
   }
 
   onRoleUpdate() {
     const form = this.roleUpdateForm.value;
-    let privileges: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
+    let companyManagementPrivilegeIdentifiers: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
     let roleUpdates: RoleUpdatedInformation = {
       name: form.name,
       description: form.description,
-      privilegeIdentifiers: privileges
+      companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
     }
 
     this.roleManagementService.updateRole(this.role.id, roleUpdates).then((roleUpdated) => {
@@ -72,4 +78,7 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
     return this.roleUpdateForm.get('companyManagementPrivileges') as CompanyPrivilegeFormGroup;
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }

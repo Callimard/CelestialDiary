@@ -3,6 +3,7 @@ import {EmployeeDTO} from "../../../../data/company-management/employee/employee
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {EmployeeManagementService} from "../../../../service/company-management/employee/employee-management.service";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-employee-information',
@@ -13,7 +14,8 @@ export class EmployeeInformationComponent implements OnInit {
 
   employee?: EmployeeDTO;
 
-  constructor(private employeeManagementService: EmployeeManagementService, private location: Location, private activatedRoute: ActivatedRoute) {
+  constructor(private employeeManagementService: EmployeeManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     this.activatedRoute.params.subscribe({
       next: (param) => {
         const employeeId: string | undefined = param["employeeId"];
@@ -36,5 +38,9 @@ export class EmployeeInformationComponent implements OnInit {
 
   goBack() {
     this.location.back()
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }

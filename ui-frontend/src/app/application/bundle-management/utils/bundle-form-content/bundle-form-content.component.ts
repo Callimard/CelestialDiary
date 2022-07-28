@@ -13,6 +13,7 @@ import {PrestationManagementService} from "../../../../../service/company-manage
 export class BundleFormContentComponent implements OnInit, OnChanges {
 
   @Input() bundleFormGroup!: FormGroup
+  @Input() allDisabled = false;
 
   allProducts = new Map<string, WrappedProductDTO>();
   availableProducts: WrappedProductDTO[] = [];
@@ -61,6 +62,10 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
     for (let product of toRemove) {
       this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
     }
+
+    if (this.allDisabled) {
+      this.bundleFormGroup.disable();
+    }
   }
 
   private chargeAllPrestations() {
@@ -76,7 +81,7 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
 
   private mergePrestationChosen() {
     let toRemove: WrappedPrestationDTO[] = [];
-    const keys = this.productFormGroupKeys;
+    const keys = this.prestationFormGroupKeys;
     for (let prestation of this.availablePrestations) {
       for (let key of keys) {
         if (prestation.id === key) {
@@ -87,6 +92,10 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
 
     for (let prestation of toRemove) {
       this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
+    }
+
+    if (this.allDisabled) {
+      this.bundleFormGroup.disable();
     }
   }
 
@@ -105,9 +114,11 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
   }
 
   choseProduct(product: WrappedProductDTO) {
-    this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
-    this.productsFormGroup.addControl(product.id, new FormControl(1, [Validators.min(1)]));
-    this.computeProductTotalPrice();
+    if (!this.allDisabled) {
+      this.availableProducts.splice(this.availableProducts.indexOf(product), 1);
+      this.productsFormGroup.addControl(product.id, new FormControl(1, [Validators.min(1)]));
+      this.computeProductTotalPrice();
+    }
   }
 
   removeProduct(productId: string) {
@@ -146,9 +157,11 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
   }
 
   chosePrestation(prestation: WrappedPrestationDTO) {
-    this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
-    this.prestationsFormGroup.addControl(prestation.id, new FormControl(1, [Validators.min(1)]));
-    this.computePrestationTotalPrice();
+    if (!this.allDisabled) {
+      this.availablePrestations.splice(this.availablePrestations.indexOf(prestation), 1);
+      this.prestationsFormGroup.addControl(prestation.id, new FormControl(1, [Validators.min(1)]));
+      this.computePrestationTotalPrice();
+    }
   }
 
   removePrestation(prestationId: string) {

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 import {RoleDTO} from "../../../../data/company-management/employee/role-dto";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-role-selection',
@@ -12,7 +13,8 @@ export class RoleSelectionComponent implements OnInit {
 
   allRoles: RoleDTO[] = [];
 
-  constructor(private roleManagementService: RoleManagementService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private roleManagementService: RoleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -45,4 +47,7 @@ export class RoleSelectionComponent implements OnInit {
     });
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }

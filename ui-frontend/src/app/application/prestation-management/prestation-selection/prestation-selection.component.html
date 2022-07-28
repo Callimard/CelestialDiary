@@ -8,6 +8,8 @@
      (elementSelected)="navigateToPrestationInformation($event)"
      (searchFilter)="filterPrestation($event)">
 </div>
-<button class="floating-button create-prestation-button" (click)="navigateToCreatePrestation()">
+<button class="floating-button create-prestation-button"
+        *ngIf="privilegeManagement.hasSaleableCreate()"
+        (click)="navigateToCreatePrestation()">
   <i class="fa-solid fa-plus"></i>
 </button>

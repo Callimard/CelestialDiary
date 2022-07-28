@@ -12,6 +12,7 @@ import {ProductUpdatedInformation} from "../../../../../data/company-management/
 export class ProductFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() product!: ProductDTO
+  @Input() allDisabled = false;
 
   updateFailed = false;
 
@@ -32,9 +33,9 @@ export class ProductFormUpdaterComponent implements OnInit, OnChanges {
   private initUpdaterForm() {
     this.productUpdateForm = new FormGroup(
       {
-        name: new FormControl(this.product.name),
-        description: new FormControl(this.product.description),
-        suggestedPrice: new FormControl(this.product.suggestedPrice),
+        name: new FormControl({value: this.product.name, disabled: this.allDisabled}),
+        description: new FormControl({value: this.product.description, disabled: this.allDisabled}),
+        suggestedPrice: new FormControl({value: this.product.suggestedPrice, disabled: this.allDisabled}),
       }
     );
   }

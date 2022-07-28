@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 import {WrappedBundleDTO} from "../../../../data/company-management/saleable/bundle/wrapped-bundle-dto";
 import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-bundle-selection',
@@ -13,7 +14,8 @@ export class BundleSelectionComponent implements OnInit {
 
   allBundles: WrappedBundleDTO[] = []
 
-  constructor(private bundleManagementService: BundleManagementService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private bundleManagementService: BundleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -44,5 +46,9 @@ export class BundleSelectionComponent implements OnInit {
     this.router.navigate([{outlets: {right: ['create']}}], {
       relativeTo: this.activatedRoute
     });
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }

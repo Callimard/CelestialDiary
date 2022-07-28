@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {JwtAccount} from "../../service/authentication/jwt-account";
 import {environment} from "../../environments/environment";
+import {PrivilegeService} from "../../service/authentication/privilege.service";
 
 @Component({
   selector: '[app-application]',
@@ -16,7 +17,7 @@ export class ApplicationComponent implements OnInit {
 
   selectedNavItem: string = "";
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthenticationService, private privilegeService: PrivilegeService) {
     this.jwtAccount = AuthenticationService.getJwtAccount();
   }
 
@@ -53,5 +54,9 @@ export class ApplicationComponent implements OnInit {
 
   isBigScreen(): boolean {
     return !this.isLittleScreen();
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }

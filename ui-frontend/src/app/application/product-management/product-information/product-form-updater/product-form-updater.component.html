@@ -28,7 +28,7 @@
     <span>€</span>
   </div>
   <div class="form-submit-group need-top-space">
-    <button class="super-valid-button need-top-space" type="submit" [disabled]="productUpdateForm.invalid">
+    <button class="super-valid-button need-top-space" type="submit" [disabled]="productUpdateForm.invalid || allDisabled">
       {{ 'product.update.update' | translate}}
     </button>
   </div>

@@ -2,10 +2,11 @@
   <div class="form-group-error role-creation-failed-container" *ngIf="updateFailed">
     <p>{{ 'role.creation.creation-failed' | translate}}</p>
   </div>
-  <div app-role-form-content [roleFormGroup]="roleUpdateForm">
+  <div app-role-form-content [roleFormGroup]="roleUpdateForm"
+       [allDisabled]="allDisabled">
   </div>
   <div class="form-submit-group need-top-space">
-    <button type="submit" class="super-valid-button need-top-space" [disabled]="roleUpdateForm.invalid">
+    <button type="submit" class="super-valid-button need-top-space" [disabled]="roleUpdateForm.invalid || allDisabled">
       {{ 'role.update.update' | translate }}
     </button>
   </div>

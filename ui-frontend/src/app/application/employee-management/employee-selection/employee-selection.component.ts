@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WrappedEmployeeDTO} from "../../../../data/company-management/employee/wrapped-employee-dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeManagementService} from "../../../../service/company-management/employee/employee-management.service";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-employee-selection',
@@ -12,7 +13,8 @@ export class EmployeeSelectionComponent implements OnInit {
 
   allEmployees: WrappedEmployeeDTO[] = [];
 
-  constructor(private employeeManagementService: EmployeeManagementService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private employeeManagementService: EmployeeManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -45,4 +47,7 @@ export class EmployeeSelectionComponent implements OnInit {
     });
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }

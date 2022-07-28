@@ -2,6 +2,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
+import org.bandrsoftwares.celestialdiary.model.dto.employee.EstablishmentRoleDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
 
 import javax.validation.Valid;
@@ -19,13 +20,14 @@ public interface RoleManagementService {
 
     Role createRole(@CompanyId String companyId, @Valid RoleCreationInformation information);
 
-    record RoleCreationInformation(@NotNull @NotBlank String name, String description, List<String> privilegeIdentifiers,
-                                   String establishmentId) {
+    record RoleCreationInformation(@NotNull @NotBlank String name, String description, List<String> companyPrivilegeIdentifiers,
+                                   List<EstablishmentRoleDTO> establishmentRoles) {
     }
 
     Role updateRole(@CompanyId String companyId, @RoleId String roleId, @Valid RoleUpdatedInformation updates);
 
-    record RoleUpdatedInformation(String name, String description, List<String> privilegeIdentifiers, String establishmentId) {
+    record RoleUpdatedInformation(String name, String description, List<String> companyPrivilegeIdentifiers,
+                                  List<EstablishmentRoleDTO> establishmentRoles) {
     }
 
     void deleteRole(@CompanyId String companyId, @RoleId String roleId);

@@ -36,14 +36,15 @@
     </div>
   </div>
   <div class="form-group" formGroupName="openingHours">
-    <h3>{{ 'establishment.hours.title' | translate }}</h3>
+    <h3>{{ 'establishment.hours.opening-hours' | translate }}</h3>
     <div class="form-group" formArrayName="mondayOpening">
       <h4>{{ 'establishment.hours.monday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'monday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeMondayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.mondayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addMondayHours()">
+        <button class="valid-button" type="button" (click)="addMondayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -51,10 +52,11 @@
     <div class="form-group" formArrayName="tuesdayOpening">
       <h4>{{ 'establishment.hours.tuesday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'tuesday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeTuesdayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.tuesdayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addTuesdayHours()">
+        <button class="valid-button" type="button" (click)="addTuesdayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -62,10 +64,11 @@
     <div class="form-group" formArrayName="wednesdayOpening">
       <h4>{{ 'establishment.hours.wednesday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'wednesday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeWednesdayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.wednesdayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addWednesdayHours()">
+        <button class="valid-button" type="button" (click)="addWednesdayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -73,10 +76,11 @@
     <div class="form-group" formArrayName="thursdayOpening">
       <h4>{{ 'establishment.hours.thursday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'thursday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeThursdayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.thursdayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addThursdayHours()">
+        <button class="valid-button" type="button" (click)="addThursdayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -84,10 +88,11 @@
     <div class="form-group" formArrayName="fridayOpening">
       <h4>{{ 'establishment.hours.friday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'friday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeFridayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.fridayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addFridayHours()">
+        <button class="valid-button" type="button" (click)="addFridayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -95,10 +100,11 @@
     <div class="form-group" formArrayName="saturdayOpening">
       <h4>{{ 'establishment.hours.saturday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'saturday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeSaturdayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.saturdayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addSaturdayHours()">
+        <button class="valid-button" type="button" (click)="addSaturdayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -106,10 +112,11 @@
     <div class="form-group" formArrayName="sundayOpening">
       <h4>{{ 'establishment.hours.sunday' | translate }}</h4>
       <div app-time-interval-form [prefix]="'sunday'" [index]="i" [timeIntervalFormGroup]="hours" (remove)="removeSundayHours(i)"
+           [disableRemoveButton]="allDisabled"
            *ngFor="let hours of this.sundayOpeningsControls; let i = index">
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button" (click)="addSundayHours()">
+        <button class="valid-button" type="button" (click)="addSundayHours()" [disabled]="allDisabled">
           {{ 'establishment.hours.add' | translate }}
         </button>
       </div>
@@ -121,23 +128,25 @@
       <div class="exceptional-date-container">
         <label class="form-label" for="exceptional-opening-date-{{i}}">Date</label>
         <input class="form-input" type="date" name="exceptional-opening-date-{{i}}" id="exceptional-opening-date-{{i}}" formControlName="date">
-        <button class="danger-button remove-button" type="button" (click)="removeExceptionalOpening(i)" *ngIf="this.exceptionalOpenings.length > 0">
+        <button class="danger-button remove-button" type="button" (click)="removeExceptionalOpening(i)" *ngIf="this.exceptionalOpenings.length > 0"
+                [disabled]="allDisabled">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <div class="time-intervals-containers" formArrayName="timeIntervals">
         <div app-time-interval-form [prefix]="'exceptional-opening'" [index]="j" [timeIntervalFormGroup]="timeInterval"
              (remove)="removeTimeIntervalForm(exceptionalOpening, j)"
+             [disableRemoveButton]="allDisabled"
              *ngFor="let timeInterval of this.getTimeIntervalFormControls(exceptionalOpening); let j =index">
         </div>
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button"
+        <button class="valid-button" type="button" [disabled]="allDisabled"
                 (click)="addTimeIntervalFormGroup(exceptionalOpening)">{{'establishment.hours.add' | translate }}</button>
       </div>
     </div>
     <div class="add-remove-buttons-container">
-      <button class="valid-button" type="button"
+      <button class="valid-button" type="button" [disabled]="allDisabled"
               (click)="addExceptionalOpening()">{{ 'establishment.exceptional-opening.add' |translate }}</button>
     </div>
   </div>
@@ -148,28 +157,30 @@
       <div class="exceptional-date-container">
         <label class="form-label" for="exceptional-closing-date-{{i}}">Date</label>
         <input class="form-input" type="date" name="exceptional-closing-date-{{i}}" id="exceptional-closing-date-{{i}}" formControlName="date">
-        <button class="danger-button remove-button" type="button" (click)="removeExceptionalClosing(i)" *ngIf="this.exceptionalClosings.length > 0">
+        <button class="danger-button remove-button" type="button" (click)="removeExceptionalClosing(i)" *ngIf="this.exceptionalClosings.length > 0"
+                [disabled]="allDisabled">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <div class="time-intervals-containers" formArrayName="timeIntervals">
         <div app-time-interval-form [prefix]="'exceptional-closing'" [index]="j" [timeIntervalFormGroup]="timeInterval"
              (remove)="removeTimeIntervalForm(exceptionalClosing, j)"
+             [disableRemoveButton]="allDisabled"
              *ngFor="let timeInterval of this.getTimeIntervalFormControls(exceptionalClosing); let j =index">
         </div>
       </div>
       <div class="add-remove-buttons-container">
-        <button class="valid-button" type="button"
+        <button class="valid-button" type="button" [disabled]="allDisabled"
                 (click)="addTimeIntervalFormGroup(exceptionalClosing)">{{'establishment.hours.add' | translate }}</button>
       </div>
     </div>
     <div class="add-remove-buttons-container">
-      <button class="valid-button" type="button"
+      <button class="valid-button" type="button" [disabled]="allDisabled"
               (click)="addExceptionalClosing()">{{ 'establishment.exceptional-closing.add' |translate }}</button>
     </div>
   </div>
   <div class="form-submit-group need-top-space">
-    <button class="super-valid-button establishment-update-button need-top-space" [disabled]="this.establishmentUpdateForm.invalid"
+    <button class="super-valid-button establishment-update-button need-top-space" [disabled]="this.establishmentUpdateForm.invalid || allDisabled"
             type="submit">{{ 'establishment.update.update' | translate }}</button>
   </div>
 </form>

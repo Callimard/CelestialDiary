@@ -9,6 +9,8 @@
      (searchFilter)="filterProduct($event)"
 >
 </div>
-<button class="floating-button create-product-button" (click)="navigateToCreateProduct()">
+<button class="floating-button create-product-button"
+        *ngIf="privilegeManagement.hasSaleableCreate()"
+        (click)="navigateToCreateProduct()">
   <i class="fa-solid fa-plus"></i>
 </button>

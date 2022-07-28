@@ -12,6 +12,7 @@ import {PrestationManagementService} from "../../../../../service/company-manage
 export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() prestation!: PrestationDTO
+  @Input() allDisabled = false;
 
   updateFailed = false;
 
@@ -31,12 +32,12 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
 
   private initUpdaterForm() {
     this.prestationUpdateForm = new FormGroup({
-      name: new FormControl(this.prestation.name),
-      description: new FormControl(this.prestation.description),
-      suggestedPrice: new FormControl(this.prestation.suggestedPrice),
-      nbNeededTechnician: new FormControl(this.prestation.nbNeededTechnician),
-      nbClient: new FormControl(this.prestation.nbClient),
-      suggestedExecutionTime: new FormControl(this.prestation.suggestedExecutionTime)
+      name: new FormControl({value: this.prestation.name, disabled: this.allDisabled}),
+      description: new FormControl({value: this.prestation.description, disabled: this.allDisabled}),
+      suggestedPrice: new FormControl({value: this.prestation.suggestedPrice, disabled: this.allDisabled}),
+      nbNeededTechnician: new FormControl({value: this.prestation.nbNeededTechnician, disabled: this.allDisabled}),
+      nbClient: new FormControl({value: this.prestation.nbClient, disabled: this.allDisabled}),
+      suggestedExecutionTime: new FormControl({value: this.prestation.suggestedExecutionTime, disabled: this.allDisabled})
     })
   }
 

@@ -3,11 +3,12 @@
     <p>{{ 'bundle.update.update-failed' | translate}}</p>
   </div>
 
-  <div app-bundle-form-content [bundleFormGroup]="bundleUpdaterForm">
+  <div app-bundle-form-content [bundleFormGroup]="bundleUpdaterForm"
+       [allDisabled]="allDisabled">
   </div>
 
   <div class="form-submit-group need-top-space">
-    <button class="super-valid-button need-top-space" type="submit" [disabled]="bundleUpdaterForm.invalid">
+    <button class="super-valid-button need-top-space" type="submit" [disabled]="bundleUpdaterForm.invalid || allDisabled">
       {{ 'bundle.update.update' | translate}}
     </button>
   </div>

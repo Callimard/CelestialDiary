@@ -76,7 +76,7 @@ public class JwtCreatorService {
                 .companyId(company.getId())
                 .companyEmail(company.getEmail())
                 .companyName(company.getName())
-                .accountAuthorities(Lists.newArrayList(CompanyManagementPrivilege.COMPANY_ALL.getPrivilegeFormatted(company.getId())))
+                .companyPrivilegeIdentifiers(Lists.newArrayList(CompanyManagementPrivilege.COMPANY_ALL.name()))
                 .build();
     }
 
@@ -88,7 +88,8 @@ public class JwtCreatorService {
                 .employeeEmail(employee.getEmail())
                 .employeeFirstName(employee.getFirstName())
                 .employeeLastName(employee.getLastName())
-                .accountAuthorities(Lists.newArrayList(employee.allAuthorities()))
+                .companyPrivilegeIdentifiers(employee.allCompanyPrivilegeIdentifiers())
+                .establishmentPrivilegeIdentifiers(employee.allEstablishmentPrivilegeIdentifiers())
                 .build();
     }
 }

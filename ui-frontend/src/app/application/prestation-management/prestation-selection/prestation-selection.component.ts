@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {WrappedPrestationDTO} from "../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-prestation-selection',
@@ -13,7 +14,8 @@ export class PrestationSelectionComponent implements OnInit {
 
   allPrestations: WrappedPrestationDTO[] = []
 
-  constructor(private prestationManagementService: PrestationManagementService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private prestationManagementService: PrestationManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -44,5 +46,9 @@ export class PrestationSelectionComponent implements OnInit {
     this.router.navigate([{outlets: {right: ['create']}}], {
       relativeTo: this.activatedRoute
     });
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }

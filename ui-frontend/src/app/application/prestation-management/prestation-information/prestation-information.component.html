@@ -5,6 +5,7 @@
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
   <div app-prestation-form-updater class="floating-card prestation-update-form need-top-space"
-       [prestation]="prestation">
+       [prestation]="prestation"
+       [allDisabled]="!privilegeManagement.hasSaleableUpdate()">
   </div>
 </div>

@@ -9,6 +9,8 @@
      (searchFilter)="filterBundle($event)"
 >
 </div>
-<button class="floating-button create-bundle-button" (click)="navigateToCreateBundle()">
+<button class="floating-button create-bundle-button"
+        *ngIf="privilegeManagement.hasSaleableCreate()"
+        (click)="navigateToCreateBundle()">
   <i class="fa-solid fa-plus"></i>
 </button>
