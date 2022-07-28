@@ -1,18 +1,20 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.employee;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementPrivilege;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -69,27 +71,49 @@ public class Employee {
 
     // Methods.
 
-    public Set<String> allAuthorities() {
-        Set<String> authorities = Sets.newHashSet();
-        if (roles != null)
+    public List<String> allCompanyPrivilegeIdentifiers() {
+        List<String> companyPrivileges = Lists.newArrayList();
+        if (roles != null) {
             for (Role role : roles) {
-                Company roleCompany = role.getCompany();
-                addAuthorities(authorities, role, roleCompany, role.getEstablishment());
+                for (Privilege companyPrivilege : role.getCompanyPrivileges()) {
+                    Optional<CompanyManagementPrivilege> privilege = Privilege.extractCompanyPrivilege(companyPrivilege);
+                    if (privilege.isPresent()) {
+                        companyPrivileges.add(privilege.get().name());
+                    } else {
+                        log.error("Fail to extract CompanyManagementPrivilege of the identifier {}", companyPrivilege.getIdentifierName());
+                    }
+                }
             }
-        return authorities;
+        }
+
+        return companyPrivileges;
     }
 
-    private void addAuthorities(Set<String> authorities, Role role, Company roleCompany, Establishment roleEstablishment) {
-        for (Privilege privilege : role.getPrivileges()) {
-            Optional<CompanyManagementPrivilege> opCompanyPrivilege = Privilege.extractCompanyPrivilege(privilege);
-            Optional<EstablishmentPrivilege> opEstablishmentPrivilege = Privilege.extractEstablishmentPrivilege(privilege);
+    public Map<String, List<String>> allEstablishmentPrivilegeIdentifiers() {
+        Map<String, List<String>> establishmentPrivileges = Maps.newHashMap();
 
-            if (opCompanyPrivilege.isPresent()) {
-                authorities.add(opCompanyPrivilege.get().getPrivilegeFormatted(roleCompany.getId()));
-            } else if (opEstablishmentPrivilege.isPresent()) {
-                authorities.add(opEstablishmentPrivilege.get().getPrivilege(roleCompany.getId(), roleEstablishment.getId()));
+        if (roles != null) {
+            for (Role role : roles) {
+                for (EstablishmentRole establishmentRole : role.getEstablishmentRoles()) {
+                    List<String> establishmentRoleIdentifiers = Lists.newArrayList();
+                    establishmentPrivileges.put(establishmentRole.getEstablishment().getId(), establishmentRoleIdentifiers);
+
+                    addEstablishmentPrivilege(establishmentRole, establishmentRoleIdentifiers);
+                }
+            }
+        }
+
+        return establishmentPrivileges;
+    }
+
+    private void addEstablishmentPrivilege(EstablishmentRole establishmentRole, List<String> establishmentRoleIdentifiers) {
+        for (Privilege establishmentPrivilege : establishmentRole.getEstablishmentPrivileges()) {
+            Optional<EstablishmentManagementPrivilege> privilege = Privilege.extractEstablishmentPrivilege(establishmentPrivilege);
+            if (privilege.isPresent()) {
+                establishmentRoleIdentifiers.add(privilege.get().name());
             } else {
-                log.error("No convertible privilege {} -> privilege ignored", privilege);
+                log.error("Fail to extract EstablishmentManagementPrivilege of the identifier {}",
+                          establishmentPrivilege.getIdentifierName());
             }
         }
     }

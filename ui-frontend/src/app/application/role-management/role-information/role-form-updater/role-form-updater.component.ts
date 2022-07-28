@@ -36,7 +36,7 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
     this.roleUpdateForm.setControl('name', new FormControl(this.role.name));
     this.roleUpdateForm.setControl('description', new FormControl(this.role.description));
 
-    for (let privilege of this.role.privileges) {
+    for (let privilege of this.role.companyPrivileges) {
       if (privilege.identifierName === 'COMPANY_ALL') {
         this.companyManagementPrivilegesFormGroup.setControl('COMPANY_ALL', new FormControl(true));
       } else if (privilege.identifierName.startsWith('EMPLOYEE_')) {
@@ -53,11 +53,11 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
 
   onRoleUpdate() {
     const form = this.roleUpdateForm.value;
-    let privileges: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
+    let companyManagementPrivilegeIdentifiers: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
     let roleUpdates: RoleUpdatedInformation = {
       name: form.name,
       description: form.description,
-      privilegeIdentifiers: privileges
+      companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
     }
 
     this.roleManagementService.updateRole(this.role.id, roleUpdates).then((roleUpdated) => {

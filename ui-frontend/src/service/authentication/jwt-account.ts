@@ -6,6 +6,7 @@ export interface JwtAccount {
   employeeEmail: string;
   employeeFirstName: string;
   employeeLastName: string;
-  accountAuthorities: string[];
 
+  companyPrivilegeIdentifiers: string[];
+  establishmentPrivilegeIdentifiers: { [id: string]: string[] };
 }

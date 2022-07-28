@@ -3,6 +3,7 @@ package org.bandrsoftwares.celestialdiary.jwt;
 import lombok.*;
 
 import java.util.List;
+import java.util.Map;
 
 @ToString
 @Builder
@@ -32,5 +33,9 @@ public class JwtAccount {
     private String employeeEmail;
     private String employeeFirstName;
     private String employeeLastName;
-    private List<String> accountAuthorities;
+
+    private List<String> companyPrivilegeIdentifiers;
+
+    /* Map<EstablishmentId, List<EstablishmentPrivilegeIdentifier> */
+    private Map<String, List<String>> establishmentPrivilegeIdentifiers;
 }

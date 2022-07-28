@@ -1,10 +1,10 @@
 import {PrivilegeDTO} from "./privilege-dto";
-import {WrappedEstablishmentDTO} from "../establishment/wrapped-establishment-dto";
+import {EstablishmentRoleDTO} from "./establishment-role-dto";
 
 export interface RoleDTO {
   id: string,
   name: string,
   description: string,
-  privileges: PrivilegeDTO[],
-  establishment: WrappedEstablishmentDTO
+  companyPrivileges: PrivilegeDTO[],
+  establishmentRoles: EstablishmentRoleDTO
 }

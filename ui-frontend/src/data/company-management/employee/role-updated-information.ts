@@ -1,6 +1,8 @@
+import {EstablishmentRoleDTO} from "./establishment-role-dto";
+
 export interface RoleUpdatedInformation {
   name?: string,
   description?: string,
-  privilegeIdentifiers?: string[],
-  establishmentId?: string
+  companyPrivilegeIdentifiers?: string[],
+  establishmentRoles?: EstablishmentRoleDTO[]
 }
