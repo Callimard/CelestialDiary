@@ -5,10 +5,10 @@ import {NonDatedTimeIntervalListDTO} from "../../data/general/time/non-dated-tim
 
 export class DatedTimeIntervalFormGroup extends FormGroup {
 
-  constructor(datedTimeIntervalList?: DatedTimeIntervalListDTO) {
+  constructor(datedTimeIntervalList?: DatedTimeIntervalListDTO, disabled: boolean = false) {
     super({
       date: new FormControl(datedTimeIntervalList?.date),
-      timeIntervals: new TimeIntervalFormArray(datedTimeIntervalList)
+      timeIntervals: new TimeIntervalFormArray(datedTimeIntervalList, disabled)
     });
   }
 

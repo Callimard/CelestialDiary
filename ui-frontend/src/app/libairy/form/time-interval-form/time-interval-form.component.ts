@@ -11,6 +11,7 @@ export class TimeIntervalFormComponent implements OnInit {
   @Input() prefix!: string;
   @Input() timeIntervalFormGroup!: TimeIntervalFormGroup;
   @Input() index!: number
+  @Input() disableRemoveButton = false;
   @Output() remove = new EventEmitter<number>();
 
   constructor() {

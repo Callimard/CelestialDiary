@@ -207,6 +207,10 @@ button {
   background: var(--valid-button-active-background-color);
 }
 
+.valid-button:disabled {
+  opacity: 0.3;
+}
+
 .danger-button {
   background: var(--danger-color-light);
 }
@@ -217,6 +221,10 @@ button {
 
 .danger-button:active {
   background: var(--danger-color);
+}
+
+.danger-button:disabled {
+  opacity: 0.3;
 }
 
 .remove-button {

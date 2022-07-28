@@ -4,6 +4,7 @@
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
   <div app-establishment-form-updater class="floating-card need-top-space"
-       [establishment]="establishment">
+       [establishment]="establishment"
+       [allDisabled]="!privilegeManagement.hasEstablishmentUpdate()">
   </div>
 </div>

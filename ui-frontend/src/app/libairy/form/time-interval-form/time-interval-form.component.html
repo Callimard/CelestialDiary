@@ -5,7 +5,7 @@
   <label class="form-label"
          for="{{prefix}}-end-{{index}}">{{ 'time.time-interval-form.end' | translate }}</label>
   <input name="{{prefix}}-end-{{index}}" id="{{prefix}}-end-{{index}}" type="time" formControlName="end">
-  <button class="danger-button remove-button" type="button" (click)="removeTimeIntervalForm()">
+  <button class="danger-button remove-button" type="button" (click)="removeTimeIntervalForm()" [disabled]="disableRemoveButton">
     <i class="fa-solid fa-xmark"></i>
   </button>
 </div>

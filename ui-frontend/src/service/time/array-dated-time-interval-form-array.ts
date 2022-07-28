@@ -4,13 +4,13 @@ import {DatedTimeIntervalFormGroup} from "./dated-time-interval-form-group";
 
 export class ArrayDatedTimeIntervalFormArray extends FormArray {
 
-  constructor(listDatedTimeIntervalList?: DatedTimeIntervalListDTO[]) {
+  constructor(listDatedTimeIntervalList?: DatedTimeIntervalListDTO[], disabled: boolean = false) {
     super([]);
 
     if (listDatedTimeIntervalList != null && listDatedTimeIntervalList.length > 0) {
       for (let dateTimeIntervalList of listDatedTimeIntervalList) {
         if (dateTimeIntervalList != null) {
-          this.push(new DatedTimeIntervalFormGroup(dateTimeIntervalList));
+          this.push(new DatedTimeIntervalFormGroup(dateTimeIntervalList, disabled));
         }
       }
     }

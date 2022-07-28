@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {WrappedEstablishmentDTO} from "../../../../data/company-management/establishment/wrapped-establishment-dto";
 import {ActivatedRoute, Router} from "@angular/router";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-establishment-selection',
@@ -12,7 +13,8 @@ export class EstablishmentSelectionComponent implements OnInit {
 
   allEstablishments: WrappedEstablishmentDTO[] = [];
 
-  constructor(private establishmentManagementService: EstablishmentManagementService, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private establishmentManagementService: EstablishmentManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -45,4 +47,7 @@ export class EstablishmentSelectionComponent implements OnInit {
     });
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }

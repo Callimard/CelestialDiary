@@ -2,10 +2,10 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TimeIntervalDTO} from "../../data/general/time/time-interval-dto";
 
 export class TimeIntervalFormGroup extends FormGroup {
-  constructor(timeInterval?: TimeIntervalDTO) {
+  constructor(timeInterval?: TimeIntervalDTO, disabled: boolean = false) {
     super({
-      start: new FormControl(timeInterval?.start, [Validators.required]),
-      end: new FormControl(timeInterval?.end, [Validators.required])
+      start: new FormControl({value: timeInterval?.start, disabled: disabled}, [Validators.required]),
+      end: new FormControl({value: timeInterval?.end, disabled: disabled}, [Validators.required])
     });
   }
 
