@@ -5,6 +5,7 @@
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
   <div app-bundle-form-updater class="floating-card need-top-space"
-  [bundle]="bundle">
+       [bundle]="bundle"
+       [allDisabled]="!privilegeManagement.hasSaleableUpdate()">
   </div>
 </div>

@@ -3,6 +3,7 @@ import {PrestationDTO} from "../../../../data/company-management/saleable/presta
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-prestation-information',
@@ -13,7 +14,8 @@ export class PrestationInformationComponent implements OnInit {
 
   prestation?: PrestationDTO;
 
-  constructor(private prestationManagementService: PrestationManagementService, private location: Location, private activatedRoute: ActivatedRoute) {
+  constructor(private prestationManagementService: PrestationManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     this.activatedRoute.params.subscribe({
       next: (param) => {
         const prestationId: string | undefined = param["prestationId"];
@@ -36,5 +38,9 @@ export class PrestationInformationComponent implements OnInit {
 
   goBack() {
     this.location.back()
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }

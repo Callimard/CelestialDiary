@@ -46,7 +46,8 @@
       <h3>{{ 'bundle.product-selection.selected' | translate }}</h3>
       <ul class="chosen-product-list">
         <li class="product-item" *ngFor="let productId of productFormGroupKeys">
-          <button class="danger-button remove-button" type="button" (click)="removeProduct(productId)">
+          <button class="danger-button remove-button" type="button" (click)="removeProduct(productId)"
+          [disabled]="allDisabled">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div app-advanced-basic-input-form
@@ -82,7 +83,8 @@
       <h3>{{ 'bundle.prestation-selection.selected' | translate }}</h3>
       <ul class="chosen-prestation-list">
         <li class="prestation-item" *ngFor="let prestationId of prestationFormGroupKeys">
-          <button class="danger-button remove-button" type="button" (click)="removePrestation(prestationId)">
+          <button class="danger-button remove-button" type="button" (click)="removePrestation(prestationId)"
+                  [disabled]="allDisabled">
             <i class="fa-solid fa-xmark"></i>
           </button>
           <div app-advanced-basic-input-form

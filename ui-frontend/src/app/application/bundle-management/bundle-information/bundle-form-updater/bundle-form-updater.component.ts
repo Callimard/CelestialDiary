@@ -14,6 +14,7 @@ export class BundleFormUpdaterComponent implements OnInit, OnChanges {
   updateFailed = false;
 
   @Input() bundle!: BundleDTO;
+  @Input() allDisabled = false;
 
   bundleUpdaterForm!: FormGroup
 
@@ -48,6 +49,10 @@ export class BundleFormUpdaterComponent implements OnInit, OnChanges {
       for (let bundlePrestation of this.bundle.prestations) {
         this.prestationsFormGroup.addControl(bundlePrestation.prestation.id, new FormControl(bundlePrestation.quantity));
       }
+    }
+
+    if (this.allDisabled) {
+      this.bundleUpdaterForm.disable();
     }
   }
 

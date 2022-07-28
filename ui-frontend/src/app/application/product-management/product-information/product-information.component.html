@@ -5,6 +5,6 @@
        [img]="'/assets/images/kraken.jpg'"
        (goBack)="goBack()"></div>
   <div app-product-form-updater class="floating-card need-top-space"
-       [product]="product">
+       [product]="product" [allDisabled]="!privilegeManagement.hasSaleableUpdate()">
   </div>
 </div>

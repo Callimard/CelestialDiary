@@ -3,6 +3,7 @@ import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {ProductDTO} from "../../../../data/company-management/saleable/product/product-dto";
 import {ProductManagementService} from "../../../../service/company-management/saleable/product-management.service";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-product-information',
@@ -13,7 +14,8 @@ export class ProductInformationComponent implements OnInit {
 
   product?: ProductDTO;
 
-  constructor(private productManagementService: ProductManagementService, private location: Location, private activatedRoute: ActivatedRoute) {
+  constructor(private productManagementService: ProductManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     this.activatedRoute.params.subscribe({
       next: (param) => {
         const productId: string | undefined = param["productId"];
@@ -36,5 +38,9 @@ export class ProductInformationComponent implements OnInit {
 
   goBack() {
     this.location.back()
+  }
+
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
   }
 }
