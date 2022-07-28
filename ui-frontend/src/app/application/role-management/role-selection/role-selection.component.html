@@ -7,7 +7,9 @@
      (elementSelected)="navigateToRoleInformation($event)"
      (searchFilter)="filterRole($event)">
 </div>
-<button class="floating-button create-role-button" (click)="navigateToCreateRole()">
+<button class="floating-button create-role-button"
+        *ngIf="privilegeManagement.hasRoleCreate()"
+        (click)="navigateToCreateRole()">
   <i class="fa-solid fa-plus"></i>
 </button>
 

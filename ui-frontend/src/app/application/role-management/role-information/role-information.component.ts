@@ -3,6 +3,7 @@ import {RoleDTO} from "../../../../data/company-management/employee/role-dto";
 import {ActivatedRoute} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 import {Location} from "@angular/common";
+import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
   selector: 'app-role-information',
@@ -13,7 +14,8 @@ export class RoleInformationComponent implements OnInit {
 
   role!: RoleDTO;
 
-  constructor(private roleManagementService: RoleManagementService, private location: Location, private activatedRoute: ActivatedRoute) {
+  constructor(private roleManagementService: RoleManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+              private privilegeService: PrivilegeService) {
     this.activatedRoute.params.subscribe({
       next: (param) => {
         const roleId: string | undefined = param["roleId"];
@@ -44,4 +46,7 @@ export class RoleInformationComponent implements OnInit {
     });
   }
 
+  get privilegeManagement(): PrivilegeService {
+    return this.privilegeService;
+  }
 }
