@@ -9,12 +9,14 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceVerificatio
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
+import org.bandrsoftwares.celestialdiary.aop.equipment.EquipmentId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.BundleId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.product.ProductId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
+import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
@@ -48,6 +50,8 @@ public class CheckAspect {
                 checkBundleCoherence(companyId);
             } else if (parameter.isAnnotationPresent(RoleId.class)) {
                 checkRoleCoherence(companyId);
+            } else if (parameter.isAnnotationPresent(EquipmentId.class)) {
+                checkEquipmentCoherence(companyId);
             }
         }
     }
@@ -123,6 +127,19 @@ public class CheckAspect {
             if (!role.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(
                         "The role with the id " + role.getId() + " is not in the company with the id " + companyId);
+            }
+        } else {
+            throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
+                                                                    "@Search annotation");
+        }
+    }
+
+    private void checkEquipmentCoherence(String companyId) {
+        Equipment equipment = SearchingAspect.EQUIPMENT_FOUND.get();
+        if (equipment != null) {
+            if (!equipment.getCompany().getId().equals(companyId)) {
+                throw new CompanyCoherenceException(
+                        "The equipment with the id " + equipment.getId() + " is not in the company with the id " + companyId);
             }
         } else {
             throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
