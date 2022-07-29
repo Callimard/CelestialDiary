@@ -48,7 +48,8 @@ export const backend = {
   productsUrl: "/products",
   prestationsUrl: "/prestations",
   bundlesUrl: "/bundles",
-  rolesUrl: "/roles"
+  rolesUrl: "/roles",
+  equipmentsUrl: "/equipments",
 }
 
 export const privileges = {
@@ -83,6 +84,13 @@ export const privileges = {
       create: "ROLE_CREATE",
       update: "ROLE_UPDATE",
       delete: "ROLE_DELETE"
+    },
+    equipment: {
+      all: "EQUIPMENT_ALL",
+      read: "EQUIPMENT_READ",
+      create: "EQUIPMENT_CREATE",
+      update: "EQUIPMENT_UPDATE",
+      delete: "EQUIPMENT_DELETE"
     }
   },
 }
