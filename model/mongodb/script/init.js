@@ -22,3 +22,6 @@ db.Prestation.createIndex({'company': 1, name: 1}, {name: "prestation_company_na
 
 db.createCollection("Bundle")
 db.Bundle.createIndex({'company': 1, name: 1}, {name: "bundle_company_name_uq_idx", unique: true})
+
+db.createCollection("Equipment")
+db.Bundle.createIndex({'company': 1, name: 1}, {name: "equipment_company_name_uq_idx", unique: true})

@@ -45,6 +45,13 @@ public class EquipmentManagementController {
         return new EquipmentDTO(equipmentManagementService.createEquipment(idCompany, information));
     }
 
+    @ReadEquipmentPrivilege
+    @GetMapping(SPECIFIC_EQUIPMENT)
+    public EquipmentDTO getSpecificEquipment(@PathVariable(name = "idCompany") String idCompany,
+                                             @PathVariable(name = "idEquipment") String idEquipment) {
+        return new EquipmentDTO(equipmentManagementService.getSpecificEquipment(idCompany, idEquipment));
+    }
+
     @UpdateEquipmentPrivilege
     @PutMapping(SPECIFIC_EQUIPMENT)
     public EquipmentDTO updateEquipment(@PathVariable(name = "idCompany") String idCompany,

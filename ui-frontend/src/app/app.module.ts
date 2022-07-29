@@ -50,16 +50,22 @@ import {EmployeeInformationComponent} from './application/employee-management/em
 import {RoleSelectionComponent} from './application/role-management/role-selection/role-selection.component';
 import {RoleInformationComponent} from './application/role-management/role-information/role-information.component';
 import {RoleCreationComponent} from './application/role-management/role-creation/role-creation.component';
-import { RoleFormCreatorComponent } from './application/role-management/role-creation/role-form-creator/role-form-creator.component';
-import { PrivilegeInputLineComponent } from './application/role-management/utils/privilege-input-line/privilege-input-line.component';
-import { RoleFormUpdaterComponent } from './application/role-management/role-information/role-form-updater/role-form-updater.component';
-import { RoleFormContentComponent } from './application/role-management/utils/role-form-content/role-form-content.component';
-import { FloatingCardButtonComponent } from './libairy/button/floating-card-button/floating-card-button.component';
-import { EmployeeFormContentComponent } from './application/employee-management/utils/employee-form-content/employee-form-content.component';
-import { EmployeeRoleSelectionComponent } from './application/employee-management/utils/employee-role-selection/employee-role-selection.component';
-import { EmployeeRoleUpdaterComponent } from './application/employee-management/employee-information/employee-role-updater/employee-role-updater.component';
-import { AdvancedBasicInputFormComponent } from './libairy/form/advanced-basic-input-form/advanced-basic-input-form.component';
-import { BundleFormContentComponent } from './application/bundle-management/utils/bundle-form-content/bundle-form-content.component';
+import {RoleFormCreatorComponent} from './application/role-management/role-creation/role-form-creator/role-form-creator.component';
+import {PrivilegeInputLineComponent} from './application/role-management/utils/privilege-input-line/privilege-input-line.component';
+import {RoleFormUpdaterComponent} from './application/role-management/role-information/role-form-updater/role-form-updater.component';
+import {RoleFormContentComponent} from './application/role-management/utils/role-form-content/role-form-content.component';
+import {FloatingCardButtonComponent} from './libairy/button/floating-card-button/floating-card-button.component';
+import {EmployeeFormContentComponent} from './application/employee-management/utils/employee-form-content/employee-form-content.component';
+import {EmployeeRoleSelectionComponent} from './application/employee-management/utils/employee-role-selection/employee-role-selection.component';
+import {EmployeeRoleUpdaterComponent} from './application/employee-management/employee-information/employee-role-updater/employee-role-updater.component';
+import {AdvancedBasicInputFormComponent} from './libairy/form/advanced-basic-input-form/advanced-basic-input-form.component';
+import {BundleFormContentComponent} from './application/bundle-management/utils/bundle-form-content/bundle-form-content.component';
+import {EquipmentSelectionComponent} from './application/equipment-management/equipment-selection/equipment-selection.component';
+import {EquipmentInformationComponent} from './application/equipment-management/equipment-information/equipment-information.component';
+import {EquipmentCreationComponent} from './application/equipment-management/equipment-creation/equipment-creation.component';
+import { EquipmentFormCreatorComponent } from './application/equipment-management/equipment-creation/equipment-form-creator/equipment-form-creator.component';
+import { EquipmentFormContentComponent } from './application/equipment-management/utils/equipment-form-content/equipment-form-content.component';
+import { EquipmentFormUpdaterComponent } from './application/equipment-management/equipment-information/equipment-form-updater/equipment-form-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -106,6 +112,13 @@ const appRoutes: Routes = [
               {path: '', component: RoleSelectionComponent},
               {path: frontend.roleInformation, component: RoleInformationComponent, outlet: 'right'},
               {path: frontend.create, component: RoleCreationComponent, outlet: 'right'}
+            ]
+          },
+          {
+            path: frontend.equipments, component: TwoSideComponent, children: [
+              {path: '', component: EquipmentSelectionComponent},
+              {path: frontend.equipmentInformation, component: EquipmentInformationComponent, outlet: 'right'},
+              {path: frontend.create, component: EquipmentCreationComponent, outlet: 'right'}
             ]
           }
         ]
@@ -166,7 +179,13 @@ const appRoutes: Routes = [
     EmployeeRoleSelectionComponent,
     EmployeeRoleUpdaterComponent,
     AdvancedBasicInputFormComponent,
-    BundleFormContentComponent
+    BundleFormContentComponent,
+    EquipmentSelectionComponent,
+    EquipmentInformationComponent,
+    EquipmentCreationComponent,
+    EquipmentFormCreatorComponent,
+    EquipmentFormContentComponent,
+    EquipmentFormUpdaterComponent
   ],
   imports: [
     BrowserModule,

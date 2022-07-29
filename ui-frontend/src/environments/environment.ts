@@ -30,6 +30,8 @@ export const frontend = {
   bundleInformation: "information/:bundleId",
   roles: "roles",
   roleInformation: "information/:roleId",
+  equipments: "equipments",
+  equipmentInformation: "information/:equipmentId",
   create: "create"
 }
 
