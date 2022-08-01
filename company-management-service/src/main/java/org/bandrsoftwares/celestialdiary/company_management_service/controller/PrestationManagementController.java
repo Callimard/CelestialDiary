@@ -42,10 +42,10 @@ public class PrestationManagementController {
 
     @CreateSaleablePrivilege
     @PostMapping
-    public WrappedPrestationDTO createPrestation(@PathVariable(name = "idCompany") String idCompany,
-                                                 @RequestBody PrestationManagementService.PrestationCreationInformation information) {
+    public PrestationDTO createPrestation(@PathVariable(name = "idCompany") String idCompany,
+                                          @RequestBody PrestationManagementService.PrestationCreationInformation information) {
         Prestation prestation = prestationManagementService.createPrestation(idCompany, information);
-        return new WrappedPrestationDTO(prestation);
+        return new PrestationDTO(prestation);
     }
 
     @ReadSaleablePrivilege
@@ -57,11 +57,11 @@ public class PrestationManagementController {
 
     @UpdateSaleablePrivilege
     @PutMapping(SPECIFIC_PRESTATION)
-    public WrappedPrestationDTO updatePrestation(@PathVariable(name = "idCompany") String idCompany,
-                                                 @PathVariable(name = "idPrestation") String idPrestation,
-                                                 @RequestBody PrestationManagementService.PrestationUpdatedInformation update) {
+    public PrestationDTO updatePrestation(@PathVariable(name = "idCompany") String idCompany,
+                                          @PathVariable(name = "idPrestation") String idPrestation,
+                                          @RequestBody PrestationManagementService.PrestationUpdatedInformation update) {
         Prestation prestation = prestationManagementService.updatePrestation(idCompany, idPrestation, update);
-        return new WrappedPrestationDTO(prestation);
+        return new PrestationDTO(prestation);
     }
 
     @ActivateSaleablePrivilege

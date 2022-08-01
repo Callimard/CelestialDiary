@@ -9,5 +9,7 @@ public interface EquipmentRepository extends MongoRepository<Equipment, String> 
 
     List<Equipment> findByCompany(Company company);
 
+    List<Equipment> findByCompanyAndIdIn(Company company, Iterable<String> ids);
+
     List<Equipment> findByCompanyAndNameRegex(Company company, String name);
 }
