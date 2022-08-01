@@ -11,6 +11,8 @@ import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleNotFoundException;
+import org.bandrsoftwares.celestialdiary.aop.equipment.EquipmentId;
+import org.bandrsoftwares.celestialdiary.aop.equipment.EquipmentNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.BundleId;
@@ -25,6 +27,8 @@ import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.RoleRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
+import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.EquipmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
@@ -52,6 +56,7 @@ public class SearchingAspect {
     public static final ThreadLocal<Prestation> PRESTATION_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Bundle> BUNDLE_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Role> ROLE_FOUND = new ThreadLocal<>();
+    public static final ThreadLocal<Equipment> EQUIPMENT_FOUND = new ThreadLocal<>();
 
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;
@@ -60,6 +65,7 @@ public class SearchingAspect {
     private final PrestationRepository prestationRepository;
     private final BundleRepository bundleRepository;
     private final RoleRepository roleRepository;
+    private final EquipmentRepository equipmentRepository;
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.company.SearchCompany)")
     void searchAndShareCompany(JoinPoint jp) {
@@ -163,6 +169,21 @@ public class SearchingAspect {
             throw new RoleNotFoundException(roleId);
         } else {
             ROLE_FOUND.set(opRole.get());
+        }
+    }
+
+    @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.equipment.SearchEquipment)")
+    void searchAndShareEquipment(JoinPoint jp) {
+        String equipmentId = AopTool.extractSpecificParameter(jp, EquipmentId.class);
+        searchAndShareEquipment(equipmentId);
+    }
+
+    private void searchAndShareEquipment(String equipmentId) {
+        Optional<Equipment> opEquipment = equipmentRepository.findById(equipmentId);
+        if (opEquipment.isEmpty()) {
+            throw new EquipmentNotFoundException(equipmentId);
+        } else {
+            EQUIPMENT_FOUND.set(opEquipment.get());
         }
     }
 }

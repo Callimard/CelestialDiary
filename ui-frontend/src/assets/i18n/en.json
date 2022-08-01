@@ -16,6 +16,7 @@
     "prestations": "Prestations",
     "bundles": "Bundles",
     "roles": "Roles",
+    "equipments": "Equipments",
     "logout": "Logout"
   },
   "employee": {
@@ -123,6 +124,8 @@
     "nb-technician": "Nb of technician",
     "nb-client": "Nb of client",
     "suggested-execution-time": "Execution time",
+    "needed-equipments": "Required equipments",
+    "needed-equipments-help": "Required equipment(s) affect appointment scheduling. All required equipments must be available for create a valid appointment.",
     "creation": {
       "prestation-creation": "Prestation creation",
       "create": "Create",
@@ -178,6 +181,22 @@
       "update-failed": "Role update failed"
     },
     "delete": "Delete"
+  },
+  "equipment": {
+    "search": "Search an equipment",
+    "name": "Equipment name",
+    "description": "Description",
+    "photo": "photo",
+    "creation": {
+      "equipment-creation": "Equipment creation",
+      "create": "Create",
+      "creation-failed": "Equipment creation failed"
+    },
+    "update": {
+      "update": "Update",
+      "update-failed": "Equipment update failed"
+    },
+    "delete": "Supprimer"
   },
   "time": {
     "time-interval-form": {

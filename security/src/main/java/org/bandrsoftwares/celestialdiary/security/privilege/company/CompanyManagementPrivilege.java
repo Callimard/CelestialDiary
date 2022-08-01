@@ -41,7 +41,15 @@ public enum CompanyManagementPrivilege implements PrivilegeEnum {
     ROLE_READ("company:%s:role:read", "privilege.company.role.read", "privilege.company.role.read-description"),
     ROLE_CREATE("company:%s:role:create", "privilege.company.role.create", "privilege.company.role.create-description"),
     ROLE_UPDATE("company:%s:role:update", "privilege.company.role.update", "privilege.company.role.update-description"),
-    ROLE_DELETE("company:%s:role:delete", "privilege.company.role.delete", "privilege.company.role.delete-description");
+    ROLE_DELETE("company:%s:role:delete", "privilege.company.role.delete", "privilege.company.role.delete-description"),
+
+    // Equipment Management Privileges
+
+    EQUIPMENT_ALL("company:%s:equipment:all", "privilege.company.equipment.all", "privilege.company.equipment.all-description"),
+    EQUIPMENT_READ("company:%s:equipment:read", "privilege.company.equipment.read", "privilege.company.equipment.read-description"),
+    EQUIPMENT_CREATE("company:%s:equipment:create", "privilege.company.equipment.create", "privilege.company.equipment.create-description"),
+    EQUIPMENT_UPDATE("company:%s:equipment:update", "privilege.company.equipment.update", "privilege.company.equipment.update-description"),
+    EQUIPMENT_DELETE("company:%s:equipment:delete", "privilege.company.equipment.delete", "privilege.company.equipment.delete-description");
 
     private final String privilegePattern;
     private final String privilegeName;

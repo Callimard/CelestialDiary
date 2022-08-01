@@ -23,7 +23,7 @@ public interface PrestationManagementService {
 
     record PrestationCreationInformation(@NotNull @NotBlank String name, String description, @NotNull @DecimalMin("0.01") Double suggestedPrice,
                                          @NotNull @Min(1) Integer nbNeededTechnician, @NotNull @Min(1) Integer nbClient,
-                                         @NotNull @Min(1) Integer suggestedExecutionTime) {
+                                         @NotNull @Min(1) Integer suggestedExecutionTime, List<String> neededEquipments) {
     }
 
     Prestation updatePrestation(@CompanyId String companyId, @PrestationId String prestationId,
@@ -31,10 +31,10 @@ public interface PrestationManagementService {
 
     record PrestationUpdatedInformation(String name, String description, Double suggestedPrice,
                                         Integer nbNeededTechnician, Integer nbClient,
-                                        Integer suggestedExecutionTime) {
+                                        Integer suggestedExecutionTime, List<String> neededEquipments) {
     }
 
-    boolean activatePrestation(@CompanyId String companyId, @PrestationId String prestationid);
+    boolean activatePrestation(@CompanyId String companyId, @PrestationId String prestationId);
 
     boolean deactivatePrestation(@CompanyId String companyId, @PrestationId String prestationId);
 }

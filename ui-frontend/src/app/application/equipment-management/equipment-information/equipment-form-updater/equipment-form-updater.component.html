@@ -1,0 +1,14 @@
+<form class="equipment-creator-form-container" [formGroup]="equipmentUpdateForm" (ngSubmit)="onEquipmentUpdate()">
+  <div class="form-group-error equipment-creation-failed-container" *ngIf="updateFailed">
+    <p>{{ 'equipment.update.update-failed' | translate}}</p>
+  </div>
+  <div app-equipment-form-content [equipmentFormGroup]="equipmentUpdateForm"
+       [allDisabled]="allDisabled">
+  </div>
+  <div class="form-submit-group need-top-space">
+    <button type="submit" class="super-valid-button need-top-space" [disabled]="equipmentUpdateForm.invalid || allDisabled">
+      {{ 'equipment.update.update' | translate }}
+    </button>
+  </div>
+</form>
+

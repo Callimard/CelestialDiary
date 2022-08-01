@@ -1,0 +1,12 @@
+.equipment-input {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1em;
+}
+
+.equipment-input label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

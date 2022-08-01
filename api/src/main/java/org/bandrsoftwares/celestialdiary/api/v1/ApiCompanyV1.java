@@ -54,4 +54,10 @@ public class ApiCompanyV1 {
     public static final String ROLES_URL = SPECIFIC_COMPANY_URL + "/roles";
 
     public static final String SPECIFIC_ROLE = "/{idRole}";
+
+    // Equipment Management.
+
+    public static final String EQUIPMENT_URL = SPECIFIC_COMPANY_URL + "/equipments";
+
+    public static final String SPECIFIC_EQUIPMENT = "/{idEquipment}";
 }

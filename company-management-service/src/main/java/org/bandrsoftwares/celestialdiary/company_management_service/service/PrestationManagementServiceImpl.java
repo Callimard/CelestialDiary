@@ -1,5 +1,6 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.aop.SearchingAspect;
@@ -9,6 +10,8 @@ import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.SearchPrestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
+import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
+import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.EquipmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,7 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
     // Variables.
 
     private final PrestationRepository prestationRepository;
+    private final EquipmentRepository equipmentRepository;
 
     // Methods.
 
@@ -58,6 +62,11 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
     }
 
     private Prestation createPrestationFrom(Company company, PrestationCreationInformation info) {
+        List<Equipment> equipments = Lists.newArrayList();
+        if (info.neededEquipments() != null && !info.neededEquipments().isEmpty()) {
+            equipments = equipmentRepository.findByCompanyAndIdIn(company, info.neededEquipments());
+        }
+
         return Prestation.builder()
                 .name(info.name())
                 .description(info.description())
@@ -65,12 +74,14 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
                 .nbNeededTechnician(info.nbNeededTechnician())
                 .nbClient(info.nbClient())
                 .suggestedExecutionTime(info.suggestedExecutionTime())
+                .neededEquipments(equipments)
                 .activated(true)
                 .creationDate(Instant.now())
                 .company(company)
                 .build();
     }
 
+    @SearchCompany
     @SearchPrestation
     @CheckCompanyCoherence
     @Override
@@ -100,6 +111,13 @@ public class PrestationManagementServiceImpl implements PrestationManagementServ
 
         if (update.suggestedExecutionTime() != null && update.suggestedExecutionTime() >= 1) {
             prestation.setSuggestedExecutionTime(update.suggestedExecutionTime());
+        }
+
+        if (update.neededEquipments() != null && !update.neededEquipments().isEmpty()) {
+            List<Equipment> equipments = equipmentRepository.findByCompanyAndIdIn(SearchingAspect.COMPANY_FOUND.get(), update.neededEquipments());
+            prestation.setNeededEquipments(equipments);
+        } else {
+            prestation.setNeededEquipments(Lists.newArrayList());
         }
 
         return prestationRepository.save(prestation);

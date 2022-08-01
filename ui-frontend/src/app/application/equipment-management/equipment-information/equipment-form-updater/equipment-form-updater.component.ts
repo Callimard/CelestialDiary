@@ -1,0 +1,55 @@
+import {Component, Input, OnInit} from '@angular/core';
+import {EquipmentDTO} from "../../../../../data/company-management/equipment/equipment-dto";
+import {FormControl, FormGroup} from "@angular/forms";
+import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
+import {EquipmentUpdatedInformation} from "../../../../../data/company-management/equipment/equipment-updated-information";
+
+@Component({
+  selector: '[app-equipment-form-updater]',
+  templateUrl: './equipment-form-updater.component.html',
+  styleUrls: ['./equipment-form-updater.component.css']
+})
+export class EquipmentFormUpdaterComponent implements OnInit {
+
+  @Input() equipment!: EquipmentDTO;
+  @Input() allDisabled = false;
+
+  updateFailed = false;
+
+  equipmentUpdateForm = new FormGroup({});
+
+  constructor(private equipmentManagementService: EquipmentManagementService) {
+    // Nothing
+  }
+
+  ngOnInit(): void {
+    this.initEquipmentRoleUpdateForm();
+  }
+
+  private initEquipmentRoleUpdateForm() {
+    this.equipmentUpdateForm = new FormGroup({
+      name: new FormControl(this.equipment.name),
+      description: new FormControl(this.equipment.description)
+    });
+
+    if (this.allDisabled) {
+      this.equipmentUpdateForm.disable();
+    }
+  }
+
+  onEquipmentUpdate() {
+    const form = this.equipmentUpdateForm.value;
+    const updates: EquipmentUpdatedInformation = {
+      name: form.name,
+      description: form.description
+    }
+
+    this.equipmentManagementService.updateEquipment(this.equipment.id, updates).then((equipment) => {
+      this.updateFailed = false;
+      this.equipment = equipment;
+      this.initEquipmentRoleUpdateForm();
+    }).catch(() => {
+      this.updateFailed = true;
+    })
+  }
+}

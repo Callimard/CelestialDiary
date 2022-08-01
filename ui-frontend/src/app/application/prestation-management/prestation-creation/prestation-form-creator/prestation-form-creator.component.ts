@@ -1,7 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PrestationCreationInformation} from "../../../../../data/company-management/saleable/prestation/prestation-creation-information";
+import {PrestationFormGroup} from "../../utils/prestation-form-group";
+import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
 
 @Component({
   selector: '[app-prestation-form-creator]',
@@ -14,17 +15,10 @@ export class PrestationFormCreatorComponent implements OnInit {
 
   @Output() prestationCreated = new EventEmitter<boolean>();
 
-  prestationCreatorForm = new FormGroup({
-    name: new FormControl(null, [Validators.required]),
-    description: new FormControl(null),
-    suggestedPrice: new FormControl(null, [Validators.required, Validators.min(0.01)]),
-    nbNeededTechnician: new FormControl(null, [Validators.required, Validators.min(1)]),
-    nbClient: new FormControl(null, [Validators.required, Validators.min(1)]),
-    suggestedExecutionTime: new FormControl(null, [Validators.required, Validators.min(1)])
-  })
+  prestationCreatorForm: PrestationFormGroup;
 
-  constructor(private prestationManagementService: PrestationManagementService) {
-    // Nothing
+  constructor(private prestationManagementService: PrestationManagementService, private equipmentManagementService: EquipmentManagementService) {
+    this.prestationCreatorForm = new PrestationFormGroup(this.equipmentManagementService, true)
   }
 
   ngOnInit(): void {
@@ -39,14 +33,15 @@ export class PrestationFormCreatorComponent implements OnInit {
       suggestedPrice: form.suggestedPrice,
       nbNeededTechnician: form.nbNeededTechnician,
       nbClient: form.nbClient,
-      suggestedExecutionTime: form.suggestedExecutionTime
+      suggestedExecutionTime: form.suggestedExecutionTime,
+      neededEquipments: this.prestationCreatorForm.equipmentSelected
     }
 
-    this.prestationManagementService.createPrestation(prestationInformation).then(() => {
-      this.creationFailed = false;
-      this.prestationCreated.emit(true);
-    }).catch(() => {
-      this.creationFailed = true;
-    })
+        this.prestationManagementService.createPrestation(prestationInformation).then(() => {
+          this.creationFailed = false;
+          this.prestationCreated.emit(true);
+        }).catch(() => {
+          this.creationFailed = true;
+        })
   }
 }

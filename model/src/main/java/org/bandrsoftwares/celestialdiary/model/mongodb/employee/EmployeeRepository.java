@@ -10,12 +10,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, String> {
 
     List<Employee> findByCompany(Company company);
 
-    List<Employee> findByCompanyAndActivated(Company company, Boolean active);
-
-    List<Employee> findByCompanyAndIsTechnician(Company company, Boolean isTechnician);
-
-    List<Employee> findByCompanyAndActivatedAndIsTechnician(Company company, Boolean active, Boolean isTechnician);
-
     List<Employee> findByCompanyAndFirstNameRegexOrLastNameRegexOrEmailRegex(Company company, String firstName, String lastName, String email);
 
     Optional<Employee> findByCompanyAndEmail(Company company, String email);

@@ -147,4 +147,34 @@ export class PrivilegeService {
       || this.hasRoleDelete()
   }
 
+  public hasEquipmentAll(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasCompanyAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.equipment.all);
+  }
+
+  public hasEquipmentRead(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEquipmentAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.equipment.read);
+  }
+
+  public hasEquipmentCreate(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEquipmentAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.equipment.create);
+  }
+
+  public hasEquipmentUpdate(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEquipmentAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.equipment.update);
+  }
+
+  public hasEquipmentDelete(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEquipmentAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.equipment.delete);
+  }
+
+  public hasSomeEquipmentPrivileges(): boolean {
+    return this.hasEquipmentAll() || this.hasEquipmentRead() || this.hasEquipmentCreate() || this.hasEquipmentUpdate()
+      || this.hasEquipmentDelete()
+  }
+
 }
