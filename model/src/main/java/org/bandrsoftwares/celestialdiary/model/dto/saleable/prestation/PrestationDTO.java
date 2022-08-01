@@ -1,5 +1,6 @@
 package org.bandrsoftwares.celestialdiary.model.dto.saleable.prestation;
 
+import com.google.common.collect.Lists;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,5 +27,7 @@ public class PrestationDTO extends SaleableDTO {
         this.nbNeededTechnician = prestation.getNbNeededTechnician();
         this.nbClient = prestation.getNbClient();
         this.suggestedExecutionTime = prestation.getSuggestedExecutionTime();
+        this.neededEquipments = prestation.getNeededEquipments() != null ?
+                prestation.getNeededEquipments().stream().map(EquipmentDTO::new).toList() : Lists.newArrayList();
     }
 }

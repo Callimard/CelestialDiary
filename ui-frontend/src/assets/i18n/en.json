@@ -124,6 +124,8 @@
     "nb-technician": "Nb of technician",
     "nb-client": "Nb of client",
     "suggested-execution-time": "Execution time",
+    "needed-equipments": "Required equipments",
+    "needed-equipments-help": "Required equipment(s) affect appointment scheduling. All required equipments must be available for create a valid appointment.",
     "creation": {
       "prestation-creation": "Prestation creation",
       "create": "Create",

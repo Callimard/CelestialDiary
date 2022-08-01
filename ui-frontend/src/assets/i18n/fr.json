@@ -124,6 +124,8 @@
     "nb-technician": "Nb de technicien(ne)",
     "nb-client": "Nb de client",
     "suggested-execution-time": "Temps d'exécution",
+    "needed-equipments": "Équipement requis",
+    "needed-equipments-help": "Le ou les différents équipements requis pour effectuer la prestation ont une influence sur la prise de rendez-vous. Tous les équipements requis de la prestation doivent-être disponibles pour que le rendez-vous soit valide.",
     "creation": {
       "prestation-creation": "Création d'une prestation",
       "create": "Créer",

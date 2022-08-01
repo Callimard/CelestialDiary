@@ -1,8 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PrestationDTO} from "../../../../../data/company-management/saleable/prestation/prestation-dto";
-import {FormControl, FormGroup} from "@angular/forms";
 import {PrestationUpdatedInformation} from "../../../../../data/company-management/saleable/prestation/prestation-updated-information";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
+import {PrestationFormGroup} from "../../utils/prestation-form-group";
+import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
 
 @Component({
   selector: '[app-prestation-form-updater]',
@@ -16,9 +17,9 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
 
   updateFailed = false;
 
-  prestationUpdateForm!: FormGroup
+  prestationUpdateForm!: PrestationFormGroup
 
-  constructor(private prestationManagementService: PrestationManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService, private equipmentManagementService: EquipmentManagementService) {
     // Nothing
   }
 
@@ -31,14 +32,11 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initUpdaterForm() {
-    this.prestationUpdateForm = new FormGroup({
-      name: new FormControl({value: this.prestation.name, disabled: this.allDisabled}),
-      description: new FormControl({value: this.prestation.description, disabled: this.allDisabled}),
-      suggestedPrice: new FormControl({value: this.prestation.suggestedPrice, disabled: this.allDisabled}),
-      nbNeededTechnician: new FormControl({value: this.prestation.nbNeededTechnician, disabled: this.allDisabled}),
-      nbClient: new FormControl({value: this.prestation.nbClient, disabled: this.allDisabled}),
-      suggestedExecutionTime: new FormControl({value: this.prestation.suggestedExecutionTime, disabled: this.allDisabled})
-    })
+    this.prestationUpdateForm = new PrestationFormGroup(this.equipmentManagementService, false, this.prestation);
+
+    if (this.allDisabled) {
+      this.prestationUpdateForm.disable();
+    }
   }
 
   onPrestationUpdate() {
@@ -49,8 +47,10 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
       suggestedPrice: form.suggestedPrice,
       nbNeededTechnician: form.nbNeededTechnician,
       nbClient: form.nbClient,
-      suggestedExecutionTime: form.suggestedExecutionTime
+      suggestedExecutionTime: form.suggestedExecutionTime,
+      neededEquipments: this.prestationUpdateForm.equipmentSelected
     }
+
     this.prestationManagementService.updatePrestation(this.prestation.id, prestationUpdates).then((wrappedPrestation) => {
       this.prestation.name = wrappedPrestation.name;
       this.prestation.description = wrappedPrestation.description;
