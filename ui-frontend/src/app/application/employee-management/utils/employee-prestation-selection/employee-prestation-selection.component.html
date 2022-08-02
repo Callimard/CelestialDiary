@@ -1,0 +1,9 @@
+<div [formGroup]="employeePrestationForm">
+  <details class="prestation-line" *ngFor="let prestation of this.employeePrestationForm.allPrestations">
+    <summary class="basic-clickable">
+      <input class="prestation-check" type="checkbox" [id]="prestation.name" [formControlName]="prestation.id">
+      <label class="prestation-name" [for]="prestation.name">{{prestation.name}}</label>
+    </summary>
+    <p class="prestation-description">{{prestation.description}}</p>
+  </details>
+</div>

@@ -60,7 +60,7 @@ public interface EmployeeManagementService {
 
     record EmployeeCreationInformation(@NotNull @ValidEmail String email, @NotNull @ValidPassword String password,
                                        @NotNull @NotBlank String firstName, @NotNull @NotBlank String lastName, String comment,
-                                       PersonGender gender, @ValidPhone String phone, @NonNull Boolean isTechnician,
+                                       PersonGender gender, @ValidPhone String phone, List<String> praticablePrestations,
                                        @NonNull List<String> tags, @NonNull List<String> roles) {
     }
 
@@ -80,7 +80,7 @@ public interface EmployeeManagementService {
                                        @Valid EmployeeUpdatedInformation employeeUpdatedInformation);
 
     record EmployeeUpdatedInformation(@ValidPassword String password, String firstName, String lastName, String comment,
-                                      PersonGender gender, @ValidPhone String phone, Boolean isTechnician,
+                                      PersonGender gender, @ValidPhone String phone, List<String> praticablePrestations,
                                       List<String> tags) {
 
     }

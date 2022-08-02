@@ -67,6 +67,7 @@ import { EquipmentFormCreatorComponent } from './application/equipment-managemen
 import { EquipmentFormContentComponent } from './application/equipment-management/utils/equipment-form-content/equipment-form-content.component';
 import { EquipmentFormUpdaterComponent } from './application/equipment-management/equipment-information/equipment-form-updater/equipment-form-updater.component';
 import { PrestationFormContentComponent } from './application/prestation-management/utils/prestation-form-content/prestation-form-content.component';
+import { EmployeePrestationSelectionComponent } from './application/employee-management/utils/employee-prestation-selection/employee-prestation-selection.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -187,7 +188,8 @@ const appRoutes: Routes = [
     EquipmentFormCreatorComponent,
     EquipmentFormContentComponent,
     EquipmentFormUpdaterComponent,
-    PrestationFormContentComponent
+    PrestationFormContentComponent,
+    EmployeePrestationSelectionComponent
   ],
   imports: [
     BrowserModule,

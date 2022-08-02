@@ -5,6 +5,5 @@ export interface WrappedEmployeeDTO {
   lastName: string;
   gender: string;
   phone: string;
-  isTechnician: boolean;
   activated: boolean;
 }

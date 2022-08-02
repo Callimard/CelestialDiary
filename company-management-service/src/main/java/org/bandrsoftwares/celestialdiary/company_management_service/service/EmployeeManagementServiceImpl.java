@@ -1,5 +1,6 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
+import com.google.common.collect.Lists;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,8 @@ import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -31,6 +34,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     // Variables.
 
     private final EmployeeRepository employeeRepository;
+    private final PrestationRepository prestationRepository;
     private final RoleRepository roleRepository;
     private final EstablishmentRepository establishmentRepository;
 
@@ -63,11 +67,15 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
         Company company = SearchingAspect.COMPANY_FOUND.get();
 
         List<Role> roles = roleRepository.findByCompanyAndIdIn(company, employeeCreationInformation.roles());
-        Employee employee = createEmployeeFrom(company, employeeCreationInformation, roles);
+        List<Prestation> praticablePrestations =
+                prestationRepository.findByCompanyAndIdIn(company, employeeCreationInformation.praticablePrestations());
+
+        Employee employee = createEmployeeFrom(company, employeeCreationInformation, roles, praticablePrestations);
         return employeeRepository.insert(employee);
     }
 
-    private Employee createEmployeeFrom(Company company, @Valid EmployeeCreationInformation employeeCreationInformation, List<Role> roles) {
+    private Employee createEmployeeFrom(Company company, @Valid EmployeeCreationInformation employeeCreationInformation, List<Role> roles,
+                                        List<Prestation> praticablePrestations) {
         return Employee.builder()
                 .email(employeeCreationInformation.email())
                 .password(employeeCreationInformation.password())
@@ -76,7 +84,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
                 .comment(employeeCreationInformation.comment())
                 .gender(employeeCreationInformation.gender() != null ? employeeCreationInformation.gender() : PersonGender.NO_GENDER)
                 .phone(employeeCreationInformation.phone())
-                .isTechnician(employeeCreationInformation.isTechnician())
+                .praticablePrestations(praticablePrestations)
                 .activated(true)
                 .tags(employeeCreationInformation.tags())
                 .roles(roles)
@@ -85,6 +93,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
                 .build();
     }
 
+    @SearchCompany
     @SearchEmployee
     @CheckCompanyCoherence
     @Override
@@ -115,12 +124,16 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
             employee.setPhone(update.phone());
         }
 
-        if (update.isTechnician() != null) {
-            employee.setIsTechnician(update.isTechnician());
-        }
-
         if (update.tags() != null) {
             employee.setTags(update.tags());
+        }
+
+        if (update.praticablePrestations() != null && !update.praticablePrestations().isEmpty()) {
+            List<Prestation> praticablePrestations = prestationRepository.findByCompanyAndIdIn(SearchingAspect.COMPANY_FOUND.get(),
+                                                                                               update.praticablePrestations());
+            employee.setPraticablePrestations(praticablePrestations);
+        } else {
+            employee.setPraticablePrestations(Lists.newArrayList());
         }
 
         return employeeRepository.save(employee);
@@ -138,10 +151,11 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
             List<Role> roles = roleRepository.findByCompanyAndIdIn(company, roleUpdate.roles());
             employee.setRoles(roles);
 
-            return employeeRepository.save(employee);
         } else {
-            return employee;
+            employee.setRoles(Lists.newArrayList());
         }
+
+        return employeeRepository.save(employee);
     }
 
     @SearchEmployee

@@ -16,8 +16,9 @@ export class EmployeeCreationComponent implements OnInit {
     // nothing
   }
 
-  goBack() {
-    this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+  goBack(success: boolean) {
+    if (success)
+      this.router.navigate(['..'], {relativeTo: this.activatedRoute});
   }
 
 }

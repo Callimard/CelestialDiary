@@ -3,10 +3,10 @@ export interface EmployeeCreationInformation {
   password: string,
   firstName: string,
   lastName: string,
-  comment: string,
-  gender: string,
-  phone: string,
-  isTechnician: boolean,
+  comment?: string,
+  gender?: string,
+  phone?: string,
+  praticablePrestations?: string[],
   tags: string[],
   roles: string[]
 }

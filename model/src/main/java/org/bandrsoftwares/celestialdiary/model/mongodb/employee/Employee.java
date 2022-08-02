@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
+import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -47,8 +48,6 @@ public class Employee {
 
     private String phone;
 
-    private Boolean isTechnician;
-
     private Boolean activated;
 
     private List<String> tags;
@@ -60,6 +59,10 @@ public class Employee {
     @ToString.Exclude
     @DocumentReference(collection = "Establishment")
     private Set<Establishment> assignedEstablishments;
+
+    @ToString.Exclude
+    @DocumentReference(collection = "Prestation")
+    private List<Prestation> praticablePrestations;
 
     @ToString.Exclude
     @DocumentReference(collection = "Company")

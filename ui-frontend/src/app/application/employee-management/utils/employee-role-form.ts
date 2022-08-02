@@ -1,12 +1,37 @@
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
+import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
+import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
+import {RoleDTO} from "../../../../data/company-management/employee/role/role-dto";
 
-export class EmployeeRoleForm extends FormGroup{
+export class EmployeeRoleForm extends FormGroup {
 
-  constructor() {
+  private _allRoles: RoleDTO[] = [];
+
+  constructor(private roleManagementService: RoleManagementService, employee?: EmployeeDTO) {
     super({});
+
+    this.roleManagementService.allRoles().then((allRoles) => {
+      this._allRoles = allRoles;
+      this.createForm();
+      this.mergeWithEmployee(employee);
+    })
   }
 
-  public extractRoles(): string[] {
+  private createForm() {
+    for (let role of this._allRoles) {
+      this.addControl(role.id, new FormControl(false));
+    }
+  }
+
+  private mergeWithEmployee(employee?: EmployeeDTO) {
+    if (employee?.praticablePrestations != null) {
+      for (let role of employee.roles) {
+        this.setControl(role.id, new FormControl(true));
+      }
+    }
+  }
+
+  public selectedRoles(): string[] {
     let roles: string[] = [];
     const controlKeys = Object.keys(this.controls);
     const v = this.value;
@@ -17,5 +42,9 @@ export class EmployeeRoleForm extends FormGroup{
     }
 
     return roles;
+  }
+
+  get allRoles(): RoleDTO[] {
+    return this._allRoles;
   }
 }

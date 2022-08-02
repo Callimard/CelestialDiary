@@ -39,21 +39,20 @@
            placeholder="{{ 'employee.phone' | translate }}"/>
   </div>
   <div class="form-control">
-    <label class="form-label" for="is-technician">{{ 'employee.is-technician' | translate }}</label>
-    <select class="form-input" id="is-technician" name="is-technician" formControlName="isTechnician">
-      <option value="true">{{'employee.is-technician-value.yes' | translate}}</option>
-      <option value="false">{{'employee.is-technician-value.no' | translate}}</option>
-    </select>
-  </div>
-  <div class="form-control">
     <label class="form-label" for="tags">{{ 'employee.tags' | translate }}</label>
     <input class="form-input" type="text" id="tags" name="tags" formControlName="tags"
            placeholder="{{ 'employee.tags' | translate }}"/>
   </div>
+  <div class="form-group">
+    <h3>{{ 'employee.praticable-prestations' | translate }}</h3>
+    <div app-employee-prestation-selection
+         [employeePrestationForm]="employeeFormGroup.prestationFormGroup">
+    </div>
+  </div>
   <div class="form-group" *ngIf="displayRoleSelection">
     <h3>{{ 'employee.roles'  | translate }}</h3>
     <div app-employee-role-selection
-         [roleFormGroup]="roleFormGroup">
+         [roleFormGroup]="employeeFormGroup.roleFormGroup">
     </div>
   </div>
 </div>

@@ -1,17 +1,17 @@
 import {WrappedEstablishmentDTO} from "../establishment/wrapped-establishment-dto";
 import {RoleDTO} from "./role/role-dto";
+import {PrestationDTO} from "../saleable/prestation/prestation-dto";
 
 export interface EmployeeDTO {
   id: string,
   email: string,
-  password: string,
   firstName: string,
   lastName: string,
   comment: string,
   photo: string,
   gender: string,
   phone: string,
-  isTechnician: boolean,
+  praticablePrestations: PrestationDTO[],
   activated: boolean,
   tags: string[],
   roles: RoleDTO[],

@@ -33,11 +33,7 @@
       "no-gender": "No gender"
     },
     "phone": "Phone",
-    "is-technician": "Is technician",
-    "is-technician-value": {
-      "yes": "Yes",
-      "no": "No"
-    },
+    "praticable-prestations": "Praticable prestations",
     "tags": "Tags",
     "roles": "Roles",
     "creation": {
