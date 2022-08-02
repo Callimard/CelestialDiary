@@ -207,10 +207,12 @@
   "privilege": {
     "company": {
       "title": "Company management privileges",
+      "description": "Theses privileges allow the all company management.",
       "all": "Admin",
       "all-description": "All company management privileges",
       "employee": {
         "title": "Employee management privileges",
+        "description": "",
         "all": "Admin",
         "all-description": "All employee management privileges",
         "read": "Read",
@@ -228,6 +230,7 @@
       },
       "establishment": {
         "title": "Establishment management privileges",
+        "description": "",
         "all": "Admin",
         "all-description": "All establishment management privileges",
         "read": "Read",
@@ -241,6 +244,7 @@
       },
       "saleable": {
         "title": "Saleable management privileges",
+        "description": "",
         "all": "Admin",
         "all-description": "All saleable management privileges",
         "read": "Read",
@@ -254,6 +258,7 @@
       },
       "role": {
         "title": "Role management privileges",
+        "description": "",
         "all": "Admin",
         "all-description": "All role management privileges",
         "read": "Read",
@@ -264,6 +269,20 @@
         "update-description": "Update role information",
         "delete": "Activate",
         "delete-description": "Delete a role"
+      },
+      "equipment": {
+        "title": "Equipment management privileges",
+        "description": "",
+        "all": "Admin",
+        "all-description": "All equipment management privileges",
+        "read": "Read",
+        "read-description": "See all equipments list and their information",
+        "create": "Create",
+        "create-description": "Create a equipment",
+        "update": "Update",
+        "update-description": "Update equipment information",
+        "delete": "Activate",
+        "delete-description": "Delete a equipment"
       }
     }
   }

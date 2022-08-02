@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
-import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
+import {EmployeeRoleForm} from "../../utils/employee-role-form";
 
 @Component({
   selector: '[app-employee-form-creator]',
@@ -25,7 +25,7 @@ export class EmployeeFormCreatorComponent implements OnInit {
     phone: new FormControl('', [Validators.required]),
     isTechnician: new FormControl('', [Validators.required]),
     tags: new FormControl(''),
-    roles: new RoleFormGroup()
+    roles: new EmployeeRoleForm()
   })
 
   constructor(private employeeManagementService: EmployeeManagementService) {
@@ -60,8 +60,8 @@ export class EmployeeFormCreatorComponent implements OnInit {
     });
   }
 
-  get roleFormGroup(): RoleFormGroup {
-    return this.employeeCreationForm.get('roles') as RoleFormGroup;
+  get roleFormGroup(): EmployeeRoleForm {
+    return this.employeeCreationForm.get('roles') as EmployeeRoleForm;
   }
 
 }

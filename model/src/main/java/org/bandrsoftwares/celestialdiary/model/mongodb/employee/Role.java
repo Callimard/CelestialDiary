@@ -2,6 +2,7 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.employee;
 
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
+import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;

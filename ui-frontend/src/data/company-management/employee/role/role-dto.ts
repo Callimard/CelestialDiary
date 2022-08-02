@@ -1,4 +1,4 @@
-import {PrivilegeDTO} from "./privilege-dto";
+import {PrivilegeDTO} from "../../../security/privilege/privilege-dto";
 import {EstablishmentRoleDTO} from "./establishment-role-dto";
 
 export interface RoleDTO {
@@ -6,5 +6,5 @@ export interface RoleDTO {
   name: string,
   description: string,
   companyPrivileges: PrivilegeDTO[],
-  establishmentRoles: EstablishmentRoleDTO
+  establishmentRoles: EstablishmentRoleDTO[]
 }

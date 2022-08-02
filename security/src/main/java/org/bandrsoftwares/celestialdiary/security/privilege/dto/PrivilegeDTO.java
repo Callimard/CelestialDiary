@@ -1,6 +1,6 @@
-package org.bandrsoftwares.celestialdiary.model.dto.employee;
+package org.bandrsoftwares.celestialdiary.security.privilege.dto;
 
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Privilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 
 public record PrivilegeDTO(String identifierName, String name, String description) {
 

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
+import {EmployeeRoleForm} from "../employee-role-form";
 
 @Component({
   selector: '[app-employee-form-content]',
@@ -17,11 +17,11 @@ export class EmployeeFormContentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-      // Noting
+    // Noting
   }
 
-  get roleFormGroup(): RoleFormGroup {
-    return this.employeeFormGroup.get('roles') as RoleFormGroup;
+  get roleFormGroup(): EmployeeRoleForm {
+    return this.employeeFormGroup.get('roles') as EmployeeRoleForm;
   }
 
 }

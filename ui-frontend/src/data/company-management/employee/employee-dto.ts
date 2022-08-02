@@ -1,5 +1,5 @@
 import {WrappedEstablishmentDTO} from "../establishment/wrapped-establishment-dto";
-import {RoleDTO} from "./role-dto";
+import {RoleDTO} from "./role/role-dto";
 
 export interface EmployeeDTO {
   id: string,

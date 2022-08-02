@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 import {FormControl} from "@angular/forms";
-import {RoleDTO} from "../../../../../data/company-management/employee/role-dto";
+import {RoleDTO} from "../../../../../data/company-management/employee/role/role-dto";
+import {EmployeeRoleForm} from "../employee-role-form";
 
 @Component({
   selector: '[app-employee-role-selection]',
@@ -11,7 +11,7 @@ import {RoleDTO} from "../../../../../data/company-management/employee/role-dto"
 })
 export class EmployeeRoleSelectionComponent implements OnInit, OnChanges {
 
-  @Input() roleFormGroup!: RoleFormGroup;
+  @Input() roleFormGroup!: EmployeeRoleForm;
 
   allRoles: RoleDTO[] = [];
 

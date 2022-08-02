@@ -1,6 +1,6 @@
 import {FormGroup} from "@angular/forms";
 
-export class RoleFormGroup extends FormGroup {
+export class EmployeeRoleForm extends FormGroup{
 
   constructor() {
     super({});

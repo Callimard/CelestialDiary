@@ -7,7 +7,7 @@
      (searchFilter)="filterEquipments($event)">
 </div>
 <button class="floating-button create-equipment-button"
-        *ngIf="privilegeManagement.hasRoleCreate()"
+        *ngIf="privilegeManagement.hasEquipmentCreate()"
         (click)="navigateToCreateEquipment()">
   <i class="fa-solid fa-plus"></i>
 </button>

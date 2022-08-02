@@ -1,4 +1,5 @@
-<form class="role-creator-form-container" [formGroup]="roleCreationForm" (ngSubmit)="onRoleCreation()">
+<form class="role-creator-form-container" [formGroup]="roleCreationForm" *ngIf="roleCreationForm"
+      (ngSubmit)="onRoleCreation()">
   <div class="form-group-error role-creation-failed-container" *ngIf="creationFailed">
     <p>{{ 'role.creation.creation-failed' | translate}}</p>
   </div>

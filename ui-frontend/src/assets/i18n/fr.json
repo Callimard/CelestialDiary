@@ -207,10 +207,12 @@
   "privilege": {
     "company": {
       "title": "Droits de gestion d'entreprises",
+      "description": "Ces droits permettent de gérer l'entreprise dans sa globalité.",
       "all": "Admin",
       "all-description": "Tous les droits de gestions de l'entreprise",
       "employee": {
         "title": "Droits de gestion des employés",
+        "description": "",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des employées",
         "read": "Lire",
@@ -228,6 +230,7 @@
       },
       "establishment": {
         "title": "Droits de gestion des établissements",
+        "description": "",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des établissement",
         "read": "Lire",
@@ -241,6 +244,7 @@
       },
       "saleable": {
         "title": "Droits de gestion des vendables",
+        "description": "",
         "all": "Admin",
         "all-description": "Tous les droits de gestion des employées",
         "read": "Lire",
@@ -254,6 +258,7 @@
       },
       "role": {
         "title": "Droits de gestion des rôles",
+        "description": "",
         "all": "Admin",
         "all-description": "Tous les droits de gestions des rôles",
         "read": "Lire",
@@ -264,6 +269,20 @@
         "update-description": "Mettre à jour les informations d'un rôle",
         "delete": "Supprimer",
         "delete-description": "Supprimer un rôle"
+      },
+      "equipment": {
+        "title": "Droits de gestion des équipements",
+        "description": "",
+        "all": "Admin",
+        "all-description": "Tous les droits de gestions des équipements",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les équipements et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer un équipement",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'un équipement",
+        "delete": "Supprimer",
+        "delete-description": "Supprimer un équipement"
       }
     }
   }

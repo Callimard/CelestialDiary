@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {PrivilegeDTO} from "../../../../../data/company-management/employee/privilege-dto";
-import {backend} from "../../../../../environments/environment";
+import {backend} from "../../../environments/environment";
+import {ScopeDTO} from "../../../data/security/privilege/scope-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,11 @@ export class PrivilegeManagementService {
     return backend.backendUrl + backend.apiV1Url + backend.privilegesUrl + backend.company;
   }
 
-  public allCompanyManagementPrivileges(): Promise<PrivilegeDTO[]> {
-    return new Promise<PrivilegeDTO[]>(((resolve, reject) => {
-      this.http.get<PrivilegeDTO[]>(PrivilegeManagementService.companyPrivilegesUrl()).subscribe({
-        next: (allPrivileges) => {
-          resolve(allPrivileges);
+  public companyManagementScope(): Promise<ScopeDTO> {
+    return new Promise<ScopeDTO>(((resolve, reject) => {
+      this.http.get<ScopeDTO>(PrivilegeManagementService.companyPrivilegesUrl()).subscribe({
+        next: (companyManagementScope) => {
+          resolve(companyManagementScope);
         },
         error: (err: HttpErrorResponse) => {
           console.log(err.error);
