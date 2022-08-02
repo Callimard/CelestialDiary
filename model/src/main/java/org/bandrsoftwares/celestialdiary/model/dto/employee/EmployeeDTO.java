@@ -1,6 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.dto.employee;
 
 import org.bandrsoftwares.celestialdiary.model.dto.establishment.WrappedEstablishmentDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.saleable.prestation.PrestationDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 
 import java.util.List;
@@ -8,7 +9,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public record EmployeeDTO(String id, String email, String firstName, String lastName, String comment, String photo, String gender,
-                          String phone, boolean isTechnician, boolean activated, List<String> tags,
+                          String phone,
+                          List<PrestationDTO> praticablePrestations,
+                          boolean activated, List<String> tags,
                           List<RoleDTO> roles,
                           Set<WrappedEstablishmentDTO> assignedEstablishments, String creationDate) {
 
@@ -21,7 +24,7 @@ public record EmployeeDTO(String id, String email, String firstName, String last
              employee.getPhoto(),
              employee.getGender().name(),
              employee.getPhone(),
-             employee.getIsTechnician(),
+             employee.getPraticablePrestations().stream().map(PrestationDTO::new).toList(),
              employee.getActivated(),
              employee.getTags(),
              employee.getRoles().stream().map(RoleDTO::new).toList(),

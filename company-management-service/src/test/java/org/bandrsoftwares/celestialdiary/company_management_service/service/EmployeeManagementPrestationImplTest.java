@@ -1,7 +1,6 @@
 package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
@@ -120,7 +119,7 @@ class EmployeeManagementPrestationImplTest {
 
         private EmployeeManagementService.EmployeeCreationInformation buildCorrectEmployeeInfo() {
             return new EmployeeManagementService.EmployeeCreationInformation("guil.rako@hotmail.fr", "Callimard94500$", "Guillaume",
-                                                                             "Rakotomalala", null, null, "+33 6 52 44 77 78", true,
+                                                                             "Rakotomalala", null, null, "+33 6 52 44 77 78", Lists.newArrayList(),
                                                                              Lists.newArrayList(), Lists.newArrayList());
         }
     }
@@ -175,7 +174,7 @@ class EmployeeManagementPrestationImplTest {
             return new EmployeeManagementService.EmployeeUpdatedInformation("newSuperPassword945$", "FirstName", "LastName", "Salut salut",
                                                                             PersonGender.FEMALE,
                                                                             "+33 6 95 55 88 77",
-                                                                            true, Lists.newArrayList());
+                                                                            Lists.newArrayList(), Lists.newArrayList());
         }
     }
 

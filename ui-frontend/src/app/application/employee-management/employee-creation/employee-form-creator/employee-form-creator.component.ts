@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
 import {EmployeeRoleForm} from "../../utils/employee-role-form";
+import {EmployeeForm} from "../../utils/employee-form";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 
 @Component({
   selector: '[app-employee-form-creator]',
@@ -15,25 +16,14 @@ export class EmployeeFormCreatorComponent implements OnInit {
 
   @Output() employeeCreated = new EventEmitter<boolean>();
 
-  employeeCreationForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.pattern("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&])[A-Za-z0-9@$!%*?&]{8,30}$")]),
-    firstName: new FormControl('', [Validators.required]),
-    lastName: new FormControl('', [Validators.required]),
-    comment: new FormControl(''),
-    gender: new FormControl('', [Validators.required]),
-    phone: new FormControl('', [Validators.required]),
-    isTechnician: new FormControl('', [Validators.required]),
-    tags: new FormControl(''),
-    roles: new EmployeeRoleForm()
-  })
+  employeeCreationForm!: EmployeeForm;
 
-  constructor(private employeeManagementService: EmployeeManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService, private employeeManagementService: EmployeeManagementService) {
     // Nothing.
   }
 
   ngOnInit(): void {
-    // Nothing
+    this.employeeCreationForm = new EmployeeForm(this.prestationManagementService);
   }
 
   onEmployeeCreation() {
@@ -46,7 +36,6 @@ export class EmployeeFormCreatorComponent implements OnInit {
       comment: form.comment,
       gender: form.gender,
       phone: form.phone,
-      isTechnician: JSON.parse(form.isTechnician),
       tags: form.tags != null && form.tags.lenght > 0 ? form.tags.split(' ') : [],
       roles: this.roleFormGroup.extractRoles()
     }

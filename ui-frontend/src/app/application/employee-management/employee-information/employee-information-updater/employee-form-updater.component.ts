@@ -1,10 +1,10 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
-import {FormControl, FormGroup} from "@angular/forms";
 import {EmployeeUpdatedInformation} from "../../../../../data/company-management/employee/employee-updated-information";
 import {RoleFormGroup} from "../../../role-management/utils/role-form-group";
-import {EmployeeRoleForm} from "../../utils/employee-role-form";
+import {EmployeeForm} from "../../utils/employee-form";
+import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 
 @Component({
   selector: '[app-employee-form-updater]',
@@ -16,13 +16,13 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   @Input() employee!: EmployeeDTO;
   @Input() allDisable = false;
 
-  employeeUpdateForm!: FormGroup;
+  employeeUpdateForm!: EmployeeForm;
 
   private defaultPassword = "***************";
 
   updateFail = false;
 
-  constructor(private employeeManagementService: EmployeeManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService, private employeeManagementService: EmployeeManagementService) {
     // Nothing.
   }
 
@@ -35,34 +35,11 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initializeEmployeeUpdateFormGroup() {
-    let allTagsConcat = this.extractEmployeeTags();
-    this.employeeUpdateForm = this.createEmployeeForm(allTagsConcat);
-  }
+    this.employeeUpdateForm = new EmployeeForm(this.prestationManagementService, this.employee);
 
-  private extractEmployeeTags() {
-    let allTagsConcat: string | null = null;
-    if (this.employee != null) {
-      allTagsConcat = "";
-      for (let tag of this.employee.tags) {
-        allTagsConcat += tag + " ";
-      }
+    if (this.allDisable) {
+      this.employeeUpdateForm.disable();
     }
-    return allTagsConcat;
-  }
-
-  private createEmployeeForm(allTagsConcat: null | string) {
-    return new FormGroup({
-      email: new FormControl({value: this.employee.email, disabled: true}),
-      password: new FormControl({value: this.defaultPassword, disabled: this.allDisable}),
-      firstName: new FormControl({value: this.employee.firstName, disabled: this.allDisable}),
-      lastName: new FormControl({value: this.employee.lastName, disabled: this.allDisable}),
-      comment: new FormControl({value: this.employee.comment, disabled: this.allDisable}),
-      gender: new FormControl({value: this.employee.gender, disabled: this.allDisable}),
-      phone: new FormControl({value: this.employee.phone, disabled: this.allDisable}),
-      isTechnician: new FormControl({value: String(this.employee.isTechnician), disabled: this.allDisable}),
-      tags: new FormControl({value: allTagsConcat, disabled: this.allDisable}),
-      roles: new EmployeeRoleForm()
-    });
   }
 
   onUpdate() {
@@ -75,7 +52,6 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
         comment: form.comment,
         gender: form.gender,
         phone: form.phone,
-        isTechnician: JSON.parse(form.isTechnician),
         tags: (form.tags != null ? form.tags.split(' ') : []),
       }
 

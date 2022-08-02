@@ -33,11 +33,7 @@
       "no-gender": "Non précisé"
     },
     "phone": "Téléphone",
-    "is-technician": "Est un(e) technicien(ne)",
-    "is-technician-value": {
-      "yes": "Oui",
-      "no": "Non"
-    },
+    "praticable-prestations": "Prestations praticables",
     "tags": "Tags",
     "roles": "Rôles",
     "creation": {
