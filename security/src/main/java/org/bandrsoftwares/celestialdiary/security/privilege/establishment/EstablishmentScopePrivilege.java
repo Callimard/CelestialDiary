@@ -6,8 +6,8 @@ public class EstablishmentScopePrivilege extends Scope.ScopePrivilege {
 
     // Constructors.
 
-    public EstablishmentScopePrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
-        super(authorityPattern, privilegeName, privilegeDescription);
+    public EstablishmentScopePrivilege(String identifierName, String authorityPattern, String privilegeName, String privilegeDescription) {
+        super(identifierName, authorityPattern, privilegeName, privilegeDescription);
     }
 
     // Methods.

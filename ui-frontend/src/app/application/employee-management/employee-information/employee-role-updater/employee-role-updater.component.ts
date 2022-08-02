@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
-import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeUpdatedRoles} from "../../../../../data/company-management/employee/employee-updated-roles";
 import {FormControl} from "@angular/forms";
+import {EmployeeRoleForm} from "../../utils/employee-role-form";
 
 @Component({
   selector: '[app-employee-role-updater]',
@@ -16,7 +16,7 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
 
   @Input() employee!: EmployeeDTO
 
-  employeeRoleFormGroup = new RoleFormGroup();
+  employeeRoleFormGroup = new EmployeeRoleForm();
 
   constructor(private employeeManagementService: EmployeeManagementService) {
     // Nothing
@@ -27,7 +27,7 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(_changes: SimpleChanges): void {
-    this.employeeRoleFormGroup = new RoleFormGroup();
+    this.employeeRoleFormGroup = new EmployeeRoleForm();
     this.mergeEmployeeRole();
   }
 

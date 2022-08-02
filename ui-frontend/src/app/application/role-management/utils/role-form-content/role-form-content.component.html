@@ -1,4 +1,4 @@
-<div [formGroup]="roleFormGroup">
+<div [formGroup]="roleFormGroup" *ngIf="roleFormGroup">
   <div app-basic-input-form
        [group]="roleFormGroup"
        [controlName]="'name'"
@@ -15,42 +15,24 @@
        [inputType]="'text'"
        placeHolder="{{ 'role.description' | translate}}">
   </div>
-  <div class="form-group" formGroupName="companyManagementPrivileges">
-    <h3>{{ 'privilege.company.title' | translate}}</h3>
-    <div app-privilege-input-line *ngIf="allCompanyPrivilege != null"
-         [group]="this.companyManagementPrivilegesForm"
-         [privilege]="allCompanyPrivilege">
-    </div>
-    <div class="form-group" formGroupName="employeeManagement">
-      <h4>{{ 'privilege.company.employee.title' | translate}}</h4>
+  <div class="form-group" formGroupName="companyManagementScope">
+    <h3>{{ roleFormGroup.companyManagementScopeFormGroup._scopeName | translate }}</h3>
+    <p>{{ roleFormGroup.companyManagementScopeFormGroup._scopeDescription | translate }}</p>
+    <div class="for" *ngFor="let companyPrivilege of roleFormGroup.companyManagementScopeFormGroup._scopePrivileges">
       <div app-privilege-input-line
-           [group]="this.employeeManagementPrivilegeForm"
-           [privilege]="privilege"
-           *ngFor="let privilege of companyEmployeePrivilege">
+           [group]="roleFormGroup.companyManagementScopeFormGroup"
+           [privilege]="companyPrivilege">
       </div>
     </div>
-    <div class="form-group" formGroupName="establishmentManagement">
-      <h4>{{ 'privilege.company.establishment.title' | translate}}</h4>
-      <div app-privilege-input-line
-           [group]="this.establishmentManagementPrivilegeForm"
-           [privilege]="privilege"
-           *ngFor="let privilege of companyEstablishmentPrivilege">
-      </div>
-    </div>
-    <div class="form-group" formGroupName="saleableManagement">
-      <h4>{{ 'privilege.company.saleable.title' | translate}}</h4>
-      <div app-privilege-input-line
-           [group]="this.saleableManagementPrivilegeForm"
-           [privilege]="privilege"
-           *ngFor="let privilege of companySaleablePrivilege">
-      </div>
-    </div>
-    <div class="form-group" formGroupName="roleManagement">
-      <h4>{{ 'privilege.company.role.title' | translate}}</h4>
-      <div app-privilege-input-line
-           [group]="this.roleManagementPrivilegeForm"
-           [privilege]="privilege"
-           *ngFor="let privilege of companyRolePrivilege">
+    <div class="form-group" *ngFor="let scopeChildForm of roleFormGroup.companyManagementScopeFormGroup.scopeChildren"
+         [formGroup]="scopeChildForm">
+      <h4>{{ scopeChildForm._scopeName | translate }}</h4>
+      <p>{{ scopeChildForm._scopeDescription | translate }}</p>
+      <div *ngFor="let scopePrivilege of scopeChildForm._scopePrivileges">
+        <div app-privilege-input-line
+             [group]="scopeChildForm"
+             [privilege]="scopePrivilege">
+        </div>
       </div>
     </div>
   </div>

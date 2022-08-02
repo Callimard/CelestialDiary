@@ -37,31 +37,43 @@ public class EquipmentManagementScope extends Scope {
             return null;
         }
     }
-// Inner enum.
+
+    // Inner enum.
 
     public enum EquipmentManagementPrivilege implements PrivilegeEnum<CompanyScopePrivilege> {
-        EQUIPMENT_ALL(new CompanyScopePrivilege("company:%s:equipment:all", "privilege.company.equipment.all",
-                                                "privilege.company.equipment.all-description")),
-        EQUIPMENT_READ(new CompanyScopePrivilege("company:%s:equipment:read", "privilege.company.equipment.read",
-                                                 "privilege.company.equipment.read-description")),
-        EQUIPMENT_CREATE(new CompanyScopePrivilege("company:%s:equipment:create", "privilege.company.equipment.create",
-                                                   "privilege.company.equipment.create-description")),
-        EQUIPMENT_UPDATE(new CompanyScopePrivilege("company:%s:equipment:update", "privilege.company.equipment.update",
-                                                   "privilege.company.equipment.update-description")),
-        EQUIPMENT_DELETE(new CompanyScopePrivilege("company:%s:equipment:delete", "privilege.company.equipment.delete",
-                                                   "privilege.company.equipment.delete-description"));
+        EQUIPMENT_ALL("company:%s:equipment:all", "privilege.company.equipment.all", "privilege.company.equipment.all-description"),
+        EQUIPMENT_READ("company:%s:equipment:read", "privilege.company.equipment.read", "privilege.company.equipment.read-description"),
+        EQUIPMENT_CREATE("company:%s:equipment:create", "privilege.company.equipment.create", "privilege.company.equipment.create-description"),
+        EQUIPMENT_UPDATE("company:%s:equipment:update", "privilege.company.equipment.update", "privilege.company.equipment.update-description"),
+        EQUIPMENT_DELETE("company:%s:equipment:delete", "privilege.company.equipment.delete", "privilege.company.equipment.delete-description");
 
         // Variables.
 
-        private final CompanyScopePrivilege scopePrivilege;
+        private final String authorityPattern;
+        private final String privilegeName;
+        private final String privilegeDescription;
 
         // Constructors.
 
-        EquipmentManagementPrivilege(CompanyScopePrivilege scopePrivilege) {
-            this.scopePrivilege = scopePrivilege;
+        EquipmentManagementPrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
+            this.authorityPattern = authorityPattern;
+            this.privilegeName = privilegeName;
+            this.privilegeDescription = privilegeDescription;
         }
 
         // Methods.
+
+        public String getAuthorityPattern() {
+            return authorityPattern;
+        }
+
+        public String getPrivilegeName() {
+            return privilegeName;
+        }
+
+        public String getPrivilegeDescription() {
+            return privilegeDescription;
+        }
 
         @Override
         public List<PrivilegeEnum<CompanyScopePrivilege>> allValues() {
@@ -70,7 +82,7 @@ public class EquipmentManagementScope extends Scope {
 
         @Override
         public CompanyScopePrivilege getScopePrivilege() {
-            return scopePrivilege;
+            return new CompanyScopePrivilege(name(), authorityPattern, privilegeName, privilegeDescription);
         }
 
         static ScopePrivilege[] allScopePrivileges() {

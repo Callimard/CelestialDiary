@@ -5,7 +5,7 @@ import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 import org.bandrsoftwares.celestialdiary.security.privilege.Scope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.employee.EmployeeManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.equipment.EquipmentManagementScope;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.CompanyEstablishmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.role.RoleManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.saleable.SaleableManagementScope;
 
@@ -18,7 +18,7 @@ public class CompanyManagementScope extends Scope {
 
     public CompanyManagementScope() {
         super("privilege.company.title", "privilege.company.description",
-              Lists.newArrayList(new EmployeeManagementScope(), new EstablishmentManagementScope(), new SaleableManagementScope(),
+              Lists.newArrayList(new EmployeeManagementScope(), new CompanyEstablishmentManagementScope(), new SaleableManagementScope(),
                                  new EquipmentManagementScope(), new RoleManagementScope()));
     }
 
@@ -47,22 +47,40 @@ public class CompanyManagementScope extends Scope {
     public CompanyScopePrivilege scopePrivilegeOf(String identifier) {
         return (CompanyScopePrivilege) super.scopePrivilegeOf(identifier);
     }
-// Inner enum.
+
+    // Inner enum.
 
     public enum CompanyManagementPrivilege implements PrivilegeEnum<CompanyScopePrivilege> {
-        COMPANY_ALL(new CompanyScopePrivilege("company:%s:all", "privilege.company.all", "privilege.company.all-description"));
+        COMPANY_ALL("company:%s:all", "privilege.company.all",
+                    "privilege.company.all-description");
 
         // Variables.
 
-        private final CompanyScopePrivilege scopePrivilege;
+        private final String authorityPattern;
+        private final String privilegeName;
+        private final String privilegeDescription;
 
         // Constructors.
 
-        CompanyManagementPrivilege(CompanyScopePrivilege scopePrivilege) {
-            this.scopePrivilege = scopePrivilege;
+        CompanyManagementPrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
+            this.authorityPattern = authorityPattern;
+            this.privilegeName = privilegeName;
+            this.privilegeDescription = privilegeDescription;
         }
 
         // Methods.
+
+        public String getAuthorityPattern() {
+            return authorityPattern;
+        }
+
+        public String getPrivilegeName() {
+            return privilegeName;
+        }
+
+        public String getPrivilegeDescription() {
+            return privilegeDescription;
+        }
 
         @Override
         public List<PrivilegeEnum<CompanyScopePrivilege>> allValues() {
@@ -71,7 +89,7 @@ public class CompanyManagementScope extends Scope {
 
         @Override
         public CompanyScopePrivilege getScopePrivilege() {
-            return scopePrivilege;
+            return new CompanyScopePrivilege(name(), authorityPattern, privilegeName, privilegeDescription);
         }
 
         static ScopePrivilege[] allScopePrivileges() {

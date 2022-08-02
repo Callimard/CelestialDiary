@@ -68,19 +68,25 @@ public abstract class Scope {
 
         // Variables.
 
+        private final String identifierName;
         private final String authorityPattern;
         private final String privilegeName;
         private final String privilegeDescription;
 
         // Constructors.
 
-        protected ScopePrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
+        protected ScopePrivilege(String identifierName, String authorityPattern, String privilegeName, String privilegeDescription) {
+            this.identifierName = identifierName;
             this.authorityPattern = authorityPattern;
             this.privilegeName = privilegeName;
             this.privilegeDescription = privilegeDescription;
         }
 
         // Getters.
+
+        public String getIdentifierName() {
+            return identifierName;
+        }
 
         public String getAuthorityPattern() {
             return authorityPattern;

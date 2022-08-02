@@ -3,7 +3,8 @@ import {EmployeeManagementService} from "../../../../../service/company-manageme
 import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {EmployeeUpdatedInformation} from "../../../../../data/company-management/employee/employee-updated-information";
-import {RoleFormGroup} from "../../../../../service/company-management/employee/role/role-form-group";
+import {RoleFormGroup} from "../../../role-management/utils/role-form-group";
+import {EmployeeRoleForm} from "../../utils/employee-role-form";
 
 @Component({
   selector: '[app-employee-form-updater]',
@@ -60,7 +61,7 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
       phone: new FormControl({value: this.employee.phone, disabled: this.allDisable}),
       isTechnician: new FormControl({value: String(this.employee.isTechnician), disabled: this.allDisable}),
       tags: new FormControl({value: allTagsConcat, disabled: this.allDisable}),
-      roles: new RoleFormGroup()
+      roles: new EmployeeRoleForm()
     });
   }
 

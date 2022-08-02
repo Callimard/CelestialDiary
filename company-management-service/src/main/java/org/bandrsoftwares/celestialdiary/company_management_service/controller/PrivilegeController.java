@@ -2,8 +2,8 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bandrsoftwares.celestialdiary.security.privilege.Scope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.dto.ScopeDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ public class PrivilegeController {
     private static final CompanyManagementScope COMPANY_MANAGEMENT_SCOPE = new CompanyManagementScope();
 
     @GetMapping(COMPANY_PRIVILEGE)
-    public Scope getAllCompanyPrivilege() {
-        return COMPANY_MANAGEMENT_SCOPE;
+    public ScopeDTO getCompanyManagementScope() {
+        return new ScopeDTO(COMPANY_MANAGEMENT_SCOPE);
     }
 }

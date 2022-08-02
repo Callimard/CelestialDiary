@@ -39,26 +39,39 @@ public class RoleManagementScope extends Scope {
 // Inner enum.
 
     public enum RoleManagementPrivilege implements PrivilegeEnum<CompanyScopePrivilege> {
-        ROLE_ALL(new CompanyScopePrivilege("company:%s:role:all", "privilege.company.role.all", "privilege.company.role.all-description")),
-        ROLE_READ(new CompanyScopePrivilege("company:%s:role:read", "privilege.company.role.read", "privilege.company.role.read-description")),
-        ROLE_CREATE(
-                new CompanyScopePrivilege("company:%s:role:create", "privilege.company.role.create", "privilege.company.role.create-description")),
-        ROLE_UPDATE(
-                new CompanyScopePrivilege("company:%s:role:update", "privilege.company.role.update", "privilege.company.role.update-description")),
-        ROLE_DELETE(
-                new CompanyScopePrivilege("company:%s:role:delete", "privilege.company.role.delete", "privilege.company.role.delete-description"));
+        ROLE_ALL("company:%s:role:all", "privilege.company.role.all", "privilege.company.role.all-description"),
+        ROLE_READ("company:%s:role:read", "privilege.company.role.read", "privilege.company.role.read-description"),
+        ROLE_CREATE("company:%s:role:create", "privilege.company.role.create", "privilege.company.role.create-description"),
+        ROLE_UPDATE("company:%s:role:update", "privilege.company.role.update", "privilege.company.role.update-description"),
+        ROLE_DELETE("company:%s:role:delete", "privilege.company.role.delete", "privilege.company.role.delete-description");
 
         // Variables.
 
-        private final CompanyScopePrivilege scopePrivilege;
+        private final String authorityPattern;
+        private final String privilegeName;
+        private final String privilegeDescription;
 
         // Constructors.
 
-        RoleManagementPrivilege(CompanyScopePrivilege scopePrivilege) {
-            this.scopePrivilege = scopePrivilege;
+        RoleManagementPrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
+            this.authorityPattern = authorityPattern;
+            this.privilegeName = privilegeName;
+            this.privilegeDescription = privilegeDescription;
         }
 
         // Methods.
+
+        public String getAuthorityPattern() {
+            return authorityPattern;
+        }
+
+        public String getPrivilegeName() {
+            return privilegeName;
+        }
+
+        public String getPrivilegeDescription() {
+            return privilegeDescription;
+        }
 
         @Override
         public List<PrivilegeEnum<CompanyScopePrivilege>> allValues() {
@@ -67,7 +80,7 @@ public class RoleManagementScope extends Scope {
 
         @Override
         public CompanyScopePrivilege getScopePrivilege() {
-            return scopePrivilege;
+            return new CompanyScopePrivilege(name(), authorityPattern, privilegeName, privilegeDescription);
         }
 
         static ScopePrivilege[] allScopePrivileges() {

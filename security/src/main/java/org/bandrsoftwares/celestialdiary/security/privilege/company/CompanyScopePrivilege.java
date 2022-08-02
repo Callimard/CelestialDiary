@@ -6,8 +6,8 @@ public class CompanyScopePrivilege extends Scope.ScopePrivilege {
 
     // Constructors.
 
-    public CompanyScopePrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
-        super(authorityPattern, privilegeName, privilegeDescription);
+    public CompanyScopePrivilege(String identifierName, String authorityPattern, String privilegeName, String privilegeDescription) {
+        super(identifierName, authorityPattern, privilegeName, privilegeDescription);
     }
 
     // Methods.

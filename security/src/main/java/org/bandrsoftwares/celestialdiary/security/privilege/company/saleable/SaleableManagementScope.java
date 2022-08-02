@@ -39,28 +39,40 @@ public class SaleableManagementScope extends Scope {
 // Inner enum.
 
     public enum SaleableManagementPrivilege implements PrivilegeEnum<CompanyScopePrivilege> {
-        SALEABLE_ALL(
-                new CompanyScopePrivilege("company:%s:saleable:all", "privilege.company.saleable.all", "privilege.company.saleable.all-description")),
-        SALEABLE_READ(new CompanyScopePrivilege("company:%s:saleable:read", "privilege.company.saleable.read",
-                                                "privilege.company.saleable.read-description")),
-        SALEABLE_CREATE(new CompanyScopePrivilege("company:%s:saleable:create", "privilege.company.saleable.create",
-                                                  "privilege.company.saleable.create-description")),
-        SALEABLE_UPDATE(new CompanyScopePrivilege("company:%s:saleable:update", "privilege.company.saleable.update",
-                                                  "privilege.company.saleable.update-description")),
-        SALEABLE_ACTIVATE(new CompanyScopePrivilege("company:%s:saleable:activate", "privilege.company.saleable.activate",
-                                                    "privilege.company.saleable.activate-description"));
+        SALEABLE_ALL("company:%s:saleable:all", "privilege.company.saleable.all", "privilege.company.saleable.all-description"),
+        SALEABLE_READ("company:%s:saleable:read", "privilege.company.saleable.read", "privilege.company.saleable.read-description"),
+        SALEABLE_CREATE("company:%s:saleable:create", "privilege.company.saleable.create", "privilege.company.saleable.create-description"),
+        SALEABLE_UPDATE("company:%s:saleable:update", "privilege.company.saleable.update", "privilege.company.saleable.update-description"),
+        SALEABLE_ACTIVATE("company:%s:saleable:activate", "privilege.company.saleable.activate", "privilege.company.saleable.activate-description");
+
 
         // Variables.
 
-        private final CompanyScopePrivilege scopePrivilege;
+        private final String authorityPattern;
+        private final String privilegeName;
+        private final String privilegeDescription;
 
         // Constructors.
 
-        SaleableManagementPrivilege(CompanyScopePrivilege scopePrivilege) {
-            this.scopePrivilege = scopePrivilege;
+        SaleableManagementPrivilege(String authorityPattern, String privilegeName, String privilegeDescription) {
+            this.authorityPattern = authorityPattern;
+            this.privilegeName = privilegeName;
+            this.privilegeDescription = privilegeDescription;
         }
 
         // Methods.
+
+        public String getAuthorityPattern() {
+            return authorityPattern;
+        }
+
+        public String getPrivilegeName() {
+            return privilegeName;
+        }
+
+        public String getPrivilegeDescription() {
+            return privilegeDescription;
+        }
 
         @Override
         public List<PrivilegeEnum<CompanyScopePrivilege>> allValues() {
@@ -69,7 +81,7 @@ public class SaleableManagementScope extends Scope {
 
         @Override
         public CompanyScopePrivilege getScopePrivilege() {
-            return scopePrivilege;
+            return new CompanyScopePrivilege(name(), authorityPattern, privilegeName, privilegeDescription);
         }
 
         static ScopePrivilege[] allScopePrivileges() {

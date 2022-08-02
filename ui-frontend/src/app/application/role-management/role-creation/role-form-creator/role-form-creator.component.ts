@@ -1,9 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PrivilegeManagementService} from "../../../../../service/company-management/employee/role/privilege/privilege-management.service";
+import {PrivilegeManagementService} from "../../../../../service/security/privilege/privilege-management.service";
 import {RoleCreationInformation} from "../../../../../data/company-management/employee/role/role-creation-information";
-import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
+import {RoleFormGroup} from "../../utils/role-form-group";
 
 @Component({
   selector: '[app-role-form-creator]',
@@ -16,28 +15,32 @@ export class RoleFormCreatorComponent implements OnInit {
 
   @Output() roleCreated = new EventEmitter<boolean>();
 
-  roleCreationForm = new FormGroup({
-    name: new FormControl(null, [Validators.required]),
-    description: new FormControl(null),
-    companyManagementPrivileges: new CompanyPrivilegeFormGroup()
-  });
+  roleCreationForm!: RoleFormGroup;
 
   constructor(private privilegeManagementService: PrivilegeManagementService, private roleManagementService: RoleManagementService) {
     // Nothing
   }
 
   ngOnInit(): void {
-    // Nothing
+    this.initRoleCreationForm();
+  }
+
+  private initRoleCreationForm() {
+    this.privilegeManagementService.companyManagementScope().then((companyManagementScope) => {
+      this.roleCreationForm = new RoleFormGroup(companyManagementScope, true);
+    })
   }
 
   onRoleCreation() {
     const form = this.roleCreationForm.value;
-    let companyManagementPrivilegeIdentifiers: string[] = this.companyManagementPrivilegesFormGroup.extractPrivileges();
+    let companyManagementPrivilegeIdentifiers: string[] = this.roleCreationForm.companyManagementScopeFormGroup.getSelectedPrivileges();
     let roleInformation: RoleCreationInformation = {
       name: form.name,
       description: form.description,
       companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
     }
+
+    console.log(roleInformation);
 
     this.roleManagementService.createRole(roleInformation).then(() => {
       this.roleCreated.emit(true);
@@ -45,9 +48,5 @@ export class RoleFormCreatorComponent implements OnInit {
     }).catch(() => {
       this.creationFailed = true;
     })
-  }
-
-  get companyManagementPrivilegesFormGroup(): CompanyPrivilegeFormGroup {
-    return this.roleCreationForm.get('companyManagementPrivileges') as CompanyPrivilegeFormGroup;
   }
 }

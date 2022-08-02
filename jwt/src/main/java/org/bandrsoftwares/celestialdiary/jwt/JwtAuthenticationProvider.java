@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyScopePrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentScopePrivilege;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

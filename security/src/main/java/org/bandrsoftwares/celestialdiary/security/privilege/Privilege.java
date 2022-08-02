@@ -3,7 +3,7 @@ package org.bandrsoftwares.celestialdiary.security.privilege;
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyScopePrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentScopePrivilege;
 
 @Builder
@@ -26,8 +26,8 @@ public class Privilege {
 
     // Static methods.
 
-    public static Privilege of(String identifierName, Scope.ScopePrivilege scopePrivilege) {
-        return new Privilege(identifierName, scopePrivilege.getPrivilegeName(), scopePrivilege.getPrivilegeDescription());
+    public static Privilege of(Scope.ScopePrivilege scopePrivilege) {
+        return new Privilege(scopePrivilege.getIdentifierName(), scopePrivilege.getPrivilegeName(), scopePrivilege.getPrivilegeDescription());
     }
 
     public static CompanyScopePrivilege extractCompanyPrivilege(String identifierName) {
@@ -51,9 +51,9 @@ public class Privilege {
         EstablishmentScopePrivilege establishmentPrivilege = extractEstablishmentPrivilege(identifierName);
 
         if (companyScopePrivilege != null) {
-            return Privilege.of(identifierName, companyScopePrivilege);
+            return Privilege.of(companyScopePrivilege);
         } else if (establishmentPrivilege != null) {
-            return Privilege.of(identifierName, establishmentPrivilege);
+            return Privilege.of(establishmentPrivilege);
         } else {
             return null;
         }
