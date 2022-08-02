@@ -1,18 +1,25 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
 import {WrappedPrestationDTO} from "../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
+import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
 
 export class EmployeePrestationForm extends FormGroup {
 
   private _allPrestations: WrappedPrestationDTO[] = [];
 
-  constructor(private prestationManagementService: PrestationManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService, employee?: EmployeeDTO) {
     super({});
 
     this.prestationManagementService.allPrestations().then((allPrestations) => {
       this._allPrestations = allPrestations;
       for (let prestation of this._allPrestations) {
         this.addControl(prestation.id, new FormControl(false));
+      }
+
+      if (employee?.praticablePrestations != null) {
+        for (let prestation of employee?.praticablePrestations) {
+          this.setControl(prestation.id, new FormControl(true));
+        }
       }
     });
   }

@@ -18,8 +18,6 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
 
   employeeUpdateForm!: EmployeeForm;
 
-  private defaultPassword = "***************";
-
   updateFail = false;
 
   constructor(private prestationManagementService: PrestationManagementService, private employeeManagementService: EmployeeManagementService) {
@@ -35,7 +33,7 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initializeEmployeeUpdateFormGroup() {
-    this.employeeUpdateForm = new EmployeeForm(this.prestationManagementService, this.employee);
+    this.employeeUpdateForm = new EmployeeForm(this.prestationManagementService, false, this.employee);
 
     if (this.allDisable) {
       this.employeeUpdateForm.disable();
@@ -46,12 +44,13 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
     if (this.employee != null) {
       const form = this.employeeUpdateForm?.value;
       const employeeUpdatedInfo: EmployeeUpdatedInformation = {
-        password: form.password !== this.defaultPassword ? form.password : null,
+        password: form.password !== EmployeeForm.DEFAULT_PASSWORD ? form.password : null,
         firstName: form.firstName,
         lastName: form.lastName,
         comment: form.comment,
         gender: form.gender,
         phone: form.phone,
+        praticablePrestations: this.employeeUpdateForm.prestationFormGroup.selectedPrestations(),
         tags: (form.tags != null ? form.tags.split(' ') : []),
       }
 

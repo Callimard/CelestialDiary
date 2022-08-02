@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeRoleForm} from "./employee-role-form";
 import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
 import {EmployeePrestationForm} from "./employee-prestation-form";
@@ -6,17 +6,19 @@ import {PrestationManagementService} from "../../../../service/company-managemen
 
 export class EmployeeForm extends FormGroup {
 
-  constructor(private prestationManagementService: PrestationManagementService, employee?: EmployeeDTO) {
+  public static readonly DEFAULT_PASSWORD: string = "***************";
+
+  constructor(private prestationManagementService: PrestationManagementService, withValidators: boolean = false, employee?: EmployeeDTO) {
     super({
-      email: new FormControl(employee?.email),
-      password: new FormControl(employee != null ? "************" : null),
-      firstName: new FormControl(employee?.firstName),
-      lastName: new FormControl(employee?.lastName),
+      email: new FormControl(employee?.email, withValidators ? [Validators.required] : []),
+      password: new FormControl(employee != null ? EmployeeForm.DEFAULT_PASSWORD : null, withValidators ? [Validators.required] : []),
+      firstName: new FormControl(employee?.firstName, withValidators ? [Validators.required] : []),
+      lastName: new FormControl(employee?.lastName, withValidators ? [Validators.required] : []),
       comment: new FormControl(employee?.comment),
       gender: new FormControl(employee?.gender),
       phone: new FormControl(employee?.phone),
       tags: new FormControl(employee != null ? EmployeeForm.extractEmployeeTags(employee) : null),
-      praticablePrestations: new EmployeePrestationForm(prestationManagementService),
+      praticablePrestations: new EmployeePrestationForm(prestationManagementService, employee),
       roles: new EmployeeRoleForm()
     });
   }
