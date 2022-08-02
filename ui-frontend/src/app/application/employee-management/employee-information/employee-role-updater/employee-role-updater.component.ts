@@ -33,7 +33,7 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
 
   onEmployeeUpdateRole() {
     const employeeRoleUpdates: EmployeeUpdatedRoles = {
-      roles: this.employeeRoleFormGroup.extractRoles()
+      roles: this.employeeRoleFormGroup.selectedRoles()
     }
     this.employeeManagementService.updateEmployeeRoles(this.employee.id, employeeRoleUpdates).then((employee) => {
       this.updateFailed = false;

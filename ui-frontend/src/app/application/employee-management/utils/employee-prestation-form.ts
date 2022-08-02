@@ -17,7 +17,7 @@ export class EmployeePrestationForm extends FormGroup {
     });
   }
 
-  public extractRoles(): string[] {
+  public selectedPrestations(): string[] {
     let prestations: string[] = [];
     const controlKeys = Object.keys(this.controls);
     const v = this.value;

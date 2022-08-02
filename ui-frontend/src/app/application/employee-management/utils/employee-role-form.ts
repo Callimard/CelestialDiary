@@ -6,7 +6,7 @@ export class EmployeeRoleForm extends FormGroup{
     super({});
   }
 
-  public extractRoles(): string[] {
+  public selectedRoles(): string[] {
     let roles: string[] = [];
     const controlKeys = Object.keys(this.controls);
     const v = this.value;
