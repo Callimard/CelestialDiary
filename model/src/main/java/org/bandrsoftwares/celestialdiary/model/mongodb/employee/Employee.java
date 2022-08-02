@@ -6,8 +6,7 @@ import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -15,7 +14,6 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import java.time.Instant;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,12 +74,7 @@ public class Employee {
         if (roles != null) {
             for (Role role : roles) {
                 for (Privilege companyPrivilege : role.getCompanyPrivileges()) {
-                    Optional<CompanyManagementPrivilege> privilege = Privilege.extractCompanyPrivilege(companyPrivilege);
-                    if (privilege.isPresent()) {
-                        companyPrivileges.add(privilege.get().name());
-                    } else {
-                        log.error("Fail to extract CompanyManagementPrivilege of the identifier {}", companyPrivilege.getIdentifierName());
-                    }
+                    companyPrivileges.add(companyPrivilege.getIdentifierName());
                 }
             }
         }
@@ -97,7 +90,6 @@ public class Employee {
                 for (EstablishmentRole establishmentRole : role.getEstablishmentRoles()) {
                     List<String> establishmentRoleIdentifiers = Lists.newArrayList();
                     establishmentPrivileges.put(establishmentRole.getEstablishment().getId(), establishmentRoleIdentifiers);
-
                     addEstablishmentPrivilege(establishmentRole, establishmentRoleIdentifiers);
                 }
             }
@@ -108,13 +100,7 @@ public class Employee {
 
     private void addEstablishmentPrivilege(EstablishmentRole establishmentRole, List<String> establishmentRoleIdentifiers) {
         for (Privilege establishmentPrivilege : establishmentRole.getEstablishmentPrivileges()) {
-            Optional<EstablishmentManagementPrivilege> privilege = Privilege.extractEstablishmentPrivilege(establishmentPrivilege);
-            if (privilege.isPresent()) {
-                establishmentRoleIdentifiers.add(privilege.get().name());
-            } else {
-                log.error("Fail to extract EstablishmentManagementPrivilege of the identifier {}",
-                          establishmentPrivilege.getIdentifierName());
-            }
+            establishmentRoleIdentifiers.add(establishmentPrivilege.getIdentifierName());
         }
     }
 

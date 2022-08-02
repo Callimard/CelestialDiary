@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
-import {PrivilegeDTO} from "../../../../../data/company-management/employee/privilege-dto";
+import {PrivilegeDTO} from "../../../../../data/security/privilege/privilege-dto";
 import {PrivilegeManagementService} from "../../../../../service/company-management/employee/role/privilege/privilege-management.service";
 
 @Component({

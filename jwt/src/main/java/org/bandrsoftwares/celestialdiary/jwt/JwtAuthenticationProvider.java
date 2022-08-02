@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyScopePrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentScopePrivilege;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,6 +34,9 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     private final JWTVerifier jwtVerifier;
 
     private final ObjectMapper mapper;
+
+    private final CompanyManagementScope companyManagementScope = new CompanyManagementScope();
+    private final EstablishmentManagementScope establishmentManagementScope = new EstablishmentManagementScope();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -64,8 +69,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         if (jwtAccount.getCompanyPrivilegeIdentifiers() != null) {
             for (String identifier : jwtAccount.getCompanyPrivilegeIdentifiers()) {
                 try {
-                    CompanyManagementPrivilege privilege = CompanyManagementPrivilege.valueOf(identifier);
-                    authorities.add(new SimpleGrantedAuthority(privilege.getPrivilegeFormatted(jwtAccount.getCompanyId())));
+                    CompanyScopePrivilege scopePrivilege = companyManagementScope.scopePrivilegeOf(identifier);
+                    authorities.add(new SimpleGrantedAuthority(scopePrivilege.formatPrivilege(jwtAccount.getCompanyId())));
                 } catch (IllegalArgumentException e) {
                     log.error("Unknown CompanyManagementPrivilege identifier", e);
                 }
@@ -83,8 +88,8 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
                 String establishmentId = entry.getKey();
                 for (String identifier : entry.getValue()) {
                     try {
-                        EstablishmentManagementPrivilege privilege = EstablishmentManagementPrivilege.valueOf(identifier);
-                        authorities.add(new SimpleGrantedAuthority(privilege.getPrivilegeFormatted(jwtAccount.getCompanyId(), establishmentId)));
+                        EstablishmentScopePrivilege scopePrivilege = establishmentManagementScope.scopePrivilegeOf(identifier);
+                        authorities.add(new SimpleGrantedAuthority(scopePrivilege.formatPrivilege(jwtAccount.getCompanyId(), establishmentId)));
                     } catch (IllegalArgumentException e) {
                         log.error("Unknown EstablishmentManagementPrivilege identifier", e);
                     }

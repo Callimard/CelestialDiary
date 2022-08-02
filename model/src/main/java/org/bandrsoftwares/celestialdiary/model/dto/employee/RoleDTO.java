@@ -1,6 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.dto.employee;
 
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
+import org.bandrsoftwares.celestialdiary.security.privilege.dto.PrivilegeDTO;
 
 import java.util.List;
 

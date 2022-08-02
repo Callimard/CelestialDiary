@@ -1,10 +1,10 @@
 package org.bandrsoftwares.celestialdiary.security.privilege;
 
-public interface PrivilegeEnum {
+import java.util.List;
 
-    String enumName();
+public interface PrivilegeEnum<T extends Scope.ScopePrivilege> {
 
-    String getPrivilegeName();
+    List<PrivilegeEnum<T>> allValues();
 
-    String getPrivilegeDescription();
+    T getScopePrivilege();
 }

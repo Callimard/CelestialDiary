@@ -1,8 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {RoleDTO} from "../../../../../data/company-management/employee/role-dto";
+import {RoleDTO} from "../../../../../data/company-management/employee/role/role-dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
-import {RoleUpdatedInformation} from "../../../../../data/company-management/employee/role-updated-information";
+import {RoleUpdatedInformation} from "../../../../../data/company-management/employee/role/role-updated-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 

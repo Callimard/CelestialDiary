@@ -12,7 +12,7 @@ import org.bandrsoftwares.celestialdiary.aop.employee.SearchRole;
 import org.bandrsoftwares.celestialdiary.model.dto.employee.EstablishmentRoleDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EstablishmentRole;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Privilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RoleDTO} from "../../../../data/company-management/employee/role-dto";
+import {RoleDTO} from "../../../../data/company-management/employee/role/role-dto";
 import {ActivatedRoute} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 import {Location} from "@angular/common";

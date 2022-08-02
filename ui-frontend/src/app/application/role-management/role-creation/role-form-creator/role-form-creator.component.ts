@@ -1,7 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PrivilegeManagementService} from "../../../../../service/company-management/employee/role/privilege/privilege-management.service";
-import {RoleCreationInformation} from "../../../../../data/company-management/employee/role-creation-information";
+import {RoleCreationInformation} from "../../../../../data/company-management/employee/role/role-creation-information";
 import {CompanyPrivilegeFormGroup} from "../../../../../service/company-management/employee/role/privilege/company-privilege-form-group";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 

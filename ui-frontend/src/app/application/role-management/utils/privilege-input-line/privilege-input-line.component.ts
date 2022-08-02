@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormGroup} from "@angular/forms";
-import {PrivilegeDTO} from "../../../../../data/company-management/employee/privilege-dto";
+import {PrivilegeDTO} from "../../../../../data/security/privilege/privilege-dto";
 
 @Component({
   selector: '[app-privilege-input-line]',

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {PrivilegeDTO} from "../../../../../data/company-management/employee/privilege-dto";
+import {PrivilegeDTO} from "../../../../../data/security/privilege/privilege-dto";
 import {backend} from "../../../../../environments/environment";
 
 @Injectable({
