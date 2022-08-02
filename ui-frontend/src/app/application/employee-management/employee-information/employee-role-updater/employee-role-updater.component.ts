@@ -4,6 +4,7 @@ import {EmployeeManagementService} from "../../../../../service/company-manageme
 import {EmployeeUpdatedRoles} from "../../../../../data/company-management/employee/employee-updated-roles";
 import {FormControl} from "@angular/forms";
 import {EmployeeRoleForm} from "../../utils/employee-role-form";
+import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 
 @Component({
   selector: '[app-employee-role-updater]',
@@ -16,9 +17,9 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
 
   @Input() employee!: EmployeeDTO
 
-  employeeRoleFormGroup = new EmployeeRoleForm();
+  employeeRoleFormGroup!: EmployeeRoleForm;
 
-  constructor(private employeeManagementService: EmployeeManagementService) {
+  constructor(private roleManagementService: RoleManagementService, private employeeManagementService: EmployeeManagementService) {
     // Nothing
   }
 
@@ -27,7 +28,7 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(_changes: SimpleChanges): void {
-    this.employeeRoleFormGroup = new EmployeeRoleForm();
+    this.employeeRoleFormGroup = new EmployeeRoleForm(this.roleManagementService);
     this.mergeEmployeeRole();
   }
 
@@ -35,6 +36,9 @@ export class EmployeeRoleUpdaterComponent implements OnInit, OnChanges {
     const employeeRoleUpdates: EmployeeUpdatedRoles = {
       roles: this.employeeRoleFormGroup.selectedRoles()
     }
+
+    console.log(employeeRoleUpdates);
+
     this.employeeManagementService.updateEmployeeRoles(this.employee.id, employeeRoleUpdates).then((employee) => {
       this.updateFailed = false;
       this.employee = employee;

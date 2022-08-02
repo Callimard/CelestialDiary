@@ -151,10 +151,11 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
             List<Role> roles = roleRepository.findByCompanyAndIdIn(company, roleUpdate.roles());
             employee.setRoles(roles);
 
-            return employeeRepository.save(employee);
         } else {
-            return employee;
+            employee.setRoles(Lists.newArrayList());
         }
+
+        return employeeRepository.save(employee);
     }
 
     @SearchEmployee

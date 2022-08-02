@@ -12,16 +12,23 @@ export class EmployeePrestationForm extends FormGroup {
 
     this.prestationManagementService.allPrestations().then((allPrestations) => {
       this._allPrestations = allPrestations;
-      for (let prestation of this._allPrestations) {
-        this.addControl(prestation.id, new FormControl(false));
-      }
-
-      if (employee?.praticablePrestations != null) {
-        for (let prestation of employee?.praticablePrestations) {
-          this.setControl(prestation.id, new FormControl(true));
-        }
-      }
+      this.createForm();
+      this.mergeWithEmployee(employee);
     });
+  }
+
+  private createForm() {
+    for (let prestation of this._allPrestations) {
+      this.addControl(prestation.id, new FormControl(false));
+    }
+  }
+
+  private mergeWithEmployee(employee?: EmployeeDTO) {
+    if (employee?.praticablePrestations != null) {
+      for (let prestation of employee?.praticablePrestations) {
+        this.setControl(prestation.id, new FormControl(true));
+      }
+    }
   }
 
   public selectedPrestations(): string[] {

@@ -3,6 +3,7 @@ import {EmployeeManagementService} from "../../../../../service/company-manageme
 import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
 import {EmployeeForm} from "../../utils/employee-form";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
+import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 
 @Component({
   selector: '[app-employee-form-creator]',
@@ -17,12 +18,14 @@ export class EmployeeFormCreatorComponent implements OnInit {
 
   employeeCreationForm!: EmployeeForm;
 
-  constructor(private prestationManagementService: PrestationManagementService, private employeeManagementService: EmployeeManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService,
+              private roleManagementService: RoleManagementService,
+              private employeeManagementService: EmployeeManagementService) {
     // Nothing.
   }
 
   ngOnInit(): void {
-    this.employeeCreationForm = new EmployeeForm(this.prestationManagementService);
+    this.employeeCreationForm = new EmployeeForm(this.prestationManagementService, this.roleManagementService);
   }
 
   onEmployeeCreation() {

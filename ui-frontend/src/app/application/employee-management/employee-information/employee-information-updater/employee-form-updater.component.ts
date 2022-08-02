@@ -5,6 +5,7 @@ import {EmployeeUpdatedInformation} from "../../../../../data/company-management
 import {RoleFormGroup} from "../../../role-management/utils/role-form-group";
 import {EmployeeForm} from "../../utils/employee-form";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
+import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 
 @Component({
   selector: '[app-employee-form-updater]',
@@ -20,7 +21,9 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
 
   updateFail = false;
 
-  constructor(private prestationManagementService: PrestationManagementService, private employeeManagementService: EmployeeManagementService) {
+  constructor(private prestationManagementService: PrestationManagementService,
+              private roleManagementService: RoleManagementService,
+              private employeeManagementService: EmployeeManagementService) {
     // Nothing.
   }
 
@@ -33,7 +36,7 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initializeEmployeeUpdateFormGroup() {
-    this.employeeUpdateForm = new EmployeeForm(this.prestationManagementService, false, this.employee);
+    this.employeeUpdateForm = new EmployeeForm(this.prestationManagementService, this.roleManagementService, false, this.employee);
 
     if (this.allDisable) {
       this.employeeUpdateForm.disable();

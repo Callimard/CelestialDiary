@@ -3,12 +3,13 @@ import {EmployeeRoleForm} from "./employee-role-form";
 import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
 import {EmployeePrestationForm} from "./employee-prestation-form";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
+import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 
 export class EmployeeForm extends FormGroup {
 
   public static readonly DEFAULT_PASSWORD: string = "***************";
 
-  constructor(private prestationManagementService: PrestationManagementService, withValidators: boolean = false, employee?: EmployeeDTO) {
+  constructor(private prestationManagementService: PrestationManagementService, private roleManagementService: RoleManagementService, withValidators: boolean = false, employee?: EmployeeDTO) {
     super({
       email: new FormControl(employee?.email, withValidators ? [Validators.required] : []),
       password: new FormControl(employee != null ? EmployeeForm.DEFAULT_PASSWORD : null, withValidators ? [Validators.required] : []),
@@ -19,7 +20,7 @@ export class EmployeeForm extends FormGroup {
       phone: new FormControl(employee?.phone),
       tags: new FormControl(employee != null ? EmployeeForm.extractEmployeeTags(employee) : null),
       praticablePrestations: new EmployeePrestationForm(prestationManagementService, employee),
-      roles: new EmployeeRoleForm()
+      roles: new EmployeeRoleForm(roleManagementService, employee)
     });
   }
 
