@@ -6,7 +6,6 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
-import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.PersonGender;
 import org.bandrsoftwares.celestialdiary.validation.ValidEmail;
@@ -101,31 +100,11 @@ public interface EmployeeManagementService {
     record EmployeeUpdatedRoles(@NotNull List<String> roles) {
     }
 
-    /**
-     * Assigns the Employee to the Establishment. The Establishment must be an Establishment of the Employee Company.
-     *
-     * @param companyId       the id of the company
-     * @param employeeId      the id of the employee to assign
-     * @param establishmentId the id of the establishment
-     *
-     * @return true if changes has been done, else false.
-     *
-     * @throws CompanyCoherenceException if the employee company is not the specified company
-     */
-    boolean assignEmployeeToEstablishment(@CompanyId String companyId, @EmployeeId String employeeId, @EstablishmentId String establishmentId);
+    Employee updateEmployeeEstablishment(@CompanyId String companyId, @EmployeeId String employeeId,
+                                         @Valid EmployeeEstablishmentInformation employeeEstablishmentInformation);
 
-    /**
-     * De assigns the Employee to the Establishment. The Establishment must be an Establishment of the Employee Company.
-     *
-     * @param companyId       the id of the company
-     * @param employeeId      the id of the employee to de assign
-     * @param establishmentId the id of the establishment
-     *
-     * @return true if changes has been done, else false.
-     *
-     * @throws CompanyCoherenceException if the employee company is not the specified company
-     */
-    boolean deAssignEmployeeToEstablishment(@CompanyId String companyId, @EmployeeId String employeeId, @EstablishmentId String establishmentId);
+    record EmployeeEstablishmentInformation(@NotNull List<String> establishmentIds) {
+    }
 
     /**
      * Activate the Employee if it is not already the case.

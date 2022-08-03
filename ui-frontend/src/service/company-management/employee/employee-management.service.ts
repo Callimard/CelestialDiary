@@ -8,6 +8,7 @@ import {EmployeeCreationInformation} from "../../../data/company-management/empl
 import {EmployeeDTO} from "../../../data/company-management/employee/employee-dto";
 import {EmployeeUpdatedInformation} from "../../../data/company-management/employee/employee-updated-information";
 import {EmployeeUpdatedRoles} from "../../../data/company-management/employee/employee-updated-roles";
+import {EmployeeEstablishmentInformation} from "../../../data/company-management/employee/employee-establishment-information";
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class EmployeeManagementService {
     return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/roles';
   }
 
-  private static companyAssignEmployeeToEstablishmentUrl(companyId: string, employeeId: string, establishmentId: string): string {
-    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/assignation/' + establishmentId;
+  private static companyAssignEmployeeToEstablishmentUrl(companyId: string, employeeId: string): string {
+    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/assignation';
   }
 
   public allEmployees(): Promise<WrappedEmployeeDTO[]> {
@@ -127,29 +128,13 @@ export class EmployeeManagementService {
     }))
   }
 
-  public assignEmployeeToEstablishment(employeeId: string, establishmentId: string): Promise<boolean> {
+  public updateEmployeeEstablishmentAssignation(employeeId: string, employeeEstablishmentInformation: EmployeeEstablishmentInformation): Promise<EmployeeDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return new Promise<boolean>(((resolve, reject) => {
-      this.http.post<boolean>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId, establishmentId), null)
+    return new Promise<EmployeeDTO>(((resolve, reject) => {
+      this.http.put<EmployeeDTO>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId), employeeEstablishmentInformation)
         .subscribe({
-          next: (hasBeenAssigned) => {
-            resolve(hasBeenAssigned);
-          },
-          error: (err: HttpErrorResponse) => {
-            console.error(err.error);
-            reject(err.error);
-          }
-        })
-    }))
-  }
-
-  public deAssignEmployeeToEstablishment(employeeId: string, establishmentId: string): Promise<boolean> {
-    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return new Promise<boolean>(((resolve, reject) => {
-      this.http.delete<boolean>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId, establishmentId))
-        .subscribe({
-          next: (hasBeenDeAssigned) => {
-            resolve(hasBeenDeAssigned);
+          next: (employee) => {
+            resolve(employee);
           },
           error: (err: HttpErrorResponse) => {
             console.error(err.error);

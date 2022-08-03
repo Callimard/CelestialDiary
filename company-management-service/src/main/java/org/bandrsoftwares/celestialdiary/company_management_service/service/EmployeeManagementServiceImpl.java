@@ -10,8 +10,6 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.SearchEmployee;
-import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
-import org.bandrsoftwares.celestialdiary.aop.establishment.SearchEstablishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.employee.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
@@ -158,60 +156,46 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
         return employeeRepository.save(employee);
     }
 
+    @SearchCompany
     @SearchEmployee
-    @SearchEstablishment
     @CheckCompanyCoherence
     @Override
-    public boolean assignEmployeeToEstablishment(@CompanyId String companyId, @EmployeeId String employeeId,
-                                                 @EstablishmentId String establishmentId) {
+    public Employee updateEmployeeEstablishment(@CompanyId String companyId, @EmployeeId String employeeId,
+                                                @Valid EmployeeEstablishmentInformation info) {
         Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
-        Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
+        List<Establishment> allEstablishments = establishmentRepository.findByCompany(SearchingAspect.COMPANY_FOUND.get());
 
-        if (!establishment.hasAsAssignedEmployee(employee)) {
-            establishment.getAssignedEmployees().add(employee);
-            establishmentRepository.save(establishment);
+        if (!info.establishmentIds().isEmpty()) {
+            List<Establishment> chosenEstablishments =
+                    establishmentRepository.findByCompanyAndIdIn(SearchingAspect.COMPANY_FOUND.get(), info.establishmentIds());
+            employee.setAssignedEstablishments(chosenEstablishments);
 
-            if (!employee.isAssignedTo(establishment)) {
-                employee.getAssignedEstablishments().add(establishment);
-                employeeRepository.save(employee);
-            }
-
-            return true;
+            updateEstablishmentEmployeeAssignation(employee, allEstablishments, chosenEstablishments);
         } else {
-            // Just in case employee is not up-to-date
-            if (!employee.isAssignedTo(establishment)) {
-                employee.getAssignedEstablishments().add(establishment);
-                employeeRepository.save(employee);
-                return true;
-            }
-            return false;
+            employee.setAssignedEstablishments(Lists.newArrayList());
+            updateEstablishmentEmployeeAssignation(employee, allEstablishments, Lists.newArrayList());
         }
+
+        return employeeRepository.save(employee);
     }
 
-    @SearchEmployee
-    @SearchEstablishment
-    @CheckCompanyCoherence
-    @Override
-    public boolean deAssignEmployeeToEstablishment(@CompanyId String companyId, @EmployeeId String employeeId,
-                                                   @EstablishmentId String establishmentId) {
-        Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
-        Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
-
-        if (establishment.hasAsAssignedEmployee(employee)) {
-            establishment.getAssignedEmployees().removeIf(emp -> emp.getId().equals(employeeId));
-            employee.getAssignedEstablishments().removeIf(est -> est.getId().equals(establishment.getId()));
-
-            employeeRepository.save(employee);
-            establishmentRepository.save(establishment);
-            return true;
-        } else {
-            // Just in case employee is not up-to-date
-            if (employee.isAssignedTo(establishment)) {
-                employee.getAssignedEstablishments().removeIf(est -> est.getId().equals(establishment.getId()));
-                employeeRepository.save(employee);
-                return true;
+    private void updateEstablishmentEmployeeAssignation(Employee employee, List<Establishment> allEstablishments,
+                                                        List<Establishment> chosenEstablishments) {
+        List<String> chosenEstablishmentIds = chosenEstablishments.stream().map(Establishment::getId).toList();
+        for (Establishment establishment : allEstablishments) {
+            if (!chosenEstablishmentIds.contains(establishment.getId())) {
+                // If establishment is not assign to the employee
+                boolean removed = establishment.getAssignedEmployees().removeIf(emp -> emp.getId().equals(employee.getId()));
+                if (removed) {
+                    establishmentRepository.save(establishment);
+                }
+            } else {
+                // If establishment is assign to the employee
+                if (!establishment.getAssignedEmployees().stream().map(Employee::getId).toList().contains(employee.getId())) {
+                    establishment.getAssignedEmployees().add(employee);
+                    establishmentRepository.save(establishment);
+                }
             }
-            return false;
         }
     }
 
