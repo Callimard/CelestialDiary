@@ -47,6 +47,11 @@
       "roles": {
         "title": "Update employee roles",
         "update": "Update roles"
+      },
+      "establishment": {
+        "title": "Employee establishment",
+        "description": "Select establishment(s) where the employee is working.",
+        "update": "Update"
       }
     }
   },

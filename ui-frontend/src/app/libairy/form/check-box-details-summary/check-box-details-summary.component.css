@@ -1,0 +1,20 @@
+.details-line {
+  overflow: hidden;
+}
+
+.summary-label, .details-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.summary-label {
+  font-weight: bold;
+}
+
+.summary-label, .summary-check, .details-line summary {
+  cursor: pointer;
+}
+
+.summary-check, .summary-label {
+  margin-left: 1em;
+}

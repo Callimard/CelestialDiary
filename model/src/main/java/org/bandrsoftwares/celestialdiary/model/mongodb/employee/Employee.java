@@ -58,7 +58,7 @@ public class Employee {
 
     @ToString.Exclude
     @DocumentReference(collection = "Establishment")
-    private Set<Establishment> assignedEstablishments;
+    private List<Establishment> assignedEstablishments;
 
     @ToString.Exclude
     @DocumentReference(collection = "Prestation")

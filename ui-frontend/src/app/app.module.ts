@@ -68,6 +68,8 @@ import { EquipmentFormContentComponent } from './application/equipment-managemen
 import { EquipmentFormUpdaterComponent } from './application/equipment-management/equipment-information/equipment-form-updater/equipment-form-updater.component';
 import { PrestationFormContentComponent } from './application/prestation-management/utils/prestation-form-content/prestation-form-content.component';
 import { EmployeePrestationSelectionComponent } from './application/employee-management/utils/employee-prestation-selection/employee-prestation-selection.component';
+import { EmployeeEstablishmentAssignationComponent } from './application/employee-management/employee-information/employee-establishment-assignation/employee-establishment-assignation.component';
+import { CheckBoxDetailsSummaryComponent } from './libairy/form/check-box-details-summary/check-box-details-summary.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -189,7 +191,9 @@ const appRoutes: Routes = [
     EquipmentFormContentComponent,
     EquipmentFormUpdaterComponent,
     PrestationFormContentComponent,
-    EmployeePrestationSelectionComponent
+    EmployeePrestationSelectionComponent,
+    EmployeeEstablishmentAssignationComponent,
+    CheckBoxDetailsSummaryComponent
   ],
   imports: [
     BrowserModule,

@@ -47,6 +47,11 @@
       "roles": {
         "title": "Mettre à jour les rôles de l'employé(e)",
         "update": "Mettre à jour les rôles"
+      },
+      "establishment": {
+        "title": "Établissement de travail de l'employé",
+        "description": "Sélectionner le ou les établissement(s) où l'employé travail.",
+        "update": "Mettre à jour"
       }
     }
   },

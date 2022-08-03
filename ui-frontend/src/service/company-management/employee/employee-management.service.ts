@@ -30,6 +30,10 @@ export class EmployeeManagementService {
     return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/roles';
   }
 
+  private static companyAssignEmployeeToEstablishmentUrl(companyId: string, employeeId: string, establishmentId: string): string {
+    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/assignation/' + establishmentId;
+  }
+
   public allEmployees(): Promise<WrappedEmployeeDTO[]> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
     return new Promise<WrappedEmployeeDTO[]>(((resolve, reject) => {
@@ -120,6 +124,38 @@ export class EmployeeManagementService {
           reject(err.error);
         }
       })
+    }))
+  }
+
+  public assignEmployeeToEstablishment(employeeId: string, establishmentId: string): Promise<boolean> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<boolean>(((resolve, reject) => {
+      this.http.post<boolean>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId, establishmentId), null)
+        .subscribe({
+          next: (hasBeenAssigned) => {
+            resolve(hasBeenAssigned);
+          },
+          error: (err: HttpErrorResponse) => {
+            console.error(err.error);
+            reject(err.error);
+          }
+        })
+    }))
+  }
+
+  public deAssignEmployeeToEstablishment(employeeId: string, establishmentId: string): Promise<boolean> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<boolean>(((resolve, reject) => {
+      this.http.delete<boolean>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId, establishmentId))
+        .subscribe({
+          next: (hasBeenDeAssigned) => {
+            resolve(hasBeenDeAssigned);
+          },
+          error: (err: HttpErrorResponse) => {
+            console.error(err.error);
+            reject(err.error);
+          }
+        })
     }))
   }
 

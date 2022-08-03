@@ -47,8 +47,6 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
       companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
     }
 
-    console.log(roleUpdates);
-
     this.roleManagementService.updateRole(this.role.id, roleUpdates).then((roleUpdated) => {
       this.role = roleUpdated;
       this.updateFailed = false;
