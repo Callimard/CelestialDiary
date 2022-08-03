@@ -8,6 +8,7 @@ import {EmployeeCreationInformation} from "../../../data/company-management/empl
 import {EmployeeDTO} from "../../../data/company-management/employee/employee-dto";
 import {EmployeeUpdatedInformation} from "../../../data/company-management/employee/employee-updated-information";
 import {EmployeeUpdatedRoles} from "../../../data/company-management/employee/employee-updated-roles";
+import {EmployeeEstablishmentInformation} from "../../../data/company-management/employee/employee-establishment-information";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class EmployeeManagementService {
 
   private static companyUpdateEmployeeRoleUrl(companyId: string, employeeId: string): string {
     return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/roles';
+  }
+
+  private static companyAssignEmployeeToEstablishmentUrl(companyId: string, employeeId: string): string {
+    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/assignation';
   }
 
   public allEmployees(): Promise<WrappedEmployeeDTO[]> {
@@ -120,6 +125,22 @@ export class EmployeeManagementService {
           reject(err.error);
         }
       })
+    }))
+  }
+
+  public updateEmployeeEstablishmentAssignation(employeeId: string, employeeEstablishmentInformation: EmployeeEstablishmentInformation): Promise<EmployeeDTO> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<EmployeeDTO>(((resolve, reject) => {
+      this.http.put<EmployeeDTO>(EmployeeManagementService.companyAssignEmployeeToEstablishmentUrl(jwtAccount.companyId, employeeId), employeeEstablishmentInformation)
+        .subscribe({
+          next: (employee) => {
+            resolve(employee);
+          },
+          error: (err: HttpErrorResponse) => {
+            console.error(err.error);
+            reject(err.error);
+          }
+        })
     }))
   }
 

@@ -55,8 +55,8 @@ public class EmployeeManagementController {
     @UpdateEmployeePrivilege
     @PutMapping(SPECIFIC_EMPLOYEE)
     public EmployeeDTO updateEmployeeInformation(@PathVariable(name = "idCompany") String idCompany,
-                                                        @PathVariable(name = "idEmployee") String idEmployee,
-                                                        @RequestBody EmployeeManagementService.EmployeeUpdatedInformation employeeUpdatedInformation) {
+                                                 @PathVariable(name = "idEmployee") String idEmployee,
+                                                 @RequestBody EmployeeManagementService.EmployeeUpdatedInformation employeeUpdatedInformation) {
         Employee employee = employeeManagementService.updateEmployeeInformation(idCompany, idEmployee, employeeUpdatedInformation);
         return new EmployeeDTO(employee);
     }
@@ -64,26 +64,18 @@ public class EmployeeManagementController {
     @UpdateEmployeeRolePrivilege
     @PutMapping(SPECIFIC_EMPLOYEE_ROLES)
     public EmployeeDTO updateEmployeeRoles(@PathVariable(name = "idCompany") String idCompany,
-                                                  @PathVariable(name = "idEmployee") String idEmployee,
-                                                  @RequestBody EmployeeManagementService.EmployeeUpdatedRoles employeeUpdatedRoles) {
+                                           @PathVariable(name = "idEmployee") String idEmployee,
+                                           @RequestBody EmployeeManagementService.EmployeeUpdatedRoles employeeUpdatedRoles) {
         Employee employee = employeeManagementService.updateEmployeeRoles(idCompany, idEmployee, employeeUpdatedRoles);
         return new EmployeeDTO(employee);
     }
 
     @AssignEmployeePrivilege
-    @PostMapping(SPECIFIC_EMPLOYEE_ESTABLISHMENT_ASSIGNATION)
-    public boolean assignEmployeeToEstablishment(@PathVariable(name = "idCompany") String idCompany,
-                                                 @PathVariable(name = "idEmployee") String idEmployee,
-                                                 @PathVariable(name = "idEstablishment") String idEstablishment) {
-        return employeeManagementService.assignEmployeeToEstablishment(idCompany, idEmployee, idEstablishment);
-    }
-
-    @AssignEmployeePrivilege
-    @DeleteMapping(SPECIFIC_EMPLOYEE_ESTABLISHMENT_ASSIGNATION)
-    public boolean deAssignEmployeeToEstablishment(@PathVariable(name = "idCompany") String idCompany,
-                                                   @PathVariable(name = "idEmployee") String idEmployee,
-                                                   @PathVariable(name = "idEstablishment") String idEstablishment) {
-        return employeeManagementService.deAssignEmployeeToEstablishment(idCompany, idEmployee, idEstablishment);
+    @PutMapping(SPECIFIC_EMPLOYEE_ESTABLISHMENT_ASSIGNATION)
+    public EmployeeDTO updateEmployeeEstablishmentAssignation(@PathVariable(name = "idCompany") String idCompany,
+                                                              @PathVariable(name = "idEmployee") String idEmployee,
+                                                              @RequestBody EmployeeManagementService.EmployeeEstablishmentInformation updates) {
+        return new EmployeeDTO(employeeManagementService.updateEmployeeEstablishment(idCompany, idEmployee, updates));
     }
 
     @ActivateEmployeePrivilege

@@ -1,9 +1,7 @@
-<div [formGroup]="roleFormGroup">
-  <details class="role-line" *ngFor="let role of roleFormGroup.allRoles">
-    <summary class="basic-clickable">
-      <input class="role-check" type="checkbox" [id]="role.name" [formControlName]="role.id">
-      <label class="role-name" [for]="role.name">{{role.name}}</label>
-    </summary>
-    <p class="role-description">{{role.description}}</p>
-  </details>
+<div app-check-box-details-summary
+     *ngFor="let role of roleFormGroup.allRoles"
+     [checkBoxFormGroup]="roleFormGroup"
+     [checkBoxControlName]="role.id"
+     [summaryLabel]="role.name"
+     [detailText]="role.description">
 </div>

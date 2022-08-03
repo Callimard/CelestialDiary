@@ -1,0 +1,19 @@
+<form [formGroup]="establishmentSelectionForm" (ngSubmit)="onUpdateEmployeeEstablishment()">
+  <h3>{{ 'employee.update.establishment.title' | translate }}</h3>
+  <p>{{ 'employee.update.establishment.description' | translate }}</p>
+  <ul class="form-group">
+    <li class="form-control"
+        app-check-box-details-summary
+        *ngFor="let establishment of establishmentSelectionForm.allEstablishment"
+        [checkBoxFormGroup]="establishmentSelectionForm"
+        [checkBoxControlName]="establishment.id"
+        [summaryLabel]="establishment.name"
+        [detailText]="establishment.description">
+    </li>
+  </ul>
+
+  <div class="form-submit-group">
+    <button class="super-valid-button need-top-space" [disabled]="establishmentSelectionForm.invalid"
+            type="submit">{{ 'employee.update.establishment.update' | translate }}</button>
+  </div>
+</form>

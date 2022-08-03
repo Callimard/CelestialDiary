@@ -10,7 +10,10 @@
   <div app-employee-role-updater class="floating-card need-top-space"
        *ngIf="privilegeManagement.hasEmployeeUpdateRole() && privilegeManagement.hasRoleRead()"
        [employee]="employee">
-
+  </div>
+  <div app-employee-establishment-assignation class="floating-card need-top-space"
+       *ngIf="privilegeManagement.hasEmployeeAssign() && privilegeManagement.hasEstablishmentRead()"
+       [employee]="employee">
   </div>
 </div>
 

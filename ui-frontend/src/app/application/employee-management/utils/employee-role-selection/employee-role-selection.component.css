@@ -1,17 +1,1 @@
-.role-name, .role-description {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
 
-.role-name {
-  font-weight: bold;
-}
-
-.role-name, .role-check, .role-line summary {
-  cursor: pointer;
-}
-
-.role-check, .role-name {
-  margin-left: 1em;
-}
