@@ -1,0 +1,14 @@
+.add-remove-buttons-container {
+  padding: 0.7em 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.1em;
+}
+
+.exceptional-date-container {
+  display: flex;
+  justify-content: stretch;
+  align-items: center;
+
+  gap: 1.2em
+}
