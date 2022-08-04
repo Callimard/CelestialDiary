@@ -1,7 +1,7 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {ScopeDTO} from "../../../../data/security/privilege/scope-dto";
 import {PrivilegeDTO} from "../../../../data/security/privilege/privilege-dto";
-import {RoleDTO} from "../../../../data/company-management/employee/role/role-dto";
+import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 
 export class ScopeFormGroup extends FormGroup {
 

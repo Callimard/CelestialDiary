@@ -1,7 +1,7 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
-import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
-import {RoleDTO} from "../../../../data/company-management/employee/role/role-dto";
+import {EmployeeDTO} from "../../../../data/company-management/person/employee/employee-dto";
+import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 
 export class EmployeeRoleForm extends FormGroup {
 

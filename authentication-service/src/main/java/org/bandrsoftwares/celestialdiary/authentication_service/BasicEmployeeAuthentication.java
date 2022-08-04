@@ -1,7 +1,7 @@
 package org.bandrsoftwares.celestialdiary.authentication_service;
 
 import lombok.NonNull;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public class BasicEmployeeAuthentication extends UsernamePasswordAuthenticationToken {

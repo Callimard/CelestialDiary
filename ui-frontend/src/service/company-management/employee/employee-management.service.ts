@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {WrappedEmployeeDTO} from "../../../data/company-management/employee/wrapped-employee-dto";
+import {WrappedEmployeeDTO} from "../../../data/company-management/person/employee/wrapped-employee-dto";
 import {backend} from "../../../environments/environment";
 import {JwtAccount} from "../../authentication/jwt-account";
 import {AuthenticationService} from "../../authentication/authentication.service";
-import {EmployeeCreationInformation} from "../../../data/company-management/employee/employee-creation-information";
-import {EmployeeDTO} from "../../../data/company-management/employee/employee-dto";
-import {EmployeeUpdatedInformation} from "../../../data/company-management/employee/employee-updated-information";
-import {EmployeeUpdatedRoles} from "../../../data/company-management/employee/employee-updated-roles";
-import {EmployeeEstablishmentInformation} from "../../../data/company-management/employee/employee-establishment-information";
+import {EmployeeCreationInformation} from "../../../data/company-management/person/employee/employee-creation-information";
+import {EmployeeDTO} from "../../../data/company-management/person/employee/employee-dto";
+import {EmployeeUpdatedInformation} from "../../../data/company-management/person/employee/employee-updated-information";
+import {EmployeeUpdatedRoles} from "../../../data/company-management/person/employee/employee-updated-roles";
+import {EmployeeEstablishmentInformation} from "../../../data/company-management/person/employee/employee-establishment-information";
 
 @Injectable({
   providedIn: 'root'

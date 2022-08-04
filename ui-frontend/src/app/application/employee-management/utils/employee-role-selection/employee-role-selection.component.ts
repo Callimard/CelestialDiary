@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RoleDTO} from "../../../../../data/company-management/employee/role/role-dto";
+import {RoleDTO} from "../../../../../data/company-management/person/employee/role/role-dto";
 import {EmployeeRoleForm} from "../employee-role-form";
 
 @Component({

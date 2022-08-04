@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.bandrsoftwares.celestialdiary.aop.client.ClientId;
+import org.bandrsoftwares.celestialdiary.aop.client.ClientNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
@@ -23,14 +25,16 @@ import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.ServiceNotFoundException;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.EquipmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.client.Client;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.client.ClientRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EmployeeRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Role;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.BundleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
@@ -57,6 +61,7 @@ public class SearchingAspect {
     public static final ThreadLocal<Bundle> BUNDLE_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Role> ROLE_FOUND = new ThreadLocal<>();
     public static final ThreadLocal<Equipment> EQUIPMENT_FOUND = new ThreadLocal<>();
+    public static final ThreadLocal<Client> CLIENT_FOUND = new ThreadLocal<>();
 
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;
@@ -66,6 +71,7 @@ public class SearchingAspect {
     private final BundleRepository bundleRepository;
     private final RoleRepository roleRepository;
     private final EquipmentRepository equipmentRepository;
+    private final ClientRepository clientRepository;
 
     @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.company.SearchCompany)")
     void searchAndShareCompany(JoinPoint jp) {
@@ -184,6 +190,21 @@ public class SearchingAspect {
             throw new EquipmentNotFoundException(equipmentId);
         } else {
             EQUIPMENT_FOUND.set(opEquipment.get());
+        }
+    }
+
+    @Before("@annotation(org.bandrsoftwares.celestialdiary.aop.client.SearchClient)")
+    void searchAndShareClient(JoinPoint jp) {
+        String clientId = AopTool.extractSpecificParameter(jp, ClientId.class);
+        searchAndShareClient(clientId);
+    }
+
+    private void searchAndShareClient(String clientId) {
+        Optional<Client> opClient = clientRepository.findById(clientId);
+        if (opClient.isEmpty()) {
+            throw new ClientNotFoundException(clientId);
+        } else {
+            CLIENT_FOUND.set(opClient.get());
         }
     }
 }

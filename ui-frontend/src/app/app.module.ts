@@ -15,7 +15,7 @@ import {LangageSelectionComponent} from './langage-selection/langage-selection.c
 import {SearchBarComponent} from './libairy/listing/search-bar/search-bar.component';
 import {InformationTicketComponent} from './libairy/informative/information-ticket/information-ticket.component';
 import {HttpAuthenticationInterceptor} from "../service/authentication/http-authentication.interceptor";
-import {EmployeeFormUpdaterComponent} from './application/employee-management/employee-information/employee-information-updater/employee-form-updater.component';
+import {EmployeeFormUpdaterComponent} from './application/employee-management/employee-information/employee-form-updater/employee-form-updater.component';
 import {EmployeeFormCreatorComponent} from './application/employee-management/employee-creation/employee-form-creator/employee-form-creator.component';
 import {EstablishmentFormCreatorComponent} from './application/establishment-management/establishment-creation/establishment-form-creator/establishment-form-creator.component';
 import {EstablishmentFormUpdaterComponent} from './application/establishment-management/establishment-information/establishment-information-updater/establishment-form-updater.component';
@@ -63,14 +63,20 @@ import {BundleFormContentComponent} from './application/bundle-management/utils/
 import {EquipmentSelectionComponent} from './application/equipment-management/equipment-selection/equipment-selection.component';
 import {EquipmentInformationComponent} from './application/equipment-management/equipment-information/equipment-information.component';
 import {EquipmentCreationComponent} from './application/equipment-management/equipment-creation/equipment-creation.component';
-import { EquipmentFormCreatorComponent } from './application/equipment-management/equipment-creation/equipment-form-creator/equipment-form-creator.component';
-import { EquipmentFormContentComponent } from './application/equipment-management/utils/equipment-form-content/equipment-form-content.component';
-import { EquipmentFormUpdaterComponent } from './application/equipment-management/equipment-information/equipment-form-updater/equipment-form-updater.component';
-import { PrestationFormContentComponent } from './application/prestation-management/utils/prestation-form-content/prestation-form-content.component';
-import { EmployeePrestationSelectionComponent } from './application/employee-management/utils/employee-prestation-selection/employee-prestation-selection.component';
-import { EmployeeEstablishmentAssignationComponent } from './application/employee-management/employee-information/employee-establishment-assignation/employee-establishment-assignation.component';
-import { CheckBoxDetailsSummaryComponent } from './libairy/form/check-box-details-summary/check-box-details-summary.component';
-import { EstablishmentFormContentComponent } from './application/establishment-management/utils/establishment-form-content/establishment-form-content.component';
+import {EquipmentFormCreatorComponent} from './application/equipment-management/equipment-creation/equipment-form-creator/equipment-form-creator.component';
+import {EquipmentFormContentComponent} from './application/equipment-management/utils/equipment-form-content/equipment-form-content.component';
+import {EquipmentFormUpdaterComponent} from './application/equipment-management/equipment-information/equipment-form-updater/equipment-form-updater.component';
+import {PrestationFormContentComponent} from './application/prestation-management/utils/prestation-form-content/prestation-form-content.component';
+import {EmployeePrestationSelectionComponent} from './application/employee-management/utils/employee-prestation-selection/employee-prestation-selection.component';
+import {EmployeeEstablishmentAssignationComponent} from './application/employee-management/employee-information/employee-establishment-assignation/employee-establishment-assignation.component';
+import {CheckBoxDetailsSummaryComponent} from './libairy/form/check-box-details-summary/check-box-details-summary.component';
+import {EstablishmentFormContentComponent} from './application/establishment-management/utils/establishment-form-content/establishment-form-content.component';
+import {ClientSelectionComponent} from './application/client-management/client-selection/client-selection.component';
+import {ClientInformationComponent} from './application/client-management/client-information/client-information.component';
+import {ClientCreationComponent} from './application/client-management/client-creation/client-creation.component';
+import { ClientFormCreatorComponent } from './application/client-management/client-creation/client-form-creator/client-form-creator.component';
+import { ClientFormContentComponent } from './application/client-management/utils/client-form-content/client-form-content.component';
+import { ClientFormUpdaterComponent } from './application/client-management/client-information/client-form-updater/client-form-updater.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -83,6 +89,13 @@ const appRoutes: Routes = [
               {path: '', component: EmployeeSelectionComponent},
               {path: frontend.employeeInformation, component: EmployeeInformationComponent, outlet: 'right'},
               {path: frontend.create, component: EmployeeCreationComponent, outlet: 'right'}
+            ]
+          },
+          {
+            path: frontend.clients, component: TwoSideComponent, children: [
+              {path: '', component: ClientSelectionComponent},
+              {path: frontend.clientInformation, component: ClientInformationComponent, outlet: 'right'},
+              {path: frontend.create, component: ClientCreationComponent, outlet: 'right'}
             ]
           },
           {
@@ -195,7 +208,13 @@ const appRoutes: Routes = [
     EmployeePrestationSelectionComponent,
     EmployeeEstablishmentAssignationComponent,
     CheckBoxDetailsSummaryComponent,
-    EstablishmentFormContentComponent
+    EstablishmentFormContentComponent,
+    ClientSelectionComponent,
+    ClientInformationComponent,
+    ClientCreationComponent,
+    ClientFormCreatorComponent,
+    ClientFormContentComponent,
+    ClientFormUpdaterComponent
   ],
   imports: [
     BrowserModule,

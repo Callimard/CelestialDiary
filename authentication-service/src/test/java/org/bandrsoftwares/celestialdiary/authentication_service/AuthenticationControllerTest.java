@@ -7,8 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.jwt.JwtTokenResponse;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.CompanyRepository;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.EmployeeRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -198,8 +198,11 @@ public class AuthenticationControllerTest {
         private Employee buildCorrectEmployee(Company company) {
             return Employee.builder()
                     .email(correctEmployeeEmail)
+                    .firstName("first name")
+                    .lastName("last name")
                     .password(correctEmployeePassword)
                     .company(company)
+                    .creationDate(Instant.now())
                     .build();
         }
 

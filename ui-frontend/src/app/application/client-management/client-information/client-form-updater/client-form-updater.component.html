@@ -1,0 +1,14 @@
+<form [formGroup]="clientUpdateForm" *ngIf="clientUpdateForm" (ngSubmit)="onUpdate()">
+  <div class="update-fail-container form-group-error" *ngIf="updateFail">
+    <p>{{ 'client.update.update-failed' | translate }}</p>
+  </div>
+
+  <div app-client-form-content class="need-top-space"
+       [clientForm]="clientUpdateForm">
+  </div>
+
+  <div class="form-submit-group">
+    <button class="super-valid-button need-top-space" [disabled]="clientUpdateForm.invalid || allDisable"
+            type="submit">{{ 'client.update.update' | translate }}</button>
+  </div>
+</form>

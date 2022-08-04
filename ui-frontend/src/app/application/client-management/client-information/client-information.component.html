@@ -1,0 +1,11 @@
+<div class="client-information-container" *ngIf="client != null">
+  <div app-advanced-title class="floating-card"
+       [title]="client.firstName + ' ' + client.lastName"
+       [subtitle]="client.email"
+       [img]="'/assets/images/kraken.jpg'"
+       (goBack)="goBack()"></div>
+  <div app-client-form-updater class="floating-card need-top-space"
+       [allDisable]="!privilegeManagement.hasClientUpdate()"
+       [client]="client">
+  </div>
+</div>

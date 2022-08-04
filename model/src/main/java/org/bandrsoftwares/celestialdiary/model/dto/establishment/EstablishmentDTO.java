@@ -1,6 +1,6 @@
 package org.bandrsoftwares.celestialdiary.model.dto.establishment;
 
-import org.bandrsoftwares.celestialdiary.model.dto.employee.WrappedEmployeeDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.general.time.DatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.general.time.NonDatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.general.Address;

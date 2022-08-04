@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {PrivilegeManagementService} from "../../../../../service/security/privilege/privilege-management.service";
-import {RoleCreationInformation} from "../../../../../data/company-management/employee/role/role-creation-information";
+import {RoleCreationInformation} from "../../../../../data/company-management/person/employee/role/role-creation-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 import {RoleFormGroup} from "../../utils/role-form-group";
 

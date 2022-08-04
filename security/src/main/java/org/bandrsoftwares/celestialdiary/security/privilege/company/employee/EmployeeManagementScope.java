@@ -10,8 +10,6 @@ import java.util.List;
 
 public class EmployeeManagementScope extends Scope {
 
-    // Constants.
-
     // Constructors.
 
     public EmployeeManagementScope() {

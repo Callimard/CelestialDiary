@@ -1,6 +1,6 @@
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmployeeRoleForm} from "./employee-role-form";
-import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
+import {EmployeeDTO} from "../../../../data/company-management/person/employee/employee-dto";
 import {EmployeePrestationForm} from "./employee-prestation-form";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
+import {EmployeeDTO} from "../../../../data/company-management/person/employee/employee-dto";
 import {Location} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
 import {EmployeeManagementService} from "../../../../service/company-management/employee/employee-management.service";

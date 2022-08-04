@@ -3,7 +3,7 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.RoleManagementService;
-import org.bandrsoftwares.celestialdiary.model.dto.employee.RoleDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.RoleDTO;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.role.CreateRolePrivilege;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.role.DeleteRolePrivilege;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.role.ReadRolePrivilege;

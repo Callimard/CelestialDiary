@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
-import {EmployeeCreationInformation} from "../../../../../data/company-management/employee/employee-creation-information";
+import {EmployeeCreationInformation} from "../../../../../data/company-management/person/employee/employee-creation-information";
 import {EmployeeForm} from "../../utils/employee-form";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";

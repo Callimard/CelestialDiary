@@ -12,6 +12,7 @@
     "title": "Celestial Diary",
     "establishments": "Establishments",
     "employees": "Employees",
+    "clients": "Clients",
     "products": "Products",
     "prestations": "Prestations",
     "bundles": "Bundles",
@@ -53,6 +54,32 @@
         "description": "Select establishment(s) where the employee is working.",
         "update": "Update"
       }
+    }
+  },
+  "client": {
+    "search": "Search an employee",
+    "email": "Email",
+    "password": "Password",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "comment": "Comment",
+    "gender": "Gender",
+    "gender-type": {
+      "male": "Male",
+      "female": "Female",
+      "no-gender": "No gender"
+    },
+    "phone": "Phone",
+    "origin": "How do you known us",
+    "technical-comment": "Technical comment",
+    "creation": {
+      "client-creation": "Create a client",
+      "create": "Create",
+      "creation-failed": "Client creation failed"
+    },
+    "update": {
+      "update": "Update",
+      "update-failed": "Client update failed"
     }
   },
   "establishment": {
@@ -228,6 +255,18 @@
         "assign-to-description": "Assign/de assign an employee of an establishment",
         "activate": "Activate",
         "activate-description": "Activate/Deactivate an employee"
+      },
+      "client": {
+        "title": "Client management privileges",
+        "description": "",
+        "all": "Admin",
+        "all-description": "All client management privileges",
+        "read": "Read",
+        "read-description": "See all clients list and their information",
+        "create": "Create",
+        "create-description": "Create a client",
+        "update": "Update",
+        "update-description": "Update client information"
       },
       "establishment": {
         "title": "Establishment management privileges",

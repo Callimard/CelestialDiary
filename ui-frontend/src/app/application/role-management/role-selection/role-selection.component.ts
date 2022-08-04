@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
-import {RoleDTO} from "../../../../data/company-management/employee/role/role-dto";
+import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({

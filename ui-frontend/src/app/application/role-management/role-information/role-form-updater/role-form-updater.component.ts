@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {RoleDTO} from "../../../../../data/company-management/employee/role/role-dto";
-import {RoleUpdatedInformation} from "../../../../../data/company-management/employee/role/role-updated-information";
+import {RoleDTO} from "../../../../../data/company-management/person/employee/role/role-dto";
+import {RoleUpdatedInformation} from "../../../../../data/company-management/person/employee/role/role-updated-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 import {RoleFormGroup} from "../../utils/role-form-group";
