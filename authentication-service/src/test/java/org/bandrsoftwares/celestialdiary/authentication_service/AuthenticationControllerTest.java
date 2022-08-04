@@ -198,8 +198,11 @@ public class AuthenticationControllerTest {
         private Employee buildCorrectEmployee(Company company) {
             return Employee.builder()
                     .email(correctEmployeeEmail)
+                    .firstName("first name")
+                    .lastName("last name")
                     .password(correctEmployeePassword)
                     .company(company)
+                    .creationDate(Instant.now())
                     .build();
         }
 
