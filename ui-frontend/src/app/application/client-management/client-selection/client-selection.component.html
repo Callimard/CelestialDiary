@@ -1,0 +1,13 @@
+<div app-searching-list class="client-searching-list-container"
+     [allElements]="allClients"
+     searchBarPlaceHolder="{{ 'client.search' | translate }}"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [elementTitleFields]="['firstName', 'lastName']"
+     [elementSubtitleField]="'email'"
+     (elementSelected)="navigateToClientInformation($event)"
+     (searchFilter)="filterClients($event)"
+>
+</div>
+<button class="floating-button create-client-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="navigateToCreateClient()">
+  <i class="fa-solid fa-plus"></i>
+</button>

@@ -22,6 +22,12 @@ public class ApiCompanyV1 {
     public static final String SPECIFIC_EMPLOYEE_ROLES = SPECIFIC_EMPLOYEE + "/roles";
     public static final String SPECIFIC_EMPLOYEE_ESTABLISHMENT_ASSIGNATION = SPECIFIC_EMPLOYEE + "/assignation";
 
+    // Client Management.
+
+    public static final String CLIENTS_URL = SPECIFIC_COMPANY_URL + "/clients";
+
+    public static final String SPECIFIC_CLIENT = "/{idClient}";
+
     // Establishment Management.
 
     public static final String ESTABLISHMENTS_URL = SPECIFIC_COMPANY_URL + "/establishments";

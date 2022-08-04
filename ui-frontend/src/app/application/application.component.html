@@ -23,6 +23,15 @@
           <span class="nav-item-text">{{ 'side-bar.employees' | translate}}</span>
         </a>
       </li>
+      <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeClientPrivileges()"
+          [routerLink]="['company', 'management', 'clients']"
+          routerLinkActive="active"
+          (click)="navClick('side-bar.clients')">
+        <a>
+          <span class="nav-item-icon"><i class="fa-solid fa-people-line"></i></span>
+          <span class="nav-item-text">{{ 'side-bar.clients' | translate}}</span>
+        </a>
+      </li>
       <li class="nav-item nav-clickable" *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
           [routerLink]="['company', 'management', 'products']"
           routerLinkActive="active"

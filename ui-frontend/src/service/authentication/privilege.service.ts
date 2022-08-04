@@ -177,4 +177,28 @@ export class PrivilegeService {
       || this.hasEquipmentDelete()
   }
 
+  public hasClientAll(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasCompanyAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.client.all);
+  }
+
+  public hasClientRead(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasClientAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.client.read);
+  }
+
+  public hasClientCreate(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasClientAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.client.create);
+  }
+
+  public hasClientUpdate(): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasClientAll() || jwtAccount.companyPrivilegeIdentifiers.includes(privileges.company.client.update);
+  }
+
+  public hasSomeClientPrivileges(): boolean {
+    return this.hasClientAll() || this.hasClientRead() || this.hasClientCreate() || this.hasClientUpdate()
+  }
+
 }

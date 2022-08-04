@@ -4,7 +4,7 @@ import {DatedTimeIntervalListDTO} from "../../general/time/dated-time-interval-l
 import {EstablishmentProductDTO} from "./establishment-product-dto";
 import {EstablishmentPrestationDTO} from "./establishment-prestation-dto";
 import {EstablishmentBundleDTO} from "./establishment-bundle-dto";
-import {WrappedEmployeeDTO} from "../employee/wrapped-employee-dto";
+import {WrappedEmployeeDTO} from "../person/employee/wrapped-employee-dto";
 
 export interface EstablishmentDTO {
   id: string,

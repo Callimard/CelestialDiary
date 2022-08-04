@@ -11,9 +11,9 @@ import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.SearchEmployee;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.PrestationRepository;
 import org.springframework.stereotype.Service;
@@ -110,9 +110,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
             employee.setLastName(update.lastName());
         }
 
-        if (update.comment() != null) {
-            employee.setComment(update.comment());
-        }
+        employee.setComment(update.comment());
 
         if (update.gender() != null) {
             employee.setGender(update.gender());
@@ -120,10 +118,14 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
 
         if (update.phone() != null) {
             employee.setPhone(update.phone());
+        } else {
+            employee.setPhone(null);
         }
 
         if (update.tags() != null) {
             employee.setTags(update.tags());
+        } else {
+            employee.setTags(Lists.newArrayList());
         }
 
         if (update.praticablePrestations() != null && !update.praticablePrestations().isEmpty()) {

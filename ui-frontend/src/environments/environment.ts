@@ -20,6 +20,8 @@ export const frontend = {
   management: "management",
   employees: "employees",
   employeeInformation: "information/:employeeId",
+  clients: "clients",
+  clientInformation: "information/:clientId",
   establishments: "establishments",
   establishmentInformation: "information/:establishmentId",
   products: "products",
@@ -46,6 +48,7 @@ export const backend = {
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",
   employeesUrl: "/employees",
+  clientsUrl: "/clients",
   establishmentsUrl: "/establishments",
   productsUrl: "/products",
   prestationsUrl: "/prestations",
@@ -65,6 +68,12 @@ export const privileges = {
       update_role: "EMPLOYEE_UPDATE_ROLE",
       assign: "EMPLOYEE_ASSIGN_TO",
       activate: "EMPLOYEE_ACTIVATE"
+    },
+    client: {
+      all: "CLIENT_ALL",
+      read: "CLIENT_READ",
+      create: "CLIENT_CREATE",
+      update: "CLIENT_UPDATE",
     },
     establishment: {
       all: "ESTABLISHMENT_ALL",

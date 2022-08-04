@@ -3,6 +3,7 @@ package org.bandrsoftwares.celestialdiary.security.privilege.company;
 import com.google.common.collect.Lists;
 import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 import org.bandrsoftwares.celestialdiary.security.privilege.Scope;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.client.ClientManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.employee.EmployeeManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.equipment.EquipmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.CompanyEstablishmentManagementScope;
@@ -18,8 +19,12 @@ public class CompanyManagementScope extends Scope {
 
     public CompanyManagementScope() {
         super("privilege.company.title", "privilege.company.description",
-              Lists.newArrayList(new EmployeeManagementScope(), new CompanyEstablishmentManagementScope(), new SaleableManagementScope(),
-                                 new EquipmentManagementScope(), new RoleManagementScope()));
+              Lists.newArrayList(new EmployeeManagementScope(),
+                                 new ClientManagementScope(),
+                                 new CompanyEstablishmentManagementScope(),
+                                 new SaleableManagementScope(),
+                                 new EquipmentManagementScope(),
+                                 new RoleManagementScope()));
     }
 
     // Methods.

@@ -2,8 +2,8 @@ package org.bandrsoftwares.celestialdiary.company_management_service.service;
 
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
-import org.bandrsoftwares.celestialdiary.model.dto.employee.EstablishmentRoleDTO;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.EstablishmentRoleDTO;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Role;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;

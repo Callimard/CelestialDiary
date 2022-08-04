@@ -3,9 +3,9 @@ package org.bandrsoftwares.celestialdiary.company_management_service.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.EmployeeManagementService;
-import org.bandrsoftwares.celestialdiary.model.dto.employee.EmployeeDTO;
-import org.bandrsoftwares.celestialdiary.model.dto.employee.WrappedEmployeeDTO;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.EmployeeDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeDTO;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.employee.*;
 import org.springframework.web.bind.annotation.*;
 

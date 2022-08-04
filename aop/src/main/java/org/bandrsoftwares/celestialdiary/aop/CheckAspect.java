@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.bandrsoftwares.celestialdiary.aop.client.ClientId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyCoherenceVerificationException;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
@@ -14,10 +15,11 @@ import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.bundle.BundleId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.product.ProductId;
 import org.bandrsoftwares.celestialdiary.aop.saleable.service.PrestationId;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Employee;
-import org.bandrsoftwares.celestialdiary.model.mongodb.employee.Role;
 import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.client.Client;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Role;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.prestation.Prestation;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.product.Product;
@@ -52,6 +54,8 @@ public class CheckAspect {
                 checkRoleCoherence(companyId);
             } else if (parameter.isAnnotationPresent(EquipmentId.class)) {
                 checkEquipmentCoherence(companyId);
+            } else if (parameter.isAnnotationPresent(ClientId.class)) {
+                checkClientCoherence(companyId);
             }
         }
     }
@@ -140,6 +144,19 @@ public class CheckAspect {
             if (!equipment.getCompany().getId().equals(companyId)) {
                 throw new CompanyCoherenceException(
                         "The equipment with the id " + equipment.getId() + " is not in the company with the id " + companyId);
+            }
+        } else {
+            throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +
+                                                                    "@Search annotation");
+        }
+    }
+
+    private void checkClientCoherence(String companyId) {
+        Client client = SearchingAspect.CLIENT_FOUND.get();
+        if (client != null) {
+            if (!client.getCompany().getId().equals(companyId)) {
+                throw new CompanyCoherenceException(
+                        "The client with the id " + client.getId() + " is not in the company with the id " + companyId);
             }
         } else {
             throw new CompanyCoherenceVerificationException("The annotation @CheckCompanyCoherence must be use in association with " +

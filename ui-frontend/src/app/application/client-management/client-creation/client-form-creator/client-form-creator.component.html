@@ -1,0 +1,14 @@
+<form [formGroup]="clientCreationForm" (ngSubmit)="onClientCreation()">
+  <div class="form-group-error" *ngIf="creationFailed">
+    <p>{{ 'client.creation.creation-failed' | translate }}</p>
+  </div>
+
+  <div app-client-form-content class="need-top-space"
+       [clientForm]="clientCreationForm">
+  </div>
+
+  <div class="form-submit-group">
+    <button class="super-valid-button need-top-space" [disabled]="clientCreationForm.invalid"
+            type="submit">{{ 'client.creation.create' | translate }}</button>
+  </div>
+</form>

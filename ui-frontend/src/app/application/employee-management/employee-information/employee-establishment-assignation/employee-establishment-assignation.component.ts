@@ -1,9 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
-import {EmployeeDTO} from "../../../../../data/company-management/employee/employee-dto";
+import {EmployeeDTO} from "../../../../../data/company-management/person/employee/employee-dto";
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 import {EmployeeEstablishmentAssignationForm} from "../../utils/employee-establishment-assignation-form";
-import {EmployeeEstablishmentInformation} from "../../../../../data/company-management/employee/employee-establishment-information";
+import {EmployeeEstablishmentInformation} from "../../../../../data/company-management/person/employee/employee-establishment-information";
 
 @Component({
   selector: '[app-employee-establishment-assignation]',

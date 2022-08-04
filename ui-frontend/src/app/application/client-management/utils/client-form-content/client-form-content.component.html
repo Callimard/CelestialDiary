@@ -1,0 +1,72 @@
+<div [formGroup]="clientForm" *ngIf="clientForm">
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="email"
+       labelFor="email"
+       label="{{ 'client.email' | translate }}"
+       placeHolder="{{ 'client.email' | translate }}"
+       inputType="text">
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="firstName"
+       labelFor="first-name"
+       label="{{ 'client.first-name' | translate }}"
+       placeHolder="{{ 'client.first-name' | translate }}"
+       inputType="text">
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="lastName"
+       labelFor="last-name"
+       label="{{ 'client.last-name' | translate }}"
+       placeHolder="{{ 'client.last-name' | translate }}"
+       inputType="text">
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="comment"
+       labelFor="comment"
+       label="{{ 'client.comment' | translate }}"
+       placeHolder="{{ 'client.comment' | translate }}"
+       inputType="text">
+  </div>
+
+  <div class="form-control">
+    <label class="form-label" for="gender">{{ 'client.gender' | translate }}</label>
+    <select class="form-input" id="gender" name="gender" formControlName="gender">
+      <option value="MALE">{{ 'client.gender-type.male' | translate }}</option>
+      <option value="FEMALE">{{ 'client.gender-type.female' | translate }}</option>
+      <option value="NO_GENDER">{{ 'client.gender-type.no-gender' | translate }}</option>
+    </select>
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="phone"
+       labelFor="phone"
+       label="{{ 'client.phone' | translate }}"
+       placeHolder="{{ 'client.phone' | translate }}"
+       inputType="tel">
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="origin"
+       labelFor="origin"
+       label="{{ 'client.origin' | translate }}"
+       placeHolder="{{ 'client.origin' | translate }}">
+  </div>
+
+  <div app-basic-input-form
+       [group]="clientForm"
+       controlName="technicalComment"
+       labelFor="technical-comment"
+       label="{{ 'client.technical-comment' | translate }}"
+       placeHolder="{{ 'client.technical-comment' | translate }}">
+  </div>
+</div>

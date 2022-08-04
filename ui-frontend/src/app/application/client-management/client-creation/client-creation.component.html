@@ -1,0 +1,8 @@
+<div class="client-creation-container">
+  <div app-basic-title class="client-creation-title-card floating-card"
+       title="{{ 'client.creation.client-creation' | translate }}"
+       (goBack)="goBack($event)"></div>
+  <div app-client-form-creator class="floating-card client-creation-form need-top-space" (clientCreated)="goBack($event)">
+
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 import {WrappedEstablishmentDTO} from "../../../../data/company-management/establishment/wrapped-establishment-dto";
-import {EmployeeDTO} from "../../../../data/company-management/employee/employee-dto";
+import {EmployeeDTO} from "../../../../data/company-management/person/employee/employee-dto";
 
 export class EmployeeEstablishmentAssignationForm extends FormGroup {
 
