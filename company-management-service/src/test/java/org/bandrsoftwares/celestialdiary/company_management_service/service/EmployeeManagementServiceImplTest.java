@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 @Nested
 @DisplayName("CompanyEmployeeManagementService tests")
 @SpringBootTest
-class EmployeeManagementPrestationImplTest {
+class EmployeeManagementServiceImplTest {
 
     @MockBean
     private CompanyRepository companyRepository;
@@ -72,13 +72,21 @@ class EmployeeManagementPrestationImplTest {
 
         correctEmployee = Employee.builder()
                 .company(company)
+                .email("correct-employee@gmail.fr")
+                .firstName("first name")
+                .lastName("last name")
                 .activated(true)
+                .creationDate(Instant.now())
                 .build();
         when(employeeRepository.findById(correctEmployeeId)).thenReturn(Optional.of(correctEmployee));
 
         Employee incoherentEmployee = Employee.builder()
                 .company(wrongCompany)
+                .email("incoherent-employee@gmail.fr")
+                .firstName("first name")
+                .lastName("last name")
                 .activated(true)
+                .creationDate(Instant.now())
                 .build();
         when(employeeRepository.findById(incoherentEmployeeId)).thenReturn(Optional.of(incoherentEmployee));
 
