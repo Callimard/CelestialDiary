@@ -1,0 +1,17 @@
+<div>
+  <h4>{{ day.title | translate }}</h4>
+  <div app-time-interval-form
+       *ngFor="let hours of day.timeIntervalFormArray.timeIntervalControls; let i = index"
+       [prefix]="day.controlName"
+       [index]="i"
+       [timeIntervalFormGroup]="hours"
+       [disableRemoveButton]="allDisabled"
+       (remove)="day.timeIntervalFormArray.removeTimeInterval(i)">
+  </div>
+  <div class="add-remove-hours-container">
+    <button class="valid-button" type="button" [disabled]="allDisabled"
+            (click)="day.timeIntervalFormArray.addTimeInterval()">
+      {{ 'hours.add' | translate }}
+    </button>
+  </div>
+</div>

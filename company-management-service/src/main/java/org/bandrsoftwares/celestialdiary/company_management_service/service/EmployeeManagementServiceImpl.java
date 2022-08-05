@@ -10,6 +10,8 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.SearchEmployee;
+import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
+import org.bandrsoftwares.celestialdiary.aop.establishment.SearchEstablishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
@@ -32,6 +34,7 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
     // Variables.
 
     private final EmployeeRepository employeeRepository;
+    private final EmployeeWorkingHoursRepository employeeWHRepository;
     private final PrestationRepository prestationRepository;
     private final RoleRepository roleRepository;
     private final EstablishmentRepository establishmentRepository;
@@ -137,6 +140,66 @@ public class EmployeeManagementServiceImpl implements EmployeeManagementService 
         }
 
         return employeeRepository.save(employee);
+    }
+
+    @SearchEmployee
+    @SearchEstablishment
+    @CheckCompanyCoherence
+    @Override
+    public EmployeeWorkingHours getEmployeeWorkingHours(@CompanyId String companyId, @EmployeeId String employeeId,
+                                                        @EstablishmentId String establishmentId, int year, int week) {
+        return employeeWHRepository.findByEmployeeAndEstablishmentAndYearAndWeekNumber(
+                SearchingAspect.EMPLOYEE_FOUND.get(),
+                SearchingAspect.ESTABLISHMENT_FOUND.get(),
+                year,
+                week
+        );
+    }
+
+    @SearchEmployee
+    @SearchEstablishment
+    @CheckCompanyCoherence
+    @Override
+    public EmployeeWorkingHours updateEmployeeWorkingHours(@CompanyId String companyId, @EmployeeId String employeeId,
+                                                           @EstablishmentId String establishmentId,
+                                                           @Valid WorkingHoursInformation info) {
+        Employee employee = SearchingAspect.EMPLOYEE_FOUND.get();
+        Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
+
+        EmployeeWorkingHours employeeWorkingHours = createEmployeeWorkingHoursFrom(employee, establishment, info);
+        EmployeeWorkingHours existing = searchEmployeeWorkingHours(info, employee, establishment);
+
+        if (existing != null) {
+            employeeWorkingHours.setId(existing.getId());
+            return employeeWHRepository.save(employeeWorkingHours);
+        } else {
+            return employeeWHRepository.insert(employeeWorkingHours);
+        }
+    }
+
+    private EmployeeWorkingHours searchEmployeeWorkingHours(WorkingHoursInformation info, Employee employee,
+                                                            Establishment establishment) {
+        return employeeWHRepository.findByEmployeeAndEstablishmentAndYearAndWeekNumber(employee,
+                                                                                       establishment,
+                                                                                       info.year(),
+                                                                                       info.weekNumber());
+    }
+
+    private EmployeeWorkingHours createEmployeeWorkingHoursFrom(Employee employee, Establishment establishment,
+                                                                WorkingHoursInformation info) {
+        return EmployeeWorkingHours.builder()
+                .year(info.year())
+                .weekNumber(info.weekNumber())
+                .monday(info.monday() != null ? info.monday().toNonDatedTimeIntervalList() : null)
+                .tuesday(info.tuesday() != null ? info.tuesday().toNonDatedTimeIntervalList() : null)
+                .wednesday(info.wednesday() != null ? info.wednesday().toNonDatedTimeIntervalList() : null)
+                .thursday(info.thursday() != null ? info.thursday().toNonDatedTimeIntervalList() : null)
+                .friday(info.friday() != null ? info.friday().toNonDatedTimeIntervalList() : null)
+                .saturday(info.saturday() != null ? info.saturday().toNonDatedTimeIntervalList() : null)
+                .sunday(info.sunday() != null ? info.sunday().toNonDatedTimeIntervalList() : null)
+                .employee(employee)
+                .establishment(establishment)
+                .build();
     }
 
     @SearchCompany

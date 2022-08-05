@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.company_management_service.service.EmployeeManagementService;
 import org.bandrsoftwares.celestialdiary.model.dto.person.employee.EmployeeDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeWorkingHoursDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EmployeeWorkingHours;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.employee.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,6 +61,31 @@ public class EmployeeManagementController {
                                                  @RequestBody EmployeeManagementService.EmployeeUpdatedInformation employeeUpdatedInformation) {
         Employee employee = employeeManagementService.updateEmployeeInformation(idCompany, idEmployee, employeeUpdatedInformation);
         return new EmployeeDTO(employee);
+    }
+
+    @ReadEmployeePrivilege
+    @GetMapping(SPECIFIC_EMPLOYEE_WORKING_HOURS)
+    public WrappedEmployeeWorkingHoursDTO getEmployeeWorkingHours(@PathVariable(name = "idCompany") String idCompany,
+                                                                  @PathVariable(name = "idEmployee") String idEmployee,
+                                                                  @PathVariable(name = "idEstablishment") String idEstablishment,
+                                                                  @RequestParam(name = "year") int year,
+                                                                  @RequestParam(name = "weekNumber") int weekNumber) {
+        EmployeeWorkingHours employeeWorkingHours = employeeManagementService.getEmployeeWorkingHours(idCompany, idEmployee, idEstablishment, year,
+                                                                                                      weekNumber);
+        if (employeeWorkingHours != null) {
+            return new WrappedEmployeeWorkingHoursDTO(employeeWorkingHours);
+        } else {
+            return null;
+        }
+    }
+
+    @UpdateEmployeePrivilege
+    @PutMapping(SPECIFIC_EMPLOYEE_WORKING_HOURS)
+    public WrappedEmployeeWorkingHoursDTO updateEmployeeWorkingHours(@PathVariable(name = "idCompany") String idCompany,
+                                                                     @PathVariable(name = "idEmployee") String idEmployee,
+                                                                     @PathVariable(name = "idEstablishment") String idEstablishment,
+                                                                     @RequestBody EmployeeManagementService.WorkingHoursInformation info) {
+        return new WrappedEmployeeWorkingHoursDTO(employeeManagementService.updateEmployeeWorkingHours(idCompany, idEmployee, idEstablishment, info));
     }
 
     @UpdateEmployeeRolePrivilege

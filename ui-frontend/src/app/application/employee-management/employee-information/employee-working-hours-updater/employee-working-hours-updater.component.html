@@ -1,0 +1,13 @@
+<div>
+  <h3>Horaire de Travail</h3>
+  <p>Horaire de travail de l'employée pour chacun des établissements où il travaille</p>
+  <div class="employee-establishment-wh-container need-top-space">
+    <div app-employee-establishment-working-hours
+         class="need-top-space"
+         *ngFor="let establishment of employee.assignedEstablishments"
+         [employee]="employee"
+         [establishment]="establishment"
+         [allDisabled]="allDisable">
+    </div>
+  </div>
+</div>

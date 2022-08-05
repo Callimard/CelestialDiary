@@ -1,0 +1,23 @@
+<details>
+  <summary><strong>{{establishment.name}}</strong></summary>
+  <div app-week-selection
+       [dateOfWeek]="currentDate"
+       (nextWeek)="weekChange($event)"
+       (previousWeek)="weekChange($event)">
+  </div>
+  <form [formGroup]="workingHoursForm" *ngIf="workingHoursForm" (ngSubmit)="onUpdate()">
+    <div class="form-group-error" *ngIf="updateFailed">
+      <p>Mise à jours des horaire de l'employé échoué</p>
+    </div>
+    <div app-day-hours-form
+         class="form-group"
+         *ngFor="let day of workingHoursForm.allDays"
+         [day]="day"
+         [allDisabled]="allDisabled">
+    </div>
+    <div class="form-submit-group">
+      <button class="super-valid-button need-top-space" type="submit"
+              [disabled]="workingHoursForm.invalid || allDisabled">{{ 'update' | translate }}</button>
+    </div>
+  </form>
+</details>

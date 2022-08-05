@@ -1,0 +1,11 @@
+<div class="week-selection-container">
+  <span class="change-week-arrow basic-clickable" (click)="passToPreviousWeek()">
+    <i class="fa-solid fa-caret-left"></i>
+  </span>
+  <span class="month-title text-bold">Semaine {{dateOfWeek | date:'w - YYYY'}}
+    ({{dateToString(firstDayOfWeek) | date: 'd/M'}}- {{dateToString(lastDayOfWeek) | date: 'd/M, yyyy'}})
+  </span>
+  <span class="change-week-arrow basic-clickable" (click)="passToNextWeek()">
+    <i class="fa-solid fa-caret-right"></i>
+  </span>
+</div>

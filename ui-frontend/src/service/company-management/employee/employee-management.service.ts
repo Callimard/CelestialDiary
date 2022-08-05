@@ -9,6 +9,8 @@ import {EmployeeDTO} from "../../../data/company-management/person/employee/empl
 import {EmployeeUpdatedInformation} from "../../../data/company-management/person/employee/employee-updated-information";
 import {EmployeeUpdatedRoles} from "../../../data/company-management/person/employee/employee-updated-roles";
 import {EmployeeEstablishmentInformation} from "../../../data/company-management/person/employee/employee-establishment-information";
+import {WrappedEmployeeWorkingHoursDTO} from "../../../data/company-management/person/employee/working-hours/wrapped-employee-working-hours-dto";
+import {WorkingHoursInformation} from "../../../data/company-management/person/employee/working-hours/working-hours-information";
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +35,10 @@ export class EmployeeManagementService {
 
   private static companyAssignEmployeeToEstablishmentUrl(companyId: string, employeeId: string): string {
     return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/assignation';
+  }
+
+  private static companyEmployeeWorkingHoursUrl(companyId: string, employeeId: string, establishmentId: string): string {
+    return EmployeeManagementService.companySpecificEmployeeUrl(companyId, employeeId) + '/working-hours/' + establishmentId;
   }
 
   public allEmployees(): Promise<WrappedEmployeeDTO[]> {
@@ -104,6 +110,37 @@ export class EmployeeManagementService {
       this.http.put<EmployeeDTO>(EmployeeManagementService.companySpecificEmployeeUrl(jwtAccount.companyId, employeeId), employeeUpdateInfo).subscribe({
         next: (employeeUpdated) => {
           resolve(employeeUpdated)
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err.error);
+          reject(err.error);
+        }
+      })
+    }))
+  }
+
+  public getEmployeeWorkingHours(employeeId: string, establishmentId: string, year: number, weekNumber: number): Promise<WrappedEmployeeWorkingHoursDTO> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<WrappedEmployeeWorkingHoursDTO>(((resolve, reject) => {
+      this.http.get<WrappedEmployeeWorkingHoursDTO>(EmployeeManagementService.companyEmployeeWorkingHoursUrl(jwtAccount.companyId, employeeId, establishmentId)
+        + '?year=' + year + '&weekNumber=' + weekNumber).subscribe({
+        next: (employeeWorkingHours) => {
+          resolve(employeeWorkingHours);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err.error);
+          reject(err.error);
+        }
+      })
+    }))
+  }
+
+  public updateEmployeeWorkingHours(employeeId: string, establishmentId: string, updates: WorkingHoursInformation): Promise<WrappedEmployeeWorkingHoursDTO> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return new Promise<WrappedEmployeeWorkingHoursDTO>(((resolve, reject) => {
+      this.http.put<WrappedEmployeeWorkingHoursDTO>(EmployeeManagementService.companyEmployeeWorkingHoursUrl(jwtAccount.companyId, employeeId, establishmentId), updates).subscribe({
+        next: (employeeWorkingHours) => {
+          resolve(employeeWorkingHours);
         },
         error: (err: HttpErrorResponse) => {
           console.error(err.error);
