@@ -32,7 +32,7 @@ public class Company {
     private String phone;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Employee")
+    @DocumentReference(collection = "Employee", lazy = true)
     private List<Employee> employees;
 
     private Instant creationDate;

@@ -27,6 +27,6 @@ public abstract class Saleable {
     private Instant creationDate;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Company")
+    @DocumentReference(collection = "Company", lazy = true)
     private Company company;
 }

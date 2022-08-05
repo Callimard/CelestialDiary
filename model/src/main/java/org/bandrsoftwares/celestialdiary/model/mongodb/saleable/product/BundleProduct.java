@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class BundleProduct {
 
     @ToString.Exclude
-    @DocumentReference(collection = "Product")
+    @DocumentReference(collection = "Product", lazy = true)
     private Product product;
 
     private Integer quantity;

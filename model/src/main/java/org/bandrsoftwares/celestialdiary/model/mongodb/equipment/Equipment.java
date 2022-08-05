@@ -26,7 +26,7 @@ public class Equipment {
     private String photo;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Company")
+    @DocumentReference(collection = "Company", lazy = true)
     private Company company;
 
     private Instant creationDate;

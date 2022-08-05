@@ -15,7 +15,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 public class BundlePrestation {
 
     @ToString.Exclude
-    @DocumentReference(collection = "Prestation")
+    @DocumentReference(collection = "Prestation", lazy = true)
     private Prestation prestation;
 
     private Integer quantity;

@@ -25,7 +25,7 @@ public class Role {
     private String description;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Company")
+    @DocumentReference(collection = "Company", lazy = true)
     private Company company;
     private List<Privilege> companyPrivileges;
 

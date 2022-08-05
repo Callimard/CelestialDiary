@@ -5,6 +5,7 @@ import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
 import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.Saleable;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.Instant;
 import java.util.List;
@@ -23,6 +24,8 @@ public class Prestation extends Saleable {
 
     private Integer suggestedExecutionTime;
 
+    @ToString.Exclude
+    @DocumentReference(collection = "Equipment", lazy = true)
     private List<Equipment> neededEquipments;
 
     // Constructors.

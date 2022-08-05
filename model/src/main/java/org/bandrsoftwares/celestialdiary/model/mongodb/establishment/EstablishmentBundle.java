@@ -16,6 +16,6 @@ public class EstablishmentBundle {
     private Boolean usingCustomPrice;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Bundle")
+    @DocumentReference(collection = "Bundle", lazy = true)
     private Bundle bundle;
 }

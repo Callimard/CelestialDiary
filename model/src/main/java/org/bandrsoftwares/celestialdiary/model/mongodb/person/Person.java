@@ -36,7 +36,7 @@ public class Person {
     private String phone;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Company")
+    @DocumentReference(collection = "Company", lazy = true)
     @NonNull
     private Company company;
 
