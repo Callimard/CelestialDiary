@@ -2,7 +2,6 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 import {EstablishmentDTO} from "../../../../../data/company-management/establishment/establishment-dto";
 import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 import {EstablishmentUpdatedInformation} from "../../../../../data/company-management/establishment/establishment-updated-information";
-import {DatedTimeIntervalListDTO} from "../../../../../data/general/time/dated-time-interval-list-dto";
 import {EstablishmentFormGroup} from "../../utils/establishment-form-group";
 
 @Component({
@@ -36,25 +35,7 @@ export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   onUpdate() {
-    const form = this.establishmentUpdateForm?.value;
-
-    let exceptionOpening: DatedTimeIntervalListDTO[] | null = this.establishmentUpdateForm.exceptionalOpenings.extractToDatedTimeIntervalListDTOArray();
-    let exceptionClosing: DatedTimeIntervalListDTO[] | null = this.establishmentUpdateForm.exceptionalClosings.extractToDatedTimeIntervalListDTOArray();
-
-    const establishmentUpdates: EstablishmentUpdatedInformation = {
-      name: form.name,
-      description: form.description,
-      address: form.address,
-      mondayOpening: this.establishmentUpdateForm.mondayOpenings.extractNonDatedTimeIntervalListDTO(),
-      tuesdayOpening: this.establishmentUpdateForm.tuesdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      wednesdayOpening: this.establishmentUpdateForm.wednesdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      thursdayOpening: this.establishmentUpdateForm.thursdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      fridayOpening: this.establishmentUpdateForm.fridayOpenings.extractNonDatedTimeIntervalListDTO(),
-      saturdayOpening: this.establishmentUpdateForm.saturdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      sundayOpening: this.establishmentUpdateForm.sundayOpenings.extractNonDatedTimeIntervalListDTO(),
-      exceptionalOpening: exceptionOpening != null ? exceptionOpening : undefined,
-      exceptionalClosing: exceptionClosing != null ? exceptionClosing : undefined
-    }
+    const establishmentUpdates: EstablishmentUpdatedInformation = this.establishmentUpdateForm.extractEstablishmentUpdatedInformation();
 
     this.establishmentManagerService.updateEstablishment(this.establishment.id, establishmentUpdates).then((wrappedEstablishment) => {
       this.establishment.name = wrappedEstablishment.name;
