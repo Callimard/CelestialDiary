@@ -26,20 +26,7 @@ export class EstablishmentFormCreatorComponent implements OnInit {
   }
 
   onEstablishmentCreation() {
-    const form = this.establishmentCreationForm.value;
-    const establishmentInfo: EstablishmentCreationInformation = {
-      name: form.name,
-      description: form.description,
-      address: form.address,
-      mondayOpening: this.establishmentCreationForm.mondayOpenings.extractNonDatedTimeIntervalListDTO(),
-      tuesdayOpening: this.establishmentCreationForm.tuesdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      wednesdayOpening: this.establishmentCreationForm.wednesdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      thursdayOpening: this.establishmentCreationForm.thursdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      fridayOpening: this.establishmentCreationForm.fridayOpenings.extractNonDatedTimeIntervalListDTO(),
-      saturdayOpening: this.establishmentCreationForm.saturdayOpenings.extractNonDatedTimeIntervalListDTO(),
-      sundayOpening: this.establishmentCreationForm.sundayOpenings.extractNonDatedTimeIntervalListDTO()
-    }
-
+    const establishmentInfo: EstablishmentCreationInformation = this.establishmentCreationForm.extractEstablishmentCreationInformation();
     this.establishmentManagementService.createEstablishment(establishmentInfo).then(() => {
       this.creationFailed = false;
       this.establishmentCreated.emit(true);
