@@ -15,7 +15,7 @@ import java.util.List;
 public class EstablishmentRole {
 
     @ToString.Exclude
-    @DocumentReference(collection = "Establishment")
+    @DocumentReference(collection = "Establishment", lazy = true)
     private Establishment establishment;
 
     private List<Privilege> establishmentPrivileges;

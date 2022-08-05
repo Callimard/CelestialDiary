@@ -32,15 +32,15 @@ public class Employee extends Person {
     private List<String> tags;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Role")
+    @DocumentReference(collection = "Role", lazy = true)
     private List<Role> roles;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Establishment")
+    @DocumentReference(collection = "Establishment", lazy = true)
     private List<Establishment> assignedEstablishments;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Prestation")
+    @DocumentReference(collection = "Prestation", lazy = true)
     private List<Prestation> praticablePrestations;
 
     // Constructors.

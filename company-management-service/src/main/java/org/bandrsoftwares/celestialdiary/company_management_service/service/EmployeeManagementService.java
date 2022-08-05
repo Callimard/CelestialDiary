@@ -6,13 +6,18 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyNotFoundException;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeId;
 import org.bandrsoftwares.celestialdiary.aop.employee.EmployeeNotFoundException;
+import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
+import org.bandrsoftwares.celestialdiary.model.dto.general.time.NonDatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Employee;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EmployeeWorkingHours;
 import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.PersonGender;
 import org.bandrsoftwares.celestialdiary.validation.ValidEmail;
 import org.bandrsoftwares.celestialdiary.validation.ValidPassword;
 import org.bandrsoftwares.celestialdiary.validation.ValidPhone;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -82,6 +87,25 @@ public interface EmployeeManagementService {
                                       PersonGender gender, @ValidPhone String phone, List<String> praticablePrestations,
                                       List<String> tags) {
 
+    }
+
+    EmployeeWorkingHours getEmployeeWorkingHours(@CompanyId String companyId, @EmployeeId String employeeId,
+                                                 @EstablishmentId String establishmentId, int year, int week);
+
+    EmployeeWorkingHours updateEmployeeWorkingHours(@CompanyId String companyId, @EmployeeId String employeeId, @EstablishmentId String establishmentId,
+                                                    @Valid WorkingHoursInformation workingHoursInformation);
+
+    record WorkingHoursInformation(
+            @Min(1990) int year,
+            @Min(1) @Max(53) int weekNumber,
+            NonDatedTimeIntervalListDTO monday,
+            NonDatedTimeIntervalListDTO tuesday,
+            NonDatedTimeIntervalListDTO wednesday,
+            NonDatedTimeIntervalListDTO thursday,
+            NonDatedTimeIntervalListDTO friday,
+            NonDatedTimeIntervalListDTO saturday,
+            NonDatedTimeIntervalListDTO sunday
+    ) {
     }
 
     /**

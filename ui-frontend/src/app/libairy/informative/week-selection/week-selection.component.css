@@ -1,0 +1,16 @@
+.week-selection-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.change-week-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 30px;
+
+  padding: 0.5rem;
+}

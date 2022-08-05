@@ -325,5 +325,19 @@
         "delete-description": "Supprimer un équipement"
       }
     }
-  }
+  },
+  "days": {
+    "monday": "Lundi",
+    "tuesday": "Mardi",
+    "wednesday": "Mercredi",
+    "thursday": "Jeudi",
+    "friday": "Vendredi",
+    "saturday": "Samedi",
+    "sunday": "Dimanche"
+  },
+  "hours": {
+    "add": "Ajouter des heures",
+    "remove": "Retirer des heures"
+  },
+  "update": "Mettre à jour"
 }

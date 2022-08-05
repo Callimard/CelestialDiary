@@ -1,0 +1,6 @@
+.add-remove-hours-container {
+  padding: 0.7em 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1.1em;
+}

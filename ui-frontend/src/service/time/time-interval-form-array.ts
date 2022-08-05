@@ -34,4 +34,16 @@ export class TimeIntervalFormArray extends FormArray {
       timeIntervals: tIntervals
     };
   }
+
+  get timeIntervalControls(): TimeIntervalFormGroup[] {
+    return this.controls as TimeIntervalFormGroup[];
+  }
+
+  public addTimeInterval() {
+    this.push(new TimeIntervalFormGroup());
+  }
+
+  public removeTimeInterval(index: number) {
+    this.removeAt(index);
+  }
 }

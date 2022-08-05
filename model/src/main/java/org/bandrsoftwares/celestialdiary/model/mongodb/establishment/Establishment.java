@@ -47,11 +47,11 @@ public class Establishment {
     private List<EstablishmentBundle> proposedBundles;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Employee")
+    @DocumentReference(collection = "Employee", lazy = true)
     private List<Employee> assignedEmployees;
 
     @ToString.Exclude
-    @DocumentReference(collection = "Company")
+    @DocumentReference(collection = "Company", lazy = true)
     private Company company;
 
     private Boolean activated;
