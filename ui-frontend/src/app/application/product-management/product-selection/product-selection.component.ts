@@ -3,6 +3,9 @@ import {WrappedProductDTO} from "../../../../data/company-management/saleable/pr
 import {ActivatedRoute, Router} from "@angular/router";
 import {ProductManagementService} from "../../../../service/company-management/saleable/product-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+import {WrappedSaleableDTO} from "../../../../data/company-management/saleable/wrapped-saleable-dto";
+import {SaleablePaneInfoTransformer} from "../../utils/saleable-pane-info-transformer";
 
 @Component({
   selector: '[app-product-management-left-side]',
@@ -12,6 +15,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class ProductSelectionComponent implements OnInit {
 
   allProducts: WrappedProductDTO[] = [];
+
+  saleablePaneInfoTransformer: PaneInfoTransformer<WrappedSaleableDTO> = new SaleablePaneInfoTransformer();
 
   constructor(private productManagementService: ProductManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -35,7 +40,7 @@ export class ProductSelectionComponent implements OnInit {
   }
 
   navigateToProductInformation(product: any) {
-    const selectedProduct: WrappedProductDTO = product as WrappedProductDTO;
+    const selectedProduct: PaneInfoWithId = product as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedProduct.id]}}], {
       relativeTo: this.activatedRoute
     });

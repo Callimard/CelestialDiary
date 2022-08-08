@@ -3,6 +3,18 @@ import {EquipmentDTO} from "../../../../data/company-management/equipment/equipm
 import {ActivatedRoute, Router} from "@angular/router";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 import {EquipmentManagementService} from "../../../../service/company-management/equipment/equipment-management.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+
+export class EquipmentPaneInfoTransformer implements PaneInfoTransformer<EquipmentDTO> {
+  transform(equipment: EquipmentDTO): PaneInfoWithId {
+    return {
+      id: equipment.id,
+      title: equipment.name,
+      img: equipment.photo
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-equipment-selection',
@@ -12,6 +24,8 @@ import {EquipmentManagementService} from "../../../../service/company-management
 export class EquipmentSelectionComponent implements OnInit {
 
   allEquipments: EquipmentDTO[] = [];
+
+  equipmentPaneInfoTransformer: PaneInfoTransformer<EquipmentDTO> = new EquipmentPaneInfoTransformer();
 
   constructor(private equipmentManagementService: EquipmentManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -35,7 +49,7 @@ export class EquipmentSelectionComponent implements OnInit {
   }
 
   navigateToEquipmentInformation(role: any) {
-    const selectedEquipment: EquipmentDTO = role as EquipmentDTO;
+    const selectedEquipment: PaneInfoWithId = role as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedEquipment.id]}}], {
       relativeTo: this.activatedRoute
     });

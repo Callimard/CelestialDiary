@@ -3,6 +3,19 @@ import {WrappedEstablishmentDTO} from "../../../../data/company-management/estab
 import {ActivatedRoute, Router} from "@angular/router";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+
+export class EstablishmentPaneInfoTransformer implements PaneInfoTransformer<WrappedEstablishmentDTO> {
+  transform(establishment: WrappedEstablishmentDTO): PaneInfoWithId {
+    return {
+      id: establishment.id,
+      title: establishment.name,
+      subTitle: establishment.description,
+      img: establishment.photo
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-establishment-selection',
@@ -12,6 +25,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class EstablishmentSelectionComponent implements OnInit {
 
   allEstablishments: WrappedEstablishmentDTO[] = [];
+
+  establishmentPaneInfoTransformer: PaneInfoTransformer<WrappedEstablishmentDTO> = new EstablishmentPaneInfoTransformer();
 
   constructor(private establishmentManagementService: EstablishmentManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -35,7 +50,7 @@ export class EstablishmentSelectionComponent implements OnInit {
   }
 
   navigateToEstablishmentInformation(establishment: any) {
-    const selectedEstablishment: WrappedEstablishmentDTO = establishment as WrappedEstablishmentDTO;
+    const selectedEstablishment: PaneInfoWithId = establishment as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedEstablishment.id]}}], {
       relativeTo: this.activatedRoute
     });

@@ -339,5 +339,7 @@
     "add": "Ajouter des heures",
     "remove": "Retirer des heures"
   },
-  "update": "Mettre à jour"
+  "create": "Créer",
+  "update": "Mettre à jour",
+  "search": "Rechercher"
 }

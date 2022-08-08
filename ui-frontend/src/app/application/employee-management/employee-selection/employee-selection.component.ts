@@ -3,6 +3,24 @@ import {WrappedEmployeeDTO} from "../../../../data/company-management/person/emp
 import {ActivatedRoute, Router} from "@angular/router";
 import {EmployeeManagementService} from "../../../../service/company-management/employee/employee-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfo, PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+
+export interface EmployeePaneInfo extends PaneInfo {
+  employeeId: string
+}
+
+export class EmployeePaneInfoTransformer implements PaneInfoTransformer<WrappedEmployeeDTO> {
+
+  transform(employee: WrappedEmployeeDTO): PaneInfoWithId {
+    return {
+      id: employee.id,
+      title: employee.firstName + ' ' + employee.lastName,
+      subTitle: employee.email,
+      img: employee.photo
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-employee-selection',
@@ -12,6 +30,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class EmployeeSelectionComponent implements OnInit {
 
   allEmployees: WrappedEmployeeDTO[] = [];
+
+  employeePaneInfoTransformer: PaneInfoTransformer<WrappedEmployeeDTO> = new EmployeePaneInfoTransformer();
 
   constructor(private employeeManagementService: EmployeeManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -34,8 +54,8 @@ export class EmployeeSelectionComponent implements OnInit {
     })
   }
 
-  navigateToEmployeeInformation(product: any) {
-    const selectedEmployee: WrappedEmployeeDTO = product as WrappedEmployeeDTO;
+  navigateToEmployeeInformation(employee: any) {
+    const selectedEmployee: PaneInfoWithId = employee as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedEmployee.id]}}], {
       relativeTo: this.activatedRoute
     });

@@ -2,8 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 import {WrappedBundleDTO} from "../../../../data/company-management/saleable/bundle/wrapped-bundle-dto";
-import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {SaleablePaneInfoTransformer} from "../../utils/saleable-pane-info-transformer";
+import {PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
 
 @Component({
   selector: 'app-bundle-selection',
@@ -13,6 +14,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class BundleSelectionComponent implements OnInit {
 
   allBundles: WrappedBundleDTO[] = []
+
+  saleablePaneInfoTransformer: SaleablePaneInfoTransformer = new SaleablePaneInfoTransformer();
 
   constructor(private bundleManagementService: BundleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -36,7 +39,7 @@ export class BundleSelectionComponent implements OnInit {
   }
 
   navigateToBundleInformation(bundle: any) {
-    const selectedBundle: WrappedProductDTO = bundle as WrappedBundleDTO;
+    const selectedBundle: PaneInfoWithId = bundle as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedBundle.id]}}], {
       relativeTo: this.activatedRoute
     });

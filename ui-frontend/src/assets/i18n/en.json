@@ -339,5 +339,7 @@
     "add": "Add hours",
     "remove": "Remove hours"
   },
-  "update": "Update"
+  "create": "Create",
+  "update": "Update",
+  "search": "Search"
 }

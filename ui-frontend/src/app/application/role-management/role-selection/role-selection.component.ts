@@ -3,6 +3,18 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+
+export class RolePaneInfoTransformer implements PaneInfoTransformer<RoleDTO> {
+  transform(role: RoleDTO): PaneInfoWithId {
+    return {
+      id: role.id,
+      title: role.name,
+      subTitle: role.description,
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-role-selection',
@@ -12,6 +24,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class RoleSelectionComponent implements OnInit {
 
   allRoles: RoleDTO[] = [];
+
+  rolePaneInfoTransformer: PaneInfoTransformer<RoleDTO> = new RolePaneInfoTransformer();
 
   constructor(private roleManagementService: RoleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -35,7 +49,7 @@ export class RoleSelectionComponent implements OnInit {
   }
 
   navigateToRoleInformation(role: any) {
-    const selectedRole: RoleDTO = role as RoleDTO;
+    const selectedRole: PaneInfoWithId = role as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedRole.id]}}], {
       relativeTo: this.activatedRoute
     });

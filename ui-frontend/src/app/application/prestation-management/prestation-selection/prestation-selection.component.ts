@@ -2,8 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {WrappedPrestationDTO} from "../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {PrestationManagementService} from "../../../../service/company-management/saleable/prestation-management.service";
-import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+import {WrappedSaleableDTO} from "../../../../data/company-management/saleable/wrapped-saleable-dto";
+import {SaleablePaneInfoTransformer} from "../../utils/saleable-pane-info-transformer";
 
 @Component({
   selector: 'app-prestation-selection',
@@ -13,6 +15,8 @@ import {PrivilegeService} from "../../../../service/authentication/privilege.ser
 export class PrestationSelectionComponent implements OnInit {
 
   allPrestations: WrappedPrestationDTO[] = []
+
+  saleablePaneInfoTransformer: PaneInfoTransformer<WrappedSaleableDTO> = new SaleablePaneInfoTransformer();
 
   constructor(private prestationManagementService: PrestationManagementService, private router: Router, private activatedRoute: ActivatedRoute,
               private privilegeService: PrivilegeService) {
@@ -36,7 +40,7 @@ export class PrestationSelectionComponent implements OnInit {
   }
 
   navigateToPrestationInformation(prestation: any) {
-    const selectedPrestation: WrappedProductDTO = prestation as WrappedPrestationDTO;
+    const selectedPrestation: PaneInfoWithId = prestation as PaneInfoWithId;
     this.router.navigate([{outlets: {right: ['information', selectedPrestation.id]}}], {
       relativeTo: this.activatedRoute
     });

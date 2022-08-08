@@ -6,6 +6,10 @@ export interface PaneInfo {
   img?: string
 }
 
+export interface PaneInfoWithId extends PaneInfo{
+  id: string
+}
+
 export interface PaneInfoTransformer<T> {
   transform(elem: T): PaneInfo
 }
