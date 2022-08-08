@@ -178,6 +178,7 @@ import {
 import {WeekSelectionComponent} from './libairy/informative/week-selection/week-selection.component';
 import {DatePipe} from "@angular/common";
 import { DayHoursFormComponent } from './libairy/form/day-hours-form/day-hours-form.component';
+import { InfoPaneComponent } from './libairy/informative/info-pane/info-pane.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -319,7 +320,8 @@ const appRoutes: Routes = [
     EmployeeWorkingHoursUpdaterComponent,
     EmployeeEstablishmentWorkingHoursComponent,
     WeekSelectionComponent,
-    DayHoursFormComponent
+    DayHoursFormComponent,
+    InfoPaneComponent
   ],
   imports: [
     BrowserModule,
