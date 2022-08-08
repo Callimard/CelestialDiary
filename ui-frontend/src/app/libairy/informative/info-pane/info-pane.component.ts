@@ -1,9 +1,13 @@
 import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
 
-export interface Info {
+export interface PaneInfo {
   title: string,
   subTitle?: string,
   img?: string
+}
+
+export interface PaneInfoTransformer<T> {
+  transform(elem: T): PaneInfo
 }
 
 @Component({
@@ -17,7 +21,7 @@ export class InfoPaneComponent implements OnInit {
   @Input() displayCenter = true;
   @Input() displayRight = true;
 
-  @Input() centreInfo!: Info;
+  @Input() info!: PaneInfo | any;
 
   @ContentChild('left') leftContent: TemplateRef<any> | undefined;
   @ContentChild('center') centerContent: TemplateRef<any> | undefined;

@@ -1,4 +1,4 @@
-.element-list-search-bar, .searching-list-element {
+.search-bar-template-container, .searching-list {
   position: absolute;
 
   width: 100%;
@@ -7,11 +7,22 @@
   left: 0;
 }
 
-.element-list-search-bar {
+.search-bar-template-container {
   padding: 1em;
   z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.searching-list-element {
+.search-bar {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.searching-list {
   height: 100%;
+  z-index: 0;
 }

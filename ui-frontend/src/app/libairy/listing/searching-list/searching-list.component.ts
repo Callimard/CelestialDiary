@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
 import {ElementListComponent} from "../element-list/element-list.component";
 
 @Component({
@@ -10,16 +10,16 @@ export class SearchingListComponent extends ElementListComponent implements OnIn
 
   @Input() searchBarPlaceHolder: string = "";
 
+  @ContentChild("searchBar") searchBarTemplate: TemplateRef<any> | undefined;
+
   @Output() searchFilter = new EventEmitter<string>();
 
   constructor() {
     super();
-    // Nothing
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
-    // Nothing
   }
 
   searchElement(filter: string) {

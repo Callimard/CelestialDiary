@@ -8,7 +8,7 @@
     <ng-container
       *ngTemplateOutlet="
       centerContent || defaultCenter;
-      context: {$implicit: centreInfo}
+      context: {$implicit: info}
       ">
     </ng-container>
   </div>
@@ -16,7 +16,7 @@
     <ng-container
       *ngTemplateOutlet="
       rightContent || defaultRight;
-      context: {$implicit: centreInfo}
+      context: {$implicit: info}
       ">
     </ng-container>
   </div>

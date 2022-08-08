@@ -1,54 +1,27 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef} from '@angular/core';
+import {PaneInfo, PaneInfoTransformer} from "../../informative/info-pane/info-pane.component";
 
 @Component({
-    selector: '[app-element-list]',
-    templateUrl: './element-list.component.html',
-    styleUrls: ['./element-list.component.css']
+  selector: '[app-element-list]',
+  templateUrl: './element-list.component.html',
+  styleUrls: ['./element-list.component.css']
 })
 export class ElementListComponent implements OnInit {
 
-    @Input() allElements: any[] = [];
-    @Input() listPaddingHeight = "0px";
-    @Input() elementSize: string = "75px";
+  @Input() allElements: any[] | PaneInfo[] = [];
+  @Input() listPaddingHeight = "0px";
+  @Input() itemHeight: string = "80px";
+  @Input() paneInfoTransformer?: PaneInfoTransformer<any>;
 
-    @Input() titlePrefix: string = "";
-    @Input() elementTitleFields!: string[];
-    @Input() titleSuffix: string = "";
+  @ContentChild('item') itemTemplate: TemplateRef<any> | undefined;
 
-    @Input() subTitlePrefix: string = "";
-    @Input() elementSubtitleField?: string;
-    @Input() subTitleSuffix: string = "";
+  @Output() elementSelected = new EventEmitter<any>();
 
-    @Input() elementImageField?: string;
-    @Input() roundImage: boolean = true;
-    @Input() withImage: boolean = true;
+  constructor() {
+    // Nothing
+  }
 
-    @Output() elementSelected = new EventEmitter<any>();
-
-    constructor() {
-        // Nothing
-    }
-
-    ngOnInit(): void {
-        // Nothing
-    }
-
-    onTicketClick(element: any) {
-        this.elementSelected.emit(element);
-    }
-
-    computeTitle(element: any): string {
-        let title = this.titlePrefix;
-        let i = 0;
-        for (let titleField of this.elementTitleFields) {
-            if (i != 0) {
-                title += ' ' + element[titleField];
-            } else {
-                title += element[titleField];
-            }
-            i++;
-        }
-        title += this.titleSuffix;
-        return title;
-    }
+  ngOnInit(): void {
+    // Nothing
+  }
 }
