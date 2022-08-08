@@ -17,9 +17,22 @@
   flex: 1 0 60%;
 }
 
+.ticket-title, .ticket-sub-title {
+  font-weight: bold;
+}
+
+.ticket-sub-title {
+  color: var(--place-holder-text-color);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .default-left-template-container, .default-center-template-container, .default-right-template-container {
   width: 100%;
   height: 100%;
+
+  text-overflow: ellipsis;
 }
 
 .default-left-template-container, .default-right-template-container {

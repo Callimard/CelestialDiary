@@ -13,7 +13,6 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {LangageSelectionComponent} from './langage-selection/langage-selection.component';
 import {SearchBarComponent} from './libairy/listing/search-bar/search-bar.component';
-import {InformationTicketComponent} from './libairy/informative/information-ticket/information-ticket.component';
 import {HttpAuthenticationInterceptor} from "../service/authentication/http-authentication.interceptor";
 import {
   EmployeeFormUpdaterComponent
@@ -254,7 +253,6 @@ const appRoutes: Routes = [
     ApplicationComponent,
     LangageSelectionComponent,
     SearchBarComponent,
-    InformationTicketComponent,
     EmployeeFormUpdaterComponent,
     EmployeeFormCreatorComponent,
     EstablishmentFormCreatorComponent,
