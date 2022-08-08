@@ -3,12 +3,12 @@
      searchBarPlaceHolder="{{ 'product.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
      [paneInfoTransformer]="saleablePaneInfoTransformer"
-     (elementSelected)="navigateToProductInformation($event)"
+     (elementSelected)="selectProduct($event)"
      (searchFilter)="filterProduct($event)"
 >
 </div>
 <button class="floating-button create-product-button"
         *ngIf="privilegeManagement.hasSaleableCreate()"
-        (click)="navigateToCreateProduct()">
+        (click)="createProduct()">
   <i class="fa-solid fa-plus"></i>
 </button>

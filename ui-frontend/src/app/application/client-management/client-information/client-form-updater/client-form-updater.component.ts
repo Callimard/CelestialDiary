@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ClientDTO} from "../../../../../data/company-management/person/client/client-dto";
 import {ClientForm} from "../../utils/client-form";
 import {ClientManagementService} from "../../../../../service/company-management/client/client-management.service";
@@ -14,6 +14,8 @@ export class ClientFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() client!: ClientDTO;
   @Input() allDisable = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   clientUpdateForm!: ClientForm;
 
@@ -38,9 +40,11 @@ export class ClientFormUpdaterComponent implements OnInit, OnChanges {
   onUpdate() {
     this.clientManagementService.updateClient(this.client.id, this.clientUpdateForm.extractClientInformation() as ClientUpdatedInformation)
       .then((client) => {
+        this.hasBeenUpdated.emit(true);
         this.updateFail = false;
         ClientUtils.copyClient(client, this.client);
       }).catch(() => {
+      this.hasBeenUpdated.emit(false);
       this.updateFail = true;
     })
   }

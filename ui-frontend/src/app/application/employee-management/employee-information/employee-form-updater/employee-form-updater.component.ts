@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EmployeeManagementService} from "../../../../../service/company-management/employee/employee-management.service";
 import {EmployeeDTO} from "../../../../../data/company-management/person/employee/employee-dto";
 import {EmployeeUpdatedInformation} from "../../../../../data/company-management/person/employee/employee-updated-information";
@@ -16,6 +16,8 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() employee!: EmployeeDTO;
   @Input() allDisable = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   employeeUpdateForm!: EmployeeForm;
 
@@ -60,8 +62,10 @@ export class EmployeeFormUpdaterComponent implements OnInit, OnChanges {
       this.employeeManagementService.updateEmployee(this.employee.id, employeeUpdatedInfo).then((employee) => {
         this.updateFail = false;
         this.employee = employee;
+        this.hasBeenUpdated.emit(true);
       }).catch(() => {
         this.updateFail = true;
+        this.hasBeenUpdated.emit(false);
       });
     }
   }

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {BundleDTO} from "../../../../../data/company-management/saleable/bundle/bundle-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {BundleManagementService} from "../../../../../service/company-management/saleable/bundle-management.service";
@@ -15,6 +15,8 @@ export class BundleFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() bundle!: BundleDTO;
   @Input() allDisabled = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   bundleUpdaterForm!: FormGroup
 
@@ -68,9 +70,11 @@ export class BundleFormUpdaterComponent implements OnInit, OnChanges {
 
     this.bundleManagementService.updateBundle(this.bundle.id, bundleUpdates).then((bundle) => {
       this.bundle = bundle;
+      this.hasBeenUpdated.emit(true);
       this.updateFailed = false;
       this.initUpdaterForm();
     }).catch(() => {
+      this.hasBeenUpdated.emit(false);
       this.updateFailed = true;
     })
   }

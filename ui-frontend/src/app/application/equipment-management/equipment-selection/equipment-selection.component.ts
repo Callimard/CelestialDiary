@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {EquipmentDTO} from "../../../../data/company-management/equipment/equipment-dto";
-import {ActivatedRoute, Router} from "@angular/router";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 import {EquipmentManagementService} from "../../../../service/company-management/equipment/equipment-management.service";
-import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../library/informative/info-pane/info-pane.component";
 
 export class EquipmentPaneInfoTransformer implements PaneInfoTransformer<EquipmentDTO> {
   transform(equipment: EquipmentDTO): PaneInfoWithId {
@@ -17,22 +16,29 @@ export class EquipmentPaneInfoTransformer implements PaneInfoTransformer<Equipme
 }
 
 @Component({
-  selector: 'app-equipment-selection',
+  selector: '[app-equipment-selection]',
   templateUrl: './equipment-selection.component.html',
   styleUrls: ['./equipment-selection.component.css']
 })
 export class EquipmentSelectionComponent implements OnInit {
 
+  @Output() equipmentSelected = new EventEmitter<string>();
+  @Output() wantCreateEquipment = new EventEmitter<boolean>();
+
   allEquipments: EquipmentDTO[] = [];
 
   equipmentPaneInfoTransformer: PaneInfoTransformer<EquipmentDTO> = new EquipmentPaneInfoTransformer();
 
-  constructor(private equipmentManagementService: EquipmentManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+  constructor(private equipmentManagementService: EquipmentManagementService,
               private privilegeService: PrivilegeService) {
     // Nothing
   }
 
   ngOnInit(): void {
+    this.chargeEquipments();
+  }
+
+  public reload() {
     this.chargeEquipments();
   }
 
@@ -48,17 +54,13 @@ export class EquipmentSelectionComponent implements OnInit {
     })
   }
 
-  navigateToEquipmentInformation(role: any) {
-    const selectedEquipment: PaneInfoWithId = role as PaneInfoWithId;
-    this.router.navigate([{outlets: {right: ['information', selectedEquipment.id]}}], {
-      relativeTo: this.activatedRoute
-    });
+  selectEquipment(equipment: any) {
+    const selectedEquipment: PaneInfoWithId = equipment as PaneInfoWithId;
+    this.equipmentSelected.emit(selectedEquipment.id);
   }
 
   navigateToCreateEquipment() {
-    this.router.navigate([{outlets: {right: ['create']}}], {
-      relativeTo: this.activatedRoute
-    });
+    this.wantCreateEquipment.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

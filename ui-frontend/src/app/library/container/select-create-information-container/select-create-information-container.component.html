@@ -1,0 +1,27 @@
+<div app-two-side-management #twoSideContainer>
+  <ng-template #left>
+    <ng-container *ngTemplateOutlet="selectionTemplate || defaultSelection"></ng-container>
+  </ng-template>
+  <ng-template #right>
+    <div *ngIf="create">
+      <ng-container *ngTemplateOutlet="creationTemplate || defaultCreation"></ng-container>
+    </div>
+
+    <div *ngIf="elementId">
+      <ng-container *ngTemplateOutlet="informationTemplate || defaultInformation"></ng-container>
+    </div>
+  </ng-template>
+</div>
+
+
+<ng-template #defaultSelection>
+  <p>Selection content</p>
+</ng-template>
+
+<ng-template #defaultCreation>
+  <p>Creation content</p>
+</ng-template>
+
+<ng-template #defaultInformation>
+  <p>Information content</p>
+</ng-template>

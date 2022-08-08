@@ -4,7 +4,7 @@ import {WrappedProductDTO} from "../../../../../data/company-management/saleable
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
-import {PaneInfoTransformer} from "../../../../libairy/informative/info-pane/info-pane.component";
+import {PaneInfoTransformer} from "../../../../library/informative/info-pane/info-pane.component";
 import {WrappedSaleableDTO} from "../../../../../data/company-management/saleable/wrapped-saleable-dto";
 import {SaleablePaneInfoTransformer} from "../../../utils/saleable-pane-info-transformer";
 

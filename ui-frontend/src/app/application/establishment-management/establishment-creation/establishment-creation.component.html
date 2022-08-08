@@ -2,6 +2,7 @@
   <div app-basic-title class="establishment-creation-title-card floating-card"
        title="{{ 'establishment.creation.establishment-creation' | translate }}"
        (goBack)="goBack()"></div>
-  <div app-establishment-form-creator class="floating-card establishment-creation-form need-top-space" (establishmentCreated)="goBack()">
+  <div app-establishment-form-creator class="floating-card establishment-creation-form need-top-space"
+       (establishmentCreated)="goBack(); establishmentHasBeenCreated.emit(true)">
   </div>
 </div>

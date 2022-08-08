@@ -3,7 +3,7 @@
      searchBarPlaceHolder="{{ 'equipment.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
      [paneInfoTransformer]="equipmentPaneInfoTransformer"
-     (elementSelected)="navigateToEquipmentInformation($event)"
+     (elementSelected)="selectEquipment($event)"
      (searchFilter)="filterEquipments($event)">
 </div>
 <button class="floating-button create-equipment-button"

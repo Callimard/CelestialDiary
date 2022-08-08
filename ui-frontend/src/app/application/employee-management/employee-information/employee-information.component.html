@@ -3,10 +3,11 @@
        [title]="employee.firstName + ' ' + employee.lastName"
        [subtitle]="employee.email"
        [img]="'/assets/images/kraken.jpg'"
-       (goBack)="goBack()"></div>
+       (goBack)="goBack($event)"></div>
   <div app-employee-form-updater class="floating-card need-top-space"
        [employee]="employee"
-       [allDisable]="!privilegeManagement.hasEmployeeUpdate()">
+       [allDisable]="!privilegeManagement.hasEmployeeUpdate()"
+       (hasBeenUpdated)="employeeHasBeenUpdated.emit($event)">
   </div>
   <div app-employee-working-hours-updater class="floating-card need-top-space"
        [employee]="employee"

@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-employee-creation',
+  selector: '[app-employee-creation]',
   templateUrl: './employee-creation.component.html',
   styleUrls: ['./employee-creation.component.css']
 })
 export class EmployeeCreationComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  @Output() employeeHasBeenCreated = new EventEmitter<boolean>();
+  @Output() wantGoBack = new EventEmitter<boolean>();
+
+  constructor() {
     // Nothing
   }
 
@@ -18,7 +20,7 @@ export class EmployeeCreationComponent implements OnInit {
 
   goBack(success: boolean) {
     if (success)
-      this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+      this.wantGoBack.emit(true);
   }
 
 }

@@ -3,10 +3,10 @@
      searchBarPlaceHolder="{{ 'client.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
      [paneInfoTransformer]="clientPaneInfoTransformer"
-     (elementSelected)="navigateToClientInformation($event)"
+     (elementSelected)="selectClient($event)"
      (searchFilter)="filterClients($event)"
 >
 </div>
-<button class="floating-button create-client-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="navigateToCreateClient()">
+<button class="floating-button create-client-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="createClient()">
   <i class="fa-solid fa-plus"></i>
 </button>

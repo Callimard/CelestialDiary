@@ -1,0 +1,22 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-role-selection #roleSelection
+         (roleSelected)="container.displayInformation($event)"
+         (wantCreateRole)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-role-information
+         [roleId]="container.elementId"
+         (wantGoBack)="container.resetInitialPos()"
+         (roleHasBeenUpdated)="roleSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-role-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (roleHasBeenCreated)="roleSelection.reload()">
+    </div>
+  </ng-template>
+</div>
+

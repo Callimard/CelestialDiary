@@ -4,6 +4,6 @@
        (goBack)="goBack()">
   </div>
   <div app-bundle-form-creator class="floating-card bundle-creation-form need-top-space"
-       (bundleCreated)="goBack()">
+       (bundleCreated)="goBack(); bundleHasBeenCreated.emit(true)">
   </div>
 </div>

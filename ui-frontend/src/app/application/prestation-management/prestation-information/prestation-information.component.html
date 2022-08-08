@@ -6,6 +6,7 @@
        (goBack)="goBack()"></div>
   <div app-prestation-form-updater class="floating-card prestation-update-form need-top-space"
        [prestation]="prestation"
-       [allDisabled]="!privilegeManagement.hasSaleableUpdate()">
+       [allDisabled]="!privilegeManagement.hasSaleableUpdate()"
+       (hasBeenUpdated)="prestationHasBeenUpdated.emit($event)">
   </div>
 </div>

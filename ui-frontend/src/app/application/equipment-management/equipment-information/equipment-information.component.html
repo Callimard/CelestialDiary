@@ -4,7 +4,8 @@
        (goBack)="goBack()"></div>
   <div app-equipment-form-updater class="floating-card need-top-space"
        [equipment]="equipment"
-       [allDisabled]="!privilegeManagement.hasEquipmentUpdate()">
+       [allDisabled]="!privilegeManagement.hasEquipmentUpdate()"
+       (equipmentHasBeenUpdated)="equipmentHasBeenUpdated.emit($event)">
   </div>
   <div app-floating-card-button class="need-top-space equipment-suppression-button"
        *ngIf="privilegeManagement.hasEquipmentDelete()"

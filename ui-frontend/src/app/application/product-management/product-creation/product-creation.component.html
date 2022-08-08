@@ -2,7 +2,7 @@
   <div app-basic-title class="product-creation-title-card floating-card"
        title="{{ 'product.creation.product-creation' | translate }}"
        (goBack)="goBack()"></div>
-  <div app-product-form-creator class="floating-card product-creation-form need-top-space" (productCreated)="goBack()">
-
+  <div app-product-form-creator class="floating-card product-creation-form need-top-space"
+       (productCreated)="goBack(); productHasBeenCreated.emit(true)">
   </div>
 </div>

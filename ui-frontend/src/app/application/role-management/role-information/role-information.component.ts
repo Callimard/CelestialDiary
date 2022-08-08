@@ -1,33 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
-import {ActivatedRoute} from "@angular/router";
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
-import {Location} from "@angular/common";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-role-information',
+  selector: '[app-role-information]',
   templateUrl: './role-information.component.html',
   styleUrls: ['./role-information.component.css']
 })
-export class RoleInformationComponent implements OnInit {
+export class RoleInformationComponent implements OnInit, OnChanges {
+
+  @Input() roleId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() roleHasBeenUpdated = new EventEmitter<boolean>();
 
   role!: RoleDTO;
 
-  constructor(private roleManagementService: RoleManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private roleManagementService: RoleManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const roleId: string | undefined = param["roleId"];
-        if (roleId != null) {
-          this.chargeRole(roleId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.roleId != null) {
+      this.chargeRole(this.roleId);
+    }
   }
 
   private chargeRole(roleId: string) {
@@ -37,11 +39,12 @@ export class RoleInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.wantGoBack.emit(true);
   }
 
   deleteRole() {
     this.roleManagementService.deleteRole(this.role?.id).then(() => {
+      this.roleHasBeenUpdated.emit(true);
       this.goBack();
     });
   }

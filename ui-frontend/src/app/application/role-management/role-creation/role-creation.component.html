@@ -2,7 +2,8 @@
   <div app-basic-title class="role-creation-title-card floating-card"
        title="{{ 'role.creation.role-creation' | translate }}"
        (goBack)="goBack()"></div>
-  <div app-role-form-creator class="floating-card role-creation-form need-top-space" (roleCreated)="goBack()">
+  <div app-role-form-creator class="floating-card role-creation-form need-top-space"
+       (roleCreated)="goBack(); roleHasBeenCreated.emit(true)">
 
   </div>
 </div>

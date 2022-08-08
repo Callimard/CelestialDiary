@@ -1,33 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EquipmentDTO} from "../../../../data/company-management/equipment/equipment-dto";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 import {EquipmentManagementService} from "../../../../service/company-management/equipment/equipment-management.service";
 
 @Component({
-  selector: 'app-equipment-information',
+  selector: '[app-equipment-information]',
   templateUrl: './equipment-information.component.html',
   styleUrls: ['./equipment-information.component.css']
 })
-export class EquipmentInformationComponent implements OnInit {
+export class EquipmentInformationComponent implements OnInit, OnChanges {
+
+  @Input() equipmentId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() equipmentHasBeenUpdated = new EventEmitter<boolean>();
 
   equipment!: EquipmentDTO;
 
-  constructor(private equipmentManagementService: EquipmentManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private equipmentManagementService: EquipmentManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const equipmentId: string | undefined = param["equipmentId"];
-        if (equipmentId != null) {
-          this.chargeEquipment(equipmentId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.equipmentId != null)
+      this.chargeEquipment(this.equipmentId);
   }
 
   private chargeEquipment(equipmentId: string) {
@@ -37,7 +38,7 @@ export class EquipmentInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    this.wantGoBack.emit(true);
   }
 
   deleteEquipment() {

@@ -2,7 +2,7 @@
   <div app-basic-title class="client-creation-title-card floating-card"
        title="{{ 'client.creation.client-creation' | translate }}"
        (goBack)="goBack($event)"></div>
-  <div app-client-form-creator class="floating-card client-creation-form need-top-space" (clientCreated)="goBack($event)">
-
+  <div app-client-form-creator class="floating-card client-creation-form need-top-space"
+       (clientCreated)="goBack($event); clientHasBeenCreated.emit(true)">
   </div>
 </div>

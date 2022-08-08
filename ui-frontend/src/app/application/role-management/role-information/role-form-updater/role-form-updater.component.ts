@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {RoleDTO} from "../../../../../data/company-management/person/employee/role/role-dto";
 import {RoleUpdatedInformation} from "../../../../../data/company-management/person/employee/role/role-updated-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
@@ -15,6 +15,8 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() role!: RoleDTO;
   @Input() allDisabled = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   updateFailed = false;
 
@@ -50,8 +52,10 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
     this.roleManagementService.updateRole(this.role.id, roleUpdates).then((roleUpdated) => {
       this.role = roleUpdated;
       this.updateFailed = false;
+      this.hasBeenUpdated.emit(true);
     }).catch(() => {
       this.updateFailed = true;
+      this.hasBeenUpdated.emit(false);
     })
   }
 

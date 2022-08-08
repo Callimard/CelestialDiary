@@ -1,9 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {WrappedEstablishmentDTO} from "../../../../data/company-management/establishment/wrapped-establishment-dto";
-import {ActivatedRoute, Router} from "@angular/router";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
-import {PaneInfoTransformer, PaneInfoWithId} from "../../../libairy/informative/info-pane/info-pane.component";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../library/informative/info-pane/info-pane.component";
 
 export class EstablishmentPaneInfoTransformer implements PaneInfoTransformer<WrappedEstablishmentDTO> {
   transform(establishment: WrappedEstablishmentDTO): PaneInfoWithId {
@@ -18,22 +17,29 @@ export class EstablishmentPaneInfoTransformer implements PaneInfoTransformer<Wra
 }
 
 @Component({
-  selector: 'app-establishment-selection',
+  selector: '[app-establishment-selection]',
   templateUrl: './establishment-selection.component.html',
   styleUrls: ['./establishment-selection.component.css']
 })
 export class EstablishmentSelectionComponent implements OnInit {
 
+  @Output() establishmentSelected = new EventEmitter<string>();
+  @Output() wantCreateEstablishment = new EventEmitter<boolean>();
+
   allEstablishments: WrappedEstablishmentDTO[] = [];
 
   establishmentPaneInfoTransformer: PaneInfoTransformer<WrappedEstablishmentDTO> = new EstablishmentPaneInfoTransformer();
 
-  constructor(private establishmentManagementService: EstablishmentManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+  constructor(private establishmentManagementService: EstablishmentManagementService,
               private privilegeService: PrivilegeService) {
     // Nothing
   }
 
   ngOnInit(): void {
+    this.chargeEstablishments();
+  }
+
+  public reload() {
     this.chargeEstablishments();
   }
 
@@ -49,17 +55,13 @@ export class EstablishmentSelectionComponent implements OnInit {
     });
   }
 
-  navigateToEstablishmentInformation(establishment: any) {
+  selectEstablishment(establishment: any) {
     const selectedEstablishment: PaneInfoWithId = establishment as PaneInfoWithId;
-    this.router.navigate([{outlets: {right: ['information', selectedEstablishment.id]}}], {
-      relativeTo: this.activatedRoute
-    });
+    this.establishmentSelected.emit(selectedEstablishment.id);
   }
 
-  navigateToCreateEstablishment() {
-    this.router.navigate([{outlets: {right: ['create']}}], {
-      relativeTo: this.activatedRoute
-    });
+  createEstablishment() {
+    this.wantCreateEstablishment.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

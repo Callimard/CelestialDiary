@@ -3,12 +3,12 @@
      searchBarPlaceHolder="{{ 'role.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
      [paneInfoTransformer]="rolePaneInfoTransformer"
-     (elementSelected)="navigateToRoleInformation($event)"
+     (elementSelected)="selectRole($event)"
      (searchFilter)="filterRole($event)">
 </div>
 <button class="floating-button create-role-button"
         *ngIf="privilegeManagement.hasRoleCreate()"
-        (click)="navigateToCreateRole()">
+        (click)="createRole()">
   <i class="fa-solid fa-plus"></i>
 </button>
 

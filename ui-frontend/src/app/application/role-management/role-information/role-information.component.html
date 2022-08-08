@@ -4,7 +4,8 @@
        (goBack)="goBack()"></div>
   <div app-role-form-updater class="floating-card need-top-space"
        [role]="role"
-       [allDisabled]="!privilegeManagement.hasRoleUpdate()">
+       [allDisabled]="!privilegeManagement.hasRoleUpdate()"
+       (hasBeenUpdated)="roleHasBeenUpdated.emit($event)">
   </div>
   <div app-floating-card-button class="need-top-space role-suppression-button"
        *ngIf="privilegeManagement.hasRoleDelete()"

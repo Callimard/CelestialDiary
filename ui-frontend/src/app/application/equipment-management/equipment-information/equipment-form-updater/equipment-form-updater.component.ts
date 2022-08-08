@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EquipmentDTO} from "../../../../../data/company-management/equipment/equipment-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
@@ -13,6 +13,8 @@ export class EquipmentFormUpdaterComponent implements OnInit {
 
   @Input() equipment!: EquipmentDTO;
   @Input() allDisabled = false;
+
+  @Output() equipmentHasBeenUpdated = new EventEmitter<boolean>();
 
   updateFailed = false;
 
@@ -47,8 +49,10 @@ export class EquipmentFormUpdaterComponent implements OnInit {
     this.equipmentManagementService.updateEquipment(this.equipment.id, updates).then((equipment) => {
       this.updateFailed = false;
       this.equipment = equipment;
+      this.equipmentHasBeenUpdated.emit(true);
       this.initEquipmentRoleUpdateForm();
     }).catch(() => {
+      this.equipmentHasBeenUpdated.emit(false);
       this.updateFailed = true;
     })
   }
