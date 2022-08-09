@@ -233,6 +233,7 @@
     }
   },
   "privilege": {
+    "title": "Privilege",
     "company": {
       "title": "Company management privileges",
       "description": "Theses privileges allow the all company management.",
@@ -339,6 +340,7 @@
     "add": "Add hours",
     "remove": "Remove hours"
   },
+  "description": "Description",
   "create": "Create",
   "update": "Update",
   "search": "Search"

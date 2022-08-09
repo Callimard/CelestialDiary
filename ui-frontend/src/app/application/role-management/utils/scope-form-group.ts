@@ -72,8 +72,20 @@ export class ScopeFormGroup extends FormGroup {
     return privileges;
   }
 
+  get scopeName(): string {
+    return this._scopeName;
+  }
+
+  get scopeDescription(): string {
+    return this._scopeDescription;
+  }
+
+  get scopePrivileges(): PrivilegeDTO[] {
+    return this._scopePrivileges;
+  }
+
   get scopeChildren(): ScopeFormGroup[] {
-    return this._scopeChildren
+    return this._scopeChildren;
   }
 
   getScopeChildFormGroup(name: string): ScopeFormGroup {

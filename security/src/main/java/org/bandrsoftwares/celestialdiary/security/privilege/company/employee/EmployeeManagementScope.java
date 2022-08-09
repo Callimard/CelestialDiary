@@ -13,7 +13,7 @@ public class EmployeeManagementScope extends Scope {
     // Constructors.
 
     public EmployeeManagementScope() {
-        super("privilege.employee.title", "privilege.employee.description");
+        super("privilege.company.employee.title", "privilege.company.employee.description");
     }
 
     // Methods.

@@ -233,6 +233,7 @@
     }
   },
   "privilege": {
+    "title": "Privilège",
     "company": {
       "title": "Droits de gestion d'entreprises",
       "description": "Ces droits permettent de gérer l'entreprise dans sa globalité.",
@@ -339,6 +340,7 @@
     "add": "Ajouter des heures",
     "remove": "Retirer des heures"
   },
+  "description": "Description",
   "create": "Créer",
   "update": "Mettre à jour",
   "search": "Rechercher"

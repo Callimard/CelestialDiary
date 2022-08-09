@@ -50,7 +50,6 @@ import {RoleSelectionComponent} from './application/role-management/role-selecti
 import {RoleInformationComponent} from './application/role-management/role-information/role-information.component';
 import {RoleCreationComponent} from './application/role-management/role-creation/role-creation.component';
 import {RoleFormCreatorComponent} from './application/role-management/role-creation/role-form-creator/role-form-creator.component';
-import {PrivilegeInputLineComponent} from './application/role-management/utils/privilege-input-line/privilege-input-line.component';
 import {RoleFormUpdaterComponent} from './application/role-management/role-information/role-form-updater/role-form-updater.component';
 import {RoleFormContentComponent} from './application/role-management/utils/role-form-content/role-form-content.component';
 import {FloatingCardButtonComponent} from './library/button/floating-card-button/floating-card-button.component';
@@ -92,6 +91,7 @@ import {EstablishmentContainerComponent} from './application/establishment-manag
 import {ProductContainerComponent} from './application/product-management/product-container/product-container.component';
 import {PrestationContainerComponent} from './application/prestation-management/prestation-container/prestation-container.component';
 import {RoleContainerComponent} from './application/role-management/role-container/role-container.component';
+import { PrivilegeTableComponent } from './application/role-management/utils/privilege-table/privilege-table.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -172,7 +172,6 @@ const appRoutes: Routes = [
     RoleInformationComponent,
     RoleCreationComponent,
     RoleFormCreatorComponent,
-    PrivilegeInputLineComponent,
     RoleFormUpdaterComponent,
     RoleFormContentComponent,
     FloatingCardButtonComponent,
@@ -212,7 +211,8 @@ const appRoutes: Routes = [
     EstablishmentContainerComponent,
     ProductContainerComponent,
     PrestationContainerComponent,
-    RoleContainerComponent
+    RoleContainerComponent,
+    PrivilegeTableComponent
   ],
   imports: [
     BrowserModule,
