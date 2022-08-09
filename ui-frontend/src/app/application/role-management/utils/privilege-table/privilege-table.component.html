@@ -1,0 +1,30 @@
+<div class="privilege-table-container"
+     [formGroup]="scopeForm">
+  <table class="table-container">
+    <caption>
+      <h3>{{ scopeForm.scopeName | translate }}</h3>
+      <p>{{ scopeForm.scopeDescription | translate }}</p>
+    </caption>
+    <thead>
+    <tr class="table-head">
+      <td><input type="checkbox" (input)="checkAll()"></td>
+      <td>{{ 'privilege.title' | translate }}</td>
+      <td>{{ 'description' | translate }}</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="table-content-row"
+        *ngFor="let privilege of scopeForm.scopePrivileges">
+      <td>
+        <input type="checkbox" [id]="privilege.identifierName" [formControlName]="privilege.identifierName">
+      </td>
+      <td>
+        {{privilege.name | translate}}
+      </td>
+      <td>
+        {{privilege.description | translate}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

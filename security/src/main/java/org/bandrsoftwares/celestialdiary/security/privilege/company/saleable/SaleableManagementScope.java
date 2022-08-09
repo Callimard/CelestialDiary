@@ -13,7 +13,7 @@ public class SaleableManagementScope extends Scope {
     // Constructors.
 
     public SaleableManagementScope() {
-        super("privilege.saleable.title", "privilege.saleable.description");
+        super("privilege.company.saleable.title", "privilege.company.saleable.description");
     }
 
     // Methods.

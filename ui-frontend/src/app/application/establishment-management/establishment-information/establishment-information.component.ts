@@ -1,33 +1,36 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EstablishmentDTO} from "../../../../data/company-management/establishment/establishment-dto";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-establishment-information',
+  selector: '[app-establishment-information]',
   templateUrl: './establishment-information.component.html',
   styleUrls: ['./establishment-information.component.css']
 })
-export class EstablishmentInformationComponent implements OnInit {
+export class EstablishmentInformationComponent implements OnInit, OnChanges {
+
+  @Input() establishmentId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() establishmentHasBeenUpdated = new EventEmitter<boolean>();
 
   establishment?: EstablishmentDTO;
 
-  constructor(private establishmentManagementService: EstablishmentManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private establishmentManagementService: EstablishmentManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const establishmentId: string | undefined = param["establishmentId"];
-        if (establishmentId != null) {
-          this.chargeEstablishment(establishmentId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.establishmentId != null) {
+      this.chargeEstablishment(this.establishmentId);
+    }
+
   }
 
   private chargeEstablishment(establishmentId: string) {
@@ -37,7 +40,7 @@ export class EstablishmentInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back()
+    this.wantGoBack.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

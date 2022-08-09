@@ -1,0 +1,25 @@
+<div class="search-bar-template-container"
+     [style.height]="listPaddingHeight">
+  <ng-container *ngTemplateOutlet="searchBarTemplate || defaultSearchBar">
+  </ng-container>
+</div>
+<div app-element-list
+     class="searching-list"
+     [allElements]="this.allElements"
+     [listPaddingHeight]="this.listPaddingHeight"
+     [itemHeight]="this.itemHeight"
+     [paneInfoTransformer]="paneInfoTransformer"
+     (elementSelected)="elementSelected.emit($event)">
+  <ng-template #item *ngIf="itemTemplate != null">
+    <ng-container
+      *ngTemplateOutlet="itemTemplate != null ? itemTemplate : null"></ng-container>
+  </ng-template>
+</div>
+
+<ng-template #defaultSearchBar>
+  <div app-search-bar
+       class="search-bar"
+       placeHolder="{{ 'search' | translate }}"
+       (inputText)="searchElement($event)">
+  </div>
+</ng-template>

@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {PrestationDTO} from "../../../../../data/company-management/saleable/prestation/prestation-dto";
 import {PrestationUpdatedInformation} from "../../../../../data/company-management/saleable/prestation/prestation-updated-information";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
@@ -14,6 +14,8 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() prestation!: PrestationDTO
   @Input() allDisabled = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   updateFailed = false;
 
@@ -58,8 +60,10 @@ export class PrestationFormUpdaterComponent implements OnInit, OnChanges {
       this.prestation.activated = wrappedPrestation.activated;
 
       this.updateFailed = false;
+      this.hasBeenUpdated.emit(true);
     }).catch(() => {
       this.updateFailed = true;
+      this.hasBeenUpdated.emit(false);
     })
   }
 

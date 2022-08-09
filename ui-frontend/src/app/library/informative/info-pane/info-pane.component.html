@@ -1,0 +1,42 @@
+<div class="info-pane-main-container">
+  <div class="info-pane-container info-pane-left-container" *ngIf="displayLeft">
+    <ng-container
+      *ngTemplateOutlet="leftContent || defaultLeft">
+    </ng-container>
+  </div>
+  <div class="info-pane-container info-pane-center-container" *ngIf="displayCenter">
+    <ng-container
+      *ngTemplateOutlet="
+      centerContent || defaultCenter;
+      context: {$implicit: info}
+      ">
+    </ng-container>
+  </div>
+  <div class="info-pane-container info-pane-right-container" *ngIf="displayRight">
+    <ng-container
+      *ngTemplateOutlet="
+      rightContent || defaultRight;
+      context: {$implicit: info}
+      ">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #defaultLeft>
+  <span class="default-left-template-container">
+    <i class="fa-solid fa-arrow-left"></i>
+  </span>
+</ng-template>
+<ng-template #defaultCenter let-info>
+  <div class="default-center-template-container">
+    <h4 class="ticket-title">{{info.title}}</h4>
+    <h5 class="ticket-sub-title" *ngIf="info.subTitle">{{info.subTitle}}</h5>
+  </div>
+</ng-template>
+<ng-template #defaultRight let-info>
+  <div class="default-right-template-container">
+    <div class="img-container">
+      <img [src]="info.img != null ? info.img : '/assets/images/kraken.jpg'" alt="Info pane image">
+    </div>
+  </div>
+</ng-template>

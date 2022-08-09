@@ -1,0 +1,26 @@
+<div class="two-side-main-container">
+  <div class="horizontal-side-left"
+       [class.swiped]="!isBigScreen() && !initialPos">
+    <ng-container
+      *ngTemplateOutlet="leftTemplate || defaultLeft">
+    </ng-container>
+  </div>
+  <div class="horizontal-side-right"
+       [class.swiped]="!isBigScreen() && !initialPos">
+    <ng-container
+      *ngTemplateOutlet="rightTemplate || defaultRight">
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #defaultLeft>
+  <div>
+    <p>Left content</p>
+  </div>
+</ng-template>
+
+<ng-template #defaultRight>
+  <div>
+    <p>Right content</p>
+  </div>
+</ng-template>

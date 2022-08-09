@@ -2,14 +2,12 @@
      [allElements]="allPrestations"
      searchBarPlaceHolder="{{ 'prestation.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-search-bar-height)'"
-     [elementTitleFields]="['name']"
-     [elementSubtitleField]="'suggestedPrice'"
-     [subTitleSuffix]="' €'"
-     (elementSelected)="navigateToPrestationInformation($event)"
+     [paneInfoTransformer]="saleablePaneInfoTransformer"
+     (elementSelected)="selectPrestation($event)"
      (searchFilter)="filterPrestation($event)">
 </div>
 <button class="floating-button create-prestation-button"
         *ngIf="privilegeManagement.hasSaleableCreate()"
-        (click)="navigateToCreatePrestation()">
+        (click)="createPrestation()">
   <i class="fa-solid fa-plus"></i>
 </button>

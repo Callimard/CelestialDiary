@@ -2,12 +2,12 @@
      [allElements]="allEstablishments"
      searchBarPlaceHolder="{{ 'establishment.search' | translate}}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
-     [elementTitleFields]="['name']"
-     (elementSelected)="navigateToEstablishmentInformation($event)"
+     [paneInfoTransformer]="establishmentPaneInfoTransformer"
+     (elementSelected)="selectEstablishment($event)"
      (searchFilter)="filterEstablishment($event)"
 >
 </div>
 <button class="floating-button create-establishment-button" *ngIf="privilegeManagement.hasEstablishmentCreate()"
-        (click)="navigateToCreateEstablishment()">
+        (click)="createEstablishment()">
   <i class="fa-solid fa-plus"></i>
 </button>

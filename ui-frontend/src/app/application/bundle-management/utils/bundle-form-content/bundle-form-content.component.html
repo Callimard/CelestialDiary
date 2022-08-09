@@ -35,33 +35,33 @@
       <h3>{{ 'bundle.product-selection.available' | translate}}</h3>
       <div app-element-list class="available-product-list need-top-space"
            [allElements]="availableProducts"
-           [elementTitleFields]="['name']"
-           [elementSubtitleField]="'suggestedPrice'"
-           [subTitleSuffix]="' €'"
-           [elementSize]="'50px'"
+           [paneInfoTransformer]="saleablePaneInfoTransformer"
            (elementSelected)="choseProduct($event)">
       </div>
     </div>
     <div class="selected-products-container need-top-space">
       <h3>{{ 'bundle.product-selection.selected' | translate }}</h3>
-      <ul class="chosen-product-list">
-        <li class="product-item" *ngFor="let productId of productFormGroupKeys">
-          <button class="danger-button remove-button" type="button" (click)="removeProduct(productId)"
-          [disabled]="allDisabled">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div app-advanced-basic-input-form
-               class="product-item-input"
-               [group]="this.productsFormGroup"
-               [controlName]="productId"
-               [labelFor]="productId"
-               [label]="getProductName(productId)"
-               [inputType]="'number'"
-               [imageSrc]="'/assets/images/kraken.jpg'"
-               (inputChange)="computeProductTotalPrice()">
+      <div app-element-list class="chosen-product-list"
+           [allElements]="productFormGroupKeys">
+        <ng-template #item let-productId>
+          <div class="product-item">
+            <button class="danger-button remove-button" type="button" (click)="removeProduct(productId)"
+                    [disabled]="allDisabled">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div app-advanced-basic-input-form
+                 class="product-item-input"
+                 [group]="this.productsFormGroup"
+                 [controlName]="productId"
+                 [labelFor]="productId"
+                 [label]="getProductName(productId)"
+                 [inputType]="'number'"
+                 [imageSrc]="'/assets/images/kraken.jpg'"
+                 (inputChange)="computeProductTotalPrice()">
+            </div>
           </div>
-        </li>
-      </ul>
+        </ng-template>
+      </div>
       <span class="total-price">Total: <strong>{{productTotalPrice}} €</strong></span>
     </div>
   </div>
@@ -72,33 +72,33 @@
       <h3>{{ 'bundle.prestation-selection.available' | translate}}</h3>
       <div app-element-list class="available-prestation-list need-top-space"
            [allElements]="availablePrestations"
-           [elementTitleFields]="['name']"
-           [elementSubtitleField]="'suggestedPrice'"
-           [subTitleSuffix]="' €'"
-           [elementSize]="'50px'"
+           [paneInfoTransformer]="saleablePaneInfoTransformer"
            (elementSelected)="chosePrestation($event)">
       </div>
     </div>
     <div class="selected-prestations-container need-top-space">
       <h3>{{ 'bundle.prestation-selection.selected' | translate }}</h3>
-      <ul class="chosen-prestation-list">
-        <li class="prestation-item" *ngFor="let prestationId of prestationFormGroupKeys">
-          <button class="danger-button remove-button" type="button" (click)="removePrestation(prestationId)"
-                  [disabled]="allDisabled">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div app-advanced-basic-input-form
-               class="prestation-item-input"
-               [group]="this.prestationsFormGroup"
-               [controlName]="prestationId"
-               [labelFor]="prestationId"
-               [label]="getPrestationName(prestationId)"
-               [inputType]="'number'"
-               [imageSrc]="'/assets/images/kraken.jpg'"
-               (inputChange)="computePrestationTotalPrice()">
+      <div app-element-list class="chosen-prestation-list"
+           [allElements]="prestationFormGroupKeys">
+        <ng-template #item let-prestationId>
+          <div class="prestation-item">
+            <button class="danger-button remove-button" type="button" (click)="removePrestation(prestationId)"
+                    [disabled]="allDisabled">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div app-advanced-basic-input-form
+                 class="prestation-item-input"
+                 [group]="this.prestationsFormGroup"
+                 [controlName]="prestationId"
+                 [labelFor]="prestationId"
+                 [label]="getPrestationName(prestationId)"
+                 [inputType]="'number'"
+                 [imageSrc]="'/assets/images/kraken.jpg'"
+                 (inputChange)="computePrestationTotalPrice()">
+            </div>
           </div>
-        </li>
-      </ul>
+        </ng-template>
+      </div>
       <span class="total-price">Total: <strong>{{prestationTotalPrice}} €</strong></span>
     </div>
   </div>

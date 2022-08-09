@@ -1,3 +1,5 @@
 .employee-establishment-wh-container {
   border-top: 1px solid var(--place-holder-text-color-light);
+
+  list-style-type: none;
 }

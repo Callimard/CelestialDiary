@@ -1,20 +1,3 @@
-.establishment-line {
-  overflow: hidden;
-}
-
-.establishment-name, .establishment-description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.establishment-name {
-  font-weight: bold;
-}
-
-.establishment-name, .establishment-check, .establishment-line summary {
-  cursor: pointer;
-}
-
-.establishment-check, .establishment-name {
-  margin-left: 1em;
+.establishment-list {
+  list-style-type: none;
 }

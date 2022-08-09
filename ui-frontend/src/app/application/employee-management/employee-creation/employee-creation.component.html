@@ -2,7 +2,9 @@
   <div app-basic-title class="employee-creation-title-card floating-card"
        title="{{ 'employee.creation.employee-creation' | translate }}"
        (goBack)="goBack($event)"></div>
-  <div app-employee-form-creator class="floating-card employee-creation-form need-top-space" (employeeCreated)="goBack($event)">
+  <div app-employee-form-creator
+       class="floating-card employee-creation-form need-top-space"
+       (employeeCreated)="goBack($event); employeeHasBeenCreated.emit($event)">
 
   </div>
 </div>

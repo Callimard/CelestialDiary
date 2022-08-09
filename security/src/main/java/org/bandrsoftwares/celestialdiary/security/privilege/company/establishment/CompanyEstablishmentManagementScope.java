@@ -13,7 +13,7 @@ public class CompanyEstablishmentManagementScope extends Scope {
     // Constructors.
 
     public CompanyEstablishmentManagementScope() {
-        super("privilege.establishment.title", "privilege.establishment.description");
+        super("privilege.company.establishment.title", "privilege.company.establishment.description");
     }
 
     // Methods.

@@ -6,6 +6,7 @@
        (goBack)="goBack()"></div>
   <div app-bundle-form-updater class="floating-card need-top-space"
        [bundle]="bundle"
-       [allDisabled]="!privilegeManagement.hasSaleableUpdate()">
+       [allDisabled]="!privilegeManagement.hasSaleableUpdate()"
+       (hasBeenUpdated)="bundleHasBeenUpdated.emit($event)">
   </div>
 </div>

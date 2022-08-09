@@ -1,33 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {BundleDTO} from "../../../../data/company-management/saleable/bundle/bundle-dto";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
 import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-bundle-information',
+  selector: '[app-bundle-information]',
   templateUrl: './bundle-information.component.html',
   styleUrls: ['./bundle-information.component.css']
 })
-export class BundleInformationComponent implements OnInit {
+export class BundleInformationComponent implements OnInit, OnChanges {
+
+  @Input() bundleId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() bundleHasBeenUpdated = new EventEmitter<boolean>();
 
   bundle?: BundleDTO;
 
-  constructor(private bundleManagementService: BundleManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private bundleManagementService: BundleManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const bundleId: string | undefined = param["bundleId"];
-        if (bundleId != null) {
-          this.chargeBundle(bundleId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.bundleId != null)
+      this.chargeBundle(this.bundleId);
   }
 
   private chargeBundle(bundleId: string) {
@@ -37,7 +38,7 @@ export class BundleInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back()
+    this.wantGoBack.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

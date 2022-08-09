@@ -1,5 +1,0 @@
-<div class="privilege-input-container" [formGroup]="group" *ngIf="group && privilege">
-  <input type="checkbox" [id]="privilege.identifierName" [formControlName]="privilege.identifierName">
-  <label class="privilege-label" [for]="privilege.identifierName">{{privilege.name | translate}}</label>
-  <p class="privilege-description">{{privilege.description | translate}}</p>
-</div>

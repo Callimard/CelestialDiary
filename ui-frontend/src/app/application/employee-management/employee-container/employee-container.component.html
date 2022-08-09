@@ -1,0 +1,21 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-employee-selection #employeeSelection
+         (employeeSelected)="container.displayInformation($event)"
+         (wantCreateEmployee)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-employee-information class="side-container"
+         [employeeId]="container.elementId"
+         (wantGoBack)="container.resetInitialPos()"
+         (employeeHasBeenUpdated)="employeeSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-employee-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (employeeHasBeenCreated)="employeeSelection.reload()">
+    </div>
+  </ng-template>
+</div>

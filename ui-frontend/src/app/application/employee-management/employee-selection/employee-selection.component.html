@@ -2,12 +2,11 @@
      [allElements]="allEmployees"
      searchBarPlaceHolder="{{ 'employee.search' | translate }}"
      [listPaddingHeight]="'var(--company-management-floating-button-size)'"
-     [elementTitleFields]="['firstName', 'lastName']"
-     [elementSubtitleField]="'email'"
-     (elementSelected)="navigateToEmployeeInformation($event)"
+     [paneInfoTransformer]="employeePaneInfoTransformer"
+     (elementSelected)="selectEmployee($event)"
      (searchFilter)="filterEmployee($event)"
 >
 </div>
-<button class="floating-button create-employee-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="navigateToCreateEmployee()">
+<button class="floating-button create-employee-button" *ngIf="privilegeManagement.hasEmployeeCreate()" (click)="createEmployee()">
   <i class="fa-solid fa-plus"></i>
 </button>

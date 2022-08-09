@@ -13,7 +13,7 @@ public class RoleManagementScope extends Scope {
     // Constructors.
 
     public RoleManagementScope() {
-        super("privilege.role.title", "privilege.role.description");
+        super("privilege.company.role.title", "privilege.company.role.description");
     }
 
     // Methods.

@@ -13,7 +13,7 @@ public class ClientManagementScope extends Scope {
     // Constructors.
 
     public ClientManagementScope() {
-        super("privilege.client.title", "privilege.client.description");
+        super("privilege.company.client.title", "privilege.company.client.description");
     }
 
     // Methods.

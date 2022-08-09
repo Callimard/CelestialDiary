@@ -1,34 +1,37 @@
-import {Component, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ProductDTO} from "../../../../data/company-management/saleable/product/product-dto";
 import {ProductManagementService} from "../../../../service/company-management/saleable/product-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-product-information',
+  selector: '[app-product-information]',
   templateUrl: './product-information.component.html',
   styleUrls: ['./product-information.component.css']
 })
-export class ProductInformationComponent implements OnInit {
+export class ProductInformationComponent implements OnInit, OnChanges {
+
+  @Input() productId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() productHasBeenUpdated = new EventEmitter<boolean>();
 
   product?: ProductDTO;
 
-  constructor(private productManagementService: ProductManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private productManagementService: ProductManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const productId: string | undefined = param["productId"];
-        if (productId != null) {
-          this.chargeProduct(productId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // nothing
   }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.productId != null) {
+      this.chargeProduct(this.productId);
+    }
+  }
+
 
   private chargeProduct(productId: string) {
     this.productManagementService.getSpecificProduct(productId).then((product) => {
@@ -37,7 +40,7 @@ export class ProductInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back()
+    this.wantGoBack.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

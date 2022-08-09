@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EstablishmentDTO} from "../../../../../data/company-management/establishment/establishment-dto";
 import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 import {EstablishmentUpdatedInformation} from "../../../../../data/company-management/establishment/establishment-updated-information";
@@ -13,6 +13,8 @@ export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() establishment!: EstablishmentDTO;
   @Input() allDisabled = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   updateFailed = false;
 
@@ -43,8 +45,10 @@ export class EstablishmentFormUpdaterComponent implements OnInit, OnChanges {
       this.establishment.address = wrappedEstablishment.address;
       this.establishment.activated = wrappedEstablishment.activated;
       this.updateFailed = false;
+      this.hasBeenUpdated.emit(true);
     }).catch(() => {
       this.updateFailed = true;
+      this.hasBeenUpdated.emit(false);
     });
   }
 }

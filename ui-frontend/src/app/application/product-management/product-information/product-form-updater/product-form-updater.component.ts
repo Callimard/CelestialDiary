@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ProductDTO} from "../../../../../data/company-management/saleable/product/product-dto";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
@@ -13,6 +13,8 @@ export class ProductFormUpdaterComponent implements OnInit, OnChanges {
 
   @Input() product!: ProductDTO
   @Input() allDisabled = false;
+
+  @Output() hasBeenUpdated = new EventEmitter<boolean>();
 
   updateFailed = false;
 
@@ -48,13 +50,16 @@ export class ProductFormUpdaterComponent implements OnInit, OnChanges {
       suggestedPrice: form.suggestedPrice
     }
     this.productManagementService.updateProduct(this.product.id, productUpdates).then((wrappedProduct) => {
+      this.hasBeenUpdated.emit(true);
       this.updateFailed = false;
+
       this.product.name = wrappedProduct.name;
       this.product.description = wrappedProduct.description;
       this.product.suggestedPrice = wrappedProduct.suggestedPrice;
       this.product.activated = wrappedProduct.activated;
     }).catch(() => {
       this.updateFailed = true
+      this.hasBeenUpdated.emit(false);
     })
   }
 

@@ -1,14 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-bundle-creation',
+  selector: '[app-bundle-creation]',
   templateUrl: './bundle-creation.component.html',
   styleUrls: ['./bundle-creation.component.css']
 })
 export class BundleCreationComponent implements OnInit {
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() bundleHasBeenCreated = new EventEmitter<boolean>();
+
+  constructor() {
     // Nothing.
   }
 
@@ -17,6 +19,6 @@ export class BundleCreationComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigate(['..'], {relativeTo: this.activatedRoute});
+    this.wantGoBack.emit(true);
   }
 }

@@ -1,0 +1,28 @@
+.search-bar-template-container, .searching-list {
+  position: absolute;
+
+  width: 100%;
+
+  top: 0;
+  left: 0;
+}
+
+.search-bar-template-container {
+  padding: 1em;
+  z-index: 2;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+}
+
+.searching-list {
+  height: 100%;
+  z-index: 0;
+}

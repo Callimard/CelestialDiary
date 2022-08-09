@@ -1,33 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ClientDTO} from "../../../../data/company-management/person/client/client-dto";
 import {ClientManagementService} from "../../../../service/company-management/client/client-management.service";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-client-information',
+  selector: '[app-client-information]',
   templateUrl: './client-information.component.html',
   styleUrls: ['./client-information.component.css']
 })
-export class ClientInformationComponent implements OnInit {
+
+export class ClientInformationComponent implements OnInit, OnChanges {
+
+  @Input() clientId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() clientHasBeenUpdated = new EventEmitter<boolean>();
 
   client?: ClientDTO;
 
-  constructor(private clientManagementService: ClientManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private clientManagementService: ClientManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const clientId: string | undefined = param["clientId"];
-        if (clientId != null) {
-          this.chargeClient(clientId);
-        }
-      }
-    })
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.clientId != null) {
+      this.chargeClient(this.clientId);
+    }
   }
 
   private chargeClient(clientId: string) {
@@ -37,7 +39,7 @@ export class ClientInformationComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back()
+    this.wantGoBack.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

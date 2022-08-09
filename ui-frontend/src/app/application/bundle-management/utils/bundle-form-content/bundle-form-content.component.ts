@@ -4,6 +4,9 @@ import {WrappedProductDTO} from "../../../../../data/company-management/saleable
 import {WrappedPrestationDTO} from "../../../../../data/company-management/saleable/prestation/wrapped-prestation-dto";
 import {ProductManagementService} from "../../../../../service/company-management/saleable/product-management.service";
 import {PrestationManagementService} from "../../../../../service/company-management/saleable/prestation-management.service";
+import {PaneInfoTransformer} from "../../../../library/informative/info-pane/info-pane.component";
+import {WrappedSaleableDTO} from "../../../../../data/company-management/saleable/wrapped-saleable-dto";
+import {SaleablePaneInfoTransformer} from "../../../utils/saleable-pane-info-transformer";
 
 @Component({
   selector: '[app-bundle-form-content]',
@@ -22,6 +25,8 @@ export class BundleFormContentComponent implements OnInit, OnChanges {
   allPrestations = new Map<string, WrappedPrestationDTO>();
   availablePrestations: WrappedPrestationDTO[] = [];
   prestationTotalPrice: number = 0;
+
+  saleablePaneInfoTransformer: PaneInfoTransformer<WrappedSaleableDTO> = new SaleablePaneInfoTransformer();
 
   constructor(private productManagementService: ProductManagementService,
               private prestationManagementService: PrestationManagementService) {

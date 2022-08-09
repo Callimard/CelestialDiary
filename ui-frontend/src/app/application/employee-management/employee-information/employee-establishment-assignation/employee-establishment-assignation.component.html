@@ -1,8 +1,8 @@
 <form [formGroup]="establishmentSelectionForm" (ngSubmit)="onUpdateEmployeeEstablishment()">
   <h3>{{ 'employee.update.establishment.title' | translate }}</h3>
   <p>{{ 'employee.update.establishment.description' | translate }}</p>
-  <ul class="form-group">
-    <li class="form-control"
+  <ul class="form-group establishment-list">
+    <li
         app-check-box-details-summary
         *ngFor="let establishment of establishmentSelectionForm.allEstablishment"
         [checkBoxFormGroup]="establishmentSelectionForm"

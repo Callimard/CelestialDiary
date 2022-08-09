@@ -1,24 +1,43 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RoleManagementService} from "../../../../service/company-management/employee/role/role-management.service";
 import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../library/informative/info-pane/info-pane.component";
+
+export class RolePaneInfoTransformer implements PaneInfoTransformer<RoleDTO> {
+  transform(role: RoleDTO): PaneInfoWithId {
+    return {
+      id: role.id,
+      title: role.name,
+      subTitle: role.description,
+    };
+  }
+}
 
 @Component({
-  selector: 'app-role-selection',
+  selector: '[app-role-selection]',
   templateUrl: './role-selection.component.html',
   styleUrls: ['./role-selection.component.css']
 })
 export class RoleSelectionComponent implements OnInit {
 
+  @Output() roleSelected = new EventEmitter<string>();
+  @Output() wantCreateRole = new EventEmitter<boolean>();
+
   allRoles: RoleDTO[] = [];
 
-  constructor(private roleManagementService: RoleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+  rolePaneInfoTransformer: PaneInfoTransformer<RoleDTO> = new RolePaneInfoTransformer();
+
+  constructor(private roleManagementService: RoleManagementService,
               private privilegeService: PrivilegeService) {
     // Nothing
   }
 
   ngOnInit(): void {
+    this.chargeRoles();
+  }
+
+  public reload() {
     this.chargeRoles();
   }
 
@@ -34,17 +53,13 @@ export class RoleSelectionComponent implements OnInit {
     })
   }
 
-  navigateToRoleInformation(role: any) {
-    const selectedRole: RoleDTO = role as RoleDTO;
-    this.router.navigate([{outlets: {right: ['information', selectedRole.id]}}], {
-      relativeTo: this.activatedRoute
-    });
+  selectRole(role: any) {
+    const selectedRole: PaneInfoWithId = role as PaneInfoWithId;
+    this.roleSelected.emit(selectedRole.id);
   }
 
-  navigateToCreateRole() {
-    this.router.navigate([{outlets: {right: ['create']}}], {
-      relativeTo: this.activatedRoute
-    });
+  createRole() {
+    this.wantCreateRole.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

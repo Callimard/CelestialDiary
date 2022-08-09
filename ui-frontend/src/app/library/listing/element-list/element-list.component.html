@@ -1,0 +1,22 @@
+<ul class="element-list">
+  <li class="element-list-padding" [style.height]="listPaddingHeight"></li>
+  <li
+    class="basic-clickable element-ticket-information" [style.height]="itemHeight"
+    *ngFor="let element of allElements">
+    <ng-container
+      *ngTemplateOutlet="
+        itemTemplate || defaultItem;
+        context: {$implicit: paneInfoTransformer != null ? paneInfoTransformer.transform(element) : element}
+      ">
+    </ng-container>
+  </li>
+</ul>
+
+<ng-template #defaultItem let-element>
+  <div app-info-pane
+       class="item"
+       [displayLeft]="false"
+       [info]="element"
+       (click)="elementSelected.emit(element)">
+  </div>
+</ng-template>

@@ -1,0 +1,22 @@
+.element-list {
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.element-list {
+  list-style-type: none;
+}
+
+.element-list li:nth-child(n+3) {
+  border-top: 1px solid var(--place-holder-text-color-light);
+}
+
+.element-ticket-information {
+}
+
+.item {
+  padding: 10px;
+  height: 100%;
+}

@@ -5,6 +5,7 @@
        (goBack)="goBack()"></div>
   <div app-establishment-form-updater class="floating-card need-top-space"
        [establishment]="establishment"
-       [allDisabled]="!privilegeManagement.hasEstablishmentUpdate()">
+       [allDisabled]="!privilegeManagement.hasEstablishmentUpdate()"
+       (hasBeenUpdated)="establishmentHasBeenUpdated.emit($event)">
   </div>
 </div>

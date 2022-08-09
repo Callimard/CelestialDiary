@@ -8,13 +8,13 @@
 :root {
   --title-logo-size: 115px;
 
-  --primary-h: 179;
-  --primary-s: 74%;
+  --primary-h: 237;
+  --primary-s: 79%;
   --primary-l: 45%;
 
   --primary: hsl(var(--primary-h), var(--primary-s), var(--primary-l));
 
-  --percent-dark: 15%;
+  --percent-dark: 9%;
   --primary-dark: hsl(var(--primary-h), var(--primary-s), calc(var(--primary-l) - var(--percent-dark)));
 
   --percent-light: 20%;
@@ -31,18 +31,15 @@
   --secondary-text-color: #000000;
   --place-holder-text-color: #c9c7c7;
   --place-holder-text-color-light: #e5e5e5;
+  --place-holder-text-color-light-light: #f5f5f5;
 
   --basic-clickable-color: #fff;
   --basic-clickable-hover-color: #fafafa;
   --basic-clickable-active-color: #eaeaea;
 
-  --valid-button-background-color: var(--primary-light);
+  --valid-button-background-color: var(--primary);
   --valid-button-hover-background-color: var(--primary-light-light);
-  --valid-button-active-background-color: var(--primary);
-
-  --danger-button-background-color: var(--danger-color);
-  --danger-button-hover-background-color: var(--primary-light-light);
-  --danger-button-active-background-color: var(--primary);
+  --valid-button-active-background-color: var(--primary-light);
 
   --company-management-search-bar-height: 60px;
   --company-management-container-transition: 0.5s;

@@ -1,33 +1,34 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EmployeeDTO} from "../../../../data/company-management/person/employee/employee-dto";
-import {Location} from "@angular/common";
-import {ActivatedRoute} from "@angular/router";
 import {EmployeeManagementService} from "../../../../service/company-management/employee/employee-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 
 @Component({
-  selector: 'app-employee-information',
+  selector: '[app-employee-information]',
   templateUrl: './employee-information.component.html',
   styleUrls: ['./employee-information.component.css']
 })
-export class EmployeeInformationComponent implements OnInit {
+export class EmployeeInformationComponent implements OnInit, OnChanges {
+
+  @Input() employeeId?: string;
+
+  @Output() wantGoBack = new EventEmitter<boolean>();
+  @Output() employeeHasBeenUpdated = new EventEmitter<boolean>();
 
   employee?: EmployeeDTO;
 
-  constructor(private employeeManagementService: EmployeeManagementService, private location: Location, private activatedRoute: ActivatedRoute,
+  constructor(private employeeManagementService: EmployeeManagementService,
               private privilegeService: PrivilegeService) {
-    this.activatedRoute.params.subscribe({
-      next: (param) => {
-        const employeeId: string | undefined = param["employeeId"];
-        if (employeeId != null) {
-          this.chargeEmployee(employeeId);
-        }
-      }
-    })
+    // Nothing
   }
 
   ngOnInit(): void {
     // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    if (this.employeeId != null)
+      this.chargeEmployee(this.employeeId);
   }
 
   private chargeEmployee(employeeId: string) {
@@ -36,8 +37,9 @@ export class EmployeeInformationComponent implements OnInit {
     })
   }
 
-  goBack() {
-    this.location.back()
+  goBack(success: boolean) {
+    if (success)
+      this.wantGoBack.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

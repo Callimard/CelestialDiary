@@ -1,11 +1,24 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {ClientDTO} from "../../../../data/company-management/person/client/client-dto";
 import {ClientManagementService} from "../../../../service/company-management/client/client-management.service";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {PaneInfoTransformer, PaneInfoWithId} from "../../../library/informative/info-pane/info-pane.component";
+
+export class ClientPaneInfoTransformer implements PaneInfoTransformer<ClientDTO> {
+
+  transform(client: ClientDTO): PaneInfoWithId {
+    return {
+      id: client.id,
+      title: client.firstName + ' ' + client.lastName,
+      subTitle: client.email,
+      img: client.photo
+    };
+  }
+
+}
 
 @Component({
-  selector: 'app-client-selection',
+  selector: '[app-client-selection]',
   templateUrl: './client-selection.component.html',
   styleUrls: ['./client-selection.component.css']
 })
@@ -13,12 +26,21 @@ export class ClientSelectionComponent implements OnInit {
 
   allClients: ClientDTO[] = [];
 
-  constructor(private clientManagementService: ClientManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+  clientPaneInfoTransformer: PaneInfoTransformer<ClientDTO> = new ClientPaneInfoTransformer();
+
+  @Output() clientSelected = new EventEmitter<string>();
+  @Output() wantCreateClient = new EventEmitter<boolean>();
+
+  constructor(private clientManagementService: ClientManagementService,
               private privilegeService: PrivilegeService) {
     // Nothing
   }
 
   ngOnInit(): void {
+    this.chargeClients();
+  }
+
+  public reload() {
     this.chargeClients();
   }
 
@@ -34,17 +56,13 @@ export class ClientSelectionComponent implements OnInit {
     })
   }
 
-  navigateToClientInformation(product: any) {
-    const selectedClient: ClientDTO = product as ClientDTO;
-    this.router.navigate([{outlets: {right: ['information', selectedClient.id]}}], {
-      relativeTo: this.activatedRoute
-    });
+  selectClient(client: any) {
+    const selectedClient: PaneInfoWithId = client as PaneInfoWithId;
+    this.clientSelected.emit(selectedClient.id);
   }
 
-  navigateToCreateClient() {
-    this.router.navigate([{outlets: {right: ['create']}}], {
-      relativeTo: this.activatedRoute
-    });
+  createClient() {
+    this.wantCreateClient.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

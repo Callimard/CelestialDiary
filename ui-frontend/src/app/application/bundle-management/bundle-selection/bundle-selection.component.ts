@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {BundleManagementService} from "../../../../service/company-management/saleable/bundle-management.service";
 import {WrappedBundleDTO} from "../../../../data/company-management/saleable/bundle/wrapped-bundle-dto";
-import {WrappedProductDTO} from "../../../../data/company-management/saleable/product/wrapped-product-dto";
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
+import {SaleablePaneInfoTransformer} from "../../utils/saleable-pane-info-transformer";
+import {PaneInfoWithId} from "../../../library/informative/info-pane/info-pane.component";
 
 @Component({
-  selector: 'app-bundle-selection',
+  selector: '[app-bundle-selection]',
   templateUrl: './bundle-selection.component.html',
   styleUrls: ['./bundle-selection.component.css']
 })
@@ -14,12 +14,21 @@ export class BundleSelectionComponent implements OnInit {
 
   allBundles: WrappedBundleDTO[] = []
 
-  constructor(private bundleManagementService: BundleManagementService, private router: Router, private activatedRoute: ActivatedRoute,
+  saleablePaneInfoTransformer: SaleablePaneInfoTransformer = new SaleablePaneInfoTransformer();
+
+  @Output() bundleSelected = new EventEmitter<string>();
+  @Output() wantCreateBundle = new EventEmitter<boolean>();
+
+  constructor(private bundleManagementService: BundleManagementService,
               private privilegeService: PrivilegeService) {
     // Nothing
   }
 
   ngOnInit(): void {
+    this.chargeBundles();
+  }
+
+  public reload() {
     this.chargeBundles();
   }
 
@@ -35,17 +44,13 @@ export class BundleSelectionComponent implements OnInit {
     })
   }
 
-  navigateToBundleInformation(bundle: any) {
-    const selectedBundle: WrappedProductDTO = bundle as WrappedBundleDTO;
-    this.router.navigate([{outlets: {right: ['information', selectedBundle.id]}}], {
-      relativeTo: this.activatedRoute
-    });
+  selectBundle(bundle: any) {
+    const selectedBundle: PaneInfoWithId = bundle as PaneInfoWithId;
+    this.bundleSelected.emit(selectedBundle.id);
   }
 
-  navigateToCreateBundle() {
-    this.router.navigate([{outlets: {right: ['create']}}], {
-      relativeTo: this.activatedRoute
-    });
+  createBundle() {
+    this.wantCreateBundle.emit(true);
   }
 
   get privilegeManagement(): PrivilegeService {

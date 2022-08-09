@@ -13,7 +13,7 @@ public class EquipmentManagementScope extends Scope {
     // Constructors.
 
     public EquipmentManagementScope() {
-        super("privilege.equipment.title", "privilege.equipment.description");
+        super("privilege.company.equipment.title", "privilege.company.equipment.description");
     }
 
     // Methods.

@@ -1,0 +1,22 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-product-selection #productSelection
+         (productSelected)="container.displayInformation($event)"
+         (wantCreateProduct)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-product-information
+         [productId]="container.elementId"
+         (wantGoBack)="container.resetInitialPos()"
+         (productHasBeenUpdated)="productSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-product-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (productHasBeenCreated)="productSelection.reload()">
+    </div>
+  </ng-template>
+</div>
+

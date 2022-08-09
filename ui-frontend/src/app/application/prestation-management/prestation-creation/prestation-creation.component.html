@@ -3,6 +3,6 @@
        title="{{ 'prestation.creation.prestation-creation' | translate}}"
        (goBack)="goBack()"></div>
   <div app-prestation-form-creator class="floating-card prestation-creation-form need-top-space"
-       (prestationCreated)="goBack()">
+       (prestationCreated)="goBack(); prestationHasBeenCreated.emit(true)">
   </div>
 </div>
