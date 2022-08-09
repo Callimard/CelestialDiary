@@ -22,7 +22,7 @@
 }
 
 .ticket-sub-title {
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
 
   overflow: hidden;
   text-overflow: ellipsis;

@@ -10,6 +10,8 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
+    "company-management": "Gestion de l'entreprise",
+    "establishments-management": "Gestions des établissements",
     "establishments": "Établissements",
     "employees": "Employés",
     "clients": "Clients",
@@ -235,6 +237,7 @@
   "privilege": {
     "title": "Privilège",
     "company": {
+      "management-title": "Gestion de l'entreprise",
       "title": "Droits de gestion d'entreprises",
       "description": "Ces droits permettent de gérer l'entreprise dans sa globalité.",
       "all": "Admin",
@@ -263,7 +266,7 @@
         "all": "Admin",
         "all-description": "Tous les droits de gestions des clients",
         "read": "Lire",
-        "read-description": "Voir la liste de tous les clients et voir leurs informations",
+        "read-description": "Voir la liste de tout les clients et voir leurs informations",
         "create": "Créer",
         "create-description": "Créer un client",
         "update": "MàJ",
@@ -275,7 +278,7 @@
         "all": "Admin",
         "all-description": "Tous les droits de gestion des établissement",
         "read": "Lire",
-        "read-description": "Voir la liste de tous les établissements et voir leurs informations",
+        "read-description": "Voir la liste de tout les établissements et voir leurs informations",
         "create": "Créer",
         "create-description": "Créer un établissement",
         "update": "MàJ",
@@ -289,7 +292,7 @@
         "all": "Admin",
         "all-description": "Tous les droits de gestion des employées",
         "read": "Lire",
-        "read-description": "Voir la liste de tous les vendables et voir leurs informations",
+        "read-description": "Voir la liste de tout les vendables et voir leurs informations",
         "create": "Créer",
         "create-description": "Créer un vendable",
         "update": "MàJ",
@@ -303,7 +306,7 @@
         "all": "Admin",
         "all-description": "Tous les droits de gestions des rôles",
         "read": "Lire",
-        "read-description": "Voir la liste de tous les rôles et voir leurs informations",
+        "read-description": "Voir la liste de tout les rôles et voir leurs informations",
         "create": "Créer",
         "create-description": "Créer un rôle",
         "update": "MàJ",
@@ -317,13 +320,34 @@
         "all": "Admin",
         "all-description": "Tous les droits de gestions des équipements",
         "read": "Lire",
-        "read-description": "Voir la liste de tous les équipements et voir leurs informations",
+        "read-description": "Voir la liste de tout les équipements et voir leurs informations",
         "create": "Créer",
         "create-description": "Créer un équipement",
         "update": "MàJ",
         "update-description": "Mettre à jour les informations d'un équipement",
         "delete": "Supprimer",
         "delete-description": "Supprimer un équipement"
+      }
+    },
+    "establishment": {
+      "management-title": "Gestion interne d'un établissement",
+      "title": "Droits de management interne d'un établissement",
+      "description": "Ces droits sont spécifiques à un établissement et spécifique à la gestion interne d'un établissement",
+      "all": "Admin",
+      "all-description": "Tous les droits de gestion interne d'un établissement",
+      "room": {
+        "title": "Droits de gestion des salles",
+        "description": "",
+        "all": "Admin",
+        "all-description": "Tous les droits de gestions des salles",
+        "read": "Lire",
+        "read-description": "Voir la liste de toutes les salles et voir leurs informations",
+        "create": "Créer",
+        "create-description": "Créer une salles",
+        "update": "MàJ",
+        "update-description": "Mettre à jour les informations d'une salles",
+        "delete": "Supprimer",
+        "delete-description": "Supprimer une salles"
       }
     }
   },
@@ -340,6 +364,7 @@
     "add": "Ajouter des heures",
     "remove": "Retirer des heures"
   },
+  "all-establishments-title": "Tous les établissements",
   "description": "Description",
   "create": "Créer",
   "update": "Mettre à jour",

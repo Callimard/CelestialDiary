@@ -6,10 +6,10 @@ import org.bandrsoftwares.celestialdiary.company_management_service.service.Esta
 import org.bandrsoftwares.celestialdiary.model.dto.establishment.EstablishmentDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.establishment.WrappedEstablishmentDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.ActivateEstablishmentPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.CreateEstablishmentPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.ReadEstablishmentPrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.UpdateEstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.ActivateCompanyEstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.CreateCompanyEstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.ReadCompanyEstablishmentPrivilege;
+import org.bandrsoftwares.celestialdiary.security.privilege.company.establishment.UpdateCompanyEstablishmentPrivilege;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,18 +28,20 @@ public class EstablishmentManagementController {
 
     // Methods.
 
-    @ReadEstablishmentPrivilege
     @GetMapping
-    public List<WrappedEstablishmentDTO> getEstablishments(@PathVariable(name = "idCompany") String idCompany, @RequestParam(name = "filter",
-            required = false) String filter) {
-        if (filter == null) {
-            return establishmentManagementService.allRegisteredEstablishment(idCompany).stream().map(WrappedEstablishmentDTO::new).toList();
-        } else {
+    public List<WrappedEstablishmentDTO> getEstablishments(@PathVariable(name = "idCompany") String idCompany,
+                                                           @RequestParam(name = "filter", required = false) String filter,
+                                                           @RequestParam(name = "ids", required = false) String ids) {
+        if (filter != null) {
             return establishmentManagementService.searchEstablishment(idCompany, filter).stream().map(WrappedEstablishmentDTO::new).toList();
+        } else if (ids != null) {
+            return establishmentManagementService.searchEstablishment(idCompany, ids.split(";")).stream().map(WrappedEstablishmentDTO::new).toList();
+        } else {
+            return establishmentManagementService.allRegisteredEstablishment(idCompany).stream().map(WrappedEstablishmentDTO::new).toList();
         }
     }
 
-    @CreateEstablishmentPrivilege
+    @CreateCompanyEstablishmentPrivilege
     @PostMapping
     public WrappedEstablishmentDTO createEstablishment(@PathVariable(name = "idCompany") String idCompany, @RequestBody
             EstablishmentManagementService.EstablishmentCreationInformation information) {
@@ -47,14 +49,14 @@ public class EstablishmentManagementController {
         return new WrappedEstablishmentDTO(establishment);
     }
 
-    @ReadEstablishmentPrivilege
+    @ReadCompanyEstablishmentPrivilege
     @GetMapping(SPECIFIC_ESTABLISHMENT)
     public EstablishmentDTO getSpecificEstablishment(@PathVariable(name = "idCompany") String idCompany,
                                                      @PathVariable(name = "idEstablishment") String idEstablishment) {
         return new EstablishmentDTO(establishmentManagementService.getSpecificEstablishment(idCompany, idEstablishment));
     }
 
-    @UpdateEstablishmentPrivilege
+    @UpdateCompanyEstablishmentPrivilege
     @PutMapping(SPECIFIC_ESTABLISHMENT)
     public WrappedEstablishmentDTO updateEstablishment(@PathVariable(name = "idCompany") String idCompany,
                                                        @PathVariable(name = "idEstablishment") String idEstablishment,
@@ -63,14 +65,14 @@ public class EstablishmentManagementController {
         return new WrappedEstablishmentDTO(establishment);
     }
 
-    @ActivateEstablishmentPrivilege
+    @ActivateCompanyEstablishmentPrivilege
     @PutMapping(SPECIFIC_ESTABLISHMENT_ACTIVATION)
     public boolean activateEstablishment(@PathVariable(name = "idCompany") String idCompany,
                                          @PathVariable(name = "idEstablishment") String idEstablishment) {
         return establishmentManagementService.activateEstablishment(idCompany, idEstablishment);
     }
 
-    @ActivateEstablishmentPrivilege
+    @ActivateCompanyEstablishmentPrivilege
     @DeleteMapping(SPECIFIC_ESTABLISHMENT_ACTIVATION)
     public boolean deactivateEstablishment(@PathVariable(name = "idCompany") String idCompany,
                                            @PathVariable(name = "idEstablishment") String idEstablishment) {

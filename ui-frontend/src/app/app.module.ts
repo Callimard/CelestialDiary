@@ -20,7 +20,6 @@ import {EstablishmentFormCreatorComponent} from './application/establishment-man
 import {EstablishmentFormUpdaterComponent} from './application/establishment-management/establishment-information/establishment-information-updater/establishment-form-updater.component';
 import {TimeIntervalFormComponent} from './library/form/time-interval-form/time-interval-form.component';
 import {ProductSelectionComponent} from './application/product-management/product-selection/product-selection.component';
-import {TwoSideComponent} from './library/container/two-side/two-side.component';
 import {ProductCreationComponent} from './application/product-management/product-creation/product-creation.component';
 import {ProductInformationComponent} from './application/product-management/product-information/product-information.component';
 import {ElementListComponent} from './library/listing/element-list/element-list.component';
@@ -92,6 +91,12 @@ import {ProductContainerComponent} from './application/product-management/produc
 import {PrestationContainerComponent} from './application/prestation-management/prestation-container/prestation-container.component';
 import {RoleContainerComponent} from './application/role-management/role-container/role-container.component';
 import { PrivilegeTableComponent } from './application/role-management/utils/privilege-table/privilege-table.component';
+import { SideBarComponent } from './library/side-bar/side-bar.component';
+import { NavItemComponent } from './library/side-bar/nav-item/nav-item.component';
+import { CompanyManagementNavigationComponent } from './library/side-bar/company-management-navigation/company-management-navigation.component';
+import { NavigationZoneComponent } from './library/side-bar/navigation-zone/navigation-zone.component';
+import { DetailsSummaryComponent } from './library/container/details-summary/details-summary.component';
+import { EstablishmentManagementNavigationComponent } from './library/side-bar/establishment-management-navigation/establishment-management-navigation.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -142,7 +147,6 @@ const appRoutes: Routes = [
     EstablishmentFormUpdaterComponent,
     TimeIntervalFormComponent,
     ProductSelectionComponent,
-    TwoSideComponent,
     ProductCreationComponent,
     ProductInformationComponent,
     ElementListComponent,
@@ -212,7 +216,13 @@ const appRoutes: Routes = [
     ProductContainerComponent,
     PrestationContainerComponent,
     RoleContainerComponent,
-    PrivilegeTableComponent
+    PrivilegeTableComponent,
+    SideBarComponent,
+    NavItemComponent,
+    CompanyManagementNavigationComponent,
+    NavigationZoneComponent,
+    DetailsSummaryComponent,
+    EstablishmentManagementNavigationComponent
   ],
   imports: [
     BrowserModule,

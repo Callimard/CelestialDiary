@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from "../../service/authentication/authentication.service";
 import {JwtAccount} from "../../service/authentication/jwt-account";
 import {environment} from "../../environments/environment";
-import {PrivilegeService} from "../../service/authentication/privilege.service";
 
 @Component({
   selector: '[app-application]',
@@ -12,17 +11,16 @@ import {PrivilegeService} from "../../service/authentication/privilege.service";
 export class ApplicationComponent implements OnInit {
 
   navigationBarClosed = window.innerWidth <= environment.bigScreenWidth;
+  selectedNavItem: string = "";
 
   jwtAccount: JwtAccount;
 
-  selectedNavItem: string = "";
-
-  constructor(private authenticationService: AuthenticationService, private privilegeService: PrivilegeService) {
+  constructor() {
     this.jwtAccount = AuthenticationService.getJwtAccount();
   }
 
   ngOnInit(): void {
-    this.authenticationService.checkLogin();
+    // Nothing
   }
 
   closeNavigationBar() {
@@ -33,11 +31,7 @@ export class ApplicationComponent implements OnInit {
     this.navigationBarClosed = false;
   }
 
-  logoutClick() {
-    this.authenticationService.employeeLogout();
-  }
-
-  navClick(navItemTitle: string) {
+  onNavClick(navItemTitle: string) {
     if (ApplicationComponent.navigationBarMustClosed() && !this.navigationBarClosed) {
       this.navigationBarClosed = true;
     }
@@ -48,15 +42,12 @@ export class ApplicationComponent implements OnInit {
     return window.innerWidth <= environment.bigScreenWidth;
   }
 
+
   isLittleScreen(): boolean {
     return window.innerWidth <= environment.bigScreenWidth;
   }
 
   isBigScreen(): boolean {
     return !this.isLittleScreen();
-  }
-
-  get privilegeManagement(): PrivilegeService {
-    return this.privilegeService;
   }
 }

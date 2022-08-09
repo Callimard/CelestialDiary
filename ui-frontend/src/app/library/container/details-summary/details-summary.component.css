@@ -1,0 +1,66 @@
+details {
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0, rgba(27, 31, 35, 0.15) 0 0 0 1px;
+
+  overflow: hidden;
+}
+
+.details-content {
+  padding: 0.5em;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0.5em;
+
+  outline: none;
+  list-style: none;
+  background: var(--place-holder-text-color-2);
+
+  cursor: pointer;
+}
+
+details > summary::after, details[open] > summary::after {
+  flex: 0 1 50px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 35px;
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+details > summary::after {
+  content: "+";
+}
+
+details[open] > summary::after {
+  content: "-";
+}
+
+details[open] summary ~ * {
+  animation: sweep .5s forwards;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-left: 10%
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0
+  }
+}

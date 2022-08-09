@@ -5,6 +5,7 @@ import {RoleManagementService} from "../../../../../service/company-management/e
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 import {RoleFormGroup} from "../../utils/role-form-group";
 import {PrivilegeManagementService} from "../../../../../service/security/privilege/privilege-management.service";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 
 @Component({
   selector: '[app-role-form-updater]',
@@ -22,7 +23,9 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
 
   roleUpdateForm!: RoleFormGroup;
 
-  constructor(private privilegeManagementService: PrivilegeManagementService, private roleManagementService: RoleManagementService, private privilegeService: PrivilegeService) {
+  constructor(private privilegeManagementService: PrivilegeManagementService,
+              private establishmentManagementService: EstablishmentManagementService,
+              private roleManagementService: RoleManagementService, private privilegeService: PrivilegeService) {
     // Nothing
   }
 
@@ -35,19 +38,11 @@ export class RoleFormUpdaterComponent implements OnInit, OnChanges {
   }
 
   private initRoleUpdateForm() {
-    this.privilegeManagementService.companyManagementScope().then((companyManagementScope) => {
-      this.roleUpdateForm = new RoleFormGroup(companyManagementScope, false, this.role);
-    });
+    this.roleUpdateForm = new RoleFormGroup(this.privilegeManagementService, this.establishmentManagementService, false, this.role);
   }
 
   onRoleUpdate() {
-    const form = this.roleUpdateForm.value;
-    let companyManagementPrivilegeIdentifiers: string[] = this.roleUpdateForm.companyManagementScopeFormGroup.getSelectedPrivileges();
-    let roleUpdates: RoleUpdatedInformation = {
-      name: form.name,
-      description: form.description,
-      companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
-    }
+    let roleUpdates: RoleUpdatedInformation = this.roleUpdateForm.extractRoleInformation() as RoleUpdatedInformation
 
     this.roleManagementService.updateRole(this.role.id, roleUpdates).then((roleUpdated) => {
       this.role = roleUpdated;

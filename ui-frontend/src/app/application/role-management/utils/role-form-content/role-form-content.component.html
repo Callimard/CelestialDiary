@@ -15,15 +15,55 @@
        [inputType]="'text'"
        placeHolder="{{ 'role.description' | translate}}">
   </div>
-  <div class="form-group" formGroupName="companyManagementScope">
-    <div app-privilege-table
-         [scopeForm]="roleFormGroup.companyManagementScopeFormGroup">
-    </div>
-    <div class="form-group"
-         *ngFor="let scopeChildForm of roleFormGroup.companyManagementScopeFormGroup.scopeChildren">
+  <div app-details-summary class="company-management-privileges-content need-top-space">
+    <ng-template #summary>
+      <h2>{{ 'privilege.company.management-title' | translate }}</h2>
+    </ng-template>
+    <ng-template #details
+                 *ngIf="roleFormGroup.companyManagementScopeFormGroup != null">
       <div app-privilege-table
-           [scopeForm]="scopeChildForm">
+           class="form-group"
+           [scopeForm]="roleFormGroup.companyManagementScopeFormGroup">
       </div>
-    </div>
+      <ul>
+        <li class="form-group"
+            *ngFor="let scopeChildForm of roleFormGroup.companyManagementScopeFormGroup.scopeChildren">
+          <div app-privilege-table
+               [scopeForm]="scopeChildForm">
+          </div>
+        </li>
+      </ul>
+    </ng-template>
+  </div>
+  <div app-details-summary class="intern-establishment-management-privileges-content need-top-space">
+    <ng-template #summary>
+      <h2>{{ 'privilege.establishment.management-title' | translate }}</h2>
+    </ng-template>
+    <ng-template #details>
+      <div>
+        <h3>{{ 'all-establishments-title' | translate }}</h3>
+        <div app-details-summary
+             class="need-top-space"
+             *ngFor="let establishmentId of roleFormGroup.allEstablishmentIds">
+          <ng-template #summary>
+            <h4>{{roleFormGroup.getEstablishmentRoleForm(establishmentId).establishment.name}}</h4>
+          </ng-template>
+          <ng-template #details>
+            <div app-privilege-table
+                 class="form-group"
+                 [scopeForm]="roleFormGroup.getEstablishmentRoleForm(establishmentId)">
+            </div>
+            <ul>
+              <li class="form-group"
+                  *ngFor="let scopeChildForm of roleFormGroup.getEstablishmentRoleForm(establishmentId).scopeChildren">
+                <div app-privilege-table
+                     [scopeForm]="scopeChildForm">
+                </div>
+              </li>
+            </ul>
+          </ng-template>
+        </div>
+      </div>
+    </ng-template>
   </div>
 </div>

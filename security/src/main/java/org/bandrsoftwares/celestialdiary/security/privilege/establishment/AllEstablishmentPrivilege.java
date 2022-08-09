@@ -1,4 +1,4 @@
-package org.bandrsoftwares.celestialdiary.security.privilege.company.establishment;
+package org.bandrsoftwares.celestialdiary.security.privilege.establishment;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,6 +9,7 @@ import java.lang.annotation.RetentionPolicy;
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAnyAuthority('company:' + #idCompany + ':establishment:activate', 'company:' + #idCompany + ':establishment:all', 'company:' + #idCompany + ':all')")
-public @interface ActivateEstablishmentPrivilege {
+@PreAuthorize("hasAnyAuthority('company:' + #idCompany + ':establishment:' + #idEstablishment + ':all'," +
+        "'company:' + #idCompany + ':all')")
+public @interface AllEstablishmentPrivilege {
 }

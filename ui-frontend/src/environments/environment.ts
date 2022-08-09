@@ -44,6 +44,7 @@ export const backend = {
   apiV1Url: "/api/v1",
   privilegesUrl: "/privileges",
   company: "/company",
+  establishment: "/establishment",
   employeeLogin: "/authentication/employee/token",
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",

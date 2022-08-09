@@ -9,6 +9,6 @@ import java.lang.annotation.RetentionPolicy;
 @SuppressWarnings({"SpringElInspection", "ELValidationInJSP"})
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAnyAuthority('company:' + #idCompany + ':establishment:update', 'company:' + #idCompany + ':establishment:all', 'company:' + #idCompany + ':all')")
-public @interface UpdateEstablishmentPrivilege {
+@PreAuthorize("hasAnyAuthority('company:' + #idCompany + ':establishment:read', 'company:' + #idCompany + ':establishment:all', 'company:' + #idCompany + ':all')")
+public @interface ReadCompanyEstablishmentPrivilege {
 }

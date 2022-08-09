@@ -31,6 +31,7 @@ public interface EstablishmentManagementService {
      */
     List<Establishment> searchEstablishment(@CompanyId String companyId, String filter);
 
+    List<Establishment> searchEstablishment(@CompanyId String companyId, String[] ids);
 
     /**
      * @param companyId       the company id

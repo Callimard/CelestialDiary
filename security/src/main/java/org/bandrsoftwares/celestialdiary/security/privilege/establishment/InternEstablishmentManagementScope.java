@@ -3,17 +3,18 @@ package org.bandrsoftwares.celestialdiary.security.privilege.establishment;
 import com.google.common.collect.Lists;
 import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 import org.bandrsoftwares.celestialdiary.security.privilege.Scope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.room.RoomManagementScope;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class EstablishmentManagementScope extends Scope {
+public class InternEstablishmentManagementScope extends Scope {
 
     // Constructors.
 
-    public EstablishmentManagementScope() {
+    public InternEstablishmentManagementScope() {
         super("privilege.establishment.title", "privilege.establishment.description",
-              Lists.newArrayList());
+              Lists.newArrayList(new RoomManagementScope()));
     }
 
     // Methods.
@@ -41,7 +42,8 @@ public class EstablishmentManagementScope extends Scope {
     public EstablishmentScopePrivilege scopePrivilegeOf(String identifier) {
         return (EstablishmentScopePrivilege) super.scopePrivilegeOf(identifier);
     }
-// Inner enum
+
+    // Inner enum
 
     public enum EstablishmentManagementPrivilege implements PrivilegeEnum<EstablishmentScopePrivilege> {
         ESTABLISHMENT_ALL("company:%s:establishment:%s:all", "privilege.establishment.all",

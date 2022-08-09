@@ -10,7 +10,7 @@
 }
 
 .element-list li:nth-child(n+3) {
-  border-top: 1px solid var(--place-holder-text-color-light);
+  border-top: 1px solid var(--place-holder-text-color-2);
 }
 
 .element-ticket-information {

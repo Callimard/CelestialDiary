@@ -3,6 +3,7 @@ import {PrivilegeManagementService} from "../../../../../service/security/privil
 import {RoleCreationInformation} from "../../../../../data/company-management/person/employee/role/role-creation-information";
 import {RoleManagementService} from "../../../../../service/company-management/employee/role/role-management.service";
 import {RoleFormGroup} from "../../utils/role-form-group";
+import {EstablishmentManagementService} from "../../../../../service/company-management/establishment/establishment-management.service";
 
 @Component({
   selector: '[app-role-form-creator]',
@@ -17,7 +18,9 @@ export class RoleFormCreatorComponent implements OnInit {
 
   roleCreationForm!: RoleFormGroup;
 
-  constructor(private privilegeManagementService: PrivilegeManagementService, private roleManagementService: RoleManagementService) {
+  constructor(private privilegeManagementService: PrivilegeManagementService,
+              private establishmentManagementService: EstablishmentManagementService,
+              private roleManagementService: RoleManagementService) {
     // Nothing
   }
 
@@ -26,21 +29,11 @@ export class RoleFormCreatorComponent implements OnInit {
   }
 
   private initRoleCreationForm() {
-    this.privilegeManagementService.companyManagementScope().then((companyManagementScope) => {
-      this.roleCreationForm = new RoleFormGroup(companyManagementScope, true);
-    })
+    this.roleCreationForm = new RoleFormGroup(this.privilegeManagementService, this.establishmentManagementService, true);
   }
 
   onRoleCreation() {
-    const form = this.roleCreationForm.value;
-    let companyManagementPrivilegeIdentifiers: string[] = this.roleCreationForm.companyManagementScopeFormGroup.getSelectedPrivileges();
-    let roleInformation: RoleCreationInformation = {
-      name: form.name,
-      description: form.description,
-      companyPrivilegeIdentifiers: companyManagementPrivilegeIdentifiers
-    }
-
-    console.log(roleInformation);
+    let roleInformation: RoleCreationInformation = this.roleCreationForm.extractRoleInformation() as RoleCreationInformation;
 
     this.roleManagementService.createRole(roleInformation).then(() => {
       this.roleCreated.emit(true);

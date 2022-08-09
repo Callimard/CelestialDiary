@@ -15,7 +15,7 @@
 
   font-size: var(--title-logo-size);
   font-weight: bold;
-  color: var(--primary-light);
+  color: var(--primary-light-1);
 
   top: 5%;
   left: 50%;
@@ -84,7 +84,7 @@
   position: relative;
   margin-top: 3%;
 
-  border-bottom: 2px solid var(--place-holder-text-color);
+  border-bottom: 2px solid var(--place-holder-text-color-1);
 }
 
 .login-input {
@@ -104,7 +104,7 @@
 }
 
 .login-input::placeholder {
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
   text-decoration: none;
   font-weight: bold;
   font-size: 30px;
@@ -124,7 +124,7 @@
 }
 
 .forgotten-password {
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
   font-weight: bold;
   font-size: 1.2rem;
   transition: 0.4s;

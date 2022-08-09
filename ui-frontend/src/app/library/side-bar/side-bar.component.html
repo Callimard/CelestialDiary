@@ -1,0 +1,23 @@
+<div class="side-bar-container">
+  <div class="nav-title-container">
+    <h1 class="nav-title">Celestial <span style="color: var(--triad-2-light-1)">Diary</span></h1>
+    <div class="close-nav-bar" (click)="close.emit(true)"><i class="fa-solid fa-xmark"></i></div>
+  </div>
+  <div class="side-bar-navigation">
+    <div app-establishment-management-navigation
+         (selectNavItem)="navClick($event)">
+    </div>
+    <div app-company-management-navigation
+         class="company-management-nav"
+         (selectNavItem)="navClick($event)">
+    </div>
+  </div>
+  <ul class="nav-zone nav-logout">
+    <li app-nav-item
+        class="nav-item nav-clickable"
+        (click)="logoutClick()"
+        faIconClasses="fa-solid fa-arrow-right-from-bracket"
+        text="{{ 'side-bar.logout' | translate }}">
+    </li>
+  </ul>
+</div>

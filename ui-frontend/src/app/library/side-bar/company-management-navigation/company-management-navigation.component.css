@@ -1,0 +1,7 @@
+details > summary {
+  list-style: none;
+}
+
+.company-management-list {
+  list-style-type: none;
+}

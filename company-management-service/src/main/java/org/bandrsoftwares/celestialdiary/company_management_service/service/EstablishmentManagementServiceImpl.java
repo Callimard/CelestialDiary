@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.List;
 
 @Slf4j
@@ -42,6 +43,12 @@ public class EstablishmentManagementServiceImpl implements EstablishmentManageme
     public List<Establishment> searchEstablishment(@CompanyId String companyId, String filter) {
         String regexFilter = ".*" + filter + ".*";
         return establishmentRepository.findByCompanyAndNameRegex(SearchingAspect.COMPANY_FOUND.get(), regexFilter);
+    }
+
+    @SearchCompany
+    @Override
+    public List<Establishment> searchEstablishment(@CompanyId String companyId, String[] ids) {
+        return establishmentRepository.findByCompanyAndIdIn(SearchingAspect.COMPANY_FOUND.get(), Arrays.asList(ids));
     }
 
     @SearchEstablishment

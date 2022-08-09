@@ -51,8 +51,24 @@ export class EstablishmentManagementService {
           console.error(err.error);
           reject(err);
         }
-      })
-    }))
+      });
+    }));
+  }
+
+  public searchEstablishmentWithId(ids: string[]): Promise<WrappedEstablishmentDTO[]> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    const idArray: string = ids.reduce((prev, cur) => prev + cur);
+    return new Promise<WrappedEstablishmentDTO[]>(((resolve, reject) => {
+      this.http.get<WrappedEstablishmentDTO[]>(EstablishmentManagementService.companyEstablishmentUrl(jwtAccount.companyId) + '?ids=' + idArray).subscribe({
+        next: (allEstablishments) => {
+          resolve(allEstablishments);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err.error);
+          reject(err);
+        }
+      });
+    }));
   }
 
   public getSpecificEstablishment(establishmentId: string): Promise<EstablishmentDTO> {

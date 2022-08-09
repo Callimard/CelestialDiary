@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyScopePrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.InternEstablishmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentScopePrivilege;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,7 +36,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
     private final ObjectMapper mapper;
 
     private final CompanyManagementScope companyManagementScope = new CompanyManagementScope();
-    private final EstablishmentManagementScope establishmentManagementScope = new EstablishmentManagementScope();
+    private final InternEstablishmentManagementScope internEstablishmentManagementScope = new InternEstablishmentManagementScope();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -88,7 +88,7 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
                 String establishmentId = entry.getKey();
                 for (String identifier : entry.getValue()) {
                     try {
-                        EstablishmentScopePrivilege scopePrivilege = establishmentManagementScope.scopePrivilegeOf(identifier);
+                        EstablishmentScopePrivilege scopePrivilege = internEstablishmentManagementScope.scopePrivilegeOf(identifier);
                         authorities.add(new SimpleGrantedAuthority(scopePrivilege.formatPrivilege(jwtAccount.getCompanyId(), establishmentId)));
                     } catch (IllegalArgumentException e) {
                         log.error("Unknown EstablishmentManagementPrivilege identifier", e);

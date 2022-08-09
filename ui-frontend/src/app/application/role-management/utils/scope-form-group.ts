@@ -1,7 +1,6 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {ScopeDTO} from "../../../../data/security/privilege/scope-dto";
 import {PrivilegeDTO} from "../../../../data/security/privilege/privilege-dto";
-import {RoleDTO} from "../../../../data/company-management/person/employee/role/role-dto";
 
 export class ScopeFormGroup extends FormGroup {
 
@@ -10,7 +9,7 @@ export class ScopeFormGroup extends FormGroup {
   public readonly _scopeChildren: ScopeFormGroup[] = [];
   public readonly _scopePrivileges: PrivilegeDTO[] = [];
 
-  constructor(scope: ScopeDTO, role?: RoleDTO) {
+  constructor(scope: ScopeDTO, checkedPrivileges?: PrivilegeDTO[]) {
     super({});
 
     this._scopeName = scope.name;
@@ -19,8 +18,10 @@ export class ScopeFormGroup extends FormGroup {
     this._scopePrivileges = scope.privileges;
 
     this.createPrivilegesFormControl();
-    this.createScopeFormChildren(scope, role);
-    this.mergeWithSpecifiedRole(role);
+    this.createScopeFormChildren(scope, checkedPrivileges);
+
+    if (checkedPrivileges != null)
+      this.mergeWithSpecifiedRole(checkedPrivileges);
   }
 
   private createPrivilegesFormControl() {
@@ -29,26 +30,18 @@ export class ScopeFormGroup extends FormGroup {
     }
   }
 
-  private createScopeFormChildren(scope: ScopeDTO, role: RoleDTO | undefined) {
+  private createScopeFormChildren(scope: ScopeDTO, checkedPrivileges?: PrivilegeDTO[]) {
     for (let scopeChild of scope.scopeChildren) {
-      const scopeForm = new ScopeFormGroup(scopeChild, role);
+      const scopeForm = new ScopeFormGroup(scopeChild, checkedPrivileges);
       this._scopeChildren.push(scopeForm);
       this.addControl(scope.name, scopeForm);
     }
   }
 
-  private mergeWithSpecifiedRole(role: RoleDTO | undefined) {
-    if (role != null) {
-      for (let companyPrivilege of role.companyPrivileges) {
-        if (this.get(companyPrivilege.identifierName) != null)
-          this.setControl(companyPrivilege.identifierName, new FormControl(true));
-      }
-
-      for (let establishmentRole of role.establishmentRoles) {
-        for (let establishmentPrivilege of establishmentRole.establishmentPrivileges) {
-          if (this.get(establishmentPrivilege.identifierName) != null)
-            this.setControl(establishmentPrivilege.identifierName, new FormControl(true))
-        }
+  private mergeWithSpecifiedRole(checkedPrivileges: PrivilegeDTO[]) {
+    for (let privilege of checkedPrivileges) {
+      if (this.get(privilege.identifierName) != null) {
+        this.setControl(privilege.identifierName, new FormControl(true));
       }
     }
   }

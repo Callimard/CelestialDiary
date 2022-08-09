@@ -9,5 +9,7 @@ public class ApiPrivilegeV1 {
 
     public static final String PRIVILEGES_URL = ApiV1.API_V1 + "/privileges";
 
-    public static final String COMPANY_PRIVILEGE = "/company";
+    public static final String COMPANY_PRIVILEGES = "/company";
+
+    public static final String ESTABLISHMENT_PRIVILEGES = "/establishment";
 }
