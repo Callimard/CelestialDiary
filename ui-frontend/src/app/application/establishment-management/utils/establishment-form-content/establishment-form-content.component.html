@@ -54,19 +54,23 @@
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <div class="time-intervals-containers" formArrayName="timeIntervals">
-          <div app-time-interval-form [prefix]="'exceptional-opening'" [index]="j" [timeIntervalFormGroup]="timeInterval"
+        <div class="time-intervals-containers need-top-space" formArrayName="timeIntervals">
+          <div app-time-interval-form
+               class="need-top-space"
+               [prefix]="'exceptional-opening'"
+               [index]="j"
+               [timeIntervalFormGroup]="timeInterval"
                (remove)="establishmentFormGroup.removeTimeIntervalForm(exceptionalOpening, j)"
                [disableRemoveButton]="allDisabled"
                *ngFor="let timeInterval of establishmentFormGroup.getTimeIntervalFormControls(exceptionalOpening); let j =index">
           </div>
         </div>
-        <div class="add-remove-buttons-container">
+        <div class="add-remove-buttons-container need-top-space">
           <button class="valid-button" type="button" [disabled]="allDisabled"
                   (click)="establishmentFormGroup.addTimeIntervalFormGroup(exceptionalOpening)">{{'establishment.hours.add' | translate }}</button>
         </div>
       </div>
-      <div class="add-remove-buttons-container">
+      <div class="add-remove-buttons-container need-top-space">
         <button class="valid-button" type="button" [disabled]="allDisabled"
                 (click)="establishmentFormGroup.addExceptionalOpening()">{{ 'establishment.exceptional-opening.add' |translate }}</button>
       </div>
@@ -84,19 +88,22 @@
             <i class="fa-solid fa-xmark"></i>
           </button>
         </div>
-        <div class="time-intervals-containers" formArrayName="timeIntervals">
-          <div app-time-interval-form [prefix]="'exceptional-closing'" [index]="j" [timeIntervalFormGroup]="timeInterval"
+        <div class="time-intervals-containers need-top-space" formArrayName="timeIntervals">
+          <div app-time-interval-form
+               class="need-top-space"
+               [prefix]="'exceptional-closing'"
+               [index]="j" [timeIntervalFormGroup]="timeInterval"
                (remove)="establishmentFormGroup.removeTimeIntervalForm(exceptionalClosing, j)"
                [disableRemoveButton]="allDisabled"
                *ngFor="let timeInterval of establishmentFormGroup.getTimeIntervalFormControls(exceptionalClosing); let j =index">
           </div>
         </div>
-        <div class="add-remove-buttons-container">
+        <div class="add-remove-buttons-containe need-top-space">
           <button class="valid-button" type="button" [disabled]="allDisabled"
                   (click)="establishmentFormGroup.addTimeIntervalFormGroup(exceptionalClosing)">{{'establishment.hours.add' | translate }}</button>
         </div>
       </div>
-      <div class="add-remove-buttons-container">
+      <div class="add-remove-buttons-container need-top-space">
         <button class="valid-button" type="button" [disabled]="allDisabled"
                 (click)="establishmentFormGroup.addExceptionalClosing()">{{ 'establishment.exceptional-closing.add' |translate }}</button>
       </div>
