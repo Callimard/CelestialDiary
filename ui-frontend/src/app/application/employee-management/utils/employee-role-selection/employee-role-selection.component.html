@@ -1,7 +1,9 @@
-<div app-check-box-details-summary
-     *ngFor="let role of roleFormGroup.allRoles"
-     [checkBoxFormGroup]="roleFormGroup"
-     [checkBoxControlName]="role.id"
-     [summaryLabel]="role.name"
-     [detailText]="role.description">
-</div>
+<ul class="role-list">
+  <li app-check-box-details-summary
+      *ngFor="let role of roleFormGroup.allRoles"
+      [checkBoxFormGroup]="roleFormGroup"
+      [checkBoxControlName]="role.id"
+      [summaryLabel]="role.name"
+      [detailText]="role.description">
+  </li>
+</ul>
