@@ -3,7 +3,7 @@ import {NavigationZoneComponent} from "../navigation-zone/navigation-zone.compon
 import {PrivilegeService} from "../../../../service/authentication/privilege.service";
 import {JwtAccount} from "../../../../service/authentication/jwt-account";
 import {AuthenticationService} from "../../../../service/authentication/authentication.service";
-import {WrappedEstablishmentDTO} from "../../../../data/company-management/establishment/wrapped-establishment-dto";
+import {WrappedEstablishmentDTO} from "../../../../data/model/establishment/wrapped-establishment-dto";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
 
 @Component({
@@ -27,11 +27,25 @@ export class EstablishmentManagementNavigationComponent extends NavigationZoneCo
   }
 
   chargeEstablishments() {
-    const establishmentIds: string[] = Object.keys(this.jwtAccount.establishmentPrivilegeIdentifiers);
-    if (establishmentIds.length > 0) {
-      this.establishmentManagementService.searchEstablishmentWithId(establishmentIds).then((allEstablishments) => {
+    if (this.privilegeService.hasCompanyAll()) {
+      this.establishmentManagementService.allEstablishments().then((allEstablishments) => {
         this.establishments = allEstablishments;
-      });
+      })
+    } else {
+      const allEstablishmentIds: string[] = Object.keys(this.jwtAccount.establishmentPrivilegeIdentifiers);
+      if (allEstablishmentIds.length > 0) {
+        // Jwt account also contains establishment id for which with do not have privileges however le privilege array is empty
+        let neededEstablishments: string[] = [];
+        for (let establishmentId of allEstablishmentIds) {
+          if (this.jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].length > 0) {
+            neededEstablishments.push(establishmentId);
+          }
+        }
+
+        this.establishmentManagementService.searchEstablishmentWithId(neededEstablishments).then((establishments) => {
+          this.establishments = establishments;
+        });
+      }
     }
   }
 

@@ -1,5 +1,5 @@
 <div class="nav-zone">
-  <h3>{{ 'side-bar.company-management' | translate }}</h3>
+  <h2 class="company-management-title">{{ 'side-bar.company-management.title' | translate }}</h2>
   <ul class="company-management-list need-top-space">
     <li
       app-nav-item
@@ -7,9 +7,9 @@
       *ngIf="privilegeManagement.hasSomeEstablishmentPrivileges()"
       [routerLink]="['company', 'management', 'establishments']"
       routerLinkActive="active"
-      (click)="navClick('side-bar.establishments')"
+      (click)="navClick('side-bar.company-management.establishments')"
       faIconClasses="fa-solid fa-shop"
-      text="{{ 'side-bar.establishments' | translate }}">
+      text="{{ 'side-bar.company-management.establishments' | translate }}">
 
     </li>
     <li app-nav-item
@@ -17,63 +17,63 @@
         *ngIf="privilegeManagement.hasSomeEmployeePrivileges()"
         [routerLink]="['company', 'management', 'employees']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.employees')"
+        (click)="navClick('side-bar.company-management.employees')"
         faIconClasses="fa-solid fa-person"
-        text="{{ 'side-bar.employees' | translate }}">
+        text="{{ 'side-bar.company-management.employees' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeClientPrivileges()"
         [routerLink]="['company', 'management', 'clients']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.clients')"
+        (click)="navClick('side-bar.company-management.clients')"
         faIconClasses="fa-solid fa-people-line"
-        text="{{ 'side-bar.clients' | translate }}">
+        text="{{ 'side-bar.company-management.clients' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
         [routerLink]="['company', 'management', 'products']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.products')"
+        (click)="navClick('side-bar.company-management.products')"
         faIconClasses="fa-solid fa-cubes"
-        text="{{ 'side-bar.products' | translate }}">
+        text="{{ 'side-bar.company-management.products' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
         [routerLink]="['company', 'management', 'prestations']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.prestations')"
+        (click)="navClick('side-bar.company-management.prestations')"
         faIconClasses="fa-solid fa-scissors"
-        text="{{ 'side-bar.prestations' | translate }}">
+        text="{{ 'side-bar.company-management.prestations' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeSaleablePrivileges()"
         [routerLink]="['company', 'management', 'bundles']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.bundles')"
+        (click)="navClick('side-bar.company-management.bundles')"
         faIconClasses="fa-solid fa-gift"
-        text="{{ 'side-bar.bundles' | translate }}">
+        text="{{ 'side-bar.company-management.bundles' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeRolePrivileges()"
         [routerLink]="['company', 'management', 'roles']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.roles')"
+        (click)="navClick('side-bar.company-management.roles')"
         faIconClasses="fa-solid fa-user-group"
-        text="{{ 'side-bar.roles' | translate }}">
+        text="{{ 'side-bar.company-management.roles' | translate }}">
     </li>
     <li app-nav-item
         class="nav-item nav-clickable"
         *ngIf="privilegeManagement.hasSomeEquipmentPrivileges()"
         [routerLink]="['company', 'management', 'equipments']"
         routerLinkActive="active"
-        (click)="navClick('side-bar.equipments')"
-        faIconClasses="fa-solid fa-user-group"
-        text="{{ 'side-bar.equipments' | translate }}">
+        (click)="navClick('side-bar.company-management.equipments')"
+        faIconClasses="fa-solid fa-screwdriver-wrench"
+        text="{{ 'side-bar.company-management.equipments' | translate }}">
     </li>
   </ul>
 </div>

@@ -1,4 +1,4 @@
-import {ClientDTO} from "../../../data/company-management/person/client/client-dto";
+import {ClientDTO} from "../../../data/model/person/client/client-dto";
 
 export class ClientUtils {
 

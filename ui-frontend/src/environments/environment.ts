@@ -15,7 +15,7 @@ export const environment = {
 export const frontend = {
   login: "login",
   application: "application",
-  companyManagementPrivileges: "company/management",
+  companyManagement: "company/management",
   company: "company",
   management: "management",
   employees: "employees",
@@ -34,6 +34,8 @@ export const frontend = {
   roleInformation: "information/:roleId",
   equipments: "equipments",
   equipmentInformation: "information/:equipmentId",
+  internEstablishmentManagement: "establishment/:establishmentId",
+  rooms: "rooms",
   create: "create"
 }
 

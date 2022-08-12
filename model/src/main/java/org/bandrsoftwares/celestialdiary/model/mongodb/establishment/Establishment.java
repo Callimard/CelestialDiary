@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @ToString
@@ -31,6 +32,8 @@ public class Establishment {
 
     private Address address;
 
+    // Hours
+
     private NonDatedTimeIntervalList mondayOpening;
     private NonDatedTimeIntervalList tuesdayOpening;
     private NonDatedTimeIntervalList wednesdayOpening;
@@ -42,9 +45,15 @@ public class Establishment {
     private List<DatedTimeIntervalList> exceptionalOpening;
     private List<DatedTimeIntervalList> exceptionalClosing;
 
+    // Establishments Saleable
+
     private List<EstablishmentProduct> proposedProducts;
     private List<EstablishmentPrestation> proposedPrestations;
     private List<EstablishmentBundle> proposedBundles;
+
+    // Establishment Equipments
+
+    private Set<EstablishmentEquipment> equipments;
 
     @ToString.Exclude
     @DocumentReference(collection = "Employee", lazy = true)

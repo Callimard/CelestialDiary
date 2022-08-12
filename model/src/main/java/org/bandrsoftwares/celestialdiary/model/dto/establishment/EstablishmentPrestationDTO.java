@@ -7,6 +7,6 @@ public record EstablishmentPrestationDTO(double customPrice, boolean usingCustom
 
     public EstablishmentPrestationDTO(EstablishmentPrestation establishmentPrestation) {
         this(establishmentPrestation.getCustomPrice(), establishmentPrestation.getUsingCustomPrice(),
-             new WrappedPrestationDTO(establishmentPrestation.getEmbeddedService().getPrestation()));
+             new WrappedPrestationDTO(establishmentPrestation.getPrestation()));
     }
 }

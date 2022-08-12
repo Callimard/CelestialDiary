@@ -10,17 +10,23 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
-    "company-management": "Gestion de l'entreprise",
-    "establishments-management": "Gestions des établissements",
-    "establishments": "Établissements",
-    "employees": "Employés",
-    "clients": "Clients",
-    "products": "Produits",
-    "prestations": "Prestations",
-    "bundles": "Paquets",
-    "roles": "Rôles",
-    "equipments": "Équipements",
-    "logout": "Déconnexion"
+    "company-management": {
+      "title": "Gestion de l'entreprise",
+      "establishments": "Établissements",
+      "employees": "Employés",
+      "clients": "Clients",
+      "products": "Produits",
+      "prestations": "Prestations",
+      "bundles": "Paquets",
+      "roles": "Rôles",
+      "equipments": "Équipements",
+      "logout": "Déconnexion"
+    },
+    "intern-establishment-management": {
+      "title": "Gestions des établissements",
+      "rooms": "Salles",
+      "equipments": "Équipement"
+    }
   },
   "employee": {
     "search": "Rechercher un(e) employé(e)",

@@ -4,18 +4,20 @@ import lombok.*;
 import org.bandrsoftwares.celestialdiary.model.mongodb.saleable.bundle.Bundle;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
-@ToString
-@Builder
+@ToString(callSuper = true)
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class EstablishmentBundle {
-
-    private Double customPrice;
-    private Boolean usingCustomPrice;
+public class EstablishmentBundle extends EstablishmentSaleable {
 
     @ToString.Exclude
     @DocumentReference(collection = "Bundle", lazy = true)
     private Bundle bundle;
+
+    @Builder
+    public EstablishmentBundle(Double customPrice, Boolean usingCustomPrice,
+                               Bundle bundle) {
+        super(customPrice, usingCustomPrice);
+        this.bundle = bundle;
+    }
 }

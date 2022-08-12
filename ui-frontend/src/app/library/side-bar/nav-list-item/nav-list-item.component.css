@@ -1,0 +1,36 @@
+.nav-list-item-container {
+  width: 100%;
+  height: auto;
+}
+
+.nav-list-item-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list-item-title-container i {
+  padding-right: 0.5em;
+  font-size: 20px;
+}
+
+.sub-item-list {
+  padding-left: 0.5em;
+}
+
+.nav-list-item-container .sub-item-list {
+  max-height: 0;
+
+  overflow: hidden;
+
+  transition: max-height 0.15s ease-out;
+}
+
+.nav-list-item-container.open .sub-item-list {
+  max-height: 350px;
+  transition: max-height 0.25s ease-in;
+}
+
+.sub-item {
+  height: 50px;
+}

@@ -1,6 +1,29 @@
 <div class="nav-zone">
-  <h3>{{ 'side-bar.establishments-management' | translate }}</h3>
-  <div *ngFor="let establishment of establishments">
-    <h4>{{establishment.name}}</h4>
-  </div>
+  <h2 class="intern-establishment-title">{{ 'side-bar.intern-establishment-management.title' | translate }}</h2>
+  <ul class="need-top-space" *ngIf="establishments.length > 0">
+    <li app-nav-list-item *ngFor="let establishment of establishments"
+        [title]="establishment.name"
+        [subItems]="[
+        {
+          icon: 'fa-solid fa-hospital',
+          title: 'side-bar.intern-establishment-management.rooms',
+          routeLink: ['establishment', establishment.id, 'rooms']
+        },
+        {
+          icon: 'fa-solid fa-screwdriver-wrench',
+          title: 'side-bar.intern-establishment-management.equipments',
+          routeLink: ['establishment', establishment.id, 'equipments']
+        }]">
+      <ng-template #item let-item>
+        <div app-nav-item
+             class="nav-item nav-clickable"
+             routerLinkActive="active"
+             [routerLink]="item.routeLink"
+             [faIconClasses]="item.icon"
+             text="{{ item.title | translate }}"
+             (click)="navClick(item.title)">
+        </div>
+      </ng-template>
+    </li>
+  </ul>
 </div>

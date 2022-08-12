@@ -83,8 +83,12 @@ public class Employee extends Person {
             for (Role role : roles) {
                 for (EstablishmentRole establishmentRole : role.getEstablishmentRoles()) {
                     List<String> establishmentRoleIdentifiers = Lists.newArrayList();
-                    establishmentPrivileges.put(establishmentRole.getEstablishment().getId(), establishmentRoleIdentifiers);
-                    addEstablishmentPrivilege(establishmentRole, establishmentRoleIdentifiers);
+                    if (establishmentRole.getEstablishment() != null && establishmentRole.getEstablishment().getActivated()) {
+                        establishmentPrivileges.put(establishmentRole.getEstablishment().getId(), establishmentRoleIdentifiers);
+                        addEstablishmentPrivilege(establishmentRole, establishmentRoleIdentifiers);
+                    } else if (establishmentRole.getEstablishment() == null) {
+                        log.error("Role contains unknown establishment. The role {}", role);
+                    }
                 }
             }
         }

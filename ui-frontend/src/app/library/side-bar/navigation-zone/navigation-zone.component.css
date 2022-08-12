@@ -3,6 +3,10 @@
   list-style-type: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .nav-clickable:hover, .nav-clickable:active, .nav-item.active {
   padding-left: 0.5em;
   border-left: 0.5em solid var(--triad-2-light-1);

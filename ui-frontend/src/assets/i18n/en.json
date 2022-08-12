@@ -20,7 +20,12 @@
     "bundles": "Bundles",
     "roles": "Roles",
     "equipments": "Equipments",
-    "logout": "Logout"
+    "logout": "Logout",
+    "intern-establishment-management": {
+      "title": "Establishment management",
+      "rooms": "Rooms",
+      "equipments": "Equipments"
+    }
   },
   "employee": {
     "search": "Search an employee",
