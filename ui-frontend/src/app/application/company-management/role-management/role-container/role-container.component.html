@@ -7,7 +7,7 @@
   </ng-template>
   <ng-template #information>
     <div app-role-information
-         [roleId]="container.elementId"
+         [roleId]="container.elementSelected"
          (wantGoBack)="container.resetInitialPos()"
          (roleHasBeenUpdated)="roleSelection.reload()">
     </div>

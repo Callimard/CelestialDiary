@@ -1,5 +1,9 @@
 import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
 
+export interface NavItemElem {
+  canBeDisplay: boolean
+}
+
 @Component({
   selector: '[app-nav-list-item]',
   templateUrl: './nav-list-item.component.html',
@@ -8,7 +12,9 @@ import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core
 export class NavListItemComponent implements OnInit {
 
   @Input() title!: string
-  @Input() subItems!: any[];
+  @Input() subItems: NavItemElem[] = [];
+
+  items: NavItemElem[] = [];
 
   open = false;
 
@@ -19,7 +25,7 @@ export class NavListItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Nothing
+    this.items = this.subItems.filter((i) => i.canBeDisplay);
   }
 
 }

@@ -5,6 +5,7 @@ import {JwtAccount} from "../../../../service/authentication/jwt-account";
 import {AuthenticationService} from "../../../../service/authentication/authentication.service";
 import {WrappedEstablishmentDTO} from "../../../../data/model/establishment/wrapped-establishment-dto";
 import {EstablishmentManagementService} from "../../../../service/company-management/establishment/establishment-management.service";
+import {NavItemElem} from "../nav-list-item/nav-list-item.component";
 
 @Component({
   selector: '[app-establishment-management-navigation]',
@@ -47,6 +48,15 @@ export class EstablishmentManagementNavigationComponent extends NavigationZoneCo
         });
       }
     }
+  }
+
+  createNavItemElem(icon: string, title: string, routeLink: string[], canBeDisplay: boolean): NavItemElem {
+    return {
+      icon: icon,
+      title: title,
+      routeLink: routeLink,
+      canBeDisplay: canBeDisplay
+    } as NavItemElem;
   }
 
   get privilegeManagement(): PrivilegeService {

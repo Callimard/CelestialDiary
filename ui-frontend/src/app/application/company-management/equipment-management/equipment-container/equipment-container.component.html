@@ -7,7 +7,7 @@
   </ng-template>
   <ng-template #information>
     <div app-equipment-information class="side-container"
-         [equipmentId]="container.elementId"
+         [equipmentId]="container.elementSelected"
          (wantGoBack)="container.resetInitialPos()"
          (equipmentHasBeenUpdated)="equipmentSelection.reload()">
     </div>

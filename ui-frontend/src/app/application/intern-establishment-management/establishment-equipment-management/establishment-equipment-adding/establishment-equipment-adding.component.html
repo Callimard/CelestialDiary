@@ -1,0 +1,11 @@
+<div class="establishment-equipment-adding-container">
+  <div app-basic-title class="floating-card"
+       title="{{ 'establishment.management.equipment.add' | translate }}"
+       (goBack)="wantGoBack.emit(true)">
+  </div>
+  <div app-establishment-equipment-add-form
+       class="floating-card need-top-space"
+       [establishmentId]="establishmentId"
+       (establishmentEquipmentCreated)="wantGoBack.emit(true); establishmentEquipmentHasBeenAdded.emit(true)">
+  </div>
+</div>

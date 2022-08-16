@@ -10,22 +10,23 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
-    "company-management": "Company management",
-    "establishments-management": "Establishment management",
-    "establishments": "Establishments",
-    "employees": "Employees",
-    "clients": "Clients",
-    "products": "Products",
-    "prestations": "Prestations",
-    "bundles": "Bundles",
-    "roles": "Roles",
-    "equipments": "Equipments",
-    "logout": "Logout",
+    "company-management": {
+      "title": "Company management",
+      "establishments": "Establishments",
+      "employees": "Employees",
+      "clients": "Clients",
+      "products": "Products",
+      "prestations": "Prestations",
+      "bundles": "Bundles",
+      "roles": "Roles",
+      "equipments": "Equipments"
+    },
     "intern-establishment-management": {
       "title": "Establishment management",
       "rooms": "Rooms",
       "equipments": "Equipments"
-    }
+    },
+    "logout": "Logout"
   },
   "employee": {
     "search": "Search an employee",
@@ -132,6 +133,17 @@
     "update": {
       "update": "Update",
       "update-failed": "Establishment update failed"
+    },
+    "management": {
+      "equipment": {
+        "available": "Available equipments",
+        "no-more-available": "No more available equipments",
+        "selected": "Selected equipments",
+        "add": "Add equipment",
+        "delete": "Remove equipment from the establishment",
+        "quantity": "Quantity",
+        "unusable": "Number unusable"
+      }
     }
   },
   "product": {
@@ -351,8 +363,22 @@
         "create-description": "Create a room",
         "update": "Update",
         "update-description": "Update room information",
-        "delete": "Activate",
+        "delete": "Delete",
         "delete-description": "Delete a room"
+      },
+      "equipment": {
+        "title": "Establishment equipment management privileges",
+        "description": "",
+        "all": "Admin",
+        "all-description": "All establishment equipment privileges",
+        "read": "Read",
+        "read-description": "See all establishment equipment list and their information",
+        "add": "Add",
+        "add-description": "Add an establishment equipment",
+        "update": "Update",
+        "update-description": "Update establishment equipment information",
+        "delete": "Delete",
+        "delete-description": "Delete an establishment equipment"
       }
     }
   },

@@ -5,6 +5,7 @@ import {EstablishmentProductDTO} from "./establishment-product-dto";
 import {EstablishmentPrestationDTO} from "./establishment-prestation-dto";
 import {EstablishmentBundleDTO} from "./establishment-bundle-dto";
 import {WrappedEmployeeDTO} from "../person/employee/wrapped-employee-dto";
+import {EstablishmentEquipmentDTO} from "./establishment-equipment-dto";
 
 export interface EstablishmentDTO {
   id: string,
@@ -23,6 +24,7 @@ export interface EstablishmentDTO {
   proposedProducts: EstablishmentProductDTO[],
   proposedServices: EstablishmentPrestationDTO[],
   proposedBundles: EstablishmentBundleDTO[],
+  equipments: EstablishmentEquipmentDTO[],
   assignedEmployees: WrappedEmployeeDTO[],
   activated: boolean,
   creationDate: string

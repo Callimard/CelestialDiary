@@ -7,7 +7,7 @@
       <ng-container *ngTemplateOutlet="creationTemplate || defaultCreation"></ng-container>
     </div>
 
-    <div *ngIf="elementId">
+    <div *ngIf="elementSelected">
       <ng-container *ngTemplateOutlet="informationTemplate || defaultInformation"></ng-container>
     </div>
   </ng-template>

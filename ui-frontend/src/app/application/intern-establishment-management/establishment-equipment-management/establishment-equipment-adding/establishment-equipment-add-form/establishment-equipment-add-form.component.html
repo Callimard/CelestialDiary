@@ -1,0 +1,41 @@
+<div>
+  <div *ngIf="availableEquipments.length > 0 || selectedEquipment != null else noAvailableEquipments">
+    <h3>{{ 'establishment.management.equipment.available' | translate}}</h3>
+    <div app-element-list
+         class="equipment-list need-top-space"
+         [allElements]="availableEquipments"
+         [paneInfoTransformer]="equipmentPaneInfoTransformer"
+         (elementSelected)="equipmentSelected($event)">
+    </div>
+  </div>
+  <ng-template #noAvailableEquipments>
+    <h3 style="color: red">{{ 'establishment.management.equipment.no-more-available' | translate}}</h3>
+  </ng-template>
+  <form
+    class="need-top-space form-group"
+    *ngIf="selectedEquipment != null"
+    [formGroup]="addEstablishmentEquipmentForm"
+    (ngSubmit)="onAdd()">
+    <h3 style="text-decoration: underline">{{ 'establishment.management.equipment.selected' | translate}}</h3>
+    <div app-info-pane
+         [displayLeft]="false"
+         [info]="equipmentPaneInfoTransformer.transform(selectedEquipment)">
+    </div>
+    <div app-basic-input-form
+         class="form-control"
+         [group]="addEstablishmentEquipmentForm"
+         controlName="quantity"
+         labelFor="quantity"
+         inputType="number"
+         label="{{ 'establishment.management.equipment.quantity' | translate }}"
+         placeHolder="1">
+    </div>
+    <div class="form-submit-group">
+      <button class="super-valid-button need-top-space"
+              type="submit"
+              [disabled]="addEstablishmentEquipmentForm.invalid">
+        {{ 'establishment.management.equipment.add' | translate}}
+      </button>
+    </div>
+  </form>
+</div>

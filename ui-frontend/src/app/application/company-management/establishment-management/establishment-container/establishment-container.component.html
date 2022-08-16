@@ -7,7 +7,7 @@
   </ng-template>
   <ng-template #information>
     <div app-establishment-information
-         [establishmentId]="container.elementId"
+         [establishmentId]="container.elementSelected"
          (wantGoBack)="container.resetInitialPos()"
          (establishmentHasBeenUpdated)="establishmentSelection.reload()">
     </div>

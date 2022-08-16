@@ -64,7 +64,7 @@ public interface EmployeeManagementService {
 
     record EmployeeCreationInformation(@NotNull @ValidEmail String email, @NotNull @ValidPassword String password,
                                        @NotNull @NotBlank String firstName, @NotNull @NotBlank String lastName, String comment,
-                                       PersonGender gender, @ValidPhone String phone, List<String> praticablePrestations,
+                                       PersonGender gender, @ValidPhone String phone, @NonNull List<String> praticablePrestations,
                                        @NonNull List<String> tags, @NonNull List<String> roles) {
     }
 

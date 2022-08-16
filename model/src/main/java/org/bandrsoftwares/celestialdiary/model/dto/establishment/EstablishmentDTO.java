@@ -1,8 +1,8 @@
 package org.bandrsoftwares.celestialdiary.model.dto.establishment;
 
-import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.general.time.DatedTimeIntervalListDTO;
 import org.bandrsoftwares.celestialdiary.model.dto.general.time.NonDatedTimeIntervalListDTO;
+import org.bandrsoftwares.celestialdiary.model.dto.person.employee.WrappedEmployeeDTO;
 import org.bandrsoftwares.celestialdiary.model.general.Address;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 
@@ -22,6 +22,7 @@ public record EstablishmentDTO(String id, String name, String description,
                                List<EstablishmentProductDTO> proposedProducts,
                                List<EstablishmentPrestationDTO> proposedServices,
                                List<EstablishmentBundleDTO> proposedBundles,
+                               List<EstablishmentEquipmentDTO> equipments,
                                List<WrappedEmployeeDTO> assignedEmployees,
                                boolean activated,
                                String creationDate) {
@@ -48,6 +49,7 @@ public record EstablishmentDTO(String id, String name, String description,
                      establishment.getProposedPrestations().stream().map(EstablishmentPrestationDTO::new).toList() : null,
              establishment.getProposedBundles() != null ? establishment.getProposedBundles().stream().map(EstablishmentBundleDTO::new).toList() :
                      null,
+             establishment.getEquipments() != null ? establishment.getEquipments().stream().map(EstablishmentEquipmentDTO::new).toList() : null,
              establishment.getAssignedEmployees() != null ? establishment.getAssignedEmployees().stream().map(WrappedEmployeeDTO::new).toList() :
                      null,
              establishment.getActivated(),

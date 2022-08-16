@@ -99,6 +99,11 @@ import {DetailsSummaryComponent} from './library/container/details-summary/detai
 import {EstablishmentManagementNavigationComponent} from './library/side-bar/establishment-management-navigation/establishment-management-navigation.component';
 import {RoomContainerComponent} from './application/intern-establishment-management/room-management/room-container/room-container.component';
 import {NavListItemComponent} from './library/side-bar/nav-list-item/nav-list-item.component';
+import { EstablishmentEquipmentContainerComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-container/establishment-equipment-container.component';
+import { EstablishmentEquipmentSelectionComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-selection/establishment-equipment-selection.component';
+import { EstablishmentEquipmentAddingComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-adding.component';
+import { EstablishmentEquipmentAddFormComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-add-form/establishment-equipment-add-form.component';
+import { EstablishmentEquipmentInformationComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-information/establishment-equipment-information.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -136,6 +141,9 @@ const appRoutes: Routes = [
         path: frontend.internEstablishmentManagement, children: [
           {
             path: frontend.rooms, component: RoomContainerComponent
+          },
+          {
+            path: frontend.equipments, component: EstablishmentEquipmentContainerComponent
           }
         ]
       }
@@ -233,7 +241,12 @@ const appRoutes: Routes = [
     DetailsSummaryComponent,
     EstablishmentManagementNavigationComponent,
     RoomContainerComponent,
-    NavListItemComponent
+    NavListItemComponent,
+    EstablishmentEquipmentContainerComponent,
+    EstablishmentEquipmentSelectionComponent,
+    EstablishmentEquipmentAddingComponent,
+    EstablishmentEquipmentAddFormComponent,
+    EstablishmentEquipmentInformationComponent
   ],
   imports: [
     BrowserModule,

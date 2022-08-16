@@ -35,13 +35,13 @@
       </ul>
     </ng-template>
   </div>
-  <div app-details-summary class="intern-establishment-management-privileges-content need-top-space">
+  <div app-details-summary class="intern-establishment-management-privileges-content need-top-space"
+       *ngIf="roleFormGroup.allEstablishmentIds.length > 0">
     <ng-template #summary>
       <h2>{{ 'privilege.establishment.management-title' | translate }}</h2>
     </ng-template>
     <ng-template #details>
       <div>
-        <h3>{{ 'all-establishments-title' | translate }}</h3>
         <div app-details-summary
              class="need-top-space"
              *ngFor="let establishmentId of roleFormGroup.allEstablishmentIds">

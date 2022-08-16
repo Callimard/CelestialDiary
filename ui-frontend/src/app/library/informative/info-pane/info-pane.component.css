@@ -4,10 +4,6 @@
   width: 100%;
 }
 
-.info-pane-main-container .info-pane-container {
-  height: 100%;
-}
-
 .info-pane-left-container, .info-pane-right-container {
   flex: 0 1 20%;
   max-width: 20%;
@@ -57,6 +53,7 @@
 .default-center-template-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 0.7em;
   align-items: flex-start;
 }

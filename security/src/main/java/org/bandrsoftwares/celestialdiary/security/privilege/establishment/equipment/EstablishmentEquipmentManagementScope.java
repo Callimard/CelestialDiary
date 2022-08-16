@@ -8,11 +8,11 @@ import org.bandrsoftwares.celestialdiary.security.privilege.establishment.Establ
 import java.util.Arrays;
 import java.util.List;
 
-public class EstablishmentEquipmentScope extends Scope {
+public class EstablishmentEquipmentManagementScope extends Scope {
 
     // Constructors.
 
-    public EstablishmentEquipmentScope() {
+    public EstablishmentEquipmentManagementScope() {
         super("privilege.establishment.equipment.title", "privilege.establishment.equipment.description");
     }
 

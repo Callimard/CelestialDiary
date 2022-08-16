@@ -1,0 +1,8 @@
+.equipment-list {
+  height: 250px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  border: 1px solid var(--place-holder-text-color-2);
+}

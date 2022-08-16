@@ -3,7 +3,7 @@ package org.bandrsoftwares.celestialdiary.security.privilege.establishment;
 import com.google.common.collect.Lists;
 import org.bandrsoftwares.celestialdiary.security.privilege.PrivilegeEnum;
 import org.bandrsoftwares.celestialdiary.security.privilege.Scope;
-import org.bandrsoftwares.celestialdiary.security.privilege.company.equipment.EquipmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.equipment.EstablishmentEquipmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.room.RoomManagementScope;
 
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class InternEstablishmentManagementScope extends Scope {
 
     public InternEstablishmentManagementScope() {
         super("privilege.establishment.title", "privilege.establishment.description",
-              Lists.newArrayList(new RoomManagementScope(), new EquipmentManagementScope()));
+              Lists.newArrayList(new RoomManagementScope(), new EstablishmentEquipmentManagementScope()));
     }
 
     // Methods.

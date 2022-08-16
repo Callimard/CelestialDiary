@@ -17,16 +17,16 @@
       "clients": "Clients",
       "products": "Produits",
       "prestations": "Prestations",
-      "bundles": "Paquets",
+      "bundles": "Coffrets",
       "roles": "Rôles",
-      "equipments": "Équipements",
-      "logout": "Déconnexion"
+      "equipments": "Équipements"
     },
     "intern-establishment-management": {
       "title": "Gestions des établissements",
       "rooms": "Salles",
       "equipments": "Équipement"
-    }
+    },
+    "logout": "Déconnexion"
   },
   "employee": {
     "search": "Rechercher un(e) employé(e)",
@@ -133,6 +133,17 @@
     "update": {
       "update": "Mettre à jour",
       "update-failed": "Mise à jour de l'établissement échouée"
+    },
+    "management": {
+      "equipment": {
+        "available": "Équipement disponibles",
+        "no-more-available": "Il n'y a plus d'équipements disponible",
+        "selected": "Équipement sélectionné",
+        "add": "Ajouter un équipement",
+        "delete": "Supprimer l'équipement de l'établissement",
+        "quantity": "Quantité",
+        "unusable": "Nombre inutilisable"
+      }
     }
   },
   "product": {
@@ -354,6 +365,20 @@
         "update-description": "Mettre à jour les informations d'une salles",
         "delete": "Supprimer",
         "delete-description": "Supprimer une salles"
+      },
+      "equipment": {
+        "title": "Droits de gestion des équipements de l'établissement",
+        "description": "",
+        "all": "Admin",
+        "all-description": "Tous les droit de gestions des équipement de l'établissement",
+        "read": "Lire",
+        "read-description": "Voir la liste de tous les équipement de l'établissement",
+        "add": "Ajouter",
+        "add-description": "Ajouter un équipement à l'établissement",
+        "update": "Mettre à jour",
+        "update-description": "Mettre à jour les informations d'un équipement de l'établissement",
+        "delete": "Supprimer",
+        "delete-description": "Supprimer un équipement de l'établissement"
       }
     }
   },

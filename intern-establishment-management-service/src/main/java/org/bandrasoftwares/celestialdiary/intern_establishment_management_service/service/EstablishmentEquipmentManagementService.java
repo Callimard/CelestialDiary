@@ -19,12 +19,16 @@ public interface EstablishmentEquipmentManagementService {
                                                              @EquipmentId String equipmentId);
 
     EstablishmentEquipment addEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                     @EquipmentId String equipmentId, @Valid @Min(1) int quantity);
+                                                     @EquipmentId String equipmentId,
+                                                     @Valid EstablishmentEquipmentAddingInformation addingInformation);
+
+    record EstablishmentEquipmentAddingInformation(@Min(1) int quantity) {
+    }
 
     EstablishmentEquipment updateEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
                                                         @EquipmentId String equipmentId, @Valid EstablishmentEquipmentUpdatedInformation updates);
 
-    record EstablishmentEquipmentUpdatedInformation(@Min(1) Integer quantity, @Min(0) Integer numberAvailable) {
+    record EstablishmentEquipmentUpdatedInformation(@Min(1) Integer quantity, @Min(0) Integer numberUnusable) {
     }
 
     boolean deleteEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,

@@ -107,4 +107,21 @@ export const privileges = {
       delete: "EQUIPMENT_DELETE"
     }
   },
+  establishment: {
+    all: "ESTABLISHMENT_ALL",
+    room: {
+      all: "ROOM_ALL",
+      read: "ROOM_READ",
+      create: "ROOM_CREATE",
+      update: "ROOM_UPDATE",
+      delete: "ROOM_DELETE",
+    },
+    equipment: {
+      all: "ESTABLISHMENT_EQUIPMENT_all",
+      read: "ESTABLISHMENT_EQUIPMENT_READ",
+      add: "ESTABLISHMENT_EQUIPMENT_ADD",
+      update: "ESTABLISHMENT_EQUIPMENT_UPDATE",
+      delete: "ESTABLISHMENT_EQUIPMENT_DELETE",
+    }
+  }
 }

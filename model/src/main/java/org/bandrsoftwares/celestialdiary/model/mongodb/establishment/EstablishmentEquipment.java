@@ -18,7 +18,7 @@ public class EstablishmentEquipment {
     private Integer quantity;
 
     @NonNull
-    private Integer numberAvailable;
+    private Integer numberUnusable;
 
     @ToString.Exclude
     @DocumentReference(collection = "Equipment", lazy = true)

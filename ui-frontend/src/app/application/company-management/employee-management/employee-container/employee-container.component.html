@@ -7,7 +7,7 @@
   </ng-template>
   <ng-template #information>
     <div app-employee-information class="side-container"
-         [employeeId]="container.elementId"
+         [employeeId]="container.elementSelected"
          (wantGoBack)="container.resetInitialPos()"
          (employeeHasBeenUpdated)="employeeSelection.reload()">
     </div>

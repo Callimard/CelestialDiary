@@ -62,9 +62,9 @@ public class EstablishmentEquipmentManagementController {
     public EstablishmentEquipmentDTO addEstablishmentEquipment(@PathVariable(name = "idCompany") String idCompany,
                                                                @PathVariable(name = "idEstablishment") String idEstablishment,
                                                                @PathVariable(name = "idEquipment") String idEquipment,
-                                                               @RequestBody Integer quantity) {
+                                                               @RequestBody EstablishmentEquipmentManagementService.EstablishmentEquipmentAddingInformation addingInformation) {
         return new EstablishmentEquipmentDTO(establishmentEquipmentManagementService.addEstablishmentEquipment(idCompany, idEstablishment,
-                                                                                                               idEquipment, quantity));
+                                                                                                               idEquipment, addingInformation));
     }
 
     @UpdateEstablishmentEquipmentPrivilege
