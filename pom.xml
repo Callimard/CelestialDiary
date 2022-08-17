@@ -35,6 +35,8 @@
         <module>aop</module>
         <module>validation</module>
         <module>authentication-service</module>
+        <module>proxy-service</module>
+        <module>discovery-service</module>
         <module>intern-establishment-management-service</module>
     </modules>
 
