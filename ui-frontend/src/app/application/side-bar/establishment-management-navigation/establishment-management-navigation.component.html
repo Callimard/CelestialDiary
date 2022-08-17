@@ -1,0 +1,25 @@
+<div class="nav-zone">
+  <h2 class="intern-establishment-title">{{ 'side-bar.intern-establishment-management.title' | translate }}</h2>
+  <ul class="need-top-space" *ngIf="establishments.length > 0">
+    <li app-nav-list-item *ngFor="let establishment of establishments"
+        [title]="establishment.name"
+        [subItems]="[
+        createNavItemElem('fa-solid fa-hospital', 'side-bar.intern-establishment-management.rooms',
+        ['establishment', establishment.id, 'rooms'], this.privilegeManagement.hasSomeRoomPrivileges(establishment.id)),
+        createNavItemElem('fa-solid fa-screwdriver-wrench', 'side-bar.intern-establishment-management.equipments',
+        ['establishment', establishment.id, 'equipments'], this.privilegeManagement.hasSomeEstablishmentEquipmentPrivileges(establishment.id))
+        ]">
+      <ng-template #item let-item>
+        <div app-nav-item
+             *ngIf="item.canBeDisplay"
+             class="nav-item nav-clickable"
+             routerLinkActive="active"
+             [routerLink]="item.routeLink"
+             [faIconClasses]="item.icon"
+             text="{{ item.title | translate }}"
+             (click)="navClick(item.title)">
+        </div>
+      </ng-template>
+    </li>
+  </ul>
+</div>

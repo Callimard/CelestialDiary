@@ -1,0 +1,25 @@
+<div class="nav-list-item-container" [class.open]="open">
+  <div class="nav-item nav-clickable nav-list-item-title-container" (click)="open = !open">
+    <h4>{{title}}</h4>
+    <i class="fa-solid fa-angle-right" *ngIf="!open"></i>
+    <i class="fa-solid fa-angle-down" *ngIf="open"></i>
+  </div>
+  <ul class="sub-item-list">
+    <li class="sub-item"
+        *ngFor="let item of items">
+      <ng-container
+        *ngTemplateOutlet="
+        itemTemplate || defaultItemTemplate;
+        context: {$implicit: item}">
+      </ng-container>
+    </li>
+  </ul>
+</div>
+
+<ng-template #defaultItemTemplate let-item>
+  <div
+    app-nav-item
+    class="nav-item nav-clickable"
+    faIconClasses="fa-solid fa-shop">
+  </div>
+</ng-template>

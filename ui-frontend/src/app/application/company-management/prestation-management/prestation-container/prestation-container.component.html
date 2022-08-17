@@ -1,0 +1,21 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-prestation-selection #prestationSelection
+         (prestationSelected)="container.displayInformation($event)"
+         (wantCreatePrestation)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-prestation-information
+         [prestationId]="container.elementSelected"
+         (wantGoBack)="container.resetInitialPos()"
+         (prestationHasBeenUpdated)="prestationSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-prestation-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (prestationHasBeenCreated)="prestationSelection.reload()">
+    </div>
+  </ng-template>
+</div>

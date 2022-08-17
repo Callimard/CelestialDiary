@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {backend} from "../../../environments/environment";
-import {WrappedBundleDTO} from "../../../data/company-management/saleable/bundle/wrapped-bundle-dto";
+import {WrappedBundleDTO} from "../../../data/model/saleable/bundle/wrapped-bundle-dto";
 import {JwtAccount} from "../../authentication/jwt-account";
 import {AuthenticationService} from "../../authentication/authentication.service";
-import {BundleDTO} from "../../../data/company-management/saleable/bundle/bundle-dto";
-import {BundleCreationInformation} from "../../../data/company-management/saleable/bundle/bundle-creation-information";
-import {BundleUpdatedInformation} from "../../../data/company-management/saleable/bundle/bundle-updated-information";
+import {BundleDTO} from "../../../data/model/saleable/bundle/bundle-dto";
+import {BundleCreationInformation} from "../../../data/model/saleable/bundle/bundle-creation-information";
+import {BundleUpdatedInformation} from "../../../data/model/saleable/bundle/bundle-updated-information";
 
 @Injectable({
   providedIn: 'root'

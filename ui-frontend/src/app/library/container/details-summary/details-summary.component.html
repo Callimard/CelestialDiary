@@ -1,0 +1,20 @@
+<details class="details-container">
+  <summary>
+    <ng-container *ngTemplateOutlet="summaryTemplate || defaultSummary">
+    </ng-container>
+  </summary>
+  <div class="details-content">
+    <ng-container>
+      <ng-container *ngTemplateOutlet="detailsTemplate || defaultDetails">
+      </ng-container>
+    </ng-container>
+  </div>
+</details>
+
+<ng-template #defaultSummary>
+  <p>Summary</p>
+</ng-template>
+
+<ng-template #defaultDetails>
+  <p>Details</p>
+</ng-template>

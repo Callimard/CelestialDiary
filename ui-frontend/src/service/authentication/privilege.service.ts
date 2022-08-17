@@ -201,4 +201,69 @@ export class PrivilegeService {
     return this.hasClientAll() || this.hasClientRead() || this.hasClientCreate() || this.hasClientUpdate()
   }
 
+  public hasInternEstablishmentAll(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasCompanyAll() || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.all)
+  }
+
+  public hasRoomAll(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasInternEstablishmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.room.all);
+  }
+
+  public hasRoomRead(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasRoomAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.room.read);
+  }
+
+  public hasRoomCreate(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasRoomAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.room.create);
+  }
+
+  public hasRoomUpdate(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasRoomAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.room.update);
+  }
+
+  public hasRoomDelete(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasRoomAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.room.delete);
+  }
+
+  public hasSomeRoomPrivileges(establishmentId: string): boolean {
+    return this.hasRoomAll(establishmentId) || this.hasRoomRead(establishmentId) || this.hasRoomCreate(establishmentId)
+      || this.hasRoomUpdate(establishmentId) || this.hasRoomDelete(establishmentId);
+  }
+
+  public hasEstablishmentEquipmentAll(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasInternEstablishmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.equipment.all);
+  }
+
+  public hasEstablishmentEquipmentRead(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEstablishmentEquipmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.equipment.read);
+  }
+
+  public hasEstablishmentEquipmentAdd(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEstablishmentEquipmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.equipment.add);
+  }
+
+  public hasEstablishmentEquipmentUpdate(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEstablishmentEquipmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.equipment.update);
+  }
+
+  public hasEstablishmentEquipmentDelete(establishmentId: string): boolean {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    return this.hasEstablishmentEquipmentAll(establishmentId) || jwtAccount.establishmentPrivilegeIdentifiers[establishmentId].includes(privileges.establishment.equipment.delete);
+  }
+
+  public hasSomeEstablishmentEquipmentPrivileges(establishmentId: string): boolean {
+    return this.hasEstablishmentEquipmentAll(establishmentId) || this.hasEstablishmentEquipmentRead(establishmentId) || this.hasEstablishmentEquipmentAdd(establishmentId)
+      || this.hasEstablishmentEquipmentUpdate(establishmentId) || this.hasEstablishmentEquipmentDelete(establishmentId);
+  }
+
 }

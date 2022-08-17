@@ -1,0 +1,36 @@
+.nav-zone {
+  padding: 1.2rem;
+  list-style-type: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.nav-clickable:hover, .nav-clickable:active, .nav-item.active {
+  padding-left: 0.5em;
+  border-left: 0.5em solid var(--triad-2-light-1);
+  cursor: pointer;
+  color: var(--triad-2-light-1);
+}
+
+.nav-item {
+  padding: 0.7em 0;
+}
+
+.nav-item.active {
+  background-color: var(--primary);
+}
+
+.nav-clickable {
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.nav-clickable:hover {
+  background-color: var(--primary-light-1);
+}
+
+.nav-clickable:active {
+  background-color: var(--primary-light-2);
+}

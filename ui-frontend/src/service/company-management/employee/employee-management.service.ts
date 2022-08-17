@@ -1,16 +1,16 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {WrappedEmployeeDTO} from "../../../data/company-management/person/employee/wrapped-employee-dto";
+import {WrappedEmployeeDTO} from "../../../data/model/person/employee/wrapped-employee-dto";
 import {backend} from "../../../environments/environment";
 import {JwtAccount} from "../../authentication/jwt-account";
 import {AuthenticationService} from "../../authentication/authentication.service";
-import {EmployeeCreationInformation} from "../../../data/company-management/person/employee/employee-creation-information";
-import {EmployeeDTO} from "../../../data/company-management/person/employee/employee-dto";
-import {EmployeeUpdatedInformation} from "../../../data/company-management/person/employee/employee-updated-information";
-import {EmployeeUpdatedRoles} from "../../../data/company-management/person/employee/employee-updated-roles";
-import {EmployeeEstablishmentInformation} from "../../../data/company-management/person/employee/employee-establishment-information";
-import {WrappedEmployeeWorkingHoursDTO} from "../../../data/company-management/person/employee/working-hours/wrapped-employee-working-hours-dto";
-import {WorkingHoursInformation} from "../../../data/company-management/person/employee/working-hours/working-hours-information";
+import {EmployeeCreationInformation} from "../../../data/model/person/employee/employee-creation-information";
+import {EmployeeDTO} from "../../../data/model/person/employee/employee-dto";
+import {EmployeeUpdatedInformation} from "../../../data/model/person/employee/employee-updated-information";
+import {EmployeeUpdatedRoles} from "../../../data/model/person/employee/employee-updated-roles";
+import {EmployeeEstablishmentInformation} from "../../../data/model/person/employee/employee-establishment-information";
+import {WrappedEmployeeWorkingHoursDTO} from "../../../data/model/person/employee/working-hours/wrapped-employee-working-hours-dto";
+import {WorkingHoursInformation} from "../../../data/model/person/employee/working-hours/working-hours-information";
 
 @Injectable({
   providedIn: 'root'

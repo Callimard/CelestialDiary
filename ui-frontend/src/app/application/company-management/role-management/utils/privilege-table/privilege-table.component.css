@@ -1,0 +1,40 @@
+.privilege-table-container {
+  width: 100%;
+  overflow-x: hidden;
+
+  border-collapse: collapse;
+}
+
+.table-container {
+  width: 100%;
+}
+
+table caption {
+  text-align: left;
+  padding: 0.5em 0;
+}
+
+thead {
+  font-weight: bold;
+
+  background-color: var(--primary-dark-1);
+  color: #ffffff;
+  text-align: left;
+}
+
+td {
+  padding: 0.5em;
+}
+
+tbody tr {
+  border-bottom: 1px solid var(--place-holder-text-color-1);
+}
+
+tbody tr {
+  background-color: var(--place-holder-text-color-3);
+}
+
+tbody tr:nth-of-type(even) {
+  background-color: var(--place-holder-text-color-2);
+}
+

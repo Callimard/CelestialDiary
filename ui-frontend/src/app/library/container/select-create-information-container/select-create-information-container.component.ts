@@ -9,7 +9,7 @@ import {TwoSideManagementComponent} from "../two-side-management/two-side-manage
 export class SelectCreateInformationContainerComponent extends TwoSideManagementComponent implements OnInit {
 
   create = false;
-  elementId?: string;
+  elementSelected?: any;
 
   @ViewChild("twoSideContainer") container!: TwoSideManagementComponent;
 
@@ -22,13 +22,13 @@ export class SelectCreateInformationContainerComponent extends TwoSideManagement
   }
 
   displayCreation() {
-    this.elementId = undefined;
+    this.elementSelected = undefined;
     this.create = true;
     this.swipeRightToLeft();
   }
 
-  displayInformation(elementId: string) {
-    this.elementId = elementId;
+  displayInformation(element: any) {
+    this.elementSelected = element;
     this.create = false;
     this.swipeRightToLeft();
   }

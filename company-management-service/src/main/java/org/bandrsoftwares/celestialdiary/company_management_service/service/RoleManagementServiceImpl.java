@@ -9,21 +9,20 @@ import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.company.SearchCompany;
 import org.bandrsoftwares.celestialdiary.aop.employee.RoleId;
 import org.bandrsoftwares.celestialdiary.aop.employee.SearchRole;
-import org.bandrsoftwares.celestialdiary.model.dto.person.employee.EstablishmentRoleDTO;
 import org.bandrsoftwares.celestialdiary.model.mongodb.company.Company;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EstablishmentRole;
-import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Role;
-import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.RoleRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.EstablishmentRole;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.Role;
+import org.bandrsoftwares.celestialdiary.model.mongodb.person.employee.RoleRepository;
+import org.bandrsoftwares.celestialdiary.security.privilege.Privilege;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -72,25 +71,8 @@ public class RoleManagementServiceImpl implements RoleManagementService {
                 .companyPrivileges(info.companyPrivilegeIdentifiers() != null ?
                                            info.companyPrivilegeIdentifiers().stream().map(Privilege::extractPrivilegeFromIdentifier).toList() :
                                            Lists.newArrayList())
-                .establishmentRoles(info.establishmentRoles() != null ?
-                                            info.establishmentRoles().stream().map(extractEstablishmentRoleFromDTO()).toList() : Lists.newArrayList())
+                .establishmentRoles(info.establishmentRoles() != null ? extractEstablishmentRoles(info.establishmentRoles()) : Lists.newArrayList())
                 .company(company)
-                .build();
-    }
-
-    private Function<EstablishmentRoleDTO, EstablishmentRole> extractEstablishmentRoleFromDTO() {
-        return eRole -> {
-            Optional<Establishment> opEstablishment = establishmentRepository.findById(eRole.establishmentId());
-            return opEstablishment.map(establishment -> createEstablishmentRoleFrom(establishment, eRole)).orElse(null);
-        };
-    }
-
-    private EstablishmentRole createEstablishmentRoleFrom(Establishment establishment, EstablishmentRoleDTO eRole) {
-        return EstablishmentRole.builder()
-                .establishment(establishment)
-                .establishmentPrivileges(eRole.establishmentPrivileges().stream()
-                                                 .map(privilegeDTO -> Privilege.extractPrivilegeFromIdentifier(privilegeDTO.identifierName()))
-                                                 .toList())
                 .build();
     }
 
@@ -116,12 +98,27 @@ public class RoleManagementServiceImpl implements RoleManagementService {
         }
 
         if (updates.establishmentRoles() != null) {
-            role.setEstablishmentRoles(updates.establishmentRoles().stream().map(extractEstablishmentRoleFromDTO()).toList());
+            role.setEstablishmentRoles(extractEstablishmentRoles(updates.establishmentRoles()));
         } else {
             role.setEstablishmentRoles(Lists.newArrayList());
         }
 
         return roleRepository.save(role);
+    }
+
+    private List<EstablishmentRole> extractEstablishmentRoles(Map<String, List<String>> establishmentRolesMap) {
+        return establishmentRolesMap.entrySet().stream().map(entry -> {
+            String establishmentId = entry.getKey();
+            List<String> privilegeIdentifiers = entry.getValue();
+
+            // Search establishment
+            Optional<Establishment> opEstablishment = establishmentRepository.findById(establishmentId);
+
+            return opEstablishment.map(establishment -> new EstablishmentRole(establishment,
+                                                                              privilegeIdentifiers.stream()
+                                                                                      .map(Privilege::extractPrivilegeFromIdentifier).toList()))
+                    .orElse(null);
+        }).toList();
     }
 
     @SearchRole

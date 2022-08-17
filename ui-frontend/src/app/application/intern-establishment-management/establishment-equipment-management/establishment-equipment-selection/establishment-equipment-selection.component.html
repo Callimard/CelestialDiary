@@ -1,0 +1,14 @@
+<div app-searching-list class="establishment-equipment-searching-list-container"
+     [allElements]="allEquipments"
+     searchBarPlaceHolder="{{ 'equipment.search' | translate }}"
+     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
+     [paneInfoTransformer]="transformer"
+     (elementSelected)="selectEstablishmentEquipment($event)"
+     (searchFilter)="filterEstablishmentEquipments($event)">
+</div>
+<button class="floating-button add-establishment-equipment-button"
+        *ngIf="privilegeManagement.hasEstablishmentEquipmentAdd(establishmentId)"
+        (click)="navigateToAddEstablishmentEquipment()">
+  <i class="fa-solid fa-plus"></i>
+</button>
+

@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {WrappedEstablishmentDTO} from "../../../data/company-management/establishment/wrapped-establishment-dto";
+import {WrappedEstablishmentDTO} from "../../../data/model/establishment/wrapped-establishment-dto";
 import {JwtAccount} from "../../authentication/jwt-account";
 import {AuthenticationService} from "../../authentication/authentication.service";
 import {backend} from "../../../environments/environment";
-import {EstablishmentDTO} from "../../../data/company-management/establishment/establishment-dto";
-import {EstablishmentCreationInformation} from "../../../data/company-management/establishment/establishment-creation-information";
-import {EstablishmentUpdatedInformation} from "../../../data/company-management/establishment/establishment-updated-information";
+import {EstablishmentDTO} from "../../../data/model/establishment/establishment-dto";
+import {EstablishmentCreationInformation} from "../../../data/model/establishment/establishment-creation-information";
+import {EstablishmentUpdatedInformation} from "../../../data/model/establishment/establishment-updated-information";
 
 @Injectable({
   providedIn: 'root'
@@ -51,8 +51,24 @@ export class EstablishmentManagementService {
           console.error(err.error);
           reject(err);
         }
-      })
-    }))
+      });
+    }));
+  }
+
+  public searchEstablishmentWithId(ids: string[]): Promise<WrappedEstablishmentDTO[]> {
+    const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
+    const idArray: string = ids.reduce((prev, cur) => prev + ';' + cur);
+    return new Promise<WrappedEstablishmentDTO[]>(((resolve, reject) => {
+      this.http.get<WrappedEstablishmentDTO[]>(EstablishmentManagementService.companyEstablishmentUrl(jwtAccount.companyId) + '?ids=' + idArray).subscribe({
+        next: (allEstablishments) => {
+          resolve(allEstablishments);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.error(err.error);
+          reject(err);
+        }
+      });
+    }));
   }
 
   public getSpecificEstablishment(establishmentId: string): Promise<EstablishmentDTO> {

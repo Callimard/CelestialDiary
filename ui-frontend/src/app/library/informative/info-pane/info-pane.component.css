@@ -4,10 +4,6 @@
   width: 100%;
 }
 
-.info-pane-main-container .info-pane-container {
-  height: 100%;
-}
-
 .info-pane-left-container, .info-pane-right-container {
   flex: 0 1 20%;
   max-width: 20%;
@@ -22,7 +18,7 @@
 }
 
 .ticket-sub-title {
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -57,6 +53,7 @@
 .default-center-template-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 0.7em;
   align-items: flex-start;
 }

@@ -15,7 +15,7 @@ export const environment = {
 export const frontend = {
   login: "login",
   application: "application",
-  companyManagementPrivileges: "company/management",
+  companyManagement: "company/management",
   company: "company",
   management: "management",
   employees: "employees",
@@ -34,6 +34,8 @@ export const frontend = {
   roleInformation: "information/:roleId",
   equipments: "equipments",
   equipmentInformation: "information/:equipmentId",
+  internEstablishmentManagement: "establishment/:establishmentId",
+  rooms: "rooms",
   create: "create"
 }
 
@@ -44,6 +46,7 @@ export const backend = {
   apiV1Url: "/api/v1",
   privilegesUrl: "/privileges",
   company: "/company",
+  establishment: "/establishment",
   employeeLogin: "/authentication/employee/token",
   employeeRefreshToken: "/authentication/employee/token/refresh",
   companiesUrl: "/companies",
@@ -104,4 +107,21 @@ export const privileges = {
       delete: "EQUIPMENT_DELETE"
     }
   },
+  establishment: {
+    all: "ESTABLISHMENT_ALL",
+    room: {
+      all: "ROOM_ALL",
+      read: "ROOM_READ",
+      create: "ROOM_CREATE",
+      update: "ROOM_UPDATE",
+      delete: "ROOM_DELETE",
+    },
+    equipment: {
+      all: "ESTABLISHMENT_EQUIPMENT_all",
+      read: "ESTABLISHMENT_EQUIPMENT_READ",
+      add: "ESTABLISHMENT_EQUIPMENT_ADD",
+      update: "ESTABLISHMENT_EQUIPMENT_UPDATE",
+      delete: "ESTABLISHMENT_EQUIPMENT_DELETE",
+    }
+  }
 }

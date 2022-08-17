@@ -10,14 +10,22 @@
   },
   "side-bar": {
     "title": "Celestial Diary",
-    "establishments": "Establishments",
-    "employees": "Employees",
-    "clients": "Clients",
-    "products": "Products",
-    "prestations": "Prestations",
-    "bundles": "Bundles",
-    "roles": "Roles",
-    "equipments": "Equipments",
+    "company-management": {
+      "title": "Company management",
+      "establishments": "Establishments",
+      "employees": "Employees",
+      "clients": "Clients",
+      "products": "Products",
+      "prestations": "Prestations",
+      "bundles": "Bundles",
+      "roles": "Roles",
+      "equipments": "Equipments"
+    },
+    "intern-establishment-management": {
+      "title": "Establishment management",
+      "rooms": "Rooms",
+      "equipments": "Equipments"
+    },
     "logout": "Logout"
   },
   "employee": {
@@ -125,6 +133,17 @@
     "update": {
       "update": "Update",
       "update-failed": "Establishment update failed"
+    },
+    "management": {
+      "equipment": {
+        "available": "Available equipments",
+        "no-more-available": "No more available equipments",
+        "selected": "Selected equipments",
+        "add": "Add equipment",
+        "delete": "Remove equipment from the establishment",
+        "quantity": "Quantity",
+        "unusable": "Number unusable"
+      }
     }
   },
   "product": {
@@ -235,8 +254,9 @@
   "privilege": {
     "title": "Privilege",
     "company": {
+      "management-title": "Company management",
       "title": "Company management privileges",
-      "description": "Theses privileges allow the all company management.",
+      "description": "Theses privileges are for company management action.",
       "all": "Admin",
       "all-description": "All company management privileges",
       "employee": {
@@ -319,11 +339,46 @@
         "read": "Read",
         "read-description": "See all equipments list and their information",
         "create": "Create",
-        "create-description": "Create a equipment",
+        "create-description": "Create an equipment",
         "update": "Update",
         "update-description": "Update equipment information",
         "delete": "Activate",
-        "delete-description": "Delete a equipment"
+        "delete-description": "Delete an equipment"
+      }
+    },
+    "establishment": {
+      "management-title": "Intern establishment management",
+      "title": "Intern establishment management privileges",
+      "description": "These privileges are for specific establishment and specific intern establishment management actions.",
+      "all": "Admin",
+      "all-description": "All intern establishment management privileges",
+      "room": {
+        "title": "Establishment room management privileges",
+        "description": "",
+        "all": "Admin",
+        "all-description": "All room management privileges",
+        "read": "Read",
+        "read-description": "See all room list and their information",
+        "create": "Create",
+        "create-description": "Create a room",
+        "update": "Update",
+        "update-description": "Update room information",
+        "delete": "Delete",
+        "delete-description": "Delete a room"
+      },
+      "equipment": {
+        "title": "Establishment equipment management privileges",
+        "description": "",
+        "all": "Admin",
+        "all-description": "All establishment equipment privileges",
+        "read": "Read",
+        "read-description": "See all establishment equipment list and their information",
+        "add": "Add",
+        "add-description": "Add an establishment equipment",
+        "update": "Update",
+        "update-description": "Update establishment equipment information",
+        "delete": "Delete",
+        "delete-description": "Delete an establishment equipment"
       }
     }
   },
@@ -340,6 +395,7 @@
     "add": "Add hours",
     "remove": "Remove hours"
   },
+  "all-establishments-title": "All establishments",
   "description": "Description",
   "create": "Create",
   "update": "Update",

@@ -23,11 +23,11 @@
 }
 
 .search-input::placeholder {
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
   font-weight: bold;
 }
 
 .search-icon {
   flex: 0 1 auto;
-  color: var(--place-holder-text-color);
+  color: var(--place-holder-text-color-1);
 }

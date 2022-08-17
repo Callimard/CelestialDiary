@@ -3,7 +3,7 @@ package org.bandrsoftwares.celestialdiary.security.privilege;
 import lombok.*;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.company.CompanyScopePrivilege;
-import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentManagementScope;
+import org.bandrsoftwares.celestialdiary.security.privilege.establishment.InternEstablishmentManagementScope;
 import org.bandrsoftwares.celestialdiary.security.privilege.establishment.EstablishmentScopePrivilege;
 
 @Builder
@@ -16,7 +16,7 @@ public class Privilege {
     // Constants.
 
     public static final CompanyManagementScope COMPANY_SCOPE_PRIVILEGE = new CompanyManagementScope();
-    public static final EstablishmentManagementScope ESTABLISHMENT_MANAGEMENT_SCOPE = new EstablishmentManagementScope();
+    public static final InternEstablishmentManagementScope ESTABLISHMENT_MANAGEMENT_SCOPE = new InternEstablishmentManagementScope();
 
     // Variables.
 

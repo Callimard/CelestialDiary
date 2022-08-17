@@ -1,0 +1,22 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-establishment-selection #establishmentSelection
+         (establishmentSelected)="container.displayInformation($event)"
+         (wantCreateEstablishment)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-establishment-information
+         [establishmentId]="container.elementSelected"
+         (wantGoBack)="container.resetInitialPos()"
+         (establishmentHasBeenUpdated)="establishmentSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-establishment-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (establishmentHasBeenCreated)="establishmentSelection.reload()">
+    </div>
+  </ng-template>
+</div>
+

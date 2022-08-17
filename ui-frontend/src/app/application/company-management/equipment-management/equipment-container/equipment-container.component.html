@@ -1,0 +1,21 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-equipment-selection #equipmentSelection
+         (equipmentSelected)="container.displayInformation($event)"
+         (wantCreateEquipment)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-equipment-information class="side-container"
+         [equipmentId]="container.elementSelected"
+         (wantGoBack)="container.resetInitialPos()"
+         (equipmentHasBeenUpdated)="equipmentSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-equipment-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (equipmentHasBeenCreated)="equipmentSelection.reload()">
+    </div>
+  </ng-template>
+</div>

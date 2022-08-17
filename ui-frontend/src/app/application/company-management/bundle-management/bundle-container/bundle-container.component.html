@@ -1,0 +1,22 @@
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-bundle-selection #bundleSelection
+         (bundleSelected)="container.displayInformation($event)"
+         (wantCreateBundle)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-bundle-information class="side-container"
+         [bundleId]="container.elementSelected"
+         (wantGoBack)="container.resetInitialPos()"
+         (bundleHasBeenUpdated)="bundleSelection.reload()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-bundle-creation
+         (wantGoBack)="container.resetInitialPos()"
+         (bundleHasBeenCreated)="bundleSelection.reload()">
+    </div>
+  </ng-template>
+</div>
+
