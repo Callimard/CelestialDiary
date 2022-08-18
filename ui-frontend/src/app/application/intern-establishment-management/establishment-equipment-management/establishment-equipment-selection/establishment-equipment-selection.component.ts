@@ -3,23 +3,9 @@ import {EstablishmentEquipmentManagementService} from "../../../../../service/in
 import {Observable} from "rxjs";
 import {EstablishmentEquipmentDTO} from "../../../../../data/model/establishment/establishment-equipment-dto";
 import {ActivatedRoute} from "@angular/router";
-import {PaneInfo, PaneInfoTransformer} from "../../../../library/informative/info-pane/info-pane.component";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
-
-export class EstablishmentEquipmentPaneInfoTransformer implements PaneInfoTransformer<EstablishmentEquipmentDTO> {
-  transform(elem: EstablishmentEquipmentDTO): EstablishmentEquipmentPaneInfo {
-    return {
-      title: elem.equipment.name,
-      subTitle: elem.equipment.description,
-      img: elem.equipment.photo,
-      establishmentEquipment: elem
-    }
-  }
-}
-
-export interface EstablishmentEquipmentPaneInfo extends PaneInfo {
-  establishmentEquipment: EstablishmentEquipmentDTO
-}
+import {AdvancedEstablishmentEquipmentContainerDTO} from "../../../../../data/model/establishment/advanced-establishment-equipment-container-dto";
+import {EquipmentPaneInfoTransformer} from "../../../company-management/equipment-management/equipment-selection/equipment-selection.component";
 
 @Component({
   selector: '[app-establishment-equipment-selection]',
@@ -33,11 +19,11 @@ export class EstablishmentEquipmentSelectionComponent implements OnInit {
 
   establishmentId!: string;
 
-  equipments$!: Observable<EstablishmentEquipmentDTO[]>;
+  equipments$!: Observable<AdvancedEstablishmentEquipmentContainerDTO[]>;
 
-  allEquipments: EstablishmentEquipmentDTO[] = [];
+  allEquipments: AdvancedEstablishmentEquipmentContainerDTO[] = [];
 
-  transformer: EstablishmentEquipmentPaneInfoTransformer = new EstablishmentEquipmentPaneInfoTransformer();
+  equipmentTransformer = new EquipmentPaneInfoTransformer();
 
   constructor(private establishmentEquipmentManagementService: EstablishmentEquipmentManagementService,
               private privilegeService: PrivilegeService,
@@ -59,16 +45,14 @@ export class EstablishmentEquipmentSelectionComponent implements OnInit {
   private chargeEstablishmentEquipments() {
     this.equipments$.subscribe((allEquipments) => {
       this.allEquipments = allEquipments;
+      EstablishmentEquipmentSelectionComponent.sortByEquipmentName(this.allEquipments);
     });
-  }
-
-  selectEstablishmentEquipment(equipment: EstablishmentEquipmentPaneInfo) {
-    this.establishmentEquipmentSelected.emit(equipment.establishmentEquipment);
   }
 
   filterEstablishmentEquipments(filter: string) {
     this.establishmentEquipmentManagementService.searchEstablishmentEquipments(this.establishmentId, filter).subscribe((allEquipments) => {
       this.allEquipments = allEquipments;
+      EstablishmentEquipmentSelectionComponent.sortByEquipmentName(this.allEquipments);
     });
   }
 
@@ -78,5 +62,16 @@ export class EstablishmentEquipmentSelectionComponent implements OnInit {
 
   get privilegeManagement(): PrivilegeService {
     return this.privilegeService;
+  }
+
+  private static sortByEquipmentName(allEquipments: AdvancedEstablishmentEquipmentContainerDTO[]) {
+    allEquipments.sort((aEEquipment0, aEEquipment1) => {
+      return aEEquipment0.equipment.name.localeCompare(aEEquipment1.equipment.name);
+    });
+    for (let eEquipment of allEquipments) {
+      eEquipment.establishmentEquipments.sort((e0, e1) => {
+        return e0.name.localeCompare(e1.name);
+      })
+    }
   }
 }

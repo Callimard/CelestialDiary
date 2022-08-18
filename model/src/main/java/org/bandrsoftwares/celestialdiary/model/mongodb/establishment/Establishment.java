@@ -1,6 +1,7 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.bandrsoftwares.celestialdiary.model.general.Address;
 import org.bandrsoftwares.celestialdiary.model.general.time.DatedTimeIntervalList;
 import org.bandrsoftwares.celestialdiary.model.general.time.NonDatedTimeIntervalList;
@@ -12,9 +13,10 @@ import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
+@Slf4j
 @ToString
 @Builder
 @Getter
@@ -53,7 +55,8 @@ public class Establishment {
 
     // Establishment Equipments
 
-    private Set<EstablishmentEquipment> equipments;
+    // Map<EquipmentId, Map<InternEstablishmentEquipmentId, EstablishmentEquipment>>
+    private Map<String, Map<String, EstablishmentEquipment>> equipments;
 
     // Establishment Rooms
 
@@ -73,7 +76,29 @@ public class Establishment {
 
     // Methods.
 
-    public boolean hasAsAssignedEmployee(Employee employee) {
-        return getAssignedEmployees().stream().map(Employee::getId).collect(Collectors.toSet()).contains(employee.getId());
+    public EstablishmentEquipment getEstablishmentEquipment(@NonNull String equipmentId, @NonNull String establishmentEquipmentId) {
+        if (getEquipments() != null) {
+            Map<String, EstablishmentEquipment> map = getEquipments().get(equipmentId);
+            if (map != null) {
+                return map.get(establishmentEquipmentId);
+            } else {
+                return null;
+            }
+        } else
+            return null;
+    }
+
+    public boolean deleteEstablishmentEquipment(@NonNull String equipmentId, @NonNull String establishmentEquipmentId) {
+        if (getEquipments() != null) {
+            Map<String, EstablishmentEquipment> map = getEquipments().get(equipmentId);
+            if (map != null) {
+                boolean removed = map.remove(establishmentEquipmentId) != null;
+                if (map.isEmpty()) {
+                    getEquipments().remove(equipmentId);
+                }
+                return removed;
+            }
+        }
+        return false;
     }
 }

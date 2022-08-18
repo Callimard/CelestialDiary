@@ -3,8 +3,8 @@ import {EstablishmentEquipmentDTO} from "../../../../../data/model/establishment
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EstablishmentEquipmentManagementService} from "../../../../../service/intern-establishment-management/equipment/establishment-equipment-management.service";
 import {ActivatedRoute} from "@angular/router";
-import {EstablishmentEquipmentUpdatedInformation} from "../../../../../data/model/establishment/establishment-equipment-updated-information";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
+import {EstablishmentEquipmentUpdatedInformation} from "../../../../../data/model/establishment/establishment-equipment-updated-information";
 
 @Component({
   selector: '[app-establishment-equipment-information]',
@@ -13,7 +13,7 @@ import {PrivilegeService} from "../../../../../service/authentication/privilege.
 })
 export class EstablishmentEquipmentInformationComponent implements OnInit, OnChanges {
 
-  @Input() establishmentEquipment?: EstablishmentEquipmentDTO;
+  @Input() establishmentEquipment!: EstablishmentEquipmentDTO;
 
   @Output() wantGoBack = new EventEmitter<boolean>();
   @Output() establishmentEquipmentHasBeenUpdated = new EventEmitter<boolean>();
@@ -40,36 +40,33 @@ export class EstablishmentEquipmentInformationComponent implements OnInit, OnCha
   }
 
   public reload() {
-    if (this.establishmentEquipment != null)
-      this.updateEquipmentForm = new FormGroup({
-        quantity: new FormControl(this.establishmentEquipment.quantity, [Validators.min(1)]),
-        numberUnusable: new FormControl(this.establishmentEquipment.numberUnusable, [Validators.min(0)])
-      })
+    this.updateEquipmentForm = new FormGroup({
+      name: new FormControl(this.establishmentEquipment.name, [Validators.required]),
+      available: new FormControl(this.establishmentEquipment.available)
+    })
   }
 
   onUpdate() {
     const form = this.updateEquipmentForm?.value;
     const updates: EstablishmentEquipmentUpdatedInformation = {
-      quantity: form.quantity,
-      numberUnusable: form.numberUnusable
+      name: form.name,
+      available: form.available
     }
 
-    if (this.establishmentEquipment)
-      this.establishmentEquipmentManagementService.updateEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipment.id, updates)
-        .subscribe((establishmentEquipment) => {
-          this.establishmentEquipment = establishmentEquipment;
-          this.reload();
-          this.establishmentEquipmentHasBeenUpdated.emit(true);
-        })
+    this.establishmentEquipmentManagementService.updateEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipmentId, this.establishmentEquipment.id, updates)
+      .subscribe((establishmentEquipment) => {
+        this.establishmentEquipment = establishmentEquipment;
+        this.reload();
+        this.establishmentEquipmentHasBeenUpdated.emit(true);
+      });
   }
 
   deleteEstablishmentEquipment() {
-    if (this.establishmentEquipment)
-      this.establishmentEquipmentManagementService.deleteEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipment.id)
-        .subscribe(() => {
-          this.establishmentEquipment = undefined;
-          this.establishmentEquipmentHasBeenDeleted.emit(true);
-        })
+    this.establishmentEquipmentManagementService.deleteEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipmentId, this.establishmentEquipment.id)
+      .subscribe(() => {
+        this.establishmentEquipmentHasBeenDeleted.emit(true);
+        this.wantGoBack.emit(true);
+      })
   }
 
   get privilegeManagement(): PrivilegeService {

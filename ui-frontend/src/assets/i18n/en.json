@@ -136,13 +136,14 @@
     },
     "management": {
       "equipment": {
-        "available": "Available equipments",
+        "available-equipments": "Available equipments",
         "no-more-available": "No more available equipments",
         "selected": "Selected equipments",
         "add": "Add equipment",
-        "delete": "Remove equipment from the establishment",
+        "delete": "Remove",
+        "name": "Name",
         "quantity": "Quantity",
-        "unusable": "Number unusable"
+        "available": "Available"
       }
     }
   },

@@ -3,9 +3,8 @@ import {NonDatedTimeIntervalListDTO} from "../../general/time/non-dated-time-int
 import {DatedTimeIntervalListDTO} from "../../general/time/dated-time-interval-list-dto";
 import {EstablishmentProductDTO} from "./establishment-product-dto";
 import {EstablishmentPrestationDTO} from "./establishment-prestation-dto";
-import {EstablishmentBundleDTO} from "./establishment-bundle-dto";
 import {WrappedEmployeeDTO} from "../person/employee/wrapped-employee-dto";
-import {EstablishmentEquipmentDTO} from "./establishment-equipment-dto";
+import {EstablishmentEquipmentContainerDTO} from "./establishment-equipment-container-dto";
 
 export interface EstablishmentDTO {
   id: string,
@@ -23,8 +22,8 @@ export interface EstablishmentDTO {
   exceptionalClosing: DatedTimeIntervalListDTO[],
   proposedProducts: EstablishmentProductDTO[],
   proposedServices: EstablishmentPrestationDTO[],
-  proposedBundles: EstablishmentBundleDTO[],
-  equipments: EstablishmentEquipmentDTO[],
+  proposedBundles: EstablishmentEquipmentContainerDTO[],
+  equipments: EstablishmentEquipmentContainerDTO[],
   assignedEmployees: WrappedEmployeeDTO[],
   activated: boolean,
   creationDate: string

@@ -1,6 +1,6 @@
 <div>
-  <div *ngIf="availableEquipments.length > 0 || selectedEquipment != null else noAvailableEquipments">
-    <h3>{{ 'establishment.management.equipment.available' | translate}}</h3>
+  <div *ngIf="availableEquipments.length > 0 else noAvailableEquipments">
+    <h3>{{ 'establishment.management.equipment.available-equipments' | translate}}</h3>
     <div app-element-list
          class="equipment-list need-top-space"
          [allElements]="availableEquipments"

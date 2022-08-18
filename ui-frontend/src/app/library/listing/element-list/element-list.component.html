@@ -1,7 +1,7 @@
 <ul class="element-list">
   <li class="element-list-padding" [style.height]="listPaddingHeight"></li>
   <li
-    class="basic-clickable element-ticket-information" [style.height]="itemHeight"
+    class="element-ticket-information" [style.height]="itemHeight"
     *ngFor="let element of allElements">
     <ng-container
       *ngTemplateOutlet="
@@ -14,7 +14,7 @@
 
 <ng-template #defaultItem let-element>
   <div app-info-pane
-       class="item"
+       class="basic-clickable item"
        [displayLeft]="false"
        [info]="element"
        (click)="elementSelected.emit(element)">
