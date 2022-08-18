@@ -55,6 +55,10 @@ public class Establishment {
 
     private Set<EstablishmentEquipment> equipments;
 
+    // Establishment Rooms
+
+    private Set<Room> rooms;
+
     @ToString.Exclude
     @DocumentReference(collection = "Employee", lazy = true)
     private List<Employee> assignedEmployees;
