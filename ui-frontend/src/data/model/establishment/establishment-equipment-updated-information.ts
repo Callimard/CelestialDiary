@@ -1,4 +1,5 @@
 export interface EstablishmentEquipmentUpdatedInformation {
-  quantity: number,
-  numberUnusable: number
+  name: string,
+  available: boolean,
+  photo?: string
 }

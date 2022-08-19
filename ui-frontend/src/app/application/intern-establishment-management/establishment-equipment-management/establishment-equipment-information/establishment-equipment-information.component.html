@@ -1,38 +1,31 @@
 <div class="establishment-equipment-information-container" *ngIf="establishmentEquipment">
   <div class="establishment-information-card floating-card">
     <i class="go-back-arrow fa-solid fa-arrow-left" (click)="wantGoBack.emit(true)"></i>
-    <div class="img-square-container">
+    <h3>
+      {{establishmentEquipment.name}}
+    </h3>
+    <div class="img-square-container need-top-space">
       <img class="establishment-equipment-img"
-           [src]="establishmentEquipment.equipment.photo ? establishmentEquipment.equipment.photo : '/assets/images/kraken.jpg'"
+           [src]="establishmentEquipment.photo ? establishmentEquipment.photo : '/assets/images/kraken.jpg'"
            alt="Establishment equipment photo">
     </div>
     <div class="establishment-equipment-information need-top-space">
-      <h3>
-        {{establishmentEquipment.equipment.name}}
-      </h3>
-      <p>
-        {{establishmentEquipment.equipment.description}}
-      </p>
       <form *ngIf="updateEquipmentForm"
-            class="form-group"
             [formGroup]="updateEquipmentForm"
             (ngSubmit)="onUpdate()">
         <div app-basic-input-form
              [group]="updateEquipmentForm"
-             controlName="quantity"
-             inputType="number"
-             placeHolder="1"
-             label="{{ 'establishment.management.equipment.quantity' | translate }}"
-             labelFor="quantity">
+             controlName="name"
+             inputType="text"
+             placeHolder="{{ 'establishment.management.equipment.name' | translate }}"
+             label="{{ 'establishment.management.equipment.name' | translate }}"
+             labelFor="name">
         </div>
-        <div app-basic-input-form
-             style="color: red"
-             [group]="updateEquipmentForm"
-             controlName="numberUnusable"
-             inputType="number"
-             placeHolder="0"
-             label="{{ 'establishment.management.equipment.unusable' | translate }}"
-             labelFor="number-unusable">
+        <div class="form-control">
+          <label for="available">
+            {{ 'establishment.management.equipment.available' | translate }}
+          </label>
+          <input id="available" name="available" formControlName="available" type="checkbox">
         </div>
         <div class="form-submit-group">
           <button class="super-valid-button need-top-space" type="submit"

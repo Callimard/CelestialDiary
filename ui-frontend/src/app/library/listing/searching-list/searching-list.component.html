@@ -10,9 +10,10 @@
      [itemHeight]="this.itemHeight"
      [paneInfoTransformer]="paneInfoTransformer"
      (elementSelected)="elementSelected.emit($event)">
-  <ng-template #item *ngIf="itemTemplate != null">
+  <ng-template #item *ngIf="itemTemplate != null" let-element>
     <ng-container
-      *ngTemplateOutlet="itemTemplate != null ? itemTemplate : null"></ng-container>
+      *ngTemplateOutlet="itemTemplate != null ? itemTemplate : null;
+      context: {$implicit: element}"></ng-container>
   </ng-template>
 </div>
 

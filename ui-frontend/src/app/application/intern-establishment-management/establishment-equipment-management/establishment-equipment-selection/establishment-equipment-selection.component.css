@@ -10,6 +10,46 @@
   z-index: 1;
 }
 
+.establishment-equipment-title {
+  padding: 0.5em;
+  background: var(--place-holder-text-color-2);
+}
+
+.establishment-equipment-item {
+  padding-left: 0.5em;
+  list-style: none;
+}
+
+.establishment-equipment-instance {
+  padding: 0.3em 0;
+}
+
+.establishment-equipment-info-center {
+  width: 100%;
+  height: 100%;
+
+  text-overflow: ellipsis;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.7em;
+  align-items: flex-start;
+}
+
+.establishment-equipment-photo-container {
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+  border-radius: 60px;
+}
+
+.establishment-equipment-photo-container img {
+  width: 100%;
+  height: auto;
+  transform: scale(1.5);
+}
+
 .add-establishment-equipment-button {
   position: absolute;
 

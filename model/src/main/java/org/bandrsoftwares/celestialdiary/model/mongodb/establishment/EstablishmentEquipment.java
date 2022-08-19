@@ -1,8 +1,6 @@
 package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
-import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import java.util.Objects;
 
@@ -15,25 +13,30 @@ import java.util.Objects;
 public class EstablishmentEquipment {
 
     @NonNull
-    private Integer quantity;
+    private String id;
 
     @NonNull
-    private Integer numberUnusable;
+    private String equipmentId;
 
-    @ToString.Exclude
-    @DocumentReference(collection = "Equipment", lazy = true)
     @NonNull
-    private Equipment equipment;
+    private String name;
+
+    @NonNull
+    private Boolean available;
+
+    private String roomId;
+
+    private String photo;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof EstablishmentEquipment that)) return false;
-        return equipment.getId().equals(that.equipment.getId());
+        return id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(equipment.getId());
+        return Objects.hash(id);
     }
 }

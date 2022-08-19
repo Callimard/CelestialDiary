@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {EstablishmentManagementService} from "../../../../../../service/company-management/establishment/establishment-management.service";
-import {EstablishmentDTO} from "../../../../../../data/model/establishment/establishment-dto";
 import {EquipmentManagementService} from "../../../../../../service/company-management/equipment/equipment-management.service";
 import {EquipmentDTO} from "../../../../../../data/model/equipment/equipment-dto";
 import {PaneInfoWithId} from "../../../../../library/informative/info-pane/info-pane.component";
@@ -22,7 +20,6 @@ export class EstablishmentEquipmentAddFormComponent implements OnInit {
 
   companyEquipments: EquipmentDTO[] = [];
   availableEquipments: EquipmentDTO[] = [];
-  establishment?: EstablishmentDTO;
 
   equipmentPaneInfoTransformer = new EquipmentPaneInfoTransformer();
 
@@ -34,7 +31,6 @@ export class EstablishmentEquipmentAddFormComponent implements OnInit {
   })
 
   constructor(private establishmentEquipmentManagementService: EstablishmentEquipmentManagementService,
-              private establishmentManagementService: EstablishmentManagementService,
               private equipmentManagementService: EquipmentManagementService) {
     // Nothing
   }
@@ -44,31 +40,16 @@ export class EstablishmentEquipmentAddFormComponent implements OnInit {
   }
 
   public reload() {
-    this.equipmentManagementService.allEquipments().then((allEquipments) => {
-      this.companyEquipments = allEquipments;
-      this.chargeEstablishment();
+    this.equipmentManagementService.allEquipments().then((companyEquipments) => {
+      this.companyEquipments = companyEquipments;
+      this.fillAvailableEquipment();
     })
   }
 
-  private chargeEstablishment() {
-    this.establishmentManagementService.getSpecificEstablishment(this.establishmentId).then((establishment) => {
-      this.establishment = establishment;
-      this.mergeEstablishmentInformation(this.establishment);
-    });
-  }
-
-  private mergeEstablishmentInformation(establishment: EstablishmentDTO) {
-    if (establishment.equipments) {
-      const establishmentEquipmentIds = establishment.equipments.map(equipment => equipment.equipment.id);
-      for (let equipment of this.companyEquipments) {
-        if (!establishmentEquipmentIds.includes(equipment.id)) {
-          this.availableEquipments.push(equipment);
-        }
-      }
-    } else {
-      for (let equipment of this.companyEquipments) {
-        this.availableEquipments.push(equipment);
-      }
+  private fillAvailableEquipment() {
+    this.availableEquipments = [];
+    for (let equipment of this.companyEquipments) {
+      this.availableEquipments.push(equipment);
     }
   }
 
@@ -101,8 +82,7 @@ export class EstablishmentEquipmentAddFormComponent implements OnInit {
     }
 
     this.establishmentEquipmentManagementService.addEstablishmentEquipment(this.establishmentId, this.equipmentIdFormControl.value, addingInformation)
-      .subscribe((establishmentEquipment) => {
-        console.log(establishmentEquipment);
+      .subscribe(() => {
         this.establishmentEquipmentCreated.emit(true);
         this.selectedEquipment = undefined;
         this.reload();

@@ -7,6 +7,8 @@ import {JwtAccount} from "../../authentication/jwt-account";
 import {AuthenticationService} from "../../authentication/authentication.service";
 import {EstablishmentEquipmentUpdatedInformation} from "../../../data/model/establishment/establishment-equipment-updated-information";
 import {EstablishmentEquipmentAddingInformation} from "../../../data/model/establishment/establishment-equipment-adding-information";
+import {AdvancedEstablishmentEquipmentContainerDTO} from "../../../data/model/establishment/advanced-establishment-equipment-container-dto";
+import {EstablishmentDTO} from "../../../data/model/establishment/establishment-dto";
 
 @Injectable({
   providedIn: 'root'
@@ -25,37 +27,52 @@ export class EstablishmentEquipmentManagementService {
     return EstablishmentEquipmentManagementService.establishmentEquipmentUrl(companyId, establishmentId) + '/' + equipmentId;
   }
 
-  public allEstablishmentEquipments(establishmentId: string): Observable<EstablishmentEquipmentDTO[]> {
+  public allEstablishmentEquipments(establishmentId: string): Observable<AdvancedEstablishmentEquipmentContainerDTO[]> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.get<EstablishmentEquipmentDTO[]>(EstablishmentEquipmentManagementService.establishmentEquipmentUrl(jwtAccount.companyId, establishmentId));
+    return this.http.get<AdvancedEstablishmentEquipmentContainerDTO[]>(EstablishmentEquipmentManagementService.establishmentEquipmentUrl(jwtAccount.companyId, establishmentId));
   }
 
-  public searchEstablishmentEquipments(establishmentId: string, filter: string): Observable<EstablishmentEquipmentDTO[]> {
+  public searchEstablishmentEquipments(establishmentId: string, filter: string): Observable<AdvancedEstablishmentEquipmentContainerDTO[]> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.get<EstablishmentEquipmentDTO[]>(EstablishmentEquipmentManagementService.establishmentEquipmentUrl(jwtAccount.companyId, establishmentId), {
+    return this.http.get<AdvancedEstablishmentEquipmentContainerDTO[]>(EstablishmentEquipmentManagementService.establishmentEquipmentUrl(jwtAccount.companyId, establishmentId), {
       params: {
         filter: filter
       }
     });
   }
 
-  public getSpecificEstablishmentEquipment(establishmentId: string, equipmentId: string): Observable<EstablishmentEquipmentDTO> {
+  public getSpecificEstablishmentEquipment(establishmentId: string, equipmentId: string, establishmentEquipmentId: string): Observable<EstablishmentEquipmentDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.get<EstablishmentEquipmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId));
+    return this.http.get<EstablishmentEquipmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId),
+      {
+        params: {
+          idEstablishmentEquipment: establishmentEquipmentId
+        }
+      });
   }
 
-  public addEstablishmentEquipment(establishmentId: string, equipmentId: string, addingInformation: EstablishmentEquipmentAddingInformation): Observable<EstablishmentEquipmentDTO> {
+  public addEstablishmentEquipment(establishmentId: string, equipmentId: string, addingInformation: EstablishmentEquipmentAddingInformation): Observable<EstablishmentDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.post<EstablishmentEquipmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId), addingInformation);
+    return this.http.post<EstablishmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId), addingInformation);
   }
 
-  public updateEstablishmentEquipment(establishmentId: string, equipmentId: string, updates: EstablishmentEquipmentUpdatedInformation): Observable<EstablishmentEquipmentDTO> {
+  public updateEstablishmentEquipment(establishmentId: string, equipmentId: string, establishmentEquipmentId: string, updates: EstablishmentEquipmentUpdatedInformation): Observable<EstablishmentEquipmentDTO> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.put<EstablishmentEquipmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId), updates);
+    return this.http.put<EstablishmentEquipmentDTO>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId), updates,
+      {
+        params: {
+          idEstablishmentEquipment: establishmentEquipmentId
+        }
+      });
   }
 
-  public deleteEstablishmentEquipment(establishmentId: string, equipmentId: string): Observable<boolean> {
+  public deleteEstablishmentEquipment(establishmentId: string, equipmentId: string, establishmentEquipmentId: string): Observable<boolean> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.delete<boolean>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId));
+    return this.http.delete<boolean>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId),
+      {
+        params: {
+          idEstablishmentEquipment: establishmentEquipmentId
+        }
+      });
   }
 }

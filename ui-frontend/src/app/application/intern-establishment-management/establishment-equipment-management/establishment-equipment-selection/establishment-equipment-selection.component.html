@@ -1,10 +1,42 @@
 <div app-searching-list class="establishment-equipment-searching-list-container"
      [allElements]="allEquipments"
      searchBarPlaceHolder="{{ 'equipment.search' | translate }}"
-     [listPaddingHeight]="'var(--company-management-floating-button-size)'"
-     [paneInfoTransformer]="transformer"
-     (elementSelected)="selectEstablishmentEquipment($event)"
+     itemHeight="auto"
+     listPaddingHeight="var(--company-management-floating-button-size)"
      (searchFilter)="filterEstablishmentEquipments($event)">
+
+  <ng-template #item let-element>
+    <div class="establishment-equipment-container">
+      <div app-info-pane
+           class="establishment-equipment-title"
+           [displayLeft]="false"
+           [info]="equipmentTransformer.transform(element.equipment)">
+      </div>
+      <ul class="establishment-equipment-item">
+        <li app-info-pane
+            class="basic-clickable establishment-equipment-instance"
+            [displayLeft]="false"
+            *ngFor="let eEquipment of element.establishmentEquipments"
+            [info]="eEquipment"
+            (click)="establishmentEquipmentSelected.emit(eEquipment)">
+          <ng-template #center let-info>
+            <div class="establishment-equipment-info-center">
+              <h4 style="font-weight: bold">
+                {{info.name}} <strong *ngIf="!info.available" style="color: red">(Indisponible)</strong>
+              </h4>
+            </div>
+          </ng-template>
+          <ng-template #right let-info>
+            <div class="default-right-template-container">
+              <div class="establishment-equipment-photo-container">
+                <img [src]="info.photo != null ? info.photo : '/assets/images/kraken.jpg'" alt="Info pane image">
+              </div>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
 </div>
 <button class="floating-button add-establishment-equipment-button"
         *ngIf="privilegeManagement.hasEstablishmentEquipmentAdd(establishmentId)"
