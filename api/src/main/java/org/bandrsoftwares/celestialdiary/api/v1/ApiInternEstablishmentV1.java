@@ -12,6 +12,11 @@ public class ApiInternEstablishmentV1 {
 
     public static final String INTERN_ESTABLISHMENT_MANAGEMENT_URL = ESTABLISHMENTS_URL + SPECIFIC_ESTABLISHMENT;
 
+    // Room Management.
+
+    public static final String ROOMS_URL = INTERN_ESTABLISHMENT_MANAGEMENT_URL + "/rooms";
+    public static final String SPECIFIC_ROOM = "/{roomName}";
+
     // Establishment Equipment Management.
 
     public static final String ESTABLISHMENT_EQUIPMENTS_URL = INTERN_ESTABLISHMENT_MANAGEMENT_URL + "/equipments";

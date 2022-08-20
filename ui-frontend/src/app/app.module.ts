@@ -104,6 +104,11 @@ import { EstablishmentEquipmentSelectionComponent } from './application/intern-e
 import { EstablishmentEquipmentAddingComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-adding.component';
 import { EstablishmentEquipmentAddFormComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-add-form/establishment-equipment-add-form.component';
 import { EstablishmentEquipmentInformationComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-information/establishment-equipment-information.component';
+import { RoomCreationComponent } from './application/intern-establishment-management/room-management/room-creation/room-creation.component';
+import { RoomInformationComponent } from './application/intern-establishment-management/room-management/room-information/room-information.component';
+import { RoomSelectionComponent } from './application/intern-establishment-management/room-management/room-selection/room-selection.component';
+import { RoomCreationFormComponent } from './application/intern-establishment-management/room-management/room-creation/room-creation-form/room-creation-form.component';
+import { SquareImageComponent } from './library/container/square-image/square-image.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -246,7 +251,12 @@ const appRoutes: Routes = [
     EstablishmentEquipmentSelectionComponent,
     EstablishmentEquipmentAddingComponent,
     EstablishmentEquipmentAddFormComponent,
-    EstablishmentEquipmentInformationComponent
+    EstablishmentEquipmentInformationComponent,
+    RoomCreationComponent,
+    RoomInformationComponent,
+    RoomSelectionComponent,
+    RoomCreationFormComponent,
+    SquareImageComponent
   ],
   imports: [
     BrowserModule,

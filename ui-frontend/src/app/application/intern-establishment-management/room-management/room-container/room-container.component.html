@@ -1,1 +1,25 @@
-<p>room-container works!</p>
+<div app-select-create-information-container #container>
+  <ng-template #selection>
+    <div app-room-selection #roomSelection
+         [establishmentId]="establishmentId"
+         (roomSelected)="container.displayInformation($event)"
+         (wantCreateRoom)="container.displayCreation()">
+    </div>
+  </ng-template>
+  <ng-template #information>
+    <div app-room-information
+         [establishmentId]="establishmentId"
+         [room]="container.elementSelected"
+         (wantGoBack)="container.resetInitialPos()"
+         (roomHasBeenUpdated)="roomSelection.reload()"
+         (roomHasBeenDeleted)="roomSelection.reload(); container.resetInitialPos()">
+    </div>
+  </ng-template>
+  <ng-template #creation>
+    <div app-room-creation
+         [establishmentId]="establishmentId"
+         (roomCreated)="container.resetInitialPos(); roomSelection.reload()"
+         (wantGoBack)="container.resetInitialPos()">
+    </div>
+  </ng-template>
+</div>

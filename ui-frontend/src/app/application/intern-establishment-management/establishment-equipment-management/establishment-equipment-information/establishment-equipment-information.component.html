@@ -1,13 +1,15 @@
-<div class="establishment-equipment-information-container" *ngIf="establishmentEquipment">
+<div class="vertical-container" *ngIf="establishmentEquipment">
   <div class="establishment-information-card floating-card">
     <i class="go-back-arrow fa-solid fa-arrow-left" (click)="wantGoBack.emit(true)"></i>
     <h3>
       {{establishmentEquipment.name}}
     </h3>
-    <div class="img-square-container need-top-space">
-      <img class="establishment-equipment-img"
-           [src]="establishmentEquipment.photo ? establishmentEquipment.photo : '/assets/images/kraken.jpg'"
-           alt="Establishment equipment photo">
+    <div app-square-image
+         class="establishment-equipment-img"
+         [sideSize]="75"
+         [img]="establishmentEquipment.photo ? establishmentEquipment.photo : '/assets/images/kraken.jpg'"
+         [round]="true"
+         border="2px solid var(--primary-light-1)">
     </div>
     <div class="establishment-equipment-information need-top-space">
       <form *ngIf="updateEquipmentForm"

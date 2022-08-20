@@ -1,0 +1,52 @@
+<div class="vertical-container">
+  <form class="floating-card room-information-container"
+        [formGroup]="roomUpdateFormGroup"
+        *ngIf="roomUpdateFormGroup"
+        (ngSubmit)="updateRoom()">
+    <i class="go-back-arrow fa-solid fa-arrow-left" (click)="wantGoBack.emit()"></i>
+    <div app-square-image
+         class="room-img"
+         [sideSize]="75"
+         [img]="room.photo ? room.photo : '/assets/images/kraken.jpg'"
+         [round]="true"
+         border="2px solid var(--primary-light-1)">
+    </div>
+    <h3 class="need-top-space">{{room.name}}</h3>
+    <div class="form-group">
+      <div app-basic-input-form
+           [group]="roomUpdateFormGroup"
+           controlName="name"
+           inputType="text"
+           label="{{ 'establishment.management.room.name' | translate }}"
+           labelFor="room-name">
+      </div>
+      <div app-basic-input-form
+           [group]="roomUpdateFormGroup"
+           controlName="capacity"
+           inputType="number"
+           label="{{ 'establishment.management.room.capacity' | translate }}"
+           labelFor="room-capacity">
+      </div>
+      <div class="form-control">
+        <label for="room-available">
+          {{ 'establishment.management.room.available' | translate }}
+        </label>
+        <input type="checkbox" id="room-available" name="room-available" formControlName="available">
+      </div>
+    </div>
+    <div class="form-submit-group">
+      <button class="super-valid-button need-top-space" type="submit"
+              [disabled]="roomUpdateFormGroup.invalid || !privilegeManagement.hasRoomUpdate(establishmentId)">
+        {{ 'update' | translate }}
+      </button>
+    </div>
+  </form>
+  <div app-floating-card-button class="need-top-space"
+       *ngIf="privilegeManagement.hasRoomDelete(establishmentId)"
+       text="{{ 'establishment.management.equipment.delete' | translate }}"
+       [textFontWeight]="'bold'"
+       [textColor]="'red'"
+       [textSize]="'1em'"
+       (buttonClick)="deleteRoom()">
+  </div>
+</div>

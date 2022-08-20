@@ -99,11 +99,11 @@ public class EstablishmentEquipmentManagementController {
 
     @DeleteEstablishmentEquipmentPrivilege
     @DeleteMapping(SPECIFIC_ESTABLISHMENT_EQUIPMENT)
-    public boolean deleteEstablishmentEquipment(@PathVariable(name = "idCompany") String idCompany,
-                                                @PathVariable(name = "idEstablishment") String idEstablishment,
-                                                @PathVariable(name = "idEquipment") String idEquipment,
-                                                @RequestParam(name = "idEstablishmentEquipment") String idEstablishmentEquipment) {
-        return establishmentEquipmentManagementService.deleteEstablishmentEquipment(idCompany, idEstablishment, idEquipment,
-                                                                                    idEstablishmentEquipment);
+    public void deleteEstablishmentEquipment(@PathVariable(name = "idCompany") String idCompany,
+                                             @PathVariable(name = "idEstablishment") String idEstablishment,
+                                             @PathVariable(name = "idEquipment") String idEquipment,
+                                             @RequestParam(name = "idEstablishmentEquipment") String idEstablishmentEquipment) {
+        establishmentEquipmentManagementService.deleteEstablishmentEquipment(idCompany, idEstablishment, idEquipment,
+                                                                             idEstablishmentEquipment);
     }
 }

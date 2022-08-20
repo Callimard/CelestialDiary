@@ -1,0 +1,25 @@
+<form class="room-creation-form-container" [formGroup]="roomCreationFormGroup" (ngSubmit)="createRoom()">
+  <div app-basic-input-form
+       [group]="roomCreationFormGroup"
+       controlName="name"
+       inputType="text"
+       placeHolder="{{ 'establishment.management.room.name' | translate }}"
+       label="{{ 'establishment.management.room.name' | translate }}"
+       labelFor="room-name">
+  </div>
+  <div app-basic-input-form
+       [group]="roomCreationFormGroup"
+       controlName="capacity"
+       inputType="number"
+       placeHolder="{{ 'establishment.management.room.capacity' | translate }}"
+       label="{{ 'establishment.management.room.capacity' | translate }}"
+       labelFor="room-capacity">
+  </div>
+  <div class="form-submit-group">
+    <button class="super-valid-button need-top-space"
+            type="submit"
+            [disabled]="roomCreationFormGroup.invalid">
+      {{ 'establishment.management.room.create' | translate}}
+    </button>
+  </div>
+</form>

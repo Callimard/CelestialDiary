@@ -7,6 +7,8 @@ import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
 import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentEquipment;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
@@ -31,12 +33,19 @@ public interface EstablishmentEquipmentManagementService {
     }
 
     EstablishmentEquipment updateEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                               @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId,
-                                               @Valid EstablishmentEquipmentUpdatedInformation updates);
+                                                        @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId,
+                                                        @Valid EstablishmentEquipmentUpdatedInformation updates);
 
     record EstablishmentEquipmentUpdatedInformation(@NonNull String name, boolean available, String photo) {
     }
 
-    boolean deleteEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
+    void deleteEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
                                          @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId);
+
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    class EstablishmentEquipmentNotFoundException extends RuntimeException {
+        public EstablishmentEquipmentNotFoundException(String establishmentEquipmentId, String establishmentName) {
+            super("The establishment equipment " + establishmentEquipmentId + " has not been found in the establishment " + establishmentName);
+        }
+    }
 }

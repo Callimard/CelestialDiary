@@ -58,6 +58,7 @@ export const backend = {
   bundlesUrl: "/bundles",
   rolesUrl: "/roles",
   equipmentsUrl: "/equipments",
+  roomsUrl: "/rooms"
 }
 
 export const privileges = {

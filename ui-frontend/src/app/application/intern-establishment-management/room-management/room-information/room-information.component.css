@@ -1,0 +1,46 @@
+.room-information-container {
+  position: relative;
+}
+
+.go-back-arrow {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 35px;
+  height: 35px;
+
+  font-size: 25px;
+
+  top: 7px;
+  left: 7px;
+}
+
+.room-img-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-square-container {
+  position: relative;
+
+  width: 75%;
+  height: 0;
+  padding-top: 75%;
+
+  border-radius: 100%;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 0 5px 0, rgba(0, 0, 0, 0.1) 0 0 1px 0;
+
+  overflow: hidden;
+}
+
+.room-img {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

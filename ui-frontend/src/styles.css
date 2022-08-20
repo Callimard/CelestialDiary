@@ -254,3 +254,12 @@ input[type=time] {
 .need-top-space {
   margin-top: 1em;
 }
+
+.vertical-container {
+  padding: var(--common-container-padding);
+
+  height: 100%;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}

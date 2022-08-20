@@ -66,9 +66,9 @@ export class EstablishmentEquipmentManagementService {
       });
   }
 
-  public deleteEstablishmentEquipment(establishmentId: string, equipmentId: string, establishmentEquipmentId: string): Observable<boolean> {
+  public deleteEstablishmentEquipment(establishmentId: string, equipmentId: string, establishmentEquipmentId: string): Observable<any> {
     const jwtAccount: JwtAccount = AuthenticationService.getJwtAccount();
-    return this.http.delete<boolean>(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId),
+    return this.http.delete(EstablishmentEquipmentManagementService.specificEstablishmentEquipmentUrl(jwtAccount.companyId, establishmentId, equipmentId),
       {
         params: {
           idEstablishmentEquipment: establishmentEquipmentId

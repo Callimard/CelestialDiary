@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {RoomSelectionComponent} from "../room-selection/room-selection.component";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-room-container',
@@ -7,8 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomContainerComponent implements OnInit {
 
-  constructor() {
-    // Nothing
+  @ViewChild("roomSelection") roomSelection!: RoomSelectionComponent;
+
+  establishmentId!: string;
+
+  constructor(private activatedRoute: ActivatedRoute) {
+    this.activatedRoute.params.subscribe(params => {
+      this.establishmentId = params['establishmentId'];
+    })
   }
 
   ngOnInit(): void {

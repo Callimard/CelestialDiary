@@ -1,0 +1,11 @@
+<div class="vertical-container">
+  <div app-basic-title class="floating-card"
+       title="{{ 'establishment.management.room.creation' | translate }}"
+       (goBack)="wantGoBack.emit()">
+  </div>
+  <div app-room-creation-form
+       class="floating-card need-top-space"
+       [establishmentId]="establishmentId"
+       (roomCreated)="roomCreated.emit()">
+  </div>
+</div>

@@ -144,6 +144,13 @@
         "name": "Nom",
         "quantity": "Quantité",
         "available": "Disponible"
+      },
+      "room": {
+        "creation": "Créer une salle",
+        "name": "Nom de la salle",
+        "capacity": "Capacité",
+        "available": "Disponible",
+        "create": "Créer"
       }
     }
   },

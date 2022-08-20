@@ -1,0 +1,13 @@
+<div app-searching-list class="room-searching-list-container"
+     [allElements]="allRooms"
+     searchBarPlaceHolder="{{ 'equipment.search' | translate }}"
+     listPaddingHeight="var(--company-management-search-bar-height)"
+     [paneInfoTransformer]="transformer"
+     (searchFilter)="filterRooms($event)"
+     (elementSelected)="roomSelected.emit($event.room)">
+</div>
+<button class="floating-button create-room-button"
+        *ngIf="privilegeManagement.hasRoomCreate(establishmentId)"
+        (click)="wantCreateRoom.emit()">
+  <i class="fa-solid fa-plus"></i>
+</button>

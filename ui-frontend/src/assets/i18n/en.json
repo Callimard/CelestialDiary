@@ -144,6 +144,13 @@
         "name": "Name",
         "quantity": "Quantity",
         "available": "Available"
+      },
+      "room": {
+        "creation": "Create room",
+        "name": "Room name",
+        "capacity": "Capacity",
+        "available": "Available",
+        "create": "Create"
       }
     }
   },

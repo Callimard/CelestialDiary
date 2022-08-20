@@ -2,7 +2,6 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
 
-import java.util.List;
 import java.util.Objects;
 
 @ToString
@@ -13,14 +12,17 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Room {
 
+    // Unique in the establishment and us as id.
     @NonNull
     private String name;
 
     @NonNull
     private Integer capacity;
 
+    private String photo;
+
     @NonNull
-    private List<RoomEquipment> equipments;
+    private Boolean available;
 
     @Override
     public boolean equals(Object o) {
