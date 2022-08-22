@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: '[app-establishment-equipment-adding]',
@@ -8,19 +7,17 @@ import {ActivatedRoute} from "@angular/router";
 })
 export class EstablishmentEquipmentAddingComponent implements OnInit {
 
+  @Input() establishmentId!: string
+
   @Output() wantGoBack = new EventEmitter<boolean>();
   @Output() establishmentEquipmentHasBeenAdded = new EventEmitter<boolean>();
 
-  establishmentId!: string
-
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor() {
     // Nothing
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      this.establishmentId = params['establishmentId'];
-    });
+    // Nothing
   }
 
 }

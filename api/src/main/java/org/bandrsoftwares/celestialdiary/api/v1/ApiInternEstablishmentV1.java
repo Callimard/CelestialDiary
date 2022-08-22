@@ -20,5 +20,5 @@ public class ApiInternEstablishmentV1 {
     // Establishment Equipment Management.
 
     public static final String ESTABLISHMENT_EQUIPMENTS_URL = INTERN_ESTABLISHMENT_MANAGEMENT_URL + "/equipments";
-    public static final String SPECIFIC_ESTABLISHMENT_EQUIPMENT = "/{idEquipment}";
+    public static final String SPECIFIC_ESTABLISHMENT_EQUIPMENT = "/{idEstablishmentEquipment}";
 }

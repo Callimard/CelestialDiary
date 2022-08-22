@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {EstablishmentEquipmentDTO} from "../../../../../data/model/establishment/establishment-equipment-dto";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EstablishmentEquipmentManagementService} from "../../../../../service/intern-establishment-management/equipment/establishment-equipment-management.service";
-import {ActivatedRoute} from "@angular/router";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 import {EstablishmentEquipmentUpdatedInformation} from "../../../../../data/model/establishment/establishment-equipment-updated-information";
 
@@ -13,6 +12,7 @@ import {EstablishmentEquipmentUpdatedInformation} from "../../../../../data/mode
 })
 export class EstablishmentEquipmentInformationComponent implements OnInit, OnChanges {
 
+  @Input() establishmentId!: string
   @Input() establishmentEquipment!: EstablishmentEquipmentDTO;
 
   @Output() wantGoBack = new EventEmitter<boolean>();
@@ -21,14 +21,8 @@ export class EstablishmentEquipmentInformationComponent implements OnInit, OnCha
 
   updateEquipmentForm?: FormGroup;
 
-  establishmentId!: string
-
   constructor(private establishmentEquipmentManagementService: EstablishmentEquipmentManagementService,
-              private privilegeService: PrivilegeService,
-              private activatedRoute: ActivatedRoute) {
-    this.activatedRoute.params.subscribe((params) => {
-      this.establishmentId = params['establishmentId'];
-    });
+              private privilegeService: PrivilegeService) {
   }
 
   ngOnInit(): void {
@@ -53,7 +47,7 @@ export class EstablishmentEquipmentInformationComponent implements OnInit, OnCha
       available: form.available
     }
 
-    this.establishmentEquipmentManagementService.updateEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipmentId, this.establishmentEquipment.id, updates)
+    this.establishmentEquipmentManagementService.updateEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.id, updates)
       .subscribe((establishmentEquipment) => {
         this.establishmentEquipment = establishmentEquipment;
         this.reload();
@@ -62,7 +56,7 @@ export class EstablishmentEquipmentInformationComponent implements OnInit, OnCha
   }
 
   deleteEstablishmentEquipment() {
-    this.establishmentEquipmentManagementService.deleteEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.equipmentId, this.establishmentEquipment.id)
+    this.establishmentEquipmentManagementService.deleteEstablishmentEquipment(this.establishmentId, this.establishmentEquipment.id)
       .subscribe(() => {
         this.establishmentEquipmentHasBeenDeleted.emit(true);
         this.wantGoBack.emit(true);

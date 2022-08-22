@@ -1,5 +1,5 @@
 <div app-searching-list class="establishment-equipment-searching-list-container"
-     [allElements]="allEquipments"
+     [allElements]="establishmentEquipments"
      searchBarPlaceHolder="{{ 'equipment.search' | translate }}"
      itemHeight="auto"
      listPaddingHeight="var(--company-management-search-bar-height)"
@@ -7,10 +7,10 @@
 
   <ng-template #item let-element>
     <div class="establishment-equipment-container">
-      <div app-info-pane
+      <div app-info-pane *ngIf="allEquipmentCharged"
            class="establishment-equipment-title"
            [displayLeft]="false"
-           [info]="equipmentTransformer.transform(element.equipment)">
+           [info]="allEquipments.get(element.equipmentId) | EquipmentPaneInfo">
       </div>
       <ul class="establishment-equipment-item">
         <li app-info-pane

@@ -1,59 +1,102 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {EstablishmentEquipmentManagementService} from "../../../../../service/intern-establishment-management/equipment/establishment-equipment-management.service";
 import {Observable} from "rxjs";
 import {EstablishmentEquipmentDTO} from "../../../../../data/model/establishment/establishment-equipment-dto";
-import {ActivatedRoute} from "@angular/router";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
-import {AdvancedEstablishmentEquipmentContainerDTO} from "../../../../../data/model/establishment/advanced-establishment-equipment-container-dto";
-import {EquipmentPaneInfoTransformer} from "../../../company-management/equipment-management/equipment-selection/equipment-selection.component";
+import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
+import {EquipmentDTO} from "../../../../../data/model/equipment/equipment-dto";
 
 @Component({
   selector: '[app-establishment-equipment-selection]',
   templateUrl: './establishment-equipment-selection.component.html',
   styleUrls: ['./establishment-equipment-selection.component.css']
 })
-export class EstablishmentEquipmentSelectionComponent implements OnInit {
+export class EstablishmentEquipmentSelectionComponent implements OnInit, OnChanges {
+
+  @Input() establishmentId!: string;
 
   @Output() establishmentEquipmentSelected = new EventEmitter<EstablishmentEquipmentDTO>();
   @Output() wantAddEstablishmentEquipment = new EventEmitter<boolean>();
 
-  establishmentId!: string;
+  allEquipments: Map<string, EquipmentDTO> = new Map<string, EquipmentDTO>();
+  allEquipmentCharged: boolean = false;
 
-  equipments$!: Observable<AdvancedEstablishmentEquipmentContainerDTO[]>;
+  establishmentEquipments$!: Observable<EstablishmentEquipmentDTO[]>;
+  allEstablishmentEquipments: EstablishmentEquipmentDTO[] = [];
+  formattedEstablishmentEquipments: { equipmentId: string, establishmentEquipments: EstablishmentEquipmentDTO[] }[] = [];
 
-  allEquipments: AdvancedEstablishmentEquipmentContainerDTO[] = [];
-
-  equipmentTransformer = new EquipmentPaneInfoTransformer();
+  equipmentsMap: { [equipmentId: string]: EstablishmentEquipmentDTO[] } = {};
 
   constructor(private establishmentEquipmentManagementService: EstablishmentEquipmentManagementService,
-              private privilegeService: PrivilegeService,
-              private activatedRoute: ActivatedRoute) {
+              private equipmentManagementService: EquipmentManagementService,
+              private privilegeService: PrivilegeService) {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe(params => {
-      this.establishmentId = params['establishmentId'];
-      this.equipments$ = this.establishmentEquipmentManagementService.allEstablishmentEquipments(this.establishmentId);
-      this.chargeEstablishmentEquipments();
-    });
+    // Nothing
+  }
+
+  ngOnChanges(_changes: SimpleChanges): void {
+    this.chargeAllEquipments();
+    this.establishmentEquipments$ = this.establishmentEquipmentManagementService.allEstablishmentEquipments(this.establishmentId);
+    this.chargeEstablishmentEquipments();
   }
 
   public reload() {
     this.chargeEstablishmentEquipments();
   }
 
+  private chargeAllEquipments() {
+    this.equipmentManagementService.allEquipments().then((allEquipments) => {
+      for (let equipment of allEquipments) {
+        this.allEquipments.set(equipment.id, equipment);
+      }
+      this.allEquipmentCharged = true;
+    })
+  }
+
   private chargeEstablishmentEquipments() {
-    this.equipments$.subscribe((allEquipments) => {
-      this.allEquipments = allEquipments;
-      EstablishmentEquipmentSelectionComponent.sortByEquipmentName(this.allEquipments);
+    this.establishmentEquipments$.subscribe((allEquipments) => {
+      this.allEstablishmentEquipments = allEquipments;
+      this.initEquipmentsMap();
     });
   }
 
   filterEstablishmentEquipments(filter: string) {
     this.establishmentEquipmentManagementService.searchEstablishmentEquipments(this.establishmentId, filter).subscribe((allEquipments) => {
-      this.allEquipments = allEquipments;
-      EstablishmentEquipmentSelectionComponent.sortByEquipmentName(this.allEquipments);
+      this.allEstablishmentEquipments = allEquipments;
+      this.initEquipmentsMap();
     });
+  }
+
+  private initEquipmentsMap() {
+    this.equipmentsMap = {};
+    for (let establishmentEquipment of this.allEstablishmentEquipments) {
+      if (this.equipmentsMap[establishmentEquipment.equipmentId] == null) {
+        this.equipmentsMap[establishmentEquipment.equipmentId] = [];
+      }
+
+      this.equipmentsMap[establishmentEquipment.equipmentId].push(establishmentEquipment);
+    }
+    this.initFormattedEstablishmentEquipments();
+  }
+
+  private initFormattedEstablishmentEquipments() {
+    this.formattedEstablishmentEquipments = [];
+    for (let key of Object.keys(this.equipmentsMap).sort((k1, k2) => k1.localeCompare(k2))) {
+      this.formattedEstablishmentEquipments.push({
+        equipmentId: key,
+        establishmentEquipments: this.equipmentsMap[key]
+      });
+    }
+
+    for (let elem of this.formattedEstablishmentEquipments) {
+      elem.establishmentEquipments = [...elem.establishmentEquipments].sort((eEq1, eEq2) => eEq1.name.localeCompare(eEq2.name));
+    }
+  }
+
+  get establishmentEquipments(): { equipmentId: string, establishmentEquipments: EstablishmentEquipmentDTO[] }[] {
+    return this.formattedEstablishmentEquipments;
   }
 
   navigateToAddEstablishmentEquipment() {
@@ -62,16 +105,5 @@ export class EstablishmentEquipmentSelectionComponent implements OnInit {
 
   get privilegeManagement(): PrivilegeService {
     return this.privilegeService;
-  }
-
-  private static sortByEquipmentName(allEquipments: AdvancedEstablishmentEquipmentContainerDTO[]) {
-    allEquipments.sort((aEEquipment0, aEEquipment1) => {
-      return aEEquipment0.equipment.name.localeCompare(aEEquipment1.equipment.name);
-    });
-    for (let eEquipment of allEquipments) {
-      eEquipment.establishmentEquipments.sort((e0, e1) => {
-        return e0.name.localeCompare(e1.name);
-      })
-    }
   }
 }

@@ -1,6 +1,7 @@
 <div app-select-create-information-container #container>
   <ng-template #selection>
     <div app-establishment-equipment-selection #establishmentEquipmentSelection
+         [establishmentId]="establishmentId"
          (establishmentEquipmentSelected)="container.displayInformation($event)"
          (wantAddEstablishmentEquipment)="container.displayCreation()">
     </div>
@@ -8,6 +9,7 @@
   <ng-template #information>
     <div app-establishment-equipment-information
          [establishmentEquipment]="container.elementSelected"
+         [establishmentId]="establishmentId"
          (wantGoBack)="container.resetInitialPos()"
          (establishmentEquipmentHasBeenUpdated)="establishmentSelection.reload()"
          (establishmentEquipmentHasBeenDeleted)="establishmentSelection.reload()">
@@ -15,6 +17,7 @@
   </ng-template>
   <ng-template #creation>
     <div app-establishment-equipment-adding
+         [establishmentId]="establishmentId"
          (wantGoBack)="container.resetInitialPos()"
          (establishmentEquipmentHasBeenAdded)="establishmentSelection.reload()">
     </div>

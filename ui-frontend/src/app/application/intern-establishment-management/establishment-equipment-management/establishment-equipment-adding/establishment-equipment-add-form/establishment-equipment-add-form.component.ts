@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EquipmentManagementService} from "../../../../../../service/company-management/equipment/equipment-management.service";
 import {EquipmentDTO} from "../../../../../../data/model/equipment/equipment-dto";
 import {PaneInfoWithId} from "../../../../../library/informative/info-pane/info-pane.component";
-import {EquipmentPaneInfoTransformer} from "../../../../company-management/equipment-management/equipment-selection/equipment-selection.component";
+import {EquipmentPaneInfoPipe} from "../../../../company-management/equipment-management/equipment-selection/equipment-selection.component";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EstablishmentEquipmentManagementService} from "../../../../../../service/intern-establishment-management/equipment/establishment-equipment-management.service";
 import {EstablishmentEquipmentAddingInformation} from "../../../../../../data/model/establishment/establishment-equipment-adding-information";
@@ -21,7 +21,7 @@ export class EstablishmentEquipmentAddFormComponent implements OnInit {
   companyEquipments: EquipmentDTO[] = [];
   availableEquipments: EquipmentDTO[] = [];
 
-  equipmentPaneInfoTransformer = new EquipmentPaneInfoTransformer();
+  equipmentPaneInfoTransformer = new EquipmentPaneInfoPipe();
 
   selectedEquipment?: EquipmentDTO;
 

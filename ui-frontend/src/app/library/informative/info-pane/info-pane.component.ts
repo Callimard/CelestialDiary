@@ -1,4 +1,4 @@
-import {Component, ContentChild, Input, OnInit, TemplateRef} from '@angular/core';
+import {Component, ContentChild, Input, OnInit, PipeTransform, TemplateRef} from '@angular/core';
 
 export interface PaneInfo {
   title: string,
@@ -6,12 +6,12 @@ export interface PaneInfo {
   img?: string
 }
 
-export interface PaneInfoWithId extends PaneInfo{
+export interface PaneInfoWithId extends PaneInfo {
   id: string
 }
 
-export interface PaneInfoTransformer<T> {
-  transform(elem: T): PaneInfo
+export interface PaneInfoTransformer<T> extends PipeTransform {
+  transform(elem: T): PaneInfo | undefined
 }
 
 @Component({

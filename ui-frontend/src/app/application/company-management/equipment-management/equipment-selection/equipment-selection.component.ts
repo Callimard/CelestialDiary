@@ -1,16 +1,17 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, Pipe} from '@angular/core';
 import {EquipmentDTO} from "../../../../../data/model/equipment/equipment-dto";
 import {PrivilegeService} from "../../../../../service/authentication/privilege.service";
 import {EquipmentManagementService} from "../../../../../service/company-management/equipment/equipment-management.service";
 import {PaneInfoTransformer, PaneInfoWithId} from "../../../../library/informative/info-pane/info-pane.component";
 
-export class EquipmentPaneInfoTransformer implements PaneInfoTransformer<EquipmentDTO> {
-  transform(equipment: EquipmentDTO): PaneInfoWithId {
-    return {
+@Pipe({name: "EquipmentPaneInfo"})
+export class EquipmentPaneInfoPipe implements PaneInfoTransformer<EquipmentDTO> {
+  transform(equipment: EquipmentDTO | undefined): PaneInfoWithId | undefined {
+    return equipment != null ? {
       id: equipment.id,
       title: equipment.name,
       img: equipment.photo
-    };
+    } : undefined;
   }
 
 }
@@ -27,7 +28,7 @@ export class EquipmentSelectionComponent implements OnInit {
 
   allEquipments: EquipmentDTO[] = [];
 
-  equipmentPaneInfoTransformer: PaneInfoTransformer<EquipmentDTO> = new EquipmentPaneInfoTransformer();
+  equipmentPaneInfoTransformer: PaneInfoTransformer<EquipmentDTO> = new EquipmentPaneInfoPipe();
 
   constructor(private equipmentManagementService: EquipmentManagementService,
               private privilegeService: PrivilegeService) {

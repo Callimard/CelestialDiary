@@ -57,7 +57,10 @@ import {EmployeeRoleSelectionComponent} from './application/company-management/e
 import {EmployeeRoleUpdaterComponent} from './application/company-management/employee-management/employee-information/employee-role-updater/employee-role-updater.component';
 import {AdvancedBasicInputFormComponent} from './library/form/advanced-basic-input-form/advanced-basic-input-form.component';
 import {BundleFormContentComponent} from './application/company-management/bundle-management/utils/bundle-form-content/bundle-form-content.component';
-import {EquipmentSelectionComponent} from './application/company-management/equipment-management/equipment-selection/equipment-selection.component';
+import {
+  EquipmentPaneInfoPipe,
+  EquipmentSelectionComponent
+} from './application/company-management/equipment-management/equipment-selection/equipment-selection.component';
 import {EquipmentInformationComponent} from './application/company-management/equipment-management/equipment-information/equipment-information.component';
 import {EquipmentCreationComponent} from './application/company-management/equipment-management/equipment-creation/equipment-creation.component';
 import {EquipmentFormCreatorComponent} from './application/company-management/equipment-management/equipment-creation/equipment-form-creator/equipment-form-creator.component';
@@ -99,16 +102,16 @@ import {DetailsSummaryComponent} from './library/container/details-summary/detai
 import {EstablishmentManagementNavigationComponent} from './application/side-bar/establishment-management-navigation/establishment-management-navigation.component';
 import {RoomContainerComponent} from './application/intern-establishment-management/room-management/room-container/room-container.component';
 import {NavListItemComponent} from './application/side-bar/nav-list-item/nav-list-item.component';
-import { EstablishmentEquipmentContainerComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-container/establishment-equipment-container.component';
-import { EstablishmentEquipmentSelectionComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-selection/establishment-equipment-selection.component';
-import { EstablishmentEquipmentAddingComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-adding.component';
-import { EstablishmentEquipmentAddFormComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-add-form/establishment-equipment-add-form.component';
-import { EstablishmentEquipmentInformationComponent } from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-information/establishment-equipment-information.component';
-import { RoomCreationComponent } from './application/intern-establishment-management/room-management/room-creation/room-creation.component';
-import { RoomInformationComponent } from './application/intern-establishment-management/room-management/room-information/room-information.component';
-import { RoomSelectionComponent } from './application/intern-establishment-management/room-management/room-selection/room-selection.component';
-import { RoomCreationFormComponent } from './application/intern-establishment-management/room-management/room-creation/room-creation-form/room-creation-form.component';
-import { SquareImageComponent } from './library/container/square-image/square-image.component';
+import {EstablishmentEquipmentContainerComponent} from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-container/establishment-equipment-container.component';
+import {EstablishmentEquipmentSelectionComponent} from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-selection/establishment-equipment-selection.component';
+import {EstablishmentEquipmentAddingComponent} from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-adding.component';
+import {EstablishmentEquipmentAddFormComponent} from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-adding/establishment-equipment-add-form/establishment-equipment-add-form.component';
+import {EstablishmentEquipmentInformationComponent} from './application/intern-establishment-management/establishment-equipment-management/establishment-equipment-information/establishment-equipment-information.component';
+import {RoomCreationComponent} from './application/intern-establishment-management/room-management/room-creation/room-creation.component';
+import {RoomInformationComponent} from './application/intern-establishment-management/room-management/room-information/room-information.component';
+import {RoomSelectionComponent} from './application/intern-establishment-management/room-management/room-selection/room-selection.component';
+import {RoomCreationFormComponent} from './application/intern-establishment-management/room-management/room-creation/room-creation-form/room-creation-form.component';
+import {SquareImageComponent} from './library/container/square-image/square-image.component';
 
 const appRoutes: Routes = [
   {path: frontend.login, component: LoginComponent},
@@ -256,7 +259,8 @@ const appRoutes: Routes = [
     RoomInformationComponent,
     RoomSelectionComponent,
     RoomCreationFormComponent,
-    SquareImageComponent
+    SquareImageComponent,
+    EquipmentPaneInfoPipe
   ],
   imports: [
     BrowserModule,

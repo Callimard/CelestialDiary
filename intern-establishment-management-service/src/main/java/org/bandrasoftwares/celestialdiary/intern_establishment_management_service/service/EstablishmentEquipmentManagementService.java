@@ -4,7 +4,6 @@ import lombok.NonNull;
 import org.bandrsoftwares.celestialdiary.aop.company.CompanyId;
 import org.bandrsoftwares.celestialdiary.aop.equipment.EquipmentId;
 import org.bandrsoftwares.celestialdiary.aop.establishment.EstablishmentId;
-import org.bandrsoftwares.celestialdiary.model.mongodb.equipment.Equipment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentEquipment;
 import org.springframework.http.HttpStatus;
@@ -13,17 +12,16 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import java.util.List;
-import java.util.Map;
 
 public interface EstablishmentEquipmentManagementService {
 
-    Map<Equipment, List<EstablishmentEquipment>> allEstablishmentEquipments(@CompanyId String companyId, @EstablishmentId String establishmentId);
+    List<EstablishmentEquipment> allEstablishmentEquipments(@CompanyId String companyId, @EstablishmentId String establishmentId);
 
-    Map<Equipment, List<EstablishmentEquipment>> searchEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                                              String filter);
+    List<EstablishmentEquipment> searchEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
+                                                              String filter);
 
     EstablishmentEquipment getSpecificEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                             @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId);
+                                                             @NonNull String establishmentEquipmentId);
 
     Establishment addEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
                                             @EquipmentId String equipmentId,
@@ -33,14 +31,14 @@ public interface EstablishmentEquipmentManagementService {
     }
 
     EstablishmentEquipment updateEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                        @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId,
+                                                        @NonNull String establishmentEquipmentId,
                                                         @Valid EstablishmentEquipmentUpdatedInformation updates);
 
     record EstablishmentEquipmentUpdatedInformation(@NonNull String name, boolean available, String photo) {
     }
 
     void deleteEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                         @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId);
+                                      @NonNull String establishmentEquipmentId);
 
     @ResponseStatus(value = HttpStatus.NOT_FOUND)
     class EstablishmentEquipmentNotFoundException extends RuntimeException {

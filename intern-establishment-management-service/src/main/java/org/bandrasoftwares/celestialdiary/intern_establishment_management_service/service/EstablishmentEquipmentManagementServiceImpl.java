@@ -1,7 +1,5 @@
 package org.bandrasoftwares.celestialdiary.intern_establishment_management_service.service;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,11 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Stream;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -43,64 +37,31 @@ public class EstablishmentEquipmentManagementServiceImpl implements Establishmen
     @SearchEstablishment
     @CheckCompanyCoherence
     @Override
-    public Map<Equipment, List<EstablishmentEquipment>> allEstablishmentEquipments(@CompanyId String companyId,
-                                                                                   @EstablishmentId String establishmentId) {
+    public List<EstablishmentEquipment> allEstablishmentEquipments(@CompanyId String companyId,
+                                                                   @EstablishmentId String establishmentId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
-
-        if (establishment.getEquipments() != null) {
-            Map<Equipment, List<EstablishmentEquipment>> res = Maps.newHashMap();
-            for (String equipmentId : establishment.getEquipments().keySet()) {
-                Optional<Equipment> opEquipment = equipmentRepository.findById(equipmentId);
-                opEquipment.ifPresent(equipment -> res.put(equipment, establishment.getEquipments().get(equipmentId).values().stream().toList()));
-            }
-
-            return res;
-        } else {
-            return Maps.newHashMap();
-        }
+        return establishment.allEstablishmentEquipments();
     }
 
     @SearchEstablishment
     @CheckCompanyCoherence
     @Override
-    public Map<Equipment, List<EstablishmentEquipment>> searchEstablishmentEquipment(@CompanyId String companyId,
-                                                                                     @EstablishmentId String establishmentId,
-                                                                                     String filter) {
+    public List<EstablishmentEquipment> searchEstablishmentEquipment(@CompanyId String companyId,
+                                                                     @EstablishmentId String establishmentId,
+                                                                     String filter) {
         String regexFilter = "(?i).*" + filter + ".*";
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
-
-        if (establishment.getEquipments() != null) {
-            Map<Equipment, List<EstablishmentEquipment>> res = Maps.newHashMap();
-            Stream<EstablishmentEquipment> searchStream =
-                    establishment.getEquipments().values().stream().map(Map::values).flatMap(Collection::stream);
-            List<EstablishmentEquipment> filteredEquipments =
-                    searchStream.filter(establishmentEquipment -> establishmentEquipment.getName().matches(regexFilter)).toList();
-
-            Map<String, Equipment> mapEquipmentIds = Maps.newHashMap();
-            for (EstablishmentEquipment establishmentEquipment : filteredEquipments) {
-                Equipment equipment = mapEquipmentIds.computeIfAbsent(establishmentEquipment.getEquipmentId(),
-                                                                      k -> equipmentRepository.findById(establishmentEquipment.getEquipmentId())
-                                                                              .orElse(null));
-                if (equipment != null) {
-                    res.computeIfAbsent(equipment, k -> Lists.newArrayList()).add(establishmentEquipment);
-                }
-            }
-
-            return res;
-        } else {
-            return Maps.newHashMap();
-        }
+        return establishment.searchEstablishmentEquipments(regexFilter);
     }
 
     @SearchEstablishment
-    @SearchEquipment
     @CheckCompanyCoherence
     @Override
     public EstablishmentEquipment getSpecificEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                                    @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId) {
+                                                                    @NonNull String establishmentEquipmentId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
 
-        EstablishmentEquipment establishmentEquipment = establishment.getEstablishmentEquipment(equipmentId, establishmentEquipmentId);
+        EstablishmentEquipment establishmentEquipment = establishment.getEstablishmentEquipment(establishmentEquipmentId);
         if (establishmentEquipment != null) {
             return establishmentEquipment;
         } else {
@@ -125,14 +86,13 @@ public class EstablishmentEquipmentManagementServiceImpl implements Establishmen
     }
 
     @SearchEstablishment
-    @SearchEquipment
     @CheckCompanyCoherence
     @Override
     public EstablishmentEquipment updateEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                                               @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId,
+                                                               @NonNull String establishmentEquipmentId,
                                                                @Valid EstablishmentEquipmentUpdatedInformation updates) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
-        EstablishmentEquipment establishmentEquipment = establishment.getEstablishmentEquipment(equipmentId, establishmentEquipmentId);
+        EstablishmentEquipment establishmentEquipment = establishment.getEstablishmentEquipment(establishmentEquipmentId);
         if (establishmentEquipment != null) {
             establishmentEquipment.setName(updates.name());
             establishmentEquipment.setAvailable(updates.available());
@@ -145,13 +105,12 @@ public class EstablishmentEquipmentManagementServiceImpl implements Establishmen
     }
 
     @SearchEstablishment
-    @SearchEquipment
     @CheckCompanyCoherence
     @Override
     public void deleteEstablishmentEquipment(@CompanyId String companyId, @EstablishmentId String establishmentId,
-                                             @EquipmentId String equipmentId, @NonNull String establishmentEquipmentId) {
+                                             @NonNull String establishmentEquipmentId) {
         Establishment establishment = SearchingAspect.ESTABLISHMENT_FOUND.get();
-        if (establishment.deleteEstablishmentEquipment(equipmentId, establishmentEquipmentId)) {
+        if (establishment.deleteEstablishmentEquipment(establishmentEquipmentId)) {
             establishmentRepository.save(establishment);
         } else {
             throw new EstablishmentEquipmentNotFoundException(establishmentEquipmentId, establishment.getName());

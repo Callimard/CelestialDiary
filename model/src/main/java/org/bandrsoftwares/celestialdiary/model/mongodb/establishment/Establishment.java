@@ -60,8 +60,8 @@ public class Establishment {
 
     // Establishment Equipments
 
-    // Map<EquipmentId, Map<InternEstablishmentEquipmentId, EstablishmentEquipment>>
-    private Map<String, Map<String, EstablishmentEquipment>> equipments;
+    // Map<InternEstablishmentEquipmentId, EstablishmentEquipment>
+    private Map<String, EstablishmentEquipment> equipments;
 
     // Establishment Rooms
 
@@ -93,8 +93,7 @@ public class Establishment {
         prepareEquipments();
         for (int i = 0; i < quantity; i++) {
             EstablishmentEquipment establishmentEquipment = createEstablishmentEquipmentFor(equipment, i);
-            getEquipments().computeIfAbsent(equipment.getId(), k -> Maps.newHashMap()).put(establishmentEquipment.getId(),
-                                                                                           establishmentEquipment);
+            equipments.put(establishmentEquipment.getId(), establishmentEquipment);
         }
     }
 
@@ -107,28 +106,29 @@ public class Establishment {
                 .build();
     }
 
-    public EstablishmentEquipment getEstablishmentEquipment(@NonNull String equipmentId, @NonNull String establishmentEquipmentId) {
-        if (getEquipments() != null) {
-            Map<String, EstablishmentEquipment> map = getEquipments().get(equipmentId);
-            if (map != null) {
-                return map.get(establishmentEquipmentId);
-            } else {
-                return null;
-            }
+    public List<EstablishmentEquipment> allEstablishmentEquipments() {
+        if (equipments != null) {
+            return equipments.values().stream().toList();
+        }
+
+        return Lists.newArrayList();
+    }
+
+    public List<EstablishmentEquipment> searchEstablishmentEquipments(String regexFilter) {
+        List<EstablishmentEquipment> establishmentEquipments = allEstablishmentEquipments();
+        return establishmentEquipments.stream().filter(establishmentEquipment -> establishmentEquipment.getName().matches(regexFilter)).toList();
+    }
+
+    public EstablishmentEquipment getEstablishmentEquipment(@NonNull String establishmentEquipmentId) {
+        if (equipments != null) {
+            return equipments.get(establishmentEquipmentId);
         } else
             return null;
     }
 
-    public boolean deleteEstablishmentEquipment(@NonNull String equipmentId, @NonNull String establishmentEquipmentId) {
-        if (getEquipments() != null) {
-            Map<String, EstablishmentEquipment> map = getEquipments().get(equipmentId);
-            if (map != null) {
-                boolean removed = map.remove(establishmentEquipmentId) != null;
-                if (map.isEmpty()) {
-                    getEquipments().remove(equipmentId);
-                }
-                return removed;
-            }
+    public boolean deleteEstablishmentEquipment(@NonNull String establishmentEquipmentId) {
+        if (equipments != null) {
+            return equipments.remove(establishmentEquipmentId) != null;
         }
         return false;
     }
