@@ -2,6 +2,7 @@ package org.bandrsoftwares.celestialdiary.model.mongodb.establishment;
 
 import lombok.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @ToString
@@ -18,6 +19,9 @@ public class Room {
 
     @NonNull
     private Integer capacity;
+
+    @NonNull
+    private List<RoomEquipment> roomEquipments;
 
     private String photo;
 

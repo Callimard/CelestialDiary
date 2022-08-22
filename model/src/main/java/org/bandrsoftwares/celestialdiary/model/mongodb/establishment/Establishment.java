@@ -119,6 +119,10 @@ public class Establishment {
         return establishmentEquipments.stream().filter(establishmentEquipment -> establishmentEquipment.getName().matches(regexFilter)).toList();
     }
 
+    public boolean establishmentEquipmentExists(@NonNull String establishmentEquipmentId) {
+        return equipments != null && equipments.containsKey(establishmentEquipmentId);
+    }
+
     public EstablishmentEquipment getEstablishmentEquipment(@NonNull String establishmentEquipmentId) {
         if (equipments != null) {
             return equipments.get(establishmentEquipmentId);

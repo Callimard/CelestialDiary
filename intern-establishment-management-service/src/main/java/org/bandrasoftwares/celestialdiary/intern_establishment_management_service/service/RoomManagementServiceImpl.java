@@ -1,5 +1,6 @@
 package org.bandrasoftwares.celestialdiary.intern_establishment_management_service.service;
 
+import com.google.common.collect.Lists;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.bandrsoftwares.celestialdiary.aop.establishment.SearchEstablishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Establishment;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.EstablishmentRepository;
 import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.Room;
+import org.bandrsoftwares.celestialdiary.model.mongodb.establishment.RoomEquipment;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -81,6 +83,7 @@ public class RoomManagementServiceImpl implements RoomManagementService {
                 .name(information.name())
                 .capacity(information.capacity())
                 .available(true)
+                .roomEquipments(Lists.newArrayList())
                 .build();
     }
 
@@ -94,7 +97,7 @@ public class RoomManagementServiceImpl implements RoomManagementService {
         Room room = establishment.getSpecificRoom(roomName);
         if (room != null) {
             checkUpdatedRoomNameNotAlreadyUsed(information, establishment, room);
-            updateRoom(information, room);
+            updateRoom(establishment, information, room);
             establishmentRepository.save(establishment);
             return room;
         } else {
@@ -110,11 +113,19 @@ public class RoomManagementServiceImpl implements RoomManagementService {
         }
     }
 
-    private void updateRoom(RoomUpdatedInformation information, Room room) {
+    private void updateRoom(Establishment establishment, RoomUpdatedInformation information, Room room) {
         room.setName(information.name());
         room.setCapacity(information.capacity());
         room.setPhoto(information.photo());
         room.setAvailable(information.available());
+        room.setRoomEquipments(
+                information.roomEquipments().stream().map(dto -> {
+                    if (establishment.establishmentEquipmentExists(dto.establishmentEquipmentId())) {
+                        return new RoomEquipment(dto.weight(), dto.establishmentEquipmentId());
+                    } else
+                        throw new EstablishmentEquipmentManagementService.EstablishmentEquipmentNotFoundException(dto.establishmentEquipmentId(),
+                                                                                                                  establishment.getName());
+                }).toList());
     }
 
     @SearchEstablishment
