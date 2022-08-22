@@ -16,7 +16,8 @@ export class RoomUpdateFormGroup extends FormGroup {
     return {
       name: this.value.name,
       capacity: this.value.capacity,
-      available: this.value.available
+      available: this.value.available,
+      roomEquipments: []
     }
   }
 }
